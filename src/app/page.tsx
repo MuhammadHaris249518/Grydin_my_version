@@ -450,7 +450,7 @@ const HeroSection = () => {
             display: "block",
           }}
         >
-          <source src="/sage_eyes.mp4" type="video/mp4" />
+          <source src="/medium.mp4" type="video/mp4" />
         </video>
       </div>
     </DarkSection>

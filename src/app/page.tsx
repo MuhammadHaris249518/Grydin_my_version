@@ -348,8 +348,8 @@ const HeroSection = () => {
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
       {/* Text content – padded, centred */}
       <div
-        className="flex flex-col items-center text-center px-6 justify-center"
-        style={{ flexShrink: 0, minHeight: "70vh" }}
+        className="flex flex-col items-center text-center px-6 justify-center items-center"
+        style={{ flexShrink: 0, minHeight: "90vh" }}
       >
         <p
           className="mb-4 tracking-widest uppercase text-xs font-medium mt-20"
@@ -429,7 +429,7 @@ const HeroSection = () => {
       </div>
 
       {/* Video – full width, height derived from 16/9 aspect ratio */}
-      <div
+      {/* <div
         className="relative mt-8 w-full"
         style={{
           aspectRatio: "16/9",
@@ -452,7 +452,7 @@ const HeroSection = () => {
         >
           <source src="/medium.mp4" type="video/mp4" />
         </video>
-      </div>
+      </div> */}
     </DarkSection>
   );
 };

@@ -744,9 +744,9 @@ export default function Contact() {
                 {
                   icon: <Mail size={14} strokeWidth={1.6} />,
                   label: "Email",
-                  value: "hello@grydin.com",
+                  value: "hello@grydin.co",
                   action: () =>
-                    window.open("mailto:hello@grydin.com", "_blank"),
+                    window.open("mailto:hello@grydin.co", "_blank"),
                   actionIcon: <ArrowUpRight size={16} strokeWidth={1.6} />,
                 },
                 {

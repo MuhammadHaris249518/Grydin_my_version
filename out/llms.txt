@@ -1,0 +1,59 @@
+# GrydIn
+
+GrydIn is a software and AI automation studio based in Islamabad, Pakistan, building for businesses globally.
+
+## What GrydIn does
+
+GrydIn surfaces the invisible work slowing business teams down — the manual handoffs, the copy-paste, the gaps between tools and decisions — and eliminates it. No disruption to what already works. No bloat. Precise systems that run quietly in the background.
+
+Every engagement starts with a diagnosis: mapping the workflow end to end before a single line of code is written. Projects are fixed-scope, quoted clearly after an initial call, and deployed fast — most within two weeks of kickoff. Post-launch documentation and support are always included.
+
+## Services
+
+- **AI Agents**: Autonomous agents that think, decide, and act — handling complex, multi-step tasks end-to-end without human intervention. Custom agent design scoped to specific workflows, with monitoring and fallback handling built in.
+
+- **Workflow Automation**: End-to-end workflow mapping and automation across platforms. Cross-platform systems built with Make.com, n8n, or custom code. Trigger-based automation that runs silently in the background.
+
+- **AI Integration**: Fine-tuned models deployed directly into existing business logic. Document processing, extraction, and classification pipelines. LLM integration, custom prompt engineering, and AI-powered decision engines.
+
+- **Custom Software**: Full-stack web and mobile application development built around how a business actually works. Backend architecture, database design, API development, admin dashboards, and internal tools.
+
+- **System Integration**: API design, development, and third-party integration. Legacy system connections without full replacement. Real-time data sync across platforms and event-driven architecture.
+
+- **Full-Stack Development**: End-to-end product builds — backend, frontend, and everything in between. Web and mobile apps (Flutter, React, Node.js), REST and GraphQL APIs, cloud deployment, CI/CD, and post-launch support.
+
+## Who GrydIn serves
+
+Businesses with workflows no existing product covers. Teams spending real hours moving data between systems, chasing approvals, running the same report on a loop — not because they lack capability, but because no one has wired the tools together properly. Startups building their first product. Businesses replacing broken systems with something built right.
+
+## How GrydIn works
+
+1. **Diagnose** — Map the workflow end to end. Every gap, bottleneck, and invisible process is identified before anything is built.
+2. **Design** — Scope only what moves the needle. A fixed plan is agreed before a single line of code is written.
+3. **Deploy** — Ship fast, integrate quietly, hand off documentation the team can actually use.
+
+## Principles
+
+- Diagnosis before any build
+- Fixed scope, fixed quote — no surprise invoices
+- First deployment typically within two weeks
+- Post-launch accountability always included
+
+## Pricing
+
+Every project is scoped before it's priced. After an initial diagnosis call, clients receive a clear, fixed quote. No ranges, no retainer traps, no surprises.
+
+## Contact
+
+- Website: https://grydin.co
+- Email: hello@grydin.co
+- WhatsApp: +92 329 6637320
+- Based in Islamabad, Pakistan — working globally
+- Response time: within one business day
+
+## Pages
+
+- https://grydin.co/ — Home: overview of what GrydIn does and why
+- https://grydin.co/services — Detailed breakdown of all six services with deliverables and who each suits
+- https://grydin.co/about — Studio background, beliefs, and origin story
+- https://grydin.co/contact — Contact details and how to start a project

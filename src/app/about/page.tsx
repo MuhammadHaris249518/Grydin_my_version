@@ -9,8 +9,8 @@ import DotGrid from "../globalscope/DotGrid";
 
 // ── Tape sizing (same system as landing page) ─────────────────────────────────
 const TAPE_H_MAX = 72;
-const TAPE_H_MIN = 48;
-const VW_COEFF   = 4;
+const TAPE_H_MIN = 58;
+const VW_COEFF   = 6;
 
 const NAV_LINKS = [
   { label: "HOME",     href: "/" },
@@ -741,7 +741,7 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
                 width: "fit-content",
               }}
             >
-              Who we are.
+              Who we are
             </p>
 
             <h1
@@ -818,7 +818,7 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
                 width: "fit-content",
               }}
             >
-              The unseen rules.
+              The unseen rules
             </p>
 
             <BeliefCards />
@@ -840,7 +840,7 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
                 width: "fit-content",
               }}
             >
-              Origin.
+              Origin
             </p>
 
             <p

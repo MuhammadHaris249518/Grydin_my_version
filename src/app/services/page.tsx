@@ -9,8 +9,8 @@ import Navbar from "./../globalscope/Navbar";
 
 // ── Tape sizing (identical to about/contact) ──────────────────────────────────
 const TAPE_H_MAX = 72;
-const TAPE_H_MIN = 48;
-const VW_COEFF   = 4;
+const TAPE_H_MIN = 58;
+const VW_COEFF   = 6;
 
 const NAV_LINKS = [
   { label: "HOME",     href: "/" },
@@ -432,7 +432,16 @@ export default function Services() {
           fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
         }}
       >
-        <Navbar tapeH={tapeH} arcR={arcR} />
+        <div
+                  style={{
+                    position: "fixed",
+                    inset: 0,
+                    zIndex: 0,
+                    pointerEvents: "none",
+                  }}
+                >
+                  <DotGrid contentBottom={tapeH} />
+                </div>
         {/* Drawer backdrop */}
         <div
           onClick={() => setMenuOpen(false)}
@@ -514,9 +523,10 @@ export default function Services() {
           </nav>
         </div>
         <section
-          style={{ background: DARK_BG, width: "100%", position: "relative" }}
+          style={{ background: DARK_BG, width: "100%" }}
         >
-          <DotGrid contentBottom={tapeH} />
+            <Navbar tapeH={tapeH} arcR={arcR} />
+            <div style={{ height: tapeH }} />
 
           <div
             style={{
@@ -736,7 +746,7 @@ export default function Services() {
                 width: "fit-content",
               }}
             >
-              Built on four principles.
+              Built on four principles
             </p>
 
             <div
@@ -808,7 +818,7 @@ export default function Services() {
                 width: "fit-content",
               }}
             >
-              Pricing.
+              Pricing
             </p>
 
             <p

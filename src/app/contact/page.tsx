@@ -17,8 +17,8 @@ import DotGrid from "../globalscope/DotGrid";
 
 // ── Tape sizing (identical to about page) ────────────────────────────────────
 const TAPE_H_MAX = 72;
-const TAPE_H_MIN = 48;
-const VW_COEFF = 4;
+const TAPE_H_MIN = 58;
+const VW_COEFF = 6;
 
 function computeTapeH(width: number) {
   const vw = (VW_COEFF / 100) * width;
@@ -587,7 +587,7 @@ export default function Contact() {
                   width: "fit-content",
                 }}
               >
-                Grid it.
+                Grid it
               </p>
 
               <h1

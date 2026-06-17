@@ -827,7 +827,7 @@ return (
             width: "fit-content",
           }}
         >
-          Your move.
+          Your move
         </p>
         <h2
           className="font-bold"

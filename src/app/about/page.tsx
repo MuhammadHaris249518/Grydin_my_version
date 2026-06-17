@@ -4,6 +4,8 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useTypewriter } from "../globalscope/typewriter";
 import { Menu, X } from "lucide-react";
+import Navbar from "../globalscope/Navbar";
+import DotGrid from "../globalscope/DotGrid";
 
 // ── Tape sizing (same system as landing page) ─────────────────────────────────
 const TAPE_H_MAX = 72;
@@ -30,126 +32,6 @@ const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 100%)";
 const VB_W    = 1000;
 
 // ── Tapes ─────────────────────────────────────────────────────────────────────
-const TopTape = ({ setMenuOpen }: { setMenuOpen: (v: boolean) => void }) => {
-  const { tapeH, arcR } = useTape();
-  return (
-    <div
-      aria-hidden="false"
-      style={{
-        position: "relative",
-        width: "100%",
-        height: `${tapeH}px`,
-        flexShrink: 0,
-        pointerEvents: "none",
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${VB_W} ${tapeH}`}
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          display: "block",
-        }}
-      >
-        <path
-          d={`M 0 0 L ${VB_W} 0 L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 0 ${VB_W - arcR} ${tapeH} L ${arcR} ${tapeH} A ${arcR} ${arcR} 0 0 0 0 ${arcR} Z`}
-          fill="white"
-        />
-      </svg>
-      <div
-        style={{
-          position: "absolute",
-          top: TAPE_H_MAX / 4,
-          left: "clamp(2rem, 4.3vw, 55px)",
-          height: `${arcR}px`,
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          pointerEvents: "auto",
-          zIndex: 1,
-        }}
-      >
-        <a
-          href="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            textDecoration: "none",
-          }}
-        >
-          <img
-            src="/logo.png"
-            alt="GrydIn"
-            width={16}
-            height={16}
-            style={{ objectFit: "contain" }}
-          />
-          <span
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: 600,
-              color: "#0a0a0a",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            GrydIn
-          </span>
-        </a>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: TAPE_H_MAX / 4,
-          right: "6.5vw",
-          height: `${arcR}px`,
-          display: "flex",
-          alignItems: "center",
-          gap: "2rem",
-          pointerEvents: "auto",
-          zIndex: 1,
-        }}
-      >
-        <div className="hidden md:flex items-center" style={{ gap: "2rem" }}>
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-xs font-semibold tracking-widest transition-opacity duration-150 hover:opacity-50"
-              style={{
-                color: "#0a0a0a",
-                letterSpacing: "0.12em",
-                textDecoration: "none",
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <button
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-          className="md:hidden"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            lineHeight: 0,
-          }}
-        >
-          <Menu size={20} color="#0a0a0a" />
-        </button>
-      </div>
-    </div>
-  );
-};
-
 const BottomTape = ({ withFooter = false }: { withFooter?: boolean }) => {
   const { tapeH, arcR } = useTape();
   return (
@@ -742,6 +624,16 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
           fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
         }}
       >
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <DotGrid contentBottom={tapeH} />
+        </div>
         {/* Drawer backdrop */}
         <div
           onClick={() => setMenuOpen(false)}
@@ -824,7 +716,8 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
         </div>
         {/* ── Single dark section – full page content ── */}
         <section style={{ background: DARK_BG, width: "100%" }}>
-          <TopTape setMenuOpen={setMenuOpen} />
+          <Navbar tapeH={tapeH} arcR={arcR} />
+          <div style={{ height: tapeH }} />
 
           <div
             style={{
@@ -842,6 +735,10 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
                 letterSpacing: "0.22em",
                 textTransform: "uppercase",
                 marginBottom: "1.2rem",
+                background: "rgba(255,255,255,0.45)",
+                borderRadius: "2px",
+                padding: "4px 8px",
+                width: "fit-content",
               }}
             >
               Who we are.
@@ -911,10 +808,14 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
               style={{
                 fontSize: "0.72rem",
                 fontWeight: 800,
-                color: "rgba(255,255,255,0.35)",
+                color: "rgba(255,255,255,0.65)",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 marginBottom: "2rem",
+                background: "rgba(255,255,255,0.45)",
+                borderRadius: "2px",
+                padding: "4px 8px",
+                width: "fit-content",
               }}
             >
               The unseen rules.
@@ -929,10 +830,14 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
               style={{
                 fontSize: "0.72rem",
                 fontWeight: 800,
-                color: "rgba(255,255,255,0.4)",
+                color: "rgba(255,255,255,0.65)",
                 letterSpacing: "0.22em",
                 textTransform: "uppercase",
                 marginBottom: "1.2rem",
+                background: "rgba(255,255,255,0.45)",
+                borderRadius: "2px",
+                padding: "4px 8px",
+                width: "fit-content",
               }}
             >
               Origin.

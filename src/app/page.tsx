@@ -3,48 +3,42 @@ import { createContext, useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import { Menu, X, ArrowRight, Zap, Brain, Plug, Repeat, Layers, Code } from "lucide-react";
 import { useTypewriter } from "./globalscope/typewriter";
-// ── Types ────────────────────────────────────────────────────────────────────
-interface NavLink {
-  label: string;
-  href: string;
-  isRoute?: boolean;
-}
-
-// ── Constants ────────────────────────────────────────────────────────────────
-const NAV_LINKS: NavLink[] = [
-  { label: "HOME",     href: "#hero" },
-  { label: "SERVICES", href: "/services", isRoute: true },
-  { label: "ABOUT",    href: "/about",    isRoute: true },
-  { label: "CONTACT",  href: "/contact",  isRoute: true },
-];
+import DotGrid from "./globalscope/DotGrid";
+import Navbar from "./globalscope/Navbar";
 
 const SERVICES = [
   {
+    color: "#22d3ee",
     icon: <Zap size={28} strokeWidth={1.4} />,
     title: "AI Agents",
     desc: "Autonomous agents that think, decide, and act – handling complex tasks end-to-end without human intervention.",
   },
   {
+    color: "#f59e0b",
     icon: <Repeat size={28} strokeWidth={1.4} />,
     title: "Workflow Automation",
     desc: "We map the gaps between your tools, teams, and decisions – then automate them. No migration. No disruption.",
   },
   {
+    color: "#10b981",
     icon: <Brain size={28} strokeWidth={1.4} />,
     title: "AI Integration",
     desc: "From document processing to decision engines – fine-tuned models deployed directly into your existing business logic.",
   },
   {
+    color: "#3b82f6",
     icon: <Layers size={28} strokeWidth={1.4} />,
     title: "Custom Software",
     desc: "Built around how your business actually works. No templates, no off-the-shelf fixes – just the right system for your exact problem.",
   },
   {
+    color: "#f43f5e",
     icon: <Plug size={28} strokeWidth={1.4} />,
     title: "System Integration",
     desc: "Connect your entire stack – APIs, platforms, databases – into one coherent, automated operation.",
   },
   {
+    color: "#a855f7",
     icon: <Code size={28} strokeWidth={1.4} />,
     title: "Full-Stack Development",
     desc: "End-to-end product builds – backend, frontend, and everything in between. Lean, scalable, and production-ready.",
@@ -171,189 +165,54 @@ const DarkSection = ({
     {children}
   </section>
 );
-// ── Navbar ────────────────────────────────────────────────────────────────────
-
-const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { tapeHSlow: tapeH, arcRSlow: arcR } = useTape();
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-
-  const handleNav = (link: NavLink, e: React.MouseEvent) => {
-    if (!link.isRoute) {
-      e.preventDefault();
-      const el = document.querySelector(link.href);
-      el?.scrollIntoView({ behavior: "smooth" });
-    }
-    setMenuOpen(false);
-  };
-
-  return (
-    <>
-      <nav
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        style={{
-          fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
-          boxShadow: scrolled ? "0 2px 24px rgba(0,0,0,0.18)" : "none",
-          transition: "box-shadow 0.3s",
-        }}
-      >
-        <div style={{ position: "relative", width: "100%", height: `${tapeH}px`, overflow: "visible" }}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox={`0 0 ${VB_W} ${tapeH}`}
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}
-          >
-            <path
-              d={`M 0 0 L ${VB_W} 0 L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 0 ${VB_W - arcR} ${tapeH} L ${arcR} ${tapeH} A ${arcR} ${arcR} 0 0 0 0 ${arcR} Z`}
-              fill="white"
-            />
-          </svg>
-
-          {/* Logo – left */}
-          <div
-            style={{
-              position: "absolute",
-              top: TAPE_H_SLOW_MAX / 4,
-              left: "clamp(2rem, 4.3vw, 55px)",
-              height: `${arcR}px`,
-              display: "flex",
-              alignItems: "center",
-              zIndex: 1,
-            }}
-          >
-            <a
-              href="/"
-              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-              style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none" }}
-            >
-              <img src="/logo.png" alt="GrydIn" width={16} height={16} style={{ objectFit: "contain" }} />
-              <span style={{ fontSize: "1.2rem", fontWeight: 600, color: "#0a0a0a", letterSpacing: "-0.02em" }}>
-                GrydIn
-              </span>
-            </a>
-          </div>
-
-          {/* Right – nav links + hamburger */}
-          <div
-            style={{
-              position: "absolute",
-              top: TAPE_H_SLOW_MAX / 4,
-              right: "6.5vw",
-              height: `${arcR}px`,
-              display: "flex",
-              alignItems: "center",
-              gap: "2rem",
-              zIndex: 1,
-            }}
-          >
-            <div className="hidden md:flex items-center" style={{ gap: "2rem" }}>
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNav(link, e)}
-                  className="text-xs font-semibold tracking-widest transition-opacity duration-150 hover:opacity-50"
-                  style={{ color: "#0a0a0a", letterSpacing: "0.12em", textDecoration: "none" }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-            <button
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open menu"
-              className="md:hidden"
-              style={{ background: "none", border: "none", cursor: "pointer", padding: 0, lineHeight: 0 }}
-            >
-              <Menu size={20} color="#0a0a0a" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Backdrop */}
-      <div
-        onClick={() => setMenuOpen(false)}
-        style={{
-          position: "fixed", inset: 0, zIndex: 99,
-          background: "rgba(0,0,0,0.35)",
-          opacity: menuOpen ? 1 : 0,
-          pointerEvents: menuOpen ? "auto" : "none",
-          transition: "opacity 0.35s ease",
-        }}
-      />
-
-      {/* Drawer */}
-      <div
-        style={{
-          position: "fixed", top: 0, right: 0,
-          height: "100vh", width: "fit-content", paddingRight: "3.5rem",
-          zIndex: 100,
-          background: "linear-gradient(to bottom, #000000 0%, #4D4D4D 100%)",
-          transform: menuOpen ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-          display: "flex", flexDirection: "column",
-          borderTopLeftRadius: "18px", borderBottomLeftRadius: "18px",
-        }}
-      >
-        <button
-          onClick={() => setMenuOpen(false)}
-          aria-label="Close menu"
-          style={{ position: "absolute", top: "14px", right: "16px", background: "none", border: "none", cursor: "pointer", padding: 0, lineHeight: 0 }}
-        >
-          <X size={20} color="white" />
-        </button>
-        <nav
-          style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", paddingTop: "72px", paddingLeft: "28px", gap: "1.1rem" }}
-        >
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNav(link, e)}
-              style={{ color: "white", fontSize: "0.95rem", fontWeight: 600, letterSpacing: "0.15em", textDecoration: "none", transition: "opacity 0.15s" }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = "0.4")}
-              onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-      </div>
-    </>
-  );
-};
-
 
 // ── Hero Section ──────────────────────────────────────────────────────────────
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { tapeH } = useTape();
+  const contentRef = useRef<HTMLDivElement>(null);
+const [contentH, setContentH] = useState(0);
+
   useEffect(() => {
     if (videoRef.current) videoRef.current.play().catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const ro = new ResizeObserver(() => {
+      setContentH(contentRef.current?.offsetHeight ?? 0);
+    });
+    ro.observe(contentRef.current);
+    return () => ro.disconnect();
   }, []);
 
   const { displayed: typed, ref: typeRef } = useTypewriter("Grid the unseen.");
   return (
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
+      <DotGrid contentBottom={tapeH + contentH} />
       {/* Text content – padded, centred */}
       <div
-        className="flex flex-col items-center text-center px-6 justify-center items-center"
-        style={{ flexShrink: 0, minHeight: "90vh" }}
+        className="flex flex-col text-center px-6 justify-center items-center"
+        ref={contentRef}
+        style={{
+          flexShrink: 0,
+          minHeight: "90vh",
+          position: "relative",
+          zIndex: 1,
+          }}
       >
         <p
           className="mb-4 tracking-widest uppercase text-xs font-medium mt-20"
-          style={{ color: "#000000", fontWeight: 700, letterSpacing: "0.22em" }}
+          style={{
+            color: "#000000",
+            fontWeight: 700,
+            letterSpacing: "0.22em",
+            background: "rgba(255,255,255,0.45)",
+            borderRadius: "2px",
+            padding: "4px 8px",
+          }}
         >
           Built for the gaps in your business
         </p>
@@ -457,118 +316,6 @@ const HeroSection = () => {
   );
 };
 
-const DotGrid = ({ contentBottom }: { contentBottom: number }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number>(0);
-const contentBottomRef = useRef(contentBottom);
-useEffect(() => { contentBottomRef.current = contentBottom; }, [contentBottom]);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const SPACING = 28;
-    const DOT_R = 1.2;
-    const PASS_DELAY = 3000; // ms pause between passes
-
-    let glowProgress = Math.ceil(contentBottomRef.current / SPACING);
-    let lastTime = 0;
-    let pauseStart = 0;
-    let waiting = false;
-    let pulseT = 0;
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-
-    const draw = (now: number) => {
-      animRef.current = requestAnimationFrame(draw);
-      const W = canvas.width;
-      const H = canvas.height;
-      if (!W || !H) return;
-
-      const ROWS = Math.ceil(H / SPACING);
-      const COLS = Math.ceil(W / SPACING);
-
-      // timing
-      if (waiting) {
-        if (now - pauseStart >= PASS_DELAY) {
-          waiting = false;
-          glowProgress = Math.ceil(contentBottomRef.current / SPACING);
-          lastTime = now;
-        }
-        // draw static dim dots while waiting
-        ctx.clearRect(0, 0, W, H);
-        for (let r = 0; r < ROWS; r++) {
-          for (let c = 0; c < COLS; c++) {
-            ctx.beginPath();
-            ctx.arc(c * SPACING + SPACING / 2, r * SPACING + SPACING / 2, DOT_R, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(255,255,255,0.12)";
-            ctx.fill();
-          }
-        }
-        return;
-      }
-
-      const dt = now - lastTime;
-      pulseT += dt / 1000; // 1 second period half-cycle
-      const pulse = Math.abs(Math.sin(pulseT * Math.PI)); // 0→1→0 smoothly
-      lastTime = now;
-      glowProgress += dt / 250; // speed: one row per 80ms = ~60fps smooth
-
-      if (glowProgress >= ROWS) {
-        glowProgress = ROWS;
-        waiting = true;
-        pauseStart = now;
-      }
-
-      ctx.clearRect(0, 0, W, H);
-
-      for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-          const dist = Math.abs(r - glowProgress);
-          const glow = dist < 2.5 ? Math.max(0, 1 - dist / 2.5) : 0;
-          const opacity = 0.1 + glow * 0.9 * pulse;
-          const radius = dist === 0
-            ? DOT_R * (1 + 0.5 * pulse)
-            : dist < 2.5
-            ? DOT_R * (1 + 0.25 * (1 - dist / 2.5) * pulse)
-            : DOT_R;
-          ctx.beginPath();
-          ctx.arc(c * SPACING + SPACING / 2, r * SPACING + SPACING / 2, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(255,255,255,${opacity})`;
-          ctx.fill();
-        }
-      }
-    };
-
-    animRef.current = requestAnimationFrame(draw);
-    return () => {
-      cancelAnimationFrame(animRef.current);
-      ro.disconnect();
-    };
-  }, [contentBottom]);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        pointerEvents: "none",
-        zIndex: 0,
-        display: "block",
-      }}
-    />
-  );
-};
 // ── Services Section ──────────────────────────────────────────────────────────
 const ShineCard = ({ onDone }: { onDone: () => void }) => {
   const [progress, setProgress] = useState(0);
@@ -638,7 +385,7 @@ useEffect(() => {
           className="flex flex-col gap-4"
         >
           {activeIndex === i && <ShineCard onDone={() => advance(i)} />}
-          <div style={{ color: "rgba(255,255,255,0.55)" }}>{s.icon}</div>
+          <div style={{ color: s.color }}>{s.icon}</div>
           <h3
             className="font-semibold"
             style={{
@@ -709,6 +456,10 @@ const ServicesSection = () => {
             color: "#000000",
             fontWeight: 700,
             letterSpacing: "0.2em",
+            background: "rgba(255,255,255,0.45)",
+            borderRadius: "2px",
+            padding: "4px 8px",
+            width: "fit-content",
           }}
         >
           Built for
@@ -871,19 +622,45 @@ const rafRef = useRef<number>(0);
   );
 };
 
-const HowItWorksSection = () => (
+const HowItWorksSection = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+const [contentH, setContentH] = useState(0);
+const { tapeH } = useTape();
+
+useEffect(() => {
+  if (!contentRef.current) return;
+  const ro = new ResizeObserver(() => {
+    setContentH(contentRef.current?.offsetHeight ?? 0);
+  });
+  ro.observe(contentRef.current);
+  return () => ro.disconnect();
+}, []);
+
+return (
   <DarkSection id="how-it-works" className="flex flex-col" minHeight>
     <TopTape />
+    <DotGrid contentBottom={tapeH + contentH} />
     <div
       className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
+      ref={contentRef}
       style={{
         paddingTop: "clamp(3rem, 7.5vh, 6rem)",
         paddingBottom: "clamp(3rem, 7.5vh, 6rem)",
+        position: "relative",
+        zIndex: 1,
       }}
     >
       <p
         className="mb-3 uppercase tracking-widest text-xs"
-        style={{ color: "#000000", fontWeight: 700, letterSpacing: "0.2em" }}
+        style={{
+          color: "#000000",
+          fontWeight: 700,
+          letterSpacing: "0.2em",
+          background: "rgba(255,255,255,0.45)",
+          borderRadius: "2px",
+          padding: "4px 8px",
+          width: "fit-content",
+        }}
       >
         Built on
       </p>
@@ -941,7 +718,9 @@ const HowItWorksSection = () => (
       </div>
     </div>
   </DarkSection>
-);
+)
+};
+
 function useCountUp(target: number, duration = 1200, triggered = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -1008,20 +787,45 @@ const WhyGrydinSection = () => {
 };
 
 // ── Contact / Footer Section ──────────────────────────────────────────────────
-const ContactSection = () => (
+const ContactSection = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+const [contentH, setContentH] = useState(0);
+const { tapeH } = useTape();
+
+useEffect(() => {
+  if (!contentRef.current) return;
+  const ro = new ResizeObserver(() => {
+    setContentH(contentRef.current?.offsetHeight ?? 0);
+  });
+  ro.observe(contentRef.current);
+  return () => ro.disconnect();
+}, []);
+return (
   <DarkSection id="contact" className="flex flex-col justify-between" minHeight>
     <TopTape />
+    <DotGrid contentBottom={tapeH + contentH} />
     <div
       className="flex-1 max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row gap-16 justify-center md:justify-between items-center"
+      ref={contentRef}
       style={{
         paddingTop: "clamp(4rem, 10vh, 8rem)",
         paddingBottom: "clamp(4rem, 10vh, 8rem)",
+        position: "relative",
+        zIndex: 1,
       }}
     >
       <div className="flex flex-col gap-6 max-w-sm">
         <p
           className="uppercase tracking-widest text-xs"
-          style={{ color: "#000000", fontWeight: 700, letterSpacing: "0.2em" }}
+          style={{
+            color: "#000000",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            background: "rgba(255,255,255,0.45)",
+            borderRadius: "2px",
+            padding: "4px 8px",
+            width: "fit-content",
+          }}
         >
           Your move.
         </p>
@@ -1084,7 +888,8 @@ const ContactSection = () => (
     {/* Footer tape – SVG BottomTape geometry with footer text overlaid */}
     <FooterTape />
   </DarkSection>
-);
+)
+};
 
 const WhatsAppButton = () => (
   <a
@@ -1187,9 +992,11 @@ useEffect(() => {
   const arcR = tapeH / 2;
   const arcRSlow = tapeHSlow / 2;
   return (
-    <TapeCtx.Provider value={{ tapeH, arcR, tapeHSlow, arcRSlow: tapeHSlow / 2 }}>
+    <TapeCtx.Provider
+      value={{ tapeH, arcR, tapeHSlow, arcRSlow: tapeHSlow / 2 }}
+    >
       <main style={{ background: "white", overflowX: "hidden" }}>
-        <Navbar />
+        <Navbar tapeH={tapeHSlow} arcR={arcRSlow} />
         <HeroSection />
         <ServicesSection />
         <HowItWorksSection />

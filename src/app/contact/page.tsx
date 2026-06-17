@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { useTypewriter } from "../globalscope/typewriter";
 import { Menu, X } from "lucide-react";
+import Navbar from "../globalscope/Navbar";
+import DotGrid from "../globalscope/DotGrid";
 
 // ── Tape sizing (identical to about page) ────────────────────────────────────
 const TAPE_H_MAX = 72;
@@ -37,126 +39,6 @@ const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 100%)";
 const VB_W = 1000;
 
 // ── Tapes (identical to about page) ──────────────────────────────────────────
-const TopTape = ({ setMenuOpen }: { setMenuOpen: (v: boolean) => void }) => {
-  const { tapeH, arcR } = useTape();
-  return (
-    <div
-      aria-hidden="false"
-      style={{
-        position: "relative",
-        width: "100%",
-        height: `${tapeH}px`,
-        flexShrink: 0,
-        pointerEvents: "none",
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${VB_W} ${tapeH}`}
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          display: "block",
-        }}
-      >
-        <path
-          d={`M 0 0 L ${VB_W} 0 L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 0 ${VB_W - arcR} ${tapeH} L ${arcR} ${tapeH} A ${arcR} ${arcR} 0 0 0 0 ${arcR} Z`}
-          fill="white"
-        />
-      </svg>
-      <div
-        style={{
-          position: "absolute",
-          top: TAPE_H_MAX / 4,
-          left: "clamp(2rem, 4.3vw, 55px)",
-          height: `${arcR}px`,
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          pointerEvents: "auto",
-          zIndex: 1,
-        }}
-      >
-        <a
-          href="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            textDecoration: "none",
-          }}
-        >
-          <img
-            src="/logo.png"
-            alt="GrydIn"
-            width={16}
-            height={16}
-            style={{ objectFit: "contain" }}
-          />
-          <span
-            style={{
-              fontSize: "1.2rem",
-              fontWeight: 600,
-              color: "#0a0a0a",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            GrydIn
-          </span>
-        </a>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: TAPE_H_MAX / 4,
-          right: "6.5vw",
-          height: `${arcR}px`,
-          display: "flex",
-          alignItems: "center",
-          gap: "2rem",
-          pointerEvents: "auto",
-          zIndex: 1,
-        }}
-      >
-        <div className="hidden md:flex items-center" style={{ gap: "2rem" }}>
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-xs font-semibold tracking-widest transition-opacity duration-150 hover:opacity-50"
-              style={{
-                color: "#0a0a0a",
-                letterSpacing: "0.12em",
-                textDecoration: "none",
-              }}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-        <button
-          onClick={() => setMenuOpen(true)}
-          aria-label="Open menu"
-          className="md:hidden"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            lineHeight: 0,
-          }}
-        >
-          <Menu size={20} color="#0a0a0a" />
-        </button>
-      </div>
-    </div>
-  );
-};
-
 const BottomTape = () => {
   const { tapeH, arcR } = useTape();
   return (
@@ -578,6 +460,16 @@ export default function Contact() {
           fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
         }}
       >
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <DotGrid contentBottom={tapeH} />
+        </div>
         {/* Drawer backdrop */}
         <div
           onClick={() => setMenuOpen(false)}
@@ -658,188 +550,206 @@ export default function Contact() {
             ))}
           </nav>
         </div>
-        <section style={{ background: DARK_BG, width: "100%" }}>
-          <TopTape setMenuOpen={setMenuOpen} />
+        <section
+          style={{
+            background: DARK_BG,
+            width: "100%",
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <Navbar tapeH={tapeH} arcR={arcR} />
+          <div style={{ height: tapeH }} />
 
-          <div
-            style={{
-              maxWidth: "860px",
-              margin: "0 auto",
-              padding: "4rem 2rem 5rem",
-            }}
-          >
-            {/* ── Eyebrow + Intro ── */}
-            <p
-              style={{
-                fontSize: "0.72rem",
-                color: "#000000",
-                fontWeight: 700,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                marginBottom: "1.2rem",
-              }}
-            >
-              Grid it.
-            </p>
-
-            <h1
-              ref={typeRef}
-              style={{
-                fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
-                color: "#ffffff",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.1,
-                marginBottom: "1.6rem",
-                maxWidth: "620px",
-              }}
-            >
-              <span style={{ display: "block", minHeight: "1.1em" }}>
-                {typed}
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: "2px",
-                    height: "0.85em",
-                    background: "rgba(255,255,255,0.7)",
-                    marginLeft: "2px",
-                    verticalAlign: "middle",
-                    animation: "blink 1s step-end infinite",
-                  }}
-                />
-              </span>
-              <span
-                style={{ display: "block", color: "rgba(255,255,255,0.4)" }}
-              >
-                we can close?
-              </span>
-            </h1>
-
-            <p
-              style={{
-                fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
-                color: "rgba(255,255,255,0.5)",
-                lineHeight: 1.8,
-                maxWidth: "520px",
-                marginBottom: 0,
-                textAlign: "justify",
-              }}
-            >
-              Describe what's slowing your business down. No pitch, no sales
-              deck – just an honest, scoped response within one business day.
-            </p>
-
-            <AnimatedDivider />
-
-            {/* ── Contact details ── */}
+          <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
             <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.2rem",
-                marginBottom: 0,
+                maxWidth: "860px",
+                margin: "0 auto",
+                padding: "2rem",
+                width: "100%",
               }}
             >
-              {[
-                {
-                  icon: <Mail size={14} strokeWidth={1.6} />,
-                  label: "Email",
-                  value: "hello@grydin.co",
-                  action: () =>
-                    window.open("mailto:hello@grydin.co", "_blank"),
-                  actionIcon: <ArrowUpRight size={16} strokeWidth={1.6} />,
-                },
-                {
-                  icon: <MessageCircle size={14} strokeWidth={1.6} />,
-                  label: "WhatsApp",
-                  value: "+92 329 6637320",
-                  action: () => {
-                    navigator.clipboard.writeText("+923296637320");
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 2000);
-                  },
-                  actionIcon: copied ? (
-                    <Check
-                      size={13}
-                      strokeWidth={1.6}
-                      style={{ color: "#10b981" }}
-                    />
-                  ) : (
-                    <Copy size={13} strokeWidth={1.6} />
-                  ),
-                },
-                {
-                  icon: <Clock size={14} strokeWidth={1.6} />,
-                  label: "Response time",
-                  value: "Within one business day",
-                  action: null,
-                  actionIcon: null,
-                },
-                {
-                  icon: <MapPin size={14} strokeWidth={1.6} />,
-                  label: "Based in",
-                  value: "Islamabad, Pakistan – working globally",
-                  action: null,
-                  actionIcon: null,
-                },
-              ].map((item) => (
-                <div
-                  key={item.label}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.75rem",
-                  }}
+              {/* ── Eyebrow + Intro ── */}
+              <p
+                style={{
+                  fontSize: "0.72rem",
+                  color: "#000000",
+                  fontWeight: 700,
+                  letterSpacing: "0.22em",
+                  textTransform: "uppercase",
+                  marginBottom: "1.2rem",
+                  background: "rgba(255,255,255,0.45)",
+                  borderRadius: "2px",
+                  padding: "4px 8px",
+                  width: "fit-content",
+                }}
+              >
+                Grid it.
+              </p>
+
+              <h1
+                ref={typeRef}
+                style={{
+                  fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
+                  color: "#ffffff",
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.1,
+                  marginBottom: "1.6rem",
+                  maxWidth: "620px",
+                }}
+              >
+                <span style={{ display: "block", minHeight: "1.1em" }}>
+                  {typed}
+                  <span
+                    style={{
+                      display: "inline-block",
+                      width: "2px",
+                      height: "0.85em",
+                      background: "rgba(255,255,255,0.7)",
+                      marginLeft: "2px",
+                      verticalAlign: "middle",
+                      animation: "blink 1s step-end infinite",
+                    }}
+                  />
+                </span>
+                <span
+                  style={{ display: "block", color: "rgba(255,255,255,0.4)" }}
                 >
-                  <span style={{ color: "rgba(255,255,255,0.3)" }}>
-                    {item.icon}
-                  </span>
-                  <span
+                  we can close?
+                </span>
+              </h1>
+
+              <p
+                style={{
+                  fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
+                  color: "rgba(255,255,255,0.5)",
+                  lineHeight: 1.8,
+                  maxWidth: "520px",
+                  marginBottom: 0,
+                  textAlign: "justify",
+                }}
+              >
+                Describe what's slowing your business down. No pitch, no sales
+                deck – just an honest, scoped response within one business day.
+              </p>
+
+              <AnimatedDivider />
+
+              {/* ── Contact details ── */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.2rem",
+                  marginBottom: 0,
+                }}
+              >
+                {[
+                  {
+                    icon: <Mail size={14} strokeWidth={1.6} />,
+                    label: "Email",
+                    value: "hello@grydin.co",
+                    action: () =>
+                      window.open("mailto:hello@grydin.co", "_blank"),
+                    actionIcon: <ArrowUpRight size={16} strokeWidth={1.6} />,
+                  },
+                  {
+                    icon: <MessageCircle size={14} strokeWidth={1.6} />,
+                    label: "WhatsApp",
+                    value: "+92 329 6637320",
+                    action: () => {
+                      navigator.clipboard.writeText("+923296637320");
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    },
+                    actionIcon: copied ? (
+                      <Check
+                        size={13}
+                        strokeWidth={1.6}
+                        style={{ color: "#10b981" }}
+                      />
+                    ) : (
+                      <Copy size={13} strokeWidth={1.6} />
+                    ),
+                  },
+                  {
+                    icon: <Clock size={14} strokeWidth={1.6} />,
+                    label: "Response time",
+                    value: "Within one business day",
+                    action: null,
+                    actionIcon: null,
+                  },
+                  {
+                    icon: <MapPin size={14} strokeWidth={1.6} />,
+                    label: "Based in",
+                    value: "Islamabad, Pakistan – working globally",
+                    action: null,
+                    actionIcon: null,
+                  },
+                ].map((item) => (
+                  <div
+                    key={item.label}
                     style={{
-                      fontSize: "0.78rem",
-                      color: "rgba(255,255,255,0.3)",
-                      letterSpacing: "0.08em",
-                      textTransform: "uppercase",
-                      minWidth: "120px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.75rem",
                     }}
                   >
-                    {item.label}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: "0.88rem",
-                      color: "rgba(255,255,255,0.6)",
-                    }}
-                  >
-                    {item.value}
-                  </span>
-                  {item.action && (
-                    <span
-                      onClick={item.action}
-                      style={{
-                        color: "rgba(255,255,255,0.25)",
-                        cursor: "pointer",
-                        lineHeight: 0,
-                        transition: "color 0.15s",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "rgba(255,255,255,0.7)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "rgba(255,255,255,0.25)")
-                      }
-                    >
-                      {item.actionIcon}
+                    <span style={{ color: "rgba(255,255,255,0.3)" }}>
+                      {item.icon}
                     </span>
-                  )}
-                </div>
-              ))}
-            </div>
+                    <span
+                      style={{
+                        fontSize: "0.78rem",
+                        color: "rgba(255,255,255,0.3)",
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        minWidth: "120px",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "0.88rem",
+                        color: "rgba(255,255,255,0.6)",
+                      }}
+                    >
+                      {item.value}
+                    </span>
+                    {item.action && (
+                      <span
+                        onClick={item.action}
+                        style={{
+                          color: "rgba(255,255,255,0.25)",
+                          cursor: "pointer",
+                          lineHeight: 0,
+                          transition: "color 0.15s",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color =
+                            "rgba(255,255,255,0.7)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color =
+                            "rgba(255,255,255,0.25)")
+                        }
+                      >
+                        {item.actionIcon}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-            {/* <AnimatedDivider /> */}
+              {/* <AnimatedDivider /> */}
 
-            {/* ── Form ── */}
-            {/* {submitted ? (
+              {/* ── Form ── */}
+              {/* {submitted ? (
               <div
                 style={{
                   display: "flex",
@@ -1044,6 +954,7 @@ export default function Contact() {
                 </button>
               </div>
             )} */}
+            </div>
           </div>
 
           <BottomTape />

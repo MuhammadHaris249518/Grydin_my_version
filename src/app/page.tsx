@@ -191,7 +191,7 @@ const [contentH, setContentH] = useState(0);
   return (
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
-      <DotGrid contentBottom={contentH / .90} />
+      <DotGrid contentBottom={contentH} />
       {/* Text content – padded, centred */}
       <div
         className="flex flex-col text-center px-6 justify-center items-center"
@@ -438,7 +438,7 @@ const ServicesSection = () => {
   return (
     <DarkSection id="services" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={contentH / .94} />
+      <DotGrid contentBottom={contentH / .96} />
       <div
         ref={contentRef}
         className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
@@ -639,7 +639,7 @@ useEffect(() => {
 return (
   <DarkSection id="how-it-works" className="flex flex-col" minHeight>
     <TopTape />
-    <DotGrid contentBottom={contentH / .94} />
+    <DotGrid contentBottom={contentH / .96} />
     <div
       className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
       ref={contentRef}
@@ -765,7 +765,7 @@ const WhyGrydinSection = () => {
   return (
     <DarkSection id="why-gridin" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={contentH / .90}/>
+      <DotGrid contentBottom={contentH / .96}/>
       <div ref={(el) => { (ref as React.MutableRefObject<HTMLDivElement | null>).current = el; (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = el; }} className="max-w-5xl mx-auto w-full px-6 md:px-12" style={{ position: "relative", zIndex: 1, paddingTop: "clamp(0.8rem, 3vh, 2rem)", paddingBottom: "clamp(2rem, 5vh, 4rem)" }}>
         <p className="mb-3 uppercase tracking-widest text-xs" style={{ fontWeight:700,color: "#000000", letterSpacing: "0.2em" }}>Why us</p>
         <h2 className="font-bold" style={{  fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "clamp(1rem, 4vh, 4rem)" }}>

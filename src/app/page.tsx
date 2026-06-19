@@ -438,7 +438,7 @@ const ServicesSection = () => {
   return (
     <DarkSection id="services" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={contentH} />
+      <DotGrid contentBottom={contentH / 1.02} />
       <div
         ref={contentRef}
         className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
@@ -639,7 +639,7 @@ useEffect(() => {
 return (
   <DarkSection id="how-it-works" className="flex flex-col" minHeight>
     <TopTape />
-    <DotGrid contentBottom={contentH} />
+    <DotGrid contentBottom={contentH / 1.02} />
     <div
       className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
       ref={contentRef}

@@ -35,7 +35,7 @@ const NAV_LINKS = [
 const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
 const useTape = () => useContext(TapeCtx);
 
-const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 100%)";
+const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
 const VB_W = 1000;
 
 // ── Tapes (identical to about page) ──────────────────────────────────────────
@@ -468,7 +468,7 @@ export default function Contact() {
             pointerEvents: "none",
           }}
         >
-          <DotGrid contentBottom={tapeH} />
+          <DotGrid contentBottom={tapeH} animate={false} />
         </div>
         {/* Drawer backdrop */}
         <div

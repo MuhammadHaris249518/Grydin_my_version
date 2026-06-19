@@ -89,7 +89,7 @@ function computeTapeHSlow(width: number) {
 }
 const TapeCtx = createContext({ tapeH: TAPE_H, arcR: ARC_R, tapeHSlow: TAPE_H, arcRSlow: ARC_R / 2 });
 const useTape = () => useContext(TapeCtx);
-const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 100%)";
+const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
 
 // ── SVG Tape components ───────────────────────────────────────────────────────
 const VB_W = 1000;
@@ -191,7 +191,7 @@ const [contentH, setContentH] = useState(0);
   return (
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
-      <DotGrid contentBottom={tapeH + contentH} />
+      <DotGrid contentBottom={contentH / 1.08} />
       {/* Text content – padded, centred */}
       <div
         className="flex flex-col text-center px-6 justify-center items-center"
@@ -438,7 +438,7 @@ const ServicesSection = () => {
   return (
     <DarkSection id="services" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={tapeH + contentH} />
+      <DotGrid contentBottom={contentH / 1.08} />
       <div
         ref={contentRef}
         className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
@@ -639,7 +639,7 @@ useEffect(() => {
 return (
   <DarkSection id="how-it-works" className="flex flex-col" minHeight>
     <TopTape />
-    <DotGrid contentBottom={tapeH + contentH} />
+    <DotGrid contentBottom={contentH / 1.08} />
     <div
       className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
       ref={contentRef}
@@ -765,7 +765,7 @@ const WhyGrydinSection = () => {
   return (
     <DarkSection id="why-gridin" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={tapeH + contentH}/>
+      <DotGrid contentBottom={contentH / 1.08}/>
       <div ref={(el) => { (ref as React.MutableRefObject<HTMLDivElement | null>).current = el; (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = el; }} className="max-w-5xl mx-auto w-full px-6 md:px-12" style={{ position: "relative", zIndex: 1, paddingTop: "clamp(0.8rem, 3vh, 2rem)", paddingBottom: "clamp(2rem, 5vh, 4rem)" }}>
         <p className="mb-3 uppercase tracking-widest text-xs" style={{ fontWeight:700,color: "#000000", letterSpacing: "0.2em" }}>Why us</p>
         <h2 className="font-bold" style={{  fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "clamp(1rem, 4vh, 4rem)" }}>
@@ -803,7 +803,7 @@ useEffect(() => {
 return (
   <DarkSection id="contact" className="flex flex-col justify-between" minHeight>
     <TopTape />
-    <DotGrid contentBottom={tapeH + contentH} />
+    <DotGrid contentBottom={contentH / 1.08} />
     <div
       className="flex-1 max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row gap-16 justify-center md:justify-between items-center"
       ref={contentRef}

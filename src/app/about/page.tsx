@@ -11,6 +11,7 @@ import DotGrid from "../globalscope/DotGrid";
 const TAPE_H_MAX = 72;
 const TAPE_H_MIN = 58;
 const VW_COEFF   = 6;
+const TRACE_BOTTOM_EXTRA = 24; 
 
 const NAV_LINKS = [
   { label: "HOME",     href: "/" },
@@ -28,19 +29,19 @@ function computeTapeH(width: number) {
 const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
 const useTape = () => useContext(TapeCtx);
 
-const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 100%)";
+const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
 const VB_W    = 1000;
 
 // ── Tapes ─────────────────────────────────────────────────────────────────────
 const BottomTape = ({ withFooter = false }: { withFooter?: boolean }) => {
   const { tapeH, arcR } = useTape();
   return (
-    <div
+    <div               
       style={{
         position: "relative",
         width: "100%",
         height: `${tapeH}px`,
-        flexShrink: 0,
+        flexShrink: 0,   
       }}
     >
       <svg
@@ -330,7 +331,7 @@ const BeliefCard = ({
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
-  const TRACE_DURATION = 5500;
+  const TRACE_DURATION = 7000;
 const [glowOpacity, setGlowOpacity] = useState(0);
 const glowRafRef = useRef<number>(0);
 const glowStartRef = useRef<number>(0);
@@ -417,7 +418,7 @@ glowStartRef.current = 0;setProgress(0); return; }
             <BoundaryTracer
               progress={progress}
               width={dims.w}
-              height={dims.h}
+              height={dims.h + TRACE_BOTTOM_EXTRA}
               glowOpacity={glowOpacity}
             />
           )}
@@ -449,7 +450,10 @@ glowStartRef.current = 0;setProgress(0); return; }
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            height: `calc(100% + ${TRACE_BOTTOM_EXTRA}px)`,
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
@@ -632,7 +636,7 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
             pointerEvents: "none",
           }}
         >
-          <DotGrid contentBottom={tapeH} />
+          <DotGrid contentBottom={tapeH} animate={false} />
         </div>
         {/* Drawer backdrop */}
         <div

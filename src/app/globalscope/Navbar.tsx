@@ -63,7 +63,7 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
           <div
             style={{
               position: "absolute",
-              top: TAPE_H_SLOW_MAX / 4,
+              top: `${arcR * 0.96}px`,
               left: "clamp(2rem, 4.3vw, 55px)",
               height: `${arcR}px`,
               display: "flex",
@@ -83,8 +83,8 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
               <img
                 src="/logo.png"
                 alt="GrydIn"
-                width={16}
-                height={16}
+                width={15}
+                height={15}
                 style={{ objectFit: "contain" }}
               />
               <span
@@ -104,7 +104,7 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
           <div
             style={{
               position: "absolute",
-              top: TAPE_H_SLOW_MAX / 4,
+              top: `${arcR * 0.96}px`,
               right: "6.5vw",
               height: `${arcR}px`,
               display: "flex",

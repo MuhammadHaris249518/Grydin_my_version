@@ -803,7 +803,7 @@ useEffect(() => {
 return (
   <DarkSection id="contact" className="flex flex-col justify-between" minHeight>
     <TopTape />
-    <DotGrid contentBottom={contentH} />
+    <DotGrid contentBottom={contentH / 1.05} />
     <div
       className="flex-1 max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row gap-16 justify-center md:justify-between items-center"
       ref={contentRef}

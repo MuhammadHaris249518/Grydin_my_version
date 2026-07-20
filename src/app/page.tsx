@@ -200,12 +200,30 @@ const HeroImageSlider = () => {
   const [progress, setProgress] = useState(0);
   const [held, setHeld] = useState(false);
 
+  const aspectCacheRef = useRef<Record<string, string>>({});
+  const [mobileAspect, setMobileAspect] = useState<string>("3 / 4"); // fallback while loading
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
   const pausedElapsedRef = useRef<number>(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isPointerDownRef = useRef(false);
 
+  useEffect(() => {
+    if (!isMobile) return;
+    const src = HERO_IMAGES[index].srcMobile;
+    const cached = aspectCacheRef.current[src];
+    if (cached) {
+      setMobileAspect(cached);
+      return;
+    }
+    const img = new Image();
+    img.onload = () => {
+      const ratio = `${img.naturalWidth} / ${img.naturalHeight}`;
+      aspectCacheRef.current[src] = ratio;
+      setMobileAspect(ratio);
+    };
+    img.src = src;
+  }, [index, isMobile]);
   const goTo = (next: number) => {
     setPrevIndex(index);
     setIndex(next);
@@ -285,7 +303,7 @@ const HeroImageSlider = () => {
           position: "relative",
           width: "90vw",
           maxWidth: "1400px",
-          aspectRatio: isMobile ? "3 / 4" : "16 / 9",
+          aspectRatio: isMobile ? mobileAspect : "16 / 9", // ← was hardcoded "3 / 4"
           border: "1px solid rgba(255,255,255,0.08)",
           background: "rgba(0,0,0,0.6)",
           overflow: "hidden",
@@ -298,13 +316,13 @@ const HeroImageSlider = () => {
         {prevIndex !== null && (
           <img key={`out-${prevIndex}-${isMobile}`} src={getSrc(prevIndex)} alt=""
             style={{
-              position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+              position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", // ← was always "cover"
               animation: "heroFadeOut 0.9s cubic-bezier(0.4,0,0.2,1) forwards"
             }} />
         )}
         <img key={`in-${index}-${isMobile}`} src={getSrc(index)} alt={HERO_IMAGES[index].service}
           style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", // ← was always "cover"
             animation: "heroFadeIn 1.1s cubic-bezier(0.4,0,0.2,1) forwards",
             filter: held ? "brightness(1.05)" : "none",
             transition: "filter 0.3s ease"

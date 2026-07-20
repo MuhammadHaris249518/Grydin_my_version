@@ -168,155 +168,183 @@ const DarkSection = ({
 
 
 // ── Hero Image Slider ─────────────────────────────────────────────────────────
+// ── mobile detection hook ─────────────────────────────────────────────
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 const HERO_IMAGES = [
-  { src: "/hero-1.png", service: "Custom Software" },
-  { src: "/hero-6.png", service: "System Integration" },
-  { src: "/hero-5.png", service: "System Integration" },
-  { src: "/hero-4.png", service: "Full-Stack Development" },
-  { src: "/hero-3.png", service: "Full-Stack Development" },
-  { src: "/hero-2.png", service: "Full-Stack Development" },
-  { src: "/hero-7.png", service: "Custom Software" },
-  { src: "/hero-8.png", service: "Custom Software" },
+  { src: "/hero-1.png", srcMobile: "/hero-1-mobile.png", service: "AI Agents" },
+  { src: "/hero-2.png", srcMobile: "/hero-2-mobile.png", service: "Workflow Automation" },
+  { src: "/hero-3.png", srcMobile: "/hero-3-mobile.png", service: "Full-Stack Development" },
+  { src: "/hero-4.png", srcMobile: "/hero-4-mobile.png", service: "Custom Software" },
+  { src: "/hero-5.png", srcMobile: "/hero-5-mobile.png", service: "AI Integration" },
+  { src: "/hero-6.png", srcMobile: "/hero-6-mobile.png", service: "System Integration" },
 ];
 
+const SLIDE_DURATION = 3400;
+const HOLD_THRESHOLD = 400; // ms — below this = tap, above = hold
+
 const HeroImageSlider = () => {
+  const isMobile = useIsMobile();
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
-  const [dir, setDir] = useState<"next" | "prev">("next");
-  const [ratio, setRatio] = useState(16 / 9);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const HEIGHT = "clamp(280px, 46vh, 460px)";
+  const [progress, setProgress] = useState(0);
+  const [held, setHeld] = useState(false);
 
-  const goTo = (next: number, direction: "next" | "prev") => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setDir(direction);
+  const rafRef = useRef<number>(0);
+  const startRef = useRef<number>(0);
+  const pausedElapsedRef = useRef<number>(0);
+  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isPointerDownRef = useRef(false);
+
+  const goTo = (next: number) => {
     setPrevIndex(index);
     setIndex(next);
+    setHeld(false);
   };
 
+  const advance = () => goTo((index + 1) % HERO_IMAGES.length);
+
+  // main progress driver — runs whenever not held
   useEffect(() => {
-    timeoutRef.current = setTimeout(() => {
-      setDir("next");
-      setPrevIndex(index);
-      setIndex((i) => (i + 1) % HERO_IMAGES.length);
-    }, 3000);
-    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
-  }, [index]);
+    if (held) return;
+    startRef.current = performance.now() - pausedElapsedRef.current;
+    const tick = (now: number) => {
+      const elapsed = now - startRef.current;
+      const p = Math.min(elapsed / SLIDE_DURATION, 1);
+      setProgress(p);
+      if (p < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        pausedElapsedRef.current = 0;
+        advance();
+      }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [index, held]);
+
+  // reset paused-elapsed whenever image actually changes
+  useEffect(() => { pausedElapsedRef.current = 0; }, [index]);
 
   useEffect(() => {
     if (prevIndex === null) return;
-    const t = setTimeout(() => setPrevIndex(null), 700);
+    const t = setTimeout(() => setPrevIndex(null), 900);
     return () => clearTimeout(t);
   }, [prevIndex]);
 
-  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const { naturalWidth, naturalHeight } = e.currentTarget;
-    if (naturalWidth && naturalHeight) setRatio(naturalWidth / naturalHeight);
+  // ── Pointer handling: distinguishes tap vs hold, works for mouse + touch ──
+  const handlePointerDown = () => {
+    isPointerDownRef.current = true;
+    holdTimerRef.current = setTimeout(() => {
+      if (!isPointerDownRef.current) return;
+      // crossed threshold → this is a HOLD → pin current frame
+      cancelAnimationFrame(rafRef.current);
+      pausedElapsedRef.current = performance.now() - startRef.current;
+      setHeld(true);
+    }, HOLD_THRESHOLD);
   };
 
+  const handlePointerUp = () => {
+    isPointerDownRef.current = false;
+    if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+    if (!held) {
+      // released before threshold → it was a TAP → skip to next instantly
+      advance();
+    }
+    // if held===true, do nothing here — global listener below handles resume
+  };
+
+  // while held, ANY click/tap anywhere resumes playback from where it paused
+  useEffect(() => {
+    if (!held) return;
+    const resume = () => setHeld(false);
+    document.addEventListener("pointerdown", resume, { once: true });
+    return () => document.removeEventListener("pointerdown", resume);
+  }, [held]);
+
+  const getSrc = (i: number) => (isMobile ? HERO_IMAGES[i].srcMobile : HERO_IMAGES[i].src);
+
   return (
-    <div className="flex flex-col items-center w-full mt-8" style={{ gap: "1.25rem" }}>
-      <div className="flex items-center justify-center w-full" style={{ gap: "1.25rem" }}>
-        <button
-          onClick={() => goTo((index - 1 + HERO_IMAGES.length) % HERO_IMAGES.length, "prev")}
-          aria-label="Previous slide"
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, lineHeight: 0, color: "rgba(255,255,255,0.6)", transition: "color 0.2s, transform 0.2s" }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "scale(1.15)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; e.currentTarget.style.transform = "scale(1)"; }}
-        >
-          <ArrowRight size={20} strokeWidth={2} style={{ transform: "rotate(180deg)" }} />
-        </button>
+    <div className="w-full flex flex-col items-center" style={{ padding: "0 5vw", marginTop: "clamp(2rem, 6vh, 4rem)", gap: "0.9rem" }}>
 
-        <div
-          className="relative"
-          style={{
-            height: HEIGHT,
-            width: `calc(${HEIGHT} * ${ratio})`,
-            maxWidth: "100%",
-            border: "1px solid rgba(255,255,255,0.08)",
-            background: "rgba(0,0,0,0.6)",
-            overflow: "hidden",
-            transition: "width 0.4s ease",
-          }}
-        >
-          {prevIndex !== null && (
-            <img
-              key={`out-${prevIndex}-${dir}`}
-              src={HERO_IMAGES[prevIndex].src}
-              alt=""
-              style={{
-                position: "absolute", inset: 0, width: "100%", height: "100%",
-                objectFit: "contain",
-                transform: `translateX(${dir === "next" ? "-100%" : "100%"})`,
-                transition: "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
-              }}
-            />
-          )}
-          <img
-            key={`in-${index}-${dir}`}
-            src={HERO_IMAGES[index].src}
-            alt=""
-            onLoad={handleLoad}
-            style={{
-              position: "absolute", inset: 0, width: "100%", height: "100%",
-              objectFit: "contain",
-              animation: `${dir === "next" ? "slideInRight" : "slideInLeft"} 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards`,
-            }}
-          />
-          <div
-            key={`trace-${index}`}
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              height: "2px",
-              width: "0%",
-              background: "rgba(255,255,255,0.7)",
-              animation: "traceWidth 2.3s linear forwards",
-              animationDelay: "0.7s",
-            }}
-          />
-          <style jsx>{`
-            @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
-            @keyframes slideInLeft  { from { transform: translateX(-100%); } to { transform: translateX(0); } }
-            @keyframes traceWidth   { from { width: 0%; } to { width: 100%; } }
-          `}</style>
-        </div>
-
-        <button
-          onClick={() => goTo((index + 1) % HERO_IMAGES.length, "next")}
-          aria-label="Next slide"
-          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, lineHeight: 0, color: "rgba(255,255,255,0.6)", transition: "color 0.2s, transform 0.2s" }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "scale(1.15)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; e.currentTarget.style.transform = "scale(1)"; }}
-        >
-          <ArrowRight size={20} strokeWidth={2} />
-        </button>
-      </div>
-
-      <p
-        key={`caption-${index}`}
+      <div
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={() => { isPointerDownRef.current = false; if (holdTimerRef.current) clearTimeout(holdTimerRef.current); }}
         style={{
-          fontSize: "0.72rem",
-          fontWeight: 700,
-          letterSpacing: "0.16em",
-          textTransform: "uppercase",
-          color: "rgba(255,255,255,0.45)",
-          margin: 0,
+          position: "relative",
+          width: "90vw",
+          maxWidth: "1400px",
+          aspectRatio: isMobile ? "3 / 4" : "16 / 9",
+          border: "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(0,0,0,0.6)",
+          overflow: "hidden",
+          borderRadius: "4px",
+          cursor: "pointer",
+          userSelect: "none",
+          touchAction: "manipulation",
         }}
       >
-        {HERO_IMAGES[index].service}
-      </p>
-
-      <div style={{ display: "flex", gap: "6px", marginBottom: "1.5rem" }}>
-        {HERO_IMAGES.map((_, i) => (
-          <div key={i} style={{
-            width: i === index ? "16px" : "6px", height: "3px", borderRadius: "1px",
-            background: i === index ? "#ffffff" : "rgba(255,255,255,0.25)",
-            transition: "width 0.3s ease, background 0.3s ease",
+        {prevIndex !== null && (
+          <img key={`out-${prevIndex}-${isMobile}`} src={getSrc(prevIndex)} alt=""
+            style={{
+              position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+              animation: "heroFadeOut 0.9s cubic-bezier(0.4,0,0.2,1) forwards"
+            }} />
+        )}
+        <img key={`in-${index}-${isMobile}`} src={getSrc(index)} alt={HERO_IMAGES[index].service}
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover",
+            animation: "heroFadeIn 1.1s cubic-bezier(0.4,0,0.2,1) forwards",
+            filter: held ? "brightness(1.05)" : "none",
+            transition: "filter 0.3s ease"
           }} />
+
+        {held && (
+          <div style={{
+            position: "absolute", inset: 0, pointerEvents: "none",
+            border: "2px solid rgba(255,255,255,0.55)",
+          }} />
+        )}
+
+        <style jsx>{`
+          @keyframes heroFadeIn { from { opacity:0; transform:scale(1.04);} to { opacity:1; transform:scale(1);} }
+          @keyframes heroFadeOut { from { opacity:1; transform:scale(1);} to { opacity:0; transform:scale(0.98);} }
+        `}</style>
+      </div>
+
+      {/* progress bar — freezes exactly in sync with held state */}
+      <div style={{ display: "flex", gap: "5px", width: "90vw", maxWidth: "1400px" }}>
+        {HERO_IMAGES.map((_, i) => (
+          <div
+            key={i}
+            onClick={(e) => { e.stopPropagation(); cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }}
+            style={{ flex: 1, height: "2px", borderRadius: "1px", background: "rgba(255,255,255,0.15)", overflow: "hidden", cursor: "pointer" }}
+          >
+            <div style={{
+              height: "100%",
+              width: i < index ? "100%" : i === index ? `${progress * 100}%` : "0%",
+              background: held && i === index ? "#fff" : "rgba(255,255,255,0.75)",
+              boxShadow: held && i === index ? "0 0 6px rgba(255,255,255,0.8)" : "none",
+            }} />
+          </div>
         ))}
       </div>
+
+      <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: "10px", color: "rgba(255,255,255,0.45)", display: "flex", alignItems: "center", gap: "6px" }}>
+        {HERO_IMAGES[index].service}
+        {held && <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>· paused</span>}
+      </p>
     </div>
   );
 };

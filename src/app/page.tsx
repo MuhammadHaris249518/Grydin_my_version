@@ -70,13 +70,13 @@ const WHY_GRYDIN = [
   { stat: "Outcome-based", label: "We succeed when you do" },
 ];
 
-const TAPE_H          = 52;
-const ARC_R           = TAPE_H / 2;
-const TAPE_H_MIN      = 24;
-const VW_COEFF        = 2;
+const TAPE_H = 52;
+const ARC_R = TAPE_H / 2;
+const TAPE_H_MIN = 24;
+const VW_COEFF = 2;
 const TAPE_H_SLOW_MAX = 72;
 const TAPE_H_SLOW_MIN = 58;
-const VW_COEFF_SLOW   = 6;
+const VW_COEFF_SLOW = 6;
 
 function computeTapeH(width: number) {
   const vw = (VW_COEFF / 100) * width;
@@ -166,16 +166,170 @@ const DarkSection = ({
   </section>
 );
 
+
+// ── Hero Image Slider ─────────────────────────────────────────────────────────
+const HERO_IMAGES = [
+  { src: "/hero-1.png", service: "Custom Software" },
+  { src: "/hero-6.png", service: "System Integration" },
+  { src: "/hero-5.png", service: "System Integration" },
+  { src: "/hero-4.png", service: "Full-Stack Development" },
+  { src: "/hero-3.png", service: "Full-Stack Development" },
+  { src: "/hero-2.png", service: "Full-Stack Development" },
+  { src: "/hero-7.png", service: "Custom Software" },
+  { src: "/hero-8.png", service: "Custom Software" },
+];
+
+const HeroImageSlider = () => {
+  const [index, setIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState<number | null>(null);
+  const [dir, setDir] = useState<"next" | "prev">("next");
+  const [ratio, setRatio] = useState(16 / 9);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const HEIGHT = "clamp(280px, 46vh, 460px)";
+
+  const goTo = (next: number, direction: "next" | "prev") => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setDir(direction);
+    setPrevIndex(index);
+    setIndex(next);
+  };
+
+  useEffect(() => {
+    timeoutRef.current = setTimeout(() => {
+      setDir("next");
+      setPrevIndex(index);
+      setIndex((i) => (i + 1) % HERO_IMAGES.length);
+    }, 3000);
+    return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
+  }, [index]);
+
+  useEffect(() => {
+    if (prevIndex === null) return;
+    const t = setTimeout(() => setPrevIndex(null), 700);
+    return () => clearTimeout(t);
+  }, [prevIndex]);
+
+  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget;
+    if (naturalWidth && naturalHeight) setRatio(naturalWidth / naturalHeight);
+  };
+
+  return (
+    <div className="flex flex-col items-center w-full mt-8" style={{ gap: "1.25rem" }}>
+      <div className="flex items-center justify-center w-full" style={{ gap: "1.25rem" }}>
+        <button
+          onClick={() => goTo((index - 1 + HERO_IMAGES.length) % HERO_IMAGES.length, "prev")}
+          aria-label="Previous slide"
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, lineHeight: 0, color: "rgba(255,255,255,0.6)", transition: "color 0.2s, transform 0.2s" }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "scale(1.15)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; e.currentTarget.style.transform = "scale(1)"; }}
+        >
+          <ArrowRight size={20} strokeWidth={2} style={{ transform: "rotate(180deg)" }} />
+        </button>
+
+        <div
+          className="relative"
+          style={{
+            height: HEIGHT,
+            width: `calc(${HEIGHT} * ${ratio})`,
+            maxWidth: "100%",
+            border: "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(0,0,0,0.6)",
+            overflow: "hidden",
+            transition: "width 0.4s ease",
+          }}
+        >
+          {prevIndex !== null && (
+            <img
+              key={`out-${prevIndex}-${dir}`}
+              src={HERO_IMAGES[prevIndex].src}
+              alt=""
+              style={{
+                position: "absolute", inset: 0, width: "100%", height: "100%",
+                objectFit: "contain",
+                transform: `translateX(${dir === "next" ? "-100%" : "100%"})`,
+                transition: "transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)",
+              }}
+            />
+          )}
+          <img
+            key={`in-${index}-${dir}`}
+            src={HERO_IMAGES[index].src}
+            alt=""
+            onLoad={handleLoad}
+            style={{
+              position: "absolute", inset: 0, width: "100%", height: "100%",
+              objectFit: "contain",
+              animation: `${dir === "next" ? "slideInRight" : "slideInLeft"} 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards`,
+            }}
+          />
+          <div
+            key={`trace-${index}`}
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              height: "2px",
+              width: "0%",
+              background: "rgba(255,255,255,0.7)",
+              animation: "traceWidth 2.3s linear forwards",
+              animationDelay: "0.7s",
+            }}
+          />
+          <style jsx>{`
+            @keyframes slideInRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+            @keyframes slideInLeft  { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+            @keyframes traceWidth   { from { width: 0%; } to { width: 100%; } }
+          `}</style>
+        </div>
+
+        <button
+          onClick={() => goTo((index + 1) % HERO_IMAGES.length, "next")}
+          aria-label="Next slide"
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0, lineHeight: 0, color: "rgba(255,255,255,0.6)", transition: "color 0.2s, transform 0.2s" }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "#ffffff"; e.currentTarget.style.transform = "scale(1.15)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; e.currentTarget.style.transform = "scale(1)"; }}
+        >
+          <ArrowRight size={20} strokeWidth={2} />
+        </button>
+      </div>
+
+      <p
+        key={`caption-${index}`}
+        style={{
+          fontSize: "0.72rem",
+          fontWeight: 700,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: "rgba(255,255,255,0.45)",
+          margin: 0,
+        }}
+      >
+        {HERO_IMAGES[index].service}
+      </p>
+
+      <div style={{ display: "flex", gap: "6px", marginBottom: "1.5rem" }}>
+        {HERO_IMAGES.map((_, i) => (
+          <div key={i} style={{
+            width: i === index ? "16px" : "6px", height: "3px", borderRadius: "1px",
+            background: i === index ? "#ffffff" : "rgba(255,255,255,0.25)",
+            transition: "width 0.3s ease, background 0.3s ease",
+          }} />
+        ))}
+      </div>
+    </div>
+  );
+};
 // ── Hero Section ──────────────────────────────────────────────────────────────
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { tapeH } = useTape();
   const contentRef = useRef<HTMLDivElement>(null);
-const [contentH, setContentH] = useState(0);
+  const [contentH, setContentH] = useState(0);
 
   useEffect(() => {
-    if (videoRef.current) videoRef.current.play().catch(() => {});
+    if (videoRef.current) videoRef.current.play().catch(() => { });
   }, []);
 
   useEffect(() => {
@@ -191,17 +345,17 @@ const [contentH, setContentH] = useState(0);
   return (
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
-      <DotGrid contentBottom={contentH / 1.04} />
+      <DotGrid contentBottom={contentH / 1.04} animate={false} />
       {/* Text content – padded, centred */}
       <div
         className="flex flex-col text-center px-6 justify-center items-center"
         ref={contentRef}
         style={{
           flexShrink: 0,
-          minHeight: "90vh",
+          minHeight: "100dvh",
           position: "relative",
           zIndex: 1,
-          }}
+        }}
       >
         <p
           className="mb-4 tracking-widest uppercase text-xs font-medium mt-20"
@@ -312,6 +466,7 @@ const [contentH, setContentH] = useState(0);
           <source src="/medium.mp4" type="video/mp4" />
         </video>
       </div> */}
+      <HeroImageSlider />
     </DarkSection>
   );
 };
@@ -368,11 +523,11 @@ const ServicesGrid = () => {
       setActiveIndex(next);
     }
   };
-useEffect(() => {
-  return () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  };
-}, []);
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-3"
@@ -438,7 +593,7 @@ const ServicesSection = () => {
   return (
     <DarkSection id="services" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={contentH / 1.02} />
+      <DotGrid contentBottom={contentH / 1.02} animate={false} />
       <div
         ref={contentRef}
         className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
@@ -484,11 +639,11 @@ const ServicesSection = () => {
 const TracedBox = ({ children }: { children: React.ReactNode }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
-const [phase, setPhase] = useState<"tracing" | "holding" | "hidden" | "waiting">("waiting");
-const [glowOpacity, setGlowOpacity] = useState(0);
-const glowRafRef = useRef<number>(0);
-const glowStartRef = useRef<number>(0);  
-const rafRef = useRef<number>(0);
+  const [phase, setPhase] = useState<"tracing" | "holding" | "hidden" | "waiting">("waiting");
+  const [glowOpacity, setGlowOpacity] = useState(0);
+  const glowRafRef = useRef<number>(0);
+  const glowStartRef = useRef<number>(0);
+  const rafRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
   const TRACE_DURATION = 1800;
   const HOLD = 10000;
@@ -568,27 +723,27 @@ const rafRef = useRef<number>(0);
     // Right branch: center-top → top-right → right-bottom → bottom-left → center-bottom
     const rDist = dist / 2;
     if (rDist <= topRight) {
-      rightPath = `M ${W/2} 0 L ${W/2 + rDist} 0`;
+      rightPath = `M ${W / 2} 0 L ${W / 2 + rDist} 0`;
     } else if (rDist <= topRight + H) {
-      rightPath = `M ${W/2} 0 L ${W} 0 L ${W} ${rDist - topRight}`;
+      rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${rDist - topRight}`;
     } else if (rDist <= topRight + H + W) {
-      rightPath = `M ${W/2} 0 L ${W} 0 L ${W} ${H} L ${W - (rDist - topRight - H)} ${H}`;
+      rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L ${W - (rDist - topRight - H)} ${H}`;
     } else {
       const remaining = rDist - topRight - H - W;
-      rightPath = `M ${W/2} 0 L ${W} 0 L ${W} ${H} L 0 ${H} L 0 ${H - remaining}`;
+      rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L 0 ${H} L 0 ${H - remaining}`;
     }
 
     // Left branch: center-top → top-left → left-bottom → bottom-right → center-bottom
     const lDist = dist / 2;
     if (lDist <= topRight) {
-      leftPath = `M ${W/2} 0 L ${W/2 - lDist} 0`;
+      leftPath = `M ${W / 2} 0 L ${W / 2 - lDist} 0`;
     } else if (lDist <= topRight + H) {
-      leftPath = `M ${W/2} 0 L 0 0 L 0 ${lDist - topRight}`;
+      leftPath = `M ${W / 2} 0 L 0 0 L 0 ${lDist - topRight}`;
     } else if (lDist <= topRight + H + W) {
-      leftPath = `M ${W/2} 0 L 0 0 L 0 ${H} L ${lDist - topRight - H} ${H}`;
+      leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${lDist - topRight - H} ${H}`;
     } else {
       const remaining = lDist - topRight - H - W;
-      leftPath = `M ${W/2} 0 L 0 0 L 0 ${H} L ${W} ${H} L ${W} ${H - remaining}`;
+      leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${W} ${H} L ${W} ${H - remaining}`;
     }
 
     return `${rightPath} ${leftPath}`;
@@ -624,101 +779,101 @@ const rafRef = useRef<number>(0);
 
 const HowItWorksSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
-const [contentH, setContentH] = useState(0);
-const { tapeH } = useTape();
+  const [contentH, setContentH] = useState(0);
+  const { tapeH } = useTape();
 
-useEffect(() => {
-  if (!contentRef.current) return;
-  const ro = new ResizeObserver(() => {
-    setContentH(contentRef.current?.offsetHeight ?? 0);
-  });
-  ro.observe(contentRef.current);
-  return () => ro.disconnect();
-}, []);
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const ro = new ResizeObserver(() => {
+      setContentH(contentRef.current?.offsetHeight ?? 0);
+    });
+    ro.observe(contentRef.current);
+    return () => ro.disconnect();
+  }, []);
 
-return (
-  <DarkSection id="how-it-works" className="flex flex-col" minHeight>
-    <TopTape />
-    <DotGrid contentBottom={contentH / 1.02} />
-    <div
-      className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
-      ref={contentRef}
-      style={{
-        paddingTop: "clamp(3rem, 7.5vh, 6rem)",
-        paddingBottom: "clamp(3rem, 7.5vh, 6rem)",
-        position: "relative",
-        zIndex: 1,
-      }}
-    >
-      <p
-        className="mb-3 uppercase tracking-widest text-xs"
+  return (
+    <DarkSection id="how-it-works" className="flex flex-col" minHeight>
+      <TopTape />
+      <DotGrid contentBottom={contentH / 1.02} animate={false} />
+      <div
+        className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
+        ref={contentRef}
         style={{
-          color: "#000000",
-          fontWeight: 700,
-          letterSpacing: "0.2em",
-          background: "rgba(255,255,255,0.45)",
-          borderRadius: "2px",
-          padding: "4px 8px",
-          width: "fit-content",
+          paddingTop: "clamp(3rem, 7.5vh, 6rem)",
+          paddingBottom: "clamp(3rem, 7.5vh, 6rem)",
+          position: "relative",
+          zIndex: 1,
         }}
       >
-        Built on
-      </p>
-      <h2
-        className="font-bold"
-        style={{
-          fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
-          color: "#ffffff",
-          letterSpacing: "-0.025em",
-          marginBottom: "clamp(1rem, 4vh, 4rem)",
-        }}
-      >
-        Three steps to invisible.
-      </h2>
+        <p
+          className="mb-3 uppercase tracking-widest text-xs"
+          style={{
+            color: "#000000",
+            fontWeight: 700,
+            letterSpacing: "0.2em",
+            background: "rgba(255,255,255,0.45)",
+            borderRadius: "2px",
+            padding: "4px 8px",
+            width: "fit-content",
+          }}
+        >
+          Built on
+        </p>
+        <h2
+          className="font-bold"
+          style={{
+            fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
+            color: "#ffffff",
+            letterSpacing: "-0.025em",
+            marginBottom: "clamp(1rem, 4vh, 4rem)",
+          }}
+        >
+          Three steps to invisible.
+        </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-        {HOW_IT_WORKS.map((item) => (
-          <TracedBox key={item.step}>
-            <div key={item.step} className="flex flex-col gap-3">
-              <span
-                className="font-bold"
-                style={{
-                  fontSize: "2.8rem",
-                  color: "rgba(255,255,255,0.07)",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 1,
-                }}
-              >
-                {item.step}
-              </span>
-              <h3
-                className="font-semibold mt-1"
-                style={{
-                  fontSize: "1.05rem",
-                  color: "#ffffff",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {item.title}
-              </h3>
-              <p
-                className="leading-relaxed"
-                style={{
-                  fontSize: "0.88rem",
-                  color: "rgba(255,255,255,0.45)",
-                  lineHeight: 1.75,
-                  textAlign: "justify",
-                }}
-              >
-                {item.desc}
-              </p>
-            </div>
-          </TracedBox>
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {HOW_IT_WORKS.map((item) => (
+            <TracedBox key={item.step}>
+              <div key={item.step} className="flex flex-col gap-3">
+                <span
+                  className="font-bold"
+                  style={{
+                    fontSize: "2.8rem",
+                    color: "rgba(255,255,255,0.07)",
+                    letterSpacing: "-0.04em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {item.step}
+                </span>
+                <h3
+                  className="font-semibold mt-1"
+                  style={{
+                    fontSize: "1.05rem",
+                    color: "#ffffff",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className="leading-relaxed"
+                  style={{
+                    fontSize: "0.88rem",
+                    color: "rgba(255,255,255,0.45)",
+                    lineHeight: 1.75,
+                    textAlign: "justify",
+                  }}
+                >
+                  {item.desc}
+                </p>
+              </div>
+            </TracedBox>
+          ))}
+        </div>
       </div>
-    </div>
-  </DarkSection>
-)
+    </DarkSection>
+  )
 };
 
 function useCountUp(target: number, duration = 1200, triggered = false) {
@@ -765,10 +920,10 @@ const WhyGrydinSection = () => {
   return (
     <DarkSection id="why-gridin" className="flex flex-col" minHeight>
       <TopTape />
-      <DotGrid contentBottom={contentH}/>
+      <DotGrid contentBottom={contentH} animate={false} />
       <div ref={(el) => { (ref as React.MutableRefObject<HTMLDivElement | null>).current = el; (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = el; }} className="max-w-5xl mx-auto w-full px-6 md:px-12" style={{ position: "relative", zIndex: 1, paddingTop: "clamp(0.8rem, 3vh, 2rem)", paddingBottom: "clamp(2rem, 5vh, 4rem)" }}>
-        <p className="mb-3 uppercase tracking-widest text-xs" style={{ fontWeight:700,color: "#000000", letterSpacing: "0.2em" }}>Why us</p>
-        <h2 className="font-bold" style={{  fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "clamp(1rem, 4vh, 4rem)" }}>
+        <p className="mb-3 uppercase tracking-widest text-xs" style={{ fontWeight: 700, color: "#000000", letterSpacing: "0.2em" }}>Why us</p>
+        <h2 className="font-bold" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "clamp(1rem, 4vh, 4rem)" }}>
           Built different, by design
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
@@ -789,106 +944,106 @@ const WhyGrydinSection = () => {
 // ── Contact / Footer Section ──────────────────────────────────────────────────
 const ContactSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
-const [contentH, setContentH] = useState(0);
-const { tapeH } = useTape();
+  const [contentH, setContentH] = useState(0);
+  const { tapeH } = useTape();
 
-useEffect(() => {
-  if (!contentRef.current) return;
-  const ro = new ResizeObserver(() => {
-    setContentH(contentRef.current?.offsetHeight ?? 0);
-  });
-  ro.observe(contentRef.current);
-  return () => ro.disconnect();
-}, []);
-return (
-  <DarkSection id="contact" className="flex flex-col justify-between" minHeight>
-    <TopTape />
-    <DotGrid contentBottom={contentH / 1.12} />
-    <div
-      className="flex-1 max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row gap-16 justify-center md:justify-between items-center"
-      ref={contentRef}
-      style={{
-        paddingTop: "clamp(4rem, 10vh, 8rem)",
-        paddingBottom: "clamp(4rem, 10vh, 8rem)",
-        position: "relative",
-        zIndex: 1,
-      }}
-    >
-      <div className="flex flex-col gap-6 max-w-sm">
-        <p
-          className="uppercase tracking-widest text-xs"
-          style={{
-            color: "#000000",
-            fontWeight: 700,
-            letterSpacing: "0.2em",
-            background: "rgba(255,255,255,0.45)",
-            borderRadius: "2px",
-            padding: "4px 8px",
-            width: "fit-content",
-          }}
-        >
-          Your move
-        </p>
-        <h2
-          className="font-bold"
-          style={{
-            fontSize: "clamp(1.8rem, 3vw, 2.4rem)",
-            color: "#ffffff",
-            letterSpacing: "-0.025em",
-            lineHeight: 1.15,
-          }}
-        >
-          See a gap worth closing?
-        </h2>
-        <p
-          style={{
-            fontSize: "0.88rem",
-            color: "rgba(255,255,255,0.42)",
-            lineHeight: 1.75,
-            textAlign: "justify",
-          }}
-        >
-          Describe what's slowing your business down. No pitch, no sales deck –
-          just an honest, scoped response within one business day.
-        </p>
-        <a
-          href="/contact"
-          className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm w-fit transition-all duration-200 hover:gap-4"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "10px 24px",
-            background: "white",
-            color: "#000000",
-            fontWeight: 600,
-            fontSize: "0.85rem",
-            borderRadius: "2px",
-            letterSpacing: "0.04em",
-            textDecoration: "none",
-            width: "fit-content",
-            transition: "gap 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.gap = "1rem";
-            e.currentTarget.style.background = "#181717";
-            e.currentTarget.style.color = "white";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.gap = "0.5rem";
-            e.currentTarget.style.background = "white";
-            e.currentTarget.style.color = "#000000";
-          }}
-        >
-          Start the diagnosis <ArrowRight size={14} strokeWidth={2.2} />
-        </a>
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const ro = new ResizeObserver(() => {
+      setContentH(contentRef.current?.offsetHeight ?? 0);
+    });
+    ro.observe(contentRef.current);
+    return () => ro.disconnect();
+  }, []);
+  return (
+    <DarkSection id="contact" className="flex flex-col justify-between" minHeight>
+      <TopTape />
+      <DotGrid contentBottom={contentH / 1.12} animate={false} />
+      <div
+        className="flex-1 max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row gap-16 justify-center md:justify-between items-center"
+        ref={contentRef}
+        style={{
+          paddingTop: "clamp(4rem, 10vh, 8rem)",
+          paddingBottom: "clamp(4rem, 10vh, 8rem)",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <div className="flex flex-col gap-6 max-w-sm">
+          <p
+            className="uppercase tracking-widest text-xs"
+            style={{
+              color: "#000000",
+              fontWeight: 700,
+              letterSpacing: "0.2em",
+              background: "rgba(255,255,255,0.45)",
+              borderRadius: "2px",
+              padding: "4px 8px",
+              width: "fit-content",
+            }}
+          >
+            Your move
+          </p>
+          <h2
+            className="font-bold"
+            style={{
+              fontSize: "clamp(1.8rem, 3vw, 2.4rem)",
+              color: "#ffffff",
+              letterSpacing: "-0.025em",
+              lineHeight: 1.15,
+            }}
+          >
+            See a gap worth closing?
+          </h2>
+          <p
+            style={{
+              fontSize: "0.88rem",
+              color: "rgba(255,255,255,0.42)",
+              lineHeight: 1.75,
+              textAlign: "justify",
+            }}
+          >
+            Describe what's slowing your business down. No pitch, no sales deck –
+            just an honest, scoped response within one business day.
+          </p>
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm w-fit transition-all duration-200 hover:gap-4"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "10px 24px",
+              background: "white",
+              color: "#000000",
+              fontWeight: 600,
+              fontSize: "0.85rem",
+              borderRadius: "2px",
+              letterSpacing: "0.04em",
+              textDecoration: "none",
+              width: "fit-content",
+              transition: "gap 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.gap = "1rem";
+              e.currentTarget.style.background = "#181717";
+              e.currentTarget.style.color = "white";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.gap = "0.5rem";
+              e.currentTarget.style.background = "white";
+              e.currentTarget.style.color = "#000000";
+            }}
+          >
+            Start the diagnosis <ArrowRight size={14} strokeWidth={2.2} />
+          </a>
+        </div>
       </div>
-    </div>
 
-    {/* Footer tape – SVG BottomTape geometry with footer text overlaid */}
-    <FooterTape />
-  </DarkSection>
-)
+      {/* Footer tape – SVG BottomTape geometry with footer text overlaid */}
+      <FooterTape />
+    </DarkSection>
+  )
 };
 
 const WhatsAppButton = () => (
@@ -944,46 +1099,46 @@ const WhatsAppButton = () => (
 
 export default function Home() {
   const [tapeH, setTapeH] = useState(TAPE_H);
-const [tapeHSlow, setTapeHSlow] = useState(TAPE_H_SLOW_MAX);
-useEffect(() => {
-  const styleId = "scrollbar-hide-style";
-
-  const hide = () => {
-    if (!document.getElementById(styleId)) {
-      const s = document.createElement("style");
-      s.id = styleId;
-      s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
-      document.head.appendChild(s);
-    }
-  };
-
-  const show = () => {
-    document.getElementById(styleId)?.remove();
-  };
-
-  let t: ReturnType<typeof setTimeout>;
-  hide();
-
-  const handler = () => {
-    show();
-    clearTimeout(t);
-    t = setTimeout(hide, 1000);
-  };
-
-  window.addEventListener("scroll", handler, { passive: true });
-  document.addEventListener("scroll", handler, { passive: true });
-
-  return () => {
-    window.removeEventListener("scroll", handler);
-    document.removeEventListener("scroll", handler);
-    clearTimeout(t);
-  };
-}, []);
+  const [tapeHSlow, setTapeHSlow] = useState(TAPE_H_SLOW_MAX);
   useEffect(() => {
-  const update = () => {
-    setTapeH(computeTapeH(window.innerWidth));
-    setTapeHSlow(computeTapeHSlow(window.innerWidth));
-  };
+    const styleId = "scrollbar-hide-style";
+
+    const hide = () => {
+      if (!document.getElementById(styleId)) {
+        const s = document.createElement("style");
+        s.id = styleId;
+        s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
+        document.head.appendChild(s);
+      }
+    };
+
+    const show = () => {
+      document.getElementById(styleId)?.remove();
+    };
+
+    let t: ReturnType<typeof setTimeout>;
+    hide();
+
+    const handler = () => {
+      show();
+      clearTimeout(t);
+      t = setTimeout(hide, 1000);
+    };
+
+    window.addEventListener("scroll", handler, { passive: true });
+    document.addEventListener("scroll", handler, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handler);
+      document.removeEventListener("scroll", handler);
+      clearTimeout(t);
+    };
+  }, []);
+  useEffect(() => {
+    const update = () => {
+      setTapeH(computeTapeH(window.innerWidth));
+      setTapeHSlow(computeTapeHSlow(window.innerWidth));
+    };
 
     update();
     window.addEventListener("resize", update, { passive: true });

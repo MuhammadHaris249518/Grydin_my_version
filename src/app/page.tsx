@@ -387,7 +387,7 @@ const HeroSection = () => {
     return () => ro.disconnect();
   }, []);
 
-  const { displayed: typed, ref: typeRef } = useTypewriter("Grid the unseen.");
+  const { displayed: typed, ref: typeRef } = useTypewriter("Grid the unseen");
   return (
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
@@ -436,7 +436,8 @@ const HeroSection = () => {
             }}
           />
           <br />
-          <span style={{ color: "rgba(255,255,255,0.45)" }}>
+          {/* <span style={{ color: "rgba(255,255,255,0.45)" }}> */}
+          <span style={{ color: "rgba(222, 2, 2, 0.45)" }}>
             Keep the humans.
           </span>
         </h1>
@@ -971,7 +972,7 @@ const StepSlide = ({
             d={buildTracePath(dims.w, dims.h, borderProgress)}
             fill="none"
             stroke="rgba(255,255,255,0.35)"
-            strokeWidth="1"
+            strokeWidth="1.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           />

@@ -902,11 +902,21 @@ const StepSlide = ({
   // const glowRafRef = useRef<number>(0);
   // const glowStartRef = useRef<number>(0);
 
+  // useEffect(() => {
+  //   if (!boxRef.current) return;
+  //   const el = boxRef.current;
+  //   const ro = new ResizeObserver(() => {
+  //     setDims({ w: el.offsetWidth, h: el.offsetHeight });
+  //   });
+  //   ro.observe(el);
+  //   return () => ro.disconnect();
+  // }, []);
   useEffect(() => {
     if (!boxRef.current) return;
     const el = boxRef.current;
-    const ro = new ResizeObserver(() => {
-      setDims({ w: el.offsetWidth, h: el.offsetHeight });
+    const ro = new ResizeObserver((entries) => {
+      const rect = entries[0].contentRect;
+      setDims({ w: Math.round(el.offsetWidth), h: Math.round(el.offsetHeight) });
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -954,6 +964,7 @@ const StepSlide = ({
     >
       {dims.w > 0 && (
         <svg
+          shapeRendering="crispEdges"
           style={{ position: "absolute", top: 0, left: 0, width: `${dims.w}px`, height: `${dims.h}px`, pointerEvents: "none", overflow: "visible" }}
         >
           <path

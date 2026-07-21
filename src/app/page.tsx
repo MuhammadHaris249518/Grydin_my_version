@@ -682,7 +682,14 @@ const ServicesSection = () => {
   );
 };
 // ── How It Works Section ──────────────────────────────────────────────────────
-const TracedBox = ({ children }: { children: React.ReactNode }) => {
+
+const TracedBox = ({
+  children,
+  onProgress,
+}: {
+  children: React.ReactNode;
+  onProgress?: (p: number) => void;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [phase, setPhase] = useState<"tracing" | "holding" | "hidden" | "waiting">("waiting");
@@ -702,10 +709,12 @@ const TracedBox = ({ children }: { children: React.ReactNode }) => {
     const startTrace = () => {
       setPhase("tracing");
       setProgress(0);
+      onProgress?.(0);
       startTimeRef.current = performance.now();
       const animate = (now: number) => {
         const p = Math.min((now - startTimeRef.current) / TRACE_DURATION, 1);
         setProgress(p);
+        onProgress?.(p);              // ← mirror out
         if (p < 1) {
           rafRef.current = requestAnimationFrame(animate);
         } else {
@@ -726,6 +735,7 @@ const TracedBox = ({ children }: { children: React.ReactNode }) => {
             cancelAnimationFrame(glowRafRef.current);
             setGlowOpacity(0);
             setProgress(0);
+            onProgress?.(1);
             setPhase("hidden");
             timeout = setTimeout(() => {
               setPhase("waiting");
@@ -823,6 +833,338 @@ const TracedBox = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+const STEP_IMAGES = [
+  { src: "/step-diagnose.png", srcMobile: "/step-diagnose-mobile.png", alt: "Diagnose dashboard" },
+  { src: "/step-design.png", srcMobile: "/step-design-mobile.png", alt: "Design dashboard" },
+  { src: "/step-deploy.png", srcMobile: "/step-deploy-mobile.png", alt: "Deploy dashboard" },
+];
+
+const SLIDE_TRANSITION = 700;   // ms — carousel push transition
+const TRACE_DURATION = 2400;  // ms — border draw + scanline reveal
+const HOLD_DURATION = 4600;  // ms — fully revealed, static
+
+// ── shared border-trace path builder (lifted from TracedBox) ──────────────
+function buildTracePath(W: number, H: number, progress: number) {
+  if (!W || !H) return "";
+  const perimeter = 2 * (W + H);
+  const dist = progress * perimeter;
+  const topRight = W / 2;
+
+  const branch = (d: number, dir: "right" | "left") => {
+    const sign = dir === "right" ? 1 : -1;
+    let path = `M ${W / 2} 0`;
+    if (d <= topRight) {
+      path += ` L ${W / 2 + sign * d} 0`;
+    } else if (d <= topRight + H) {
+      const s2 = d - topRight;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${s2}`;
+    } else if (d <= topRight + H + W) {
+      const s3 = d - topRight - H;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? W - s3 : s3} ${H}`;
+    } else {
+      const s4 = d - topRight - H - W;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? 0 : W} ${H} L ${dir === "right" ? 0 : W} ${H - s4}`;
+    }
+    return path;
+  };
+
+  const half = dist / 2;
+  return `${branch(half, "right")} ${branch(half, "left")}`;
+}
+
+// ── one step's box: border trace + scanline image reveal ──────────────────
+const StepSlide = ({
+  item,
+  image,
+  isActive,
+  phase,
+  progress,
+  onPointerDown,
+  onPointerUp,
+  onPointerLeave,
+}: {
+  item: (typeof HOW_IT_WORKS)[number];
+  image: string;
+  isActive: boolean;
+  phase: "trace" | "hold";
+  progress: number;
+  onPointerDown: () => void;
+  onPointerUp: () => void;
+  onPointerLeave: () => void;
+}) => {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState({ w: 0, h: 0 });
+  const [glowOpacity, setGlowOpacity] = useState(0);
+  const glowRafRef = useRef<number>(0);
+  const glowStartRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!boxRef.current) return;
+    const ro = new ResizeObserver(() => {
+      if (boxRef.current) setDims({ w: boxRef.current.offsetWidth, h: boxRef.current.offsetHeight });
+    });
+    ro.observe(boxRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  // glow pulse — runs only while this step is active AND holding
+  useEffect(() => {
+    const holding = isActive && phase === "hold";
+    if (!holding) {
+      cancelAnimationFrame(glowRafRef.current);
+      setGlowOpacity(0);
+      glowStartRef.current = 0;
+      return;
+    }
+    const GLOW_PERIOD = 2000;
+    const animateGlow = (now: number) => {
+      if (!glowStartRef.current) glowStartRef.current = now;
+      const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
+      const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
+      setGlowOpacity(opacity);
+      glowRafRef.current = requestAnimationFrame(animateGlow);
+    };
+    glowRafRef.current = requestAnimationFrame(animateGlow);
+    return () => cancelAnimationFrame(glowRafRef.current);
+  }, [isActive, phase]);
+
+  const tracing = isActive && phase === "trace";
+  const revealed = !isActive || phase === "hold";
+  const clipBottom = tracing ? Math.max(0, (1 - progress) * 100) : 0;
+  const borderProgress = tracing ? progress : isActive ? 1 : 0;
+
+  return (
+    <div
+      ref={boxRef}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerLeave={onPointerLeave}
+      style={{
+        position: "relative",
+        width: "100%",
+        cursor: "pointer",
+        userSelect: "none",
+        touchAction: "manipulation",
+        padding: "14px",
+      }}
+    >
+      {dims.w > 0 && (
+        <svg
+          style={{ position: "absolute", top: 0, left: 0, width: `${dims.w}px`, height: `${dims.h}px`, pointerEvents: "none", overflow: "visible" }}
+        >
+          <path
+            d={buildTracePath(dims.w, dims.h, borderProgress)}
+            fill="none"
+            stroke={`rgba(255,255,255,${0.35 + glowOpacity * 0.65})`}
+            strokeWidth="1"
+            filter={
+              glowOpacity > 0
+                ? `drop-shadow(0 0 ${glowOpacity * 4}px rgba(255,255,255,${glowOpacity * 0.95}))
+         drop-shadow(0 0 ${glowOpacity * 14}px rgba(255,255,255,${glowOpacity * 0.6}))
+         drop-shadow(0 0 ${glowOpacity * 28}px rgba(255,255,255,${glowOpacity * 0.35}))`
+                : undefined
+            }
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      )}
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem", alignItems: "center" }}>
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            aspectRatio: "16 / 9",
+            overflow: "hidden",
+            borderRadius: "3px",
+            border: "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(0,0,0,0.5)",
+          }}
+        >
+          <img
+            src={image}
+            alt={item.title}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              clipPath: `inset(0 0 ${clipBottom}% 0)`,
+              filter: revealed ? "brightness(1)" : `brightness(0.55) blur(${(1 - progress) * 3}px)`,
+              transition: "filter 0.3s ease-out",
+            }}
+          />
+          {tracing && (
+            <div
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: `${progress * 100}%`,
+                height: "2px",
+                background: "rgba(34,211,238,0.9)",
+                boxShadow: "0 0 12px 2px rgba(34,211,238,0.7), 0 0 30px 6px rgba(34,211,238,0.25)",
+                pointerEvents: "none",
+              }}
+            />
+          )}
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            maxWidth: "640px",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
+            {item.step}
+          </span>
+          <h3 style={{ fontSize: "1.3rem", color: "#ffffff", fontWeight: 600, letterSpacing: "-0.01em", margin: 0 }}>
+            {item.title}
+          </h3>
+          <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, margin: 0, textAlign: "center" }}>
+            {item.desc}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── carousel orchestrator ───────────────────────────────────────────────────
+const StepCarousel = () => {
+  const isMobile = useIsMobile();
+  const [index, setIndex] = useState(0);
+  const [phase, setPhase] = useState<"trace" | "hold">("trace");
+  const [progress, setProgress] = useState(0);
+  const [held, setHeld] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
+
+  const rafRef = useRef<number>(0);
+  const startRef = useRef<number>(0);
+  const pausedElapsedRef = useRef<number>(0);
+  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isPointerDownRef = useRef(false);
+
+  const phaseDuration = phase === "trace" ? TRACE_DURATION : HOLD_DURATION;
+
+  const advanceStep = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setIndex((i) => (i + 1) % HOW_IT_WORKS.length);
+      setPhase("trace");
+      setProgress(0);
+      pausedElapsedRef.current = 0;
+      setHeld(false);
+      setTransitioning(false);
+    }, SLIDE_TRANSITION);
+  };
+
+  useEffect(() => {
+    if (held || transitioning) return;
+    startRef.current = performance.now() - pausedElapsedRef.current;
+    const tick = (now: number) => {
+      const elapsed = now - startRef.current;
+      const p = Math.min(elapsed / phaseDuration, 1);
+      setProgress(p);
+      if (p < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      } else {
+        pausedElapsedRef.current = 0;
+        if (phase === "trace") setPhase("hold");
+        else advanceStep();
+      }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [phase, held, transitioning, index]);
+
+  const handlePointerDown = () => {
+    if (transitioning) return;
+    isPointerDownRef.current = true;
+    holdTimerRef.current = setTimeout(() => {
+      if (!isPointerDownRef.current) return;
+      cancelAnimationFrame(rafRef.current);
+      pausedElapsedRef.current = performance.now() - startRef.current;
+      setHeld(true);
+    }, HOLD_THRESHOLD);
+  };
+
+  const handlePointerUp = () => {
+    isPointerDownRef.current = false;
+    if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+    if (!held && !transitioning) {
+      cancelAnimationFrame(rafRef.current);
+      advanceStep();
+    }
+  };
+
+  const handlePointerLeave = () => {
+    isPointerDownRef.current = false;
+    if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+  };
+
+  // any tap anywhere resumes a held step
+  useEffect(() => {
+    if (!held) return;
+    const resume = () => setHeld(false);
+    document.addEventListener("pointerdown", resume, { once: true });
+    return () => document.removeEventListener("pointerdown", resume);
+  }, [held]);
+
+  return (
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
+      <div style={{ position: "relative", width: "88vw", maxWidth: "1500px", overflow: "hidden" }}>
+        <div
+          style={{
+            display: "flex",
+            width: `${HOW_IT_WORKS.length * 100}%`,
+            transform: `translateX(-${(index * 100) / HOW_IT_WORKS.length}%)`,
+            transition: `transform ${SLIDE_TRANSITION}ms cubic-bezier(0.4,0,0.2,1)`,
+          }}
+        >
+          {HOW_IT_WORKS.map((item, i) => (
+            <div key={item.step} style={{ flex: `0 0 ${100 / HOW_IT_WORKS.length}%` }}>
+              <StepSlide
+                item={item}
+                image={isMobile ? STEP_IMAGES[i].srcMobile : STEP_IMAGES[i].src}
+                isActive={i === index}
+                phase={phase}
+                progress={i === index ? progress : 0}
+                onPointerDown={handlePointerDown}
+                onPointerUp={handlePointerUp}
+                onPointerLeave={handlePointerLeave}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div style={{ display: "flex", gap: "6px" }}>
+        {HOW_IT_WORKS.map((_, i) => (
+          <div
+            key={i}
+            style={{
+              width: i === index ? "20px" : "6px",
+              height: "3px",
+              borderRadius: "1px",
+              background: i === index ? "#fff" : "rgba(255,255,255,0.25)",
+              transition: "width 0.3s ease, background 0.3s ease",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// ── section wrapper ─────────────────────────────────────────────────────────
 const HowItWorksSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
@@ -877,49 +1219,10 @@ const HowItWorksSection = () => {
           Three steps to invisible.
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {HOW_IT_WORKS.map((item) => (
-            <TracedBox key={item.step}>
-              <div key={item.step} className="flex flex-col gap-3">
-                <span
-                  className="font-bold"
-                  style={{
-                    fontSize: "2.8rem",
-                    color: "rgba(255,255,255,0.07)",
-                    letterSpacing: "-0.04em",
-                    lineHeight: 1,
-                  }}
-                >
-                  {item.step}
-                </span>
-                <h3
-                  className="font-semibold mt-1"
-                  style={{
-                    fontSize: "1.05rem",
-                    color: "#ffffff",
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {item.title}
-                </h3>
-                <p
-                  className="leading-relaxed"
-                  style={{
-                    fontSize: "0.88rem",
-                    color: "rgba(255,255,255,0.45)",
-                    lineHeight: 1.75,
-                    textAlign: "justify",
-                  }}
-                >
-                  {item.desc}
-                </p>
-              </div>
-            </TracedBox>
-          ))}
-        </div>
+        <StepCarousel />
       </div>
     </DarkSection>
-  )
+  );
 };
 
 function useCountUp(target: number, duration = 1200, triggered = false) {

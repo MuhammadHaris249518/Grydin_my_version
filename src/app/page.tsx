@@ -876,57 +876,61 @@ function buildTracePath(W: number, H: number, progress: number) {
 const StepSlide = ({
   item,
   image,
+  mobileAspect,
   isActive,
   phase,
   progress,
+  isMobile,
   onPointerDown,
   onPointerUp,
   onPointerLeave,
 }: {
   item: (typeof HOW_IT_WORKS)[number];
   image: string;
+  mobileAspect: string;   // ← add to type
   isActive: boolean;
   phase: "trace" | "hold";
   progress: number;
+  isMobile: boolean;
   onPointerDown: () => void;
   onPointerUp: () => void;
   onPointerLeave: () => void;
 }) => {
   const boxRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
-  const [glowOpacity, setGlowOpacity] = useState(0);
-  const glowRafRef = useRef<number>(0);
-  const glowStartRef = useRef<number>(0);
+  // const [glowOpacity, setGlowOpacity] = useState(0);
+  // const glowRafRef = useRef<number>(0);
+  // const glowStartRef = useRef<number>(0);
 
   useEffect(() => {
     if (!boxRef.current) return;
+    const el = boxRef.current;
     const ro = new ResizeObserver(() => {
-      if (boxRef.current) setDims({ w: boxRef.current.offsetWidth, h: boxRef.current.offsetHeight });
+      setDims({ w: el.offsetWidth, h: el.offsetHeight });
     });
-    ro.observe(boxRef.current);
+    ro.observe(el);
     return () => ro.disconnect();
   }, []);
-
-  // glow pulse — runs only while this step is active AND holding
-  useEffect(() => {
-    const holding = isActive && phase === "hold";
-    if (!holding) {
-      cancelAnimationFrame(glowRafRef.current);
-      setGlowOpacity(0);
-      glowStartRef.current = 0;
-      return;
-    }
-    const GLOW_PERIOD = 2000;
-    const animateGlow = (now: number) => {
-      if (!glowStartRef.current) glowStartRef.current = now;
-      const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
-      const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
-      setGlowOpacity(opacity);
-      glowRafRef.current = requestAnimationFrame(animateGlow);
-    };
-    glowRafRef.current = requestAnimationFrame(animateGlow);
-    return () => cancelAnimationFrame(glowRafRef.current);
-  }, [isActive, phase]);
+  const holding = isActive && phase === "hold";
+  // useEffect(() => {
+  //   const holding = isActive && phase === "hold";
+  //   if (!holding) {
+  //     cancelAnimationFrame(glowRafRef.current);
+  //     setGlowOpacity(0);
+  //     glowStartRef.current = 0;
+  //     return;
+  //   }
+  //   const GLOW_PERIOD = 2000;
+  //   const animateGlow = (now: number) => {
+  //     if (!glowStartRef.current) glowStartRef.current = now;
+  //     const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
+  //     const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
+  //     setGlowOpacity(opacity);
+  //     glowRafRef.current = requestAnimationFrame(animateGlow);
+  //   };
+  //   glowRafRef.current = requestAnimationFrame(animateGlow);
+  //   return () => cancelAnimationFrame(glowRafRef.current);
+  // }, [isActive, phase]);
 
   const tracing = isActive && phase === "trace";
   const revealed = !isActive || phase === "hold";
@@ -955,27 +959,40 @@ const StepSlide = ({
           <path
             d={buildTracePath(dims.w, dims.h, borderProgress)}
             fill="none"
-            stroke={`rgba(255,255,255,${0.35 + glowOpacity * 0.65})`}
+            stroke="rgba(255,255,255,0.35)"
             strokeWidth="1"
-            filter={
-              glowOpacity > 0
-                ? `drop-shadow(0 0 ${glowOpacity * 4}px rgba(255,255,255,${glowOpacity * 0.95}))
-         drop-shadow(0 0 ${glowOpacity * 14}px rgba(255,255,255,${glowOpacity * 0.6}))
-         drop-shadow(0 0 ${glowOpacity * 28}px rgba(255,255,255,${glowOpacity * 0.35}))`
-                : undefined
-            }
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+          {holding && (
+            <path
+              d={buildTracePath(dims.w, dims.h, borderProgress)}
+              fill="none"
+              stroke="rgba(255,255,255,1)"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{
+                filter:
+                  "drop-shadow(0 0 4px rgba(255,255,255,0.95)) drop-shadow(0 0 14px rgba(255,255,255,0.6)) drop-shadow(0 0 28px rgba(255,255,255,0.35))",
+                animation: "traceGlowPulse 2s ease-in-out infinite",
+              }}
+            />
+          )}
         </svg>
       )}
-
+      <style jsx>{`
+        @keyframes traceGlowPulse {
+          0%, 100% { opacity: 0; }
+          50% { opacity: 1; }
+        }
+      `}</style>
       <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem", alignItems: "center" }}>
         <div
           style={{
             position: "relative",
             width: "100%",
-            aspectRatio: "16 / 9",
+            aspectRatio: isMobile ? mobileAspect : "16 / 9",
             overflow: "hidden",
             borderRadius: "3px",
             border: "1px solid rgba(255,255,255,0.08)",
@@ -990,9 +1007,9 @@ const StepSlide = ({
               inset: 0,
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: isMobile ? "contain" : "cover",
               clipPath: `inset(0 0 ${clipBottom}% 0)`,
-              filter: revealed ? "brightness(1)" : `brightness(0.55) blur(${(1 - progress) * 3}px)`,
+              filter: revealed ? "brightness(1)" : "brightness(0.55)",
               transition: "filter 0.3s ease-out",
             }}
           />
@@ -1036,7 +1053,6 @@ const StepSlide = ({
     </div>
   );
 };
-
 // ── carousel orchestrator ───────────────────────────────────────────────────
 const StepCarousel = () => {
   const isMobile = useIsMobile();
@@ -1053,7 +1069,34 @@ const StepCarousel = () => {
   const isPointerDownRef = useRef(false);
 
   const phaseDuration = phase === "trace" ? TRACE_DURATION : HOLD_DURATION;
+  // ── shared aspect-ratio cache for all step images ──
+  const aspectCacheRef = useRef<Record<string, string>>({});
+  const [aspects, setAspects] = useState<Record<string, string>>({});
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(true);
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+  useEffect(() => {
+    if (!isMobile) return;
+    STEP_IMAGES.forEach(({ srcMobile }) => {
+      if (aspectCacheRef.current[srcMobile]) return; // already cached
+      const img = new Image();
+      img.onload = () => {
+        const ratio = `${img.naturalWidth} / ${img.naturalHeight}`;
+        aspectCacheRef.current[srcMobile] = ratio;
+        setAspects((prev) => ({ ...prev, [srcMobile]: ratio }));
+      };
+      img.src = srcMobile;
+    });
+  }, [isMobile]);
   const advanceStep = () => {
     setTransitioning(true);
     setTimeout(() => {
@@ -1067,7 +1110,12 @@ const StepCarousel = () => {
   };
 
   useEffect(() => {
-    if (held || transitioning) return;
+    if (held || transitioning || !inView) {
+      if (!held && !transitioning && !inView && startRef.current) {
+        pausedElapsedRef.current = performance.now() - startRef.current;
+      }
+      return;
+    }
     startRef.current = performance.now() - pausedElapsedRef.current;
     const tick = (now: number) => {
       const elapsed = now - startRef.current;
@@ -1083,7 +1131,7 @@ const StepCarousel = () => {
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [phase, held, transitioning, index]);
+  }, [phase, held, transitioning, index, inView]);
 
   const handlePointerDown = () => {
     if (transitioning) return;
@@ -1119,7 +1167,7 @@ const StepCarousel = () => {
   }, [held]);
 
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
+    <div ref={containerRef} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
       <div style={{ position: "relative", width: "88vw", maxWidth: "1500px", overflow: "hidden" }}>
         <div
           style={{
@@ -1134,9 +1182,11 @@ const StepCarousel = () => {
               <StepSlide
                 item={item}
                 image={isMobile ? STEP_IMAGES[i].srcMobile : STEP_IMAGES[i].src}
+                mobileAspect={aspects[STEP_IMAGES[i].srcMobile] || "3 / 4"}   // ← new prop
                 isActive={i === index}
                 phase={phase}
                 progress={i === index ? progress : 0}
+                isMobile={isMobile}
                 onPointerDown={handlePointerDown}
                 onPointerUp={handlePointerUp}
                 onPointerLeave={handlePointerLeave}

@@ -6,17 +6,18 @@ import { useTypewriter } from "../globalscope/typewriter";
 import { X } from "lucide-react";
 import DotGrid from "./../globalscope/DotGrid";
 import Navbar from "./../globalscope/Navbar";
+import { FooterTape } from "../contact/page"
 
 // ── Tape sizing (identical to about/contact) ──────────────────────────────────
 const TAPE_H_MAX = 72;
 const TAPE_H_MIN = 58;
-const VW_COEFF   = 6;
+const VW_COEFF = 6;
 
 const NAV_LINKS = [
-  { label: "HOME",     href: "/" },
+  { label: "HOME", href: "/" },
   { label: "SERVICES", href: "/services" },
-  { label: "ABOUT",    href: "/about" },
-  { label: "CONTACT",  href: "/contact" },
+  { label: "ABOUT", href: "/about" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 function computeTapeH(width: number) {
@@ -28,82 +29,82 @@ const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
 const useTape = () => useContext(TapeCtx);
 
 const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
-const VB_W    = 1000;
+const VB_W = 1000;
 
 // ── Tapes ─────────────────────────────────────────────────────────────────────
-const BottomTape = () => {
-  const { tapeH, arcR } = useTape();
-  return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        height: `${tapeH}px`,
-        flexShrink: 0,
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${VB_W} ${tapeH}`}
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          display: "block",
-        }}
-      >
-        <path
-          d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`}
-          fill="white"
-        />
-      </svg>
-      <div
-        style={{
-          position: "absolute",
-          bottom: 10,
-          left: `${arcR * 1.25}px`,
-          right: `${arcR * 1.25}px`,
-          height: `${arcR}px`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          zIndex: 1,
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <img
-            src="/logo.png"
-            alt="GrydIn"
-            width={10}
-            height={10}
-            style={{ objectFit: "contain" }}
-          />
-          <span
-            style={{
-              fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-              color: "rgba(0,0,0,.6)",
-              letterSpacing: "0.05em",
-            }}
-          >
-            GrydIn © {new Date().getFullYear()}
-          </span>
-        </div>
-        <span
-          style={{
-            fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-            color: "rgba(0,0,0,.6)",
-            letterSpacing: "0.06em",
-          }}
-        >
-          Built for the gaps in your business.
-        </span>
-      </div>
-    </div>
-  );
-};
+// const BottomTape = () => {
+//   const { tapeH, arcR } = useTape();
+//   return (
+//     <div
+//       style={{
+//         position: "relative",
+//         width: "100%",
+//         height: `${tapeH}px`,
+//         flexShrink: 0,
+//       }}
+//     >
+//       <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         viewBox={`0 0 ${VB_W} ${tapeH}`}
+//         preserveAspectRatio="none"
+//         aria-hidden="true"
+//         style={{
+//           position: "absolute",
+//           inset: 0,
+//           width: "100%",
+//           height: "100%",
+//           display: "block",
+//         }}
+//       >
+//         <path
+//           d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`}
+//           fill="white"
+//         />
+//       </svg>
+//       <div
+//         style={{
+//           position: "absolute",
+//           bottom: 10,
+//           left: `${arcR * 1.25}px`,
+//           right: `${arcR * 1.25}px`,
+//           height: `${arcR}px`,
+//           display: "flex",
+//           alignItems: "center",
+//           justifyContent: "space-between",
+//           zIndex: 1,
+//         }}
+//       >
+//         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+//           <img
+//             src="/logo.png"
+//             alt="GrydIn"
+//             width={10}
+//             height={10}
+//             style={{ objectFit: "contain" }}
+//           />
+//           <span
+//             style={{
+//               fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
+//               color: "rgba(0,0,0,.6)",
+//               letterSpacing: "0.05em",
+//             }}
+//           >
+//             GrydIn © {new Date().getFullYear()}
+//           </span>
+//         </div>
+//         <span
+//           style={{
+//             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
+//             color: "rgba(0,0,0,.6)",
+//             letterSpacing: "0.06em",
+//           }}
+//         >
+//           Built for the gaps in your business.
+//         </span>
+//       </div>
+//     </div>
+//   );
+// };
 
 
 const useDividerAnimation = () => {
@@ -113,13 +114,13 @@ const useDividerAnimation = () => {
   const [visible, setVisible] = useState(true);
   const rafRef = useRef<number>(0);
   const glowRafRef = useRef<number>(0);
-const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const TRACE_DURATION = 2800;
-    const HOLD_DURATION  = 10000;
-    const WAIT_DURATION  = 3000;
-    const GLOW_PERIOD    = 2000;
+    const HOLD_DURATION = 10000;
+    const WAIT_DURATION = 3000;
+    const GLOW_PERIOD = 2000;
 
     let glowStart = 0;
     let glowActive = false;
@@ -159,20 +160,20 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
         if (p < 1) {
           rafRef.current = requestAnimationFrame(animateTrace);
         } else {
-          
-            setPhase("holding");
+
+          setPhase("holding");
+          timerRef.current = setTimeout(() => {
+            // DONE
+            stopGlow();
+            setPhase("done");
+            setTraceProgress(0);
+            setVisible(false);
+            // WAIT then restart
             timerRef.current = setTimeout(() => {
-              // DONE
-              stopGlow();
-              setPhase("done");
-              setTraceProgress(0);
-              setVisible(false);
-              // WAIT then restart
-              timerRef.current = setTimeout(() => {
-                setVisible(true);
-                runCycle();
-              }, WAIT_DURATION);
-            }, HOLD_DURATION);
+              setVisible(true);
+              runCycle();
+            }, WAIT_DURATION);
+          }, HOLD_DURATION);
         }
       };
       rafRef.current = requestAnimationFrame(animateTrace);
@@ -180,10 +181,10 @@ const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     runCycle();
     return () => {
-  if (rafRef.current) cancelAnimationFrame(rafRef.current);
-  if (glowRafRef.current) cancelAnimationFrame(glowRafRef.current);
-  if (timerRef.current) clearTimeout(timerRef.current);
-};
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      if (glowRafRef.current) cancelAnimationFrame(glowRafRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
   }, []);
 
   return { phase, traceProgress, glowOpacity, visible };
@@ -379,39 +380,39 @@ export default function Services() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
-  const styleId = "scrollbar-hide-style";
+    const styleId = "scrollbar-hide-style";
 
-  const hide = () => {
-    if (!document.getElementById(styleId)) {
-      const s = document.createElement("style");
-      s.id = styleId;
-      s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
-      document.head.appendChild(s);
-    }
-  };
+    const hide = () => {
+      if (!document.getElementById(styleId)) {
+        const s = document.createElement("style");
+        s.id = styleId;
+        s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
+        document.head.appendChild(s);
+      }
+    };
 
-  const show = () => {
-    document.getElementById(styleId)?.remove();
-  };
+    const show = () => {
+      document.getElementById(styleId)?.remove();
+    };
 
-  let t: ReturnType<typeof setTimeout>;
-  hide();
+    let t: ReturnType<typeof setTimeout>;
+    hide();
 
-  const handler = () => {
-    show();
-    clearTimeout(t);
-    t = setTimeout(hide, 1000);
-  };
+    const handler = () => {
+      show();
+      clearTimeout(t);
+      t = setTimeout(hide, 1000);
+    };
 
-  window.addEventListener("scroll", handler, { passive: true });
-  document.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("scroll", handler, { passive: true });
+    document.addEventListener("scroll", handler, { passive: true });
 
-  return () => {
-    window.removeEventListener("scroll", handler);
-    document.removeEventListener("scroll", handler);
-    clearTimeout(t);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handler);
+      document.removeEventListener("scroll", handler);
+      clearTimeout(t);
+    };
+  }, []);
   useEffect(() => {
     const update = () => setTapeH(computeTapeH(window.innerWidth));
     update();
@@ -420,9 +421,9 @@ export default function Services() {
   }, []);
 
   const arcR = tapeH / 2;
- const { displayed: typed, ref: typeRef } = useTypewriter(
-   "Scoped to your problem.",
- );
+  const { displayed: typed, ref: typeRef } = useTypewriter(
+    "Scoped to your problem.",
+  );
   return (
     <TapeCtx.Provider value={{ tapeH, arcR }}>
       <main
@@ -433,15 +434,15 @@ export default function Services() {
         }}
       >
         <div
-                  style={{
-                    position: "fixed",
-                    inset: 0,
-                    zIndex: 0,
-                    pointerEvents: "none",
-                  }}
-                >
-                  <DotGrid contentBottom={tapeH} animate={false} />
-                </div>
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <DotGrid contentBottom={tapeH} animate={false} />
+        </div>
         {/* Drawer backdrop */}
         <div
           onClick={() => setMenuOpen(false)}
@@ -525,8 +526,8 @@ export default function Services() {
         <section
           style={{ background: DARK_BG, width: "100%" }}
         >
-            <Navbar tapeH={tapeH} arcR={arcR} />
-            <div style={{ height: tapeH }} />
+          <Navbar tapeH={tapeH} arcR={arcR} />
+          <div style={{ height: tapeH }} />
 
           <div
             style={{
@@ -905,7 +906,7 @@ export default function Services() {
             </div>
           </div>
 
-          <BottomTape />
+          <FooterTape />
         </section>
         <WhatsAppButton />
       </main>

@@ -6,18 +6,18 @@ import { useTypewriter } from "../globalscope/typewriter";
 import { Menu, X } from "lucide-react";
 import Navbar from "../globalscope/Navbar";
 import DotGrid from "../globalscope/DotGrid";
-
+import { FooterTape } from "../contact/page"
 // ── Tape sizing (same system as landing page) ─────────────────────────────────
 const TAPE_H_MAX = 72;
 const TAPE_H_MIN = 58;
-const VW_COEFF   = 6;
-const TRACE_BOTTOM_EXTRA = 24; 
+const VW_COEFF = 6;
+const TRACE_BOTTOM_EXTRA = 24;
 
 const NAV_LINKS = [
-  { label: "HOME",     href: "/" },
+  { label: "HOME", href: "/" },
   { label: "SERVICES", href: "/services" },
-  { label: "ABOUT",    href: "/about" },
-  { label: "CONTACT",  href: "/contact" },
+  { label: "ABOUT", href: "/about" },
+  { label: "CONTACT", href: "/contact" },
 ];
 
 
@@ -30,84 +30,84 @@ const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
 const useTape = () => useContext(TapeCtx);
 
 const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
-const VB_W    = 1000;
+const VB_W = 1000;
 
 // ── Tapes ─────────────────────────────────────────────────────────────────────
-const BottomTape = ({ withFooter = false }: { withFooter?: boolean }) => {
-  const { tapeH, arcR } = useTape();
-  return (
-    <div               
-      style={{
-        position: "relative",
-        width: "100%",
-        height: `${tapeH}px`,
-        flexShrink: 0,   
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={`0 0 ${VB_W} ${tapeH}`}
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          display: "block",
-        }}
-      >
-        <path
-          d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`}
-          fill="white"
-        />
-      </svg>
-      {withFooter && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: 10,
-            left: `${arcR * 1.25}px`,
-            right: `${arcR * 1.25}px`,
-            height: `${arcR}px`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            zIndex: 1,
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <img
-              src="/logo.png"
-              alt="GrydIn"
-              width={10}
-              height={10}
-              style={{ objectFit: "contain" }}
-            />
-            <span
-              style={{
-                fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-                color: "rgba(0,0,0,.6)",
-                letterSpacing: "0.05em",
-              }}
-            >
-              GrydIn © {new Date().getFullYear()}
-            </span>
-          </div>
-          <span
-            style={{
-              fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-              color: "rgba(0,0,0,.6)",
-              letterSpacing: "0.06em",
-            }}
-          >
-            Built for the gaps in your business.
-          </span>
-        </div>
-      )}
-    </div>
-  );
-};
+// const BottomTape = ({ withFooter = false }: { withFooter?: boolean }) => {
+//   const { tapeH, arcR } = useTape();
+//   return (
+//     <div               
+//       style={{
+//         position: "relative",
+//         width: "100%",
+//         height: `${tapeH}px`,
+//         flexShrink: 0,   
+//       }}
+//     >
+//       <svg
+//         xmlns="http://www.w3.org/2000/svg"
+//         viewBox={`0 0 ${VB_W} ${tapeH}`}
+//         preserveAspectRatio="none"
+//         aria-hidden="true"
+//         style={{
+//           position: "absolute",
+//           inset: 0,
+//           width: "100%",
+//           height: "100%",
+//           display: "block",
+//         }}
+//       >
+//         <path
+//           d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`}
+//           fill="white"
+//         />
+//       </svg>
+//       {withFooter && (
+//         <div
+//           style={{
+//             position: "absolute",
+//             bottom: 10,
+//             left: `${arcR * 1.25}px`,
+//             right: `${arcR * 1.25}px`,
+//             height: `${arcR}px`,
+//             display: "flex",
+//             alignItems: "center",
+//             justifyContent: "space-between",
+//             zIndex: 1,
+//           }}
+//         >
+//           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+//             <img
+//               src="/logo.png"
+//               alt="GrydIn"
+//               width={10}
+//               height={10}
+//               style={{ objectFit: "contain" }}
+//             />
+//             <span
+//               style={{
+//                 fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
+//                 color: "rgba(0,0,0,.6)",
+//                 letterSpacing: "0.05em",
+//               }}
+//             >
+//               GrydIn © {new Date().getFullYear()}
+//             </span>
+//           </div>
+//           <span
+//             style={{
+//               fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
+//               color: "rgba(0,0,0,.6)",
+//               letterSpacing: "0.06em",
+//             }}
+//           >
+//             Built for the gaps in your business.
+//           </span>
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
 
 // ── Divider ───────────────────────────────────────────────────────────────────
 
@@ -121,9 +121,9 @@ const useDividerAnimation = () => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     const TRACE_DURATION = 3500;
-    const HOLD_DURATION  = 5000;
-    const WAIT_DURATION  = 3000;
-    const GLOW_PERIOD    = 2000;
+    const HOLD_DURATION = 5000;
+    const WAIT_DURATION = 3000;
+    const GLOW_PERIOD = 2000;
 
     let glowStart = 0;
     let glowActive = false;
@@ -283,7 +283,7 @@ const BoundaryTracer = ({ progress, width, height, glowOpacity }: { progress: nu
   };
 
   const rightPath = buildBranch(half_dist, "right");
-  const leftPath  = buildBranch(half_dist, "left");
+  const leftPath = buildBranch(half_dist, "left");
 
   return (
     <svg
@@ -291,23 +291,23 @@ const BoundaryTracer = ({ progress, width, height, glowOpacity }: { progress: nu
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-  d={rightPath}
-  fill="none"
-  stroke={`rgba(255,255,255,${0.25 + glowOpacity * 0.75})`}
-  strokeWidth="1"
-  filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 3}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
-  strokeLinecap="round"
-  strokeLinejoin="round"
-/>
-<path
-  d={leftPath}
-  fill="none"
-  stroke={`rgba(255,255,255,${0.25 + glowOpacity * 0.75})`}
-  strokeWidth="1"
-  filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 3}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
-  strokeLinecap="round"
-  strokeLinejoin="round"
-/>
+        d={rightPath}
+        fill="none"
+        stroke={`rgba(255,255,255,${0.25 + glowOpacity * 0.75})`}
+        strokeWidth="1"
+        filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 3}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d={leftPath}
+        fill="none"
+        stroke={`rgba(255,255,255,${0.25 + glowOpacity * 0.75})`}
+        strokeWidth="1"
+        filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 3}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
@@ -332,9 +332,9 @@ const BeliefCard = ({
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
   const TRACE_DURATION = 7000;
-const [glowOpacity, setGlowOpacity] = useState(0);
-const glowRafRef = useRef<number>(0);
-const glowStartRef = useRef<number>(0);
+  const [glowOpacity, setGlowOpacity] = useState(0);
+  const glowRafRef = useRef<number>(0);
+  const glowStartRef = useRef<number>(0);
 
   // measure card
   useEffect(() => {
@@ -351,9 +351,11 @@ const glowStartRef = useRef<number>(0);
   // trace animation – restarts on resetKey change when active
   useEffect(() => {
     cancelAnimationFrame(rafRef.current);
-    if (!isActive) { cancelAnimationFrame(glowRafRef.current);
-setGlowOpacity(0);
-glowStartRef.current = 0;setProgress(0); return; }
+    if (!isActive) {
+      cancelAnimationFrame(glowRafRef.current);
+      setGlowOpacity(0);
+      glowStartRef.current = 0; setProgress(0); return;
+    }
     setProgress(0);
     startRef.current = performance.now();
     const animate = (now: number) => {
@@ -373,11 +375,11 @@ glowStartRef.current = 0;setProgress(0); return; }
     };
     rafRef.current = requestAnimationFrame(animate);
     return () => {
-  cancelAnimationFrame(rafRef.current);
-  cancelAnimationFrame(glowRafRef.current);
-  setGlowOpacity(0);
-  glowStartRef.current = 0;
-};
+      cancelAnimationFrame(rafRef.current);
+      cancelAnimationFrame(glowRafRef.current);
+      setGlowOpacity(0);
+      glowStartRef.current = 0;
+    };
   }, [isActive, resetKey]);
 
   const flipped = !isActive;
@@ -577,39 +579,39 @@ export default function About() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
-  const styleId = "scrollbar-hide-style";
+    const styleId = "scrollbar-hide-style";
 
-  const hide = () => {
-    if (!document.getElementById(styleId)) {
-      const s = document.createElement("style");
-      s.id = styleId;
-      s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
-      document.head.appendChild(s);
-    }
-  };
+    const hide = () => {
+      if (!document.getElementById(styleId)) {
+        const s = document.createElement("style");
+        s.id = styleId;
+        s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
+        document.head.appendChild(s);
+      }
+    };
 
-  const show = () => {
-    document.getElementById(styleId)?.remove();
-  };
+    const show = () => {
+      document.getElementById(styleId)?.remove();
+    };
 
-  let t: ReturnType<typeof setTimeout>;
-  hide();
+    let t: ReturnType<typeof setTimeout>;
+    hide();
 
-  const handler = () => {
-    show();
-    clearTimeout(t);
-    t = setTimeout(hide, 1000);
-  };
+    const handler = () => {
+      show();
+      clearTimeout(t);
+      t = setTimeout(hide, 1000);
+    };
 
-  window.addEventListener("scroll", handler, { passive: true });
-  document.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("scroll", handler, { passive: true });
+    document.addEventListener("scroll", handler, { passive: true });
 
-  return () => {
-    window.removeEventListener("scroll", handler);
-    document.removeEventListener("scroll", handler);
-    clearTimeout(t);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handler);
+      document.removeEventListener("scroll", handler);
+      clearTimeout(t);
+    };
+  }, []);
   useEffect(() => {
     const update = () => setTapeH(computeTapeH(window.innerWidth));
     update();
@@ -618,7 +620,7 @@ export default function About() {
   }, []);
 
   const arcR = tapeH / 2;
-const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer between");
+  const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer between");
   return (
     <TapeCtx.Provider value={{ tapeH, arcR }}>
       <main
@@ -935,7 +937,7 @@ const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer bet
             </div>
           </div>
 
-          <BottomTape withFooter />
+          <FooterTape />
         </section>
         <WhatsAppButton />
       </main>

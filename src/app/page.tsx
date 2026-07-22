@@ -49,17 +49,17 @@ const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Diagnose",
-    desc: "We map your workflow end to end – every gap, bottleneck, and invisible process costing you time. Nothing gets built until we understand exactly what's broken.",
+    //desc: "We map your workflow end to end – every gap, bottleneck, and invisible process costing you time. Nothing gets built until we understand exactly what's broken.",
   },
   {
     step: "02",
     title: "Design",
-    desc: "We scope only what moves the needle. No bloated proposals, no unnecessary complexity. You see the exact plan before a single line of code is written.",
+    //desc: "We scope only what moves the needle. No bloated proposals, no unnecessary complexity. You see the exact plan before a single line of code is written.",
   },
   {
     step: "03",
     title: "Deploy",
-    desc: "We ship fast, integrate quietly, and hand off documentation your team can actually use. The system runs in the background. You barely notice – except in the results.",
+    //desc: "We ship fast, integrate quietly, and hand off documentation your team can actually use. The system runs in the background. You barely notice – except in the results.",
   },
 ];
 
@@ -107,32 +107,115 @@ const TopTape = () => {
   );
 };
 
-const BottomTape = () => {
-  const { tapeH, arcR } = useTape();
-  return (
-    <div aria-hidden="true" style={{ position: "relative", width: "100%", height: `${tapeH}px`, flexShrink: 0, pointerEvents: "none" }}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${VB_W} ${tapeH}`} preserveAspectRatio="none"
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}>
-        <path d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`} fill="white" />
-      </svg>
-    </div>
-  );
-};
-
 const FooterTape = () => {
   const { tapeHSlow: tapeH, arcRSlow: arcR } = useTape();
+  const VB_W = 1920;
+  const VB_H = 140;
+
   return (
     <div style={{ position: "relative", width: "100%", height: `${tapeH}px`, flexShrink: 0 }}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${VB_W} ${tapeH}`} preserveAspectRatio="none"
-        aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}>
-        <path d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`} fill="white" />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox={`0 0 ${VB_W} ${VB_H}`}
+        preserveAspectRatio="none"
+        aria-hidden="true"
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}
+      >
+        <defs>
+          <linearGradient id="footertape-left" y1="70" x2="941.3" y2="70" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopOpacity="0.2" />
+            <stop offset="1" />
+          </linearGradient>
+          <linearGradient id="footertape-right" x1="900.68" y1="70" x2="1920" y2="70" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor="#fff" />
+            <stop offset="0.18" stopColor="#fff" stopOpacity="0.85" />
+            <stop offset="1" stopColor="#fff" stopOpacity="0.2" />
+          </linearGradient>
+        </defs>
+        <polygon points="902.67 70 939.31 70 900.68 140 0 140 0 0 941.3 0 902.67 70" fill="url(#footertape-left)" />
+        <polygon points="1920 0 1920 140 900.68 140 939.31 70 902.67 70 941.3 0 1920 0" fill="url(#footertape-right)" />
       </svg>
-      <div style={{ position: "absolute", bottom: 13, left: `${arcR * 1.25}px`, right: `${arcR * 1.25}px`, height: `${arcR}px`, display: "flex", alignItems: "center", justifyContent: "space-between", zIndex: 1 }}>
-        <div className="flex items-center gap-2">
-          <img src="/logo.png" alt="GrydIn" width={11} height={11} style={{ objectFit: "contain" }} />
-          <span style={{ fontSize: "clamp(0.6rem, 1vw, 0.75rem)", color: "rgba(0,0,0,.6)", letterSpacing: "0.05em" }}>GrydIn © {new Date().getFullYear()}</span>
-        </div>
-        <span style={{ fontSize: "clamp(0.6rem, 1vw, 0.75rem)", color: "rgba(0,0,0,.6)", letterSpacing: "0.06em" }}>Built for the gaps in your business.</span>
+
+      {/* Logo + wordmark + copyright — sits on the LEFT (black gradient), so white */}
+      <div
+        style={{
+          position: "absolute",
+          top: `${arcR * 0.55}px`,
+          left: "clamp(2rem, 4.3vw, 55px)",
+          height: `${arcR}px`,
+          display: "flex",
+          alignItems: "center",
+          gap: "10px",
+          zIndex: 1,
+        }}
+      >
+        <img
+          src="/logowhite.png"
+          alt="GrydIn"
+          width={12}
+          height={12}
+          style={{ objectFit: "contain" }}
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 123.86 30.24"
+          role="img"
+          aria-label="GrydIn"
+          style={{ height: "12px", width: "auto", display: "block", marginTop: "1px" }}
+        >
+          <defs>
+            <linearGradient id="footer-logo-gradient-1" x1="99.59" y1="13.45" x2="99.59" y2="13.34" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stopColor="#e6e6e6" />
+              <stop offset="1" stopColor="#ffffff" />
+            </linearGradient>
+          </defs>
+          <path d="M99.59,13.34a.45.45,0,0,1,0,.11s0-.08,0-.11Z" fillRule="evenodd" fill="url(#footer-logo-gradient-1)" />
+          <path d="M102,5.66a.28.28,0,0,1,0,.13.28.28,0,0,0,0-.13c0-1,0-2,0-3C102,3.67,102,4.67,102,5.66Z" fillRule="evenodd" fill="#ffffff" />
+          <path d="M27.78,18.82c0,.92,0,1.83,0,2.75-.19,2.31-2.55,3.16-4.58,2.92a.16.16,0,0,1-.06-.13V15.62c0-.12,0-.23,0-.35a2.17,2.17,0,0,1,0-.26.17.17,0,0,0,.16-.06,3.55,3.55,0,0,1,1.18-1.65l.08-.08c.32-.37,3.16-2.61,3.2-2.73a.15.15,0,0,1,.05.13c0,1.32,0,2.63,0,3.94V15.8c0,.54,0,1.07,0,1.6Z" fillRule="evenodd" fill="#ffffff" />
+          <path d="M51.59,13.13a.41.41,0,0,0-.1.14A.33.33,0,0,1,51.59,13.13Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M27.28,0H18q-3,0-6,0C2.84.65-3.14,10.71,1.74,18.83a12.47,12.47,0,0,0,4.35,4.25,11.32,11.32,0,0,0,2.23,1,7.54,7.54,0,0,0,1.13.3c2.2.42,4.65.15,6.89.24.32,0,.43-.12.61-.34.88-1.07,1.76-2.14,2.65-3.2.07-.06.28-.29,0-.28q-3.81,0-7.62,0a9.44,9.44,0,0,1-1.91-.34,8,8,0,0,1-2.81-1.56,8.4,8.4,0,0,1-2.51-4A8.88,8.88,0,0,1,12.84,3.76H23.5A2.54,2.54,0,0,0,25.28,3c.8-.94,1.6-1.87,2.41-2.79a.11.11,0,0,0,0-.13A1.63,1.63,0,0,0,27.28,0ZM14.59.29a.11.11,0,0,1-.1-.06.08.08,0,0,1,.09,0h.3a.08.08,0,0,0-.07,0,.14.14,0,0,0,.12.06C14.82.3,14.7.29,14.59.29Zm1.56,0h0Zm.59-.12a.71.71,0,0,1-.38,0l.34,0c.15,0,.29,0,.42.06Zm8,0H22.06A.24.24,0,0,1,22.28.1h2.5C24.92.14,24.92.17,24.77.19Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M14.93.29c-.11,0-.23,0-.34,0a.11.11,0,0,1-.1-.06.08.08,0,0,1,.09,0h.3a.08.08,0,0,0-.07,0A.14.14,0,0,0,14.93.29Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M92.57,0H88.22a.22.22,0,0,0-.2.08q0,3.54,0,7.08a.62.62,0,0,1-.07.33.83.83,0,0,1-.34.07H80.78A9.5,9.5,0,0,0,76.2,8.75,7.72,7.72,0,0,0,73.09,12c-1.7,3.42-1.19,8.08,1.86,10.59a8.73,8.73,0,0,0,4.72,2c.37,0,.74.06,1.11.07h6.38a5.67,5.67,0,0,0,4.58-2,5,5,0,0,0,1-2.85q0-9.81,0-19.62A.21.21,0,0,0,92.57,0ZM84.29,21.11c-1.22,0-2.43,0-3.64,0a4.1,4.1,0,0,1-3.79-4.18c-.12-2.19.14-4.11,2.19-5.29a4.81,4.81,0,0,1,1.82-.51H88a.11.11,0,0,1,.06.11c0,1.76,0,3.52,0,5.28,0,.53,0,1.06,0,1.59a3.26,3.26,0,0,1-.58,1.49A3.89,3.89,0,0,1,84.29,21.11Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M72.87,7.73q-6.7,10-13.32,20.08a6.21,6.21,0,0,1-1.29,1.32,5.6,5.6,0,0,1-2.78,1.05c-1.1.1-2.38,0-3.5,0q-.1-.06,0-.18l.31-.44c1.45-2,2.88-3.94,4.29-5.92a1.08,1.08,0,0,0-.11-1.31c-1.14-1.71-2.26-3.42-3.38-5.13-.71-1.07-1.42-2.13-2.12-3.2L46.65,7.61a.09.09,0,0,1,.09-.05c1.61,0,3.27,0,4.88,0a13.17,13.17,0,0,1,1.56,2.1c.69,1,1.37,1.95,2,2.92q2,2.84,4,5.68a.69.69,0,0,0,1.23-.08l7.2-10.33a.57.57,0,0,1,.58-.32c1.54,0,3.08,0,4.62,0Q73,7.58,72.87,7.73Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M44.4,11c0,.19-.24.13-.36.14H40a4.81,4.81,0,0,0-.84.1,3.94,3.94,0,0,0-1.68.79l-.09.09a2.59,2.59,0,0,0-.82,1.63c0,3.54,0,7.08,0,10.63,0,.11-.06.16-.18.16H32a.2.2,0,0,1-.19-.09q0-6,0-12.08a5.78,5.78,0,0,1,.38-1.79,5.21,5.21,0,0,1,.89-1.34,5.37,5.37,0,0,1,3.75-1.65h7a1.23,1.23,0,0,1,.38,0C44.52,7.84,44.35,10.46,44.4,11Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M123.85,24.09a.5.5,0,0,1-.13.39,1,1,0,0,1-.3,0H119.6a.21.21,0,0,1-.21-.09c0-3.14,0-6.29,0-9.43v-.09a3.66,3.66,0,0,0-.75-2,3.78,3.78,0,0,0-2.26-1.45,3.18,3.18,0,0,0-.62-.07c-1.64,0-3.28,0-4.92,0a.17.17,0,0,0-.19.09q0,6.33,0,12.66a1.54,1.54,0,0,1,0,.3c-.07.13-.26.12-.39.13h-3.55a1,1,0,0,1-.38-.05.48.48,0,0,1-.11-.38q0-7.89,0-15.78a2.88,2.88,0,0,1,0-.59.12.12,0,0,1,.11,0l1.05,0c3.09,0,6.18,0,9.26,0a7.39,7.39,0,0,1,7.12,6.42,7,7,0,0,1,.08,1.12C123.83,18.18,123.83,21.13,123.85,24.09Z" fill="#ffffff" fillRule="evenodd" />
+          <path d="M27.74,10.49c0,.12-2.88,2.36-3.2,2.73l-.08.08A3.55,3.55,0,0,0,23.28,15a.17.17,0,0,1-.16.06,2.83,2.83,0,0,0,0-.77,34.17,34.17,0,0,0-4.74-.11H9.87c-.09,0-.11,0-.07-.1.3-.28.59-.56.9-.83.7-.64,1.39-1.29,2.08-1.94a3.72,3.72,0,0,1,2.81-.78h2.92l8.74,0A4,4,0,0,1,27.74,10.49Z" fillRule="evenodd" fill="#ffffff" />
+          <path d="M102.06,19.52V7.11c0-2.25,0-4.5,0-6.75,0-.08,0-.34-.13-.25-.46.39-.92.79-1.36,1.2l-.52.46c-.33.28-.66.56-1,.85-.84.71-1.47,1.08-1.45,2.32V19.6c0,1.59,0,3.17,0,4.75,0,.25.42.14.55.17h3.46a.79.79,0,0,0,.37-.07A39.38,39.38,0,0,0,102.06,19.52Zm-2.48-6.08v-.11h0A.41.41,0,0,0,99.58,13.44Z" fillRule="evenodd" fill="#ffffff" />
+        </svg>
+        <span
+          style={{
+            fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
+            color: "rgba(255,255,255,0.6)",
+            letterSpacing: "0.05em",
+            marginLeft: "2px",
+          }}
+        >
+          © {new Date().getFullYear()}
+        </span>
+      </div>
+
+      {/* Tagline — sits on the RIGHT (white gradient), so black, matching nav links */}
+      <div
+        style={{
+          position: "absolute",
+          top: `${arcR * 0.55}px`,
+          right: "6.5vw",
+          height: `${arcR}px`,
+          display: "flex",
+          alignItems: "center",
+          zIndex: 1,
+        }}
+      >
+        <span
+          style={{
+            fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
+            color: "#0a0a0a",
+            fontWeight: 600,
+            letterSpacing: "0.06em",
+          }}
+        >
+          Built for the gaps in your business.
+        </span>
       </div>
     </div>
   );
@@ -190,7 +273,7 @@ const HERO_IMAGES = [
   { src: "/hero-6.png", srcMobile: "/hero-6-mobile.png", service: "System Integration" },
 ];
 
-const SLIDE_DURATION = 3400;
+const SLIDE_DURATION = 8500;
 const HOLD_THRESHOLD = 400; // ms — below this = tap, above = hold
 
 const HeroImageSlider = () => {
@@ -436,8 +519,8 @@ const HeroSection = () => {
             }}
           />
           <br />
-          {/* <span style={{ color: "rgba(255,255,255,0.45)" }}> */}
-          <span style={{ color: "rgba(222, 2, 2, 0.45)" }}>
+          <span style={{ color: "rgba(255,255,255,0.45)" }}>
+            {/* <span style={{ color: "rgba(222, 2, 2, 0.45)" }}> */}
             Keep the humans.
           </span>
         </h1>
@@ -684,155 +767,155 @@ const ServicesSection = () => {
 };
 // ── How It Works Section ──────────────────────────────────────────────────────
 
-const TracedBox = ({
-  children,
-  onProgress,
-}: {
-  children: React.ReactNode;
-  onProgress?: (p: number) => void;
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<"tracing" | "holding" | "hidden" | "waiting">("waiting");
-  const [glowOpacity, setGlowOpacity] = useState(0);
-  const glowRafRef = useRef<number>(0);
-  const glowStartRef = useRef<number>(0);
-  const rafRef = useRef<number>(0);
-  const startTimeRef = useRef<number>(0);
-  const TRACE_DURATION = 1800;
-  const HOLD = 10000;
-  const PAUSE = 3500;
-  const PAD = 16;
+// const TracedBox = ({
+//   children,
+//   onProgress,
+// }: {
+//   children: React.ReactNode;
+//   onProgress?: (p: number) => void;
+// }) => {
+//   const ref = useRef<HTMLDivElement>(null);
+//   const [progress, setProgress] = useState(0);
+//   const [phase, setPhase] = useState<"tracing" | "holding" | "hidden" | "waiting">("waiting");
+//   const [glowOpacity, setGlowOpacity] = useState(0);
+//   const glowRafRef = useRef<number>(0);
+//   const glowStartRef = useRef<number>(0);
+//   const rafRef = useRef<number>(0);
+//   const startTimeRef = useRef<number>(0);
+//   const TRACE_DURATION = 1800;
+//   const HOLD = 10000;
+//   const PAUSE = 3500;
+//   const PAD = 16;
 
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
+//   useEffect(() => {
+//     let timeout: ReturnType<typeof setTimeout>;
 
-    const startTrace = () => {
-      setPhase("tracing");
-      setProgress(0);
-      onProgress?.(0);
-      startTimeRef.current = performance.now();
-      const animate = (now: number) => {
-        const p = Math.min((now - startTimeRef.current) / TRACE_DURATION, 1);
-        setProgress(p);
-        onProgress?.(p);              // ← mirror out
-        if (p < 1) {
-          rafRef.current = requestAnimationFrame(animate);
-        } else {
-          setPhase("holding");
-          // start glow loop
-          const GLOW_PERIOD = 2000;
-          glowStartRef.current = 0;
-          const animateGlow = (now: number) => {
-            if (!glowStartRef.current) glowStartRef.current = now;
-            const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
-            const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
-            setGlowOpacity(opacity);
-            glowRafRef.current = requestAnimationFrame(animateGlow);
-          };
-          glowRafRef.current = requestAnimationFrame(animateGlow);
+//     const startTrace = () => {
+//       setPhase("tracing");
+//       setProgress(0);
+//       onProgress?.(0);
+//       startTimeRef.current = performance.now();
+//       const animate = (now: number) => {
+//         const p = Math.min((now - startTimeRef.current) / TRACE_DURATION, 1);
+//         setProgress(p);
+//         onProgress?.(p);              // ← mirror out
+//         if (p < 1) {
+//           rafRef.current = requestAnimationFrame(animate);
+//         } else {
+//           setPhase("holding");
+//           // start glow loop
+//           const GLOW_PERIOD = 2000;
+//           glowStartRef.current = 0;
+//           const animateGlow = (now: number) => {
+//             if (!glowStartRef.current) glowStartRef.current = now;
+//             const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
+//             const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
+//             setGlowOpacity(opacity);
+//             glowRafRef.current = requestAnimationFrame(animateGlow);
+//           };
+//           glowRafRef.current = requestAnimationFrame(animateGlow);
 
-          timeout = setTimeout(() => {
-            cancelAnimationFrame(glowRafRef.current);
-            setGlowOpacity(0);
-            setProgress(0);
-            onProgress?.(1);
-            setPhase("hidden");
-            timeout = setTimeout(() => {
-              setPhase("waiting");
-              timeout = setTimeout(startTrace, PAUSE);
-            }, 100);
-          }, HOLD);
-        }
-      };
-      rafRef.current = requestAnimationFrame(animate);
-    };
+//           timeout = setTimeout(() => {
+//             cancelAnimationFrame(glowRafRef.current);
+//             setGlowOpacity(0);
+//             setProgress(0);
+//             onProgress?.(1);
+//             setPhase("hidden");
+//             timeout = setTimeout(() => {
+//               setPhase("waiting");
+//               timeout = setTimeout(startTrace, PAUSE);
+//             }, 100);
+//           }, HOLD);
+//         }
+//       };
+//       rafRef.current = requestAnimationFrame(animate);
+//     };
 
-    timeout = setTimeout(startTrace, 300);
-    return () => {
-      clearTimeout(timeout);
-      cancelAnimationFrame(rafRef.current);
-      cancelAnimationFrame(glowRafRef.current);
-    };
-  }, []);
+//     timeout = setTimeout(startTrace, 300);
+//     return () => {
+//       clearTimeout(timeout);
+//       cancelAnimationFrame(rafRef.current);
+//       cancelAnimationFrame(glowRafRef.current);
+//     };
+//   }, []);
 
-  const el = ref.current;
-  const W = el ? el.offsetWidth + PAD * 2 : 0;
-  const H = el ? el.offsetHeight + PAD * 2 : 0;
-  const perimeter = W && H ? 2 * (W + H) : 0;
+//   const el = ref.current;
+//   const W = el ? el.offsetWidth + PAD * 2 : 0;
+//   const H = el ? el.offsetHeight + PAD * 2 : 0;
+//   const perimeter = W && H ? 2 * (W + H) : 0;
 
-  // Perimeter segments starting from top-center going clockwise:
-  // right half of top → right side → bottom → left side → left half of top
-  const getPath = (p: number) => {
-    if (!W || !H) return "";
-    const dist = p * perimeter;
-    const topRight = W / 2;
-    const rightSide = topRight + H;
-    const bottom = rightSide + W;
-    const leftSide = bottom + H;
-    const topLeft = leftSide + W / 2;
+//   // Perimeter segments starting from top-center going clockwise:
+//   // right half of top → right side → bottom → left side → left half of top
+//   const getPath = (p: number) => {
+//     if (!W || !H) return "";
+//     const dist = p * perimeter;
+//     const topRight = W / 2;
+//     const rightSide = topRight + H;
+//     const bottom = rightSide + W;
+//     const leftSide = bottom + H;
+//     const topLeft = leftSide + W / 2;
 
-    // Right direction from center-top
-    let rightPath = "";
-    // Left direction from center-top (mirror)
-    let leftPath = "";
+//     // Right direction from center-top
+//     let rightPath = "";
+//     // Left direction from center-top (mirror)
+//     let leftPath = "";
 
-    // Right branch: center-top → top-right → right-bottom → bottom-left → center-bottom
-    const rDist = dist / 2;
-    if (rDist <= topRight) {
-      rightPath = `M ${W / 2} 0 L ${W / 2 + rDist} 0`;
-    } else if (rDist <= topRight + H) {
-      rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${rDist - topRight}`;
-    } else if (rDist <= topRight + H + W) {
-      rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L ${W - (rDist - topRight - H)} ${H}`;
-    } else {
-      const remaining = rDist - topRight - H - W;
-      rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L 0 ${H} L 0 ${H - remaining}`;
-    }
+//     // Right branch: center-top → top-right → right-bottom → bottom-left → center-bottom
+//     const rDist = dist / 2;
+//     if (rDist <= topRight) {
+//       rightPath = `M ${W / 2} 0 L ${W / 2 + rDist} 0`;
+//     } else if (rDist <= topRight + H) {
+//       rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${rDist - topRight}`;
+//     } else if (rDist <= topRight + H + W) {
+//       rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L ${W - (rDist - topRight - H)} ${H}`;
+//     } else {
+//       const remaining = rDist - topRight - H - W;
+//       rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L 0 ${H} L 0 ${H - remaining}`;
+//     }
 
-    // Left branch: center-top → top-left → left-bottom → bottom-right → center-bottom
-    const lDist = dist / 2;
-    if (lDist <= topRight) {
-      leftPath = `M ${W / 2} 0 L ${W / 2 - lDist} 0`;
-    } else if (lDist <= topRight + H) {
-      leftPath = `M ${W / 2} 0 L 0 0 L 0 ${lDist - topRight}`;
-    } else if (lDist <= topRight + H + W) {
-      leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${lDist - topRight - H} ${H}`;
-    } else {
-      const remaining = lDist - topRight - H - W;
-      leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${W} ${H} L ${W} ${H - remaining}`;
-    }
+//     // Left branch: center-top → top-left → left-bottom → bottom-right → center-bottom
+//     const lDist = dist / 2;
+//     if (lDist <= topRight) {
+//       leftPath = `M ${W / 2} 0 L ${W / 2 - lDist} 0`;
+//     } else if (lDist <= topRight + H) {
+//       leftPath = `M ${W / 2} 0 L 0 0 L 0 ${lDist - topRight}`;
+//     } else if (lDist <= topRight + H + W) {
+//       leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${lDist - topRight - H} ${H}`;
+//     } else {
+//       const remaining = lDist - topRight - H - W;
+//       leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${W} ${H} L ${W} ${H - remaining}`;
+//     }
 
-    return `${rightPath} ${leftPath}`;
-  };
+//     return `${rightPath} ${leftPath}`;
+//   };
 
-  return (
-    <div ref={ref} style={{ position: "relative", padding: `${PAD}px` }}>
-      {phase !== "hidden" && W > 0 && (
-        <svg
-          style={{
-            position: "absolute",
-            top: `-${PAD}px`, left: `-${PAD}px`,
-            width: `${W}px`, height: `${H}px`,
-            pointerEvents: "none", overflow: "visible",
-            opacity: 1,
-          }}
-        >
-          <path
-            d={getPath(progress)}
-            fill="none"
-            stroke={`rgba(255,255,255,${0.3 + glowOpacity * 0.7})`}
-            strokeWidth="1"
-            filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 9}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      )}
-      {children}
-    </div>
-  );
-};
+//   return (
+//     <div ref={ref} style={{ position: "relative", padding: `${PAD}px` }}>
+//       {phase !== "hidden" && W > 0 && (
+//         <svg
+//           style={{
+//             position: "absolute",
+//             top: `-${PAD}px`, left: `-${PAD}px`,
+//             width: `${W}px`, height: `${H}px`,
+//             pointerEvents: "none", overflow: "visible",
+//             opacity: 1,
+//           }}
+//         >
+//           <path
+//             d={getPath(progress)}
+//             fill="none"
+//             stroke={`rgba(255,255,255,${0.3 + glowOpacity * 0.7})`}
+//             strokeWidth="1"
+//             filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 9}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
+//             strokeLinecap="round"
+//             strokeLinejoin="round"
+//           />
+//         </svg>
+//       )}
+//       {children}
+//     </div>
+//   );
+// };
 
 const STEP_IMAGES = [
   { src: "/step-diagnose.png", srcMobile: "/step-diagnose-mobile.png", alt: "Diagnose dashboard" },
@@ -841,8 +924,8 @@ const STEP_IMAGES = [
 ];
 
 const SLIDE_TRANSITION = 700;   // ms — carousel push transition
-const TRACE_DURATION = 2400;  // ms — border draw + scanline reveal
-const HOLD_DURATION = 4600;  // ms — fully revealed, static
+const TRACE_DURATION = 1500;  // ms — border draw + scanline reveal
+const HOLD_DURATION = 7000;  // ms — fully revealed, static
 
 // ── shared border-trace path builder (lifted from TracedBox) ──────────────
 function buildTracePath(W: number, H: number, progress: number) {
@@ -1057,9 +1140,9 @@ const StepSlide = ({
           <h3 style={{ fontSize: "1.3rem", color: "#ffffff", fontWeight: 600, letterSpacing: "-0.01em", margin: 0 }}>
             {item.title}
           </h3>
-          <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, margin: 0, textAlign: "center" }}>
+          {/* <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, margin: 0, textAlign: "center" }}>
             {item.desc}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
@@ -1352,6 +1435,296 @@ const WhyGrydinSection = () => {
   );
 };
 
+
+//measurable impact section
+
+
+const IMPACT_CASES = [
+  {
+    tag: "LOGISTICS",
+    stat: "+47%",
+    label: "Faster Dispatch Turnaround",
+    client: "Meridian Freight Co.",
+    desc: "Deployed an AI agent to triage incoming freight requests and auto-assign drivers, cutting manual dispatch review to minutes.",
+    color: "#22d3ee",
+    barPct: 47,
+  },
+  {
+    tag: "FINTECH",
+    stat: "-58%",
+    label: "Drop in Manual Reconciliation Hours",
+    client: "Ledgerly Financial",
+    desc: "Automated cross-ledger transaction matching, removing the weekly reconciliation backlog their finance team used to run by hand.",
+    color: "#f59e0b",
+    barPct: 58,
+  },
+  {
+    tag: "HOSPITALITY",
+    stat: "+31%",
+    label: "Increase in Booking Completion",
+    client: "Aurelia Stays",
+    desc: "Connected their booking engine, PMS, and channel manager into one system, replacing manual re-entry across three platforms with a single source of truth.",
+    color: "#10b981",
+    barPct: 31,
+  },
+];
+
+// ── Odometer digit (rolls 0→9 strip into place, compositor-friendly transform only) ──
+const OdometerDigit = ({ digit, active, delay }: { digit: string; active: boolean; delay: number }) => {
+  if (!/[0-9]/.test(digit)) {
+    return (
+      <span
+        style={{
+          display: "inline-block",
+          height: "1em",
+          lineHeight: 1,
+          verticalAlign: "bottom",
+          opacity: active ? 1 : 0,
+          transition: `opacity 0.3s ease ${delay}ms`,
+        }}
+      >
+        {digit}
+      </span>
+    );
+  }
+  const target = parseInt(digit, 10);
+  return (
+    <span style={{ display: "inline-block", height: "1em", lineHeight: 1, overflow: "hidden", verticalAlign: "bottom" }}>
+      <span
+        style={{
+          display: "block",
+          transform: active ? `translateY(-${target}em)` : "translateY(0em)",
+          transition: `transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
+        }}
+      >
+        {Array.from({ length: 10 }).map((_, n) => (
+          <span key={n} style={{ display: "block", lineHeight: 1, height: "1em" }}>{n}</span>
+        ))}
+      </span>
+    </span>
+  );
+};
+
+// ── One impact card: border trace-in + odometer stat + fill bar ──
+const ImpactCard = ({ item, index }: { item: (typeof IMPACT_CASES)[number]; index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState({ w: 0, h: 0 });
+  const [active, setActive] = useState(false);
+  const [traceProgress, setTraceProgress] = useState(0);
+  const rafRef = useRef<number>(0);
+  const [hovered, setHovered] = useState(false);
+  const isMobile = useIsMobile();   // ← add this
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const el = cardRef.current;
+    const ro = new ResizeObserver((entries) => {
+      //const r = entries[0].contentRect;
+      setDims({ w: Math.round(el.clientWidth), h: Math.round(el.clientHeight) });
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!cardRef.current) return;
+    const el = cardRef.current;
+
+    const enterObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (isMobile) {
+          if (entry.intersectionRatio >= 0.7) setActive(true);
+        } else {
+          if (entry.isIntersecting) setActive(true);
+        }
+      },
+      isMobile
+        ? { threshold: [0, 0.7, 1] }
+        : { threshold: 0, rootMargin: "-50% 0px -50% 0px" }
+    );
+
+    const exitObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (isMobile) {
+          if (entry.intersectionRatio < 0.15) setActive(false);
+        } else {
+          if (!entry.isIntersecting) setActive(false);
+        }
+      },
+      isMobile
+        ? { threshold: [0, 0.15, 1] }
+        : { threshold: 0, rootMargin: "-35% 0px -35% 0px" }
+    );
+
+    enterObserver.observe(el);
+    exitObserver.observe(el);
+    return () => {
+      enterObserver.disconnect();
+      exitObserver.disconnect();
+    };
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (!active) {
+      setTraceProgress(0); // reset so re-entry always redraws from 0, not from wherever it left off
+      return;
+    }
+    const DURATION = 900;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / DURATION, 1);
+      setTraceProgress(p);
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [active]);
+
+  const chars = item.stat.split("");
+
+  return (
+    <div
+      ref={cardRef}
+      className="flex flex-col gap-4"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative",
+        padding: "clamp(1.6rem, 3vw, 2.2rem)",
+        border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: "6px",
+        background: "rgba(255,255,255,0.015)",
+        opacity: active ? 1 : 0,
+        transform: active ? "translateY(0)" : "translateY(16px)",
+        transition: `opacity 0.6s ease ${index * 120}ms, transform 0.6s ease ${index * 120}ms`,
+      }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          borderRadius: "6px",
+          pointerEvents: "none",
+          background: "radial-gradient(circle at 50% 0%, rgba(255,255,255,0.14), rgba(255,255,255,0.03) 55%, transparent 75%)",
+          opacity: hovered ? 1 : 0,
+          transition: "opacity 0.4s ease",
+          zIndex: 0,
+        }}
+      />
+      {dims.w > 0 && (
+        <svg
+          shapeRendering="crispEdges"
+          style={{ position: "absolute", top: 0, left: 0, width: `${dims.w}px`, height: `${dims.h}px`, pointerEvents: "none", overflow: "visible", zIndex: 2 }}
+        >
+          <path d={buildTracePath(dims.w, dims.h, 1)} fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+          <path
+            d={buildTracePath(dims.w, dims.h, traceProgress)}
+            fill="none"
+            stroke="rgba(255,255,255,0.9)"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+              filter: "drop-shadow(0 0 6px rgba(255,255,255,0.55))", // constant string — no per-frame filter rebuild
+              opacity: traceProgress > 0 && traceProgress < 1 ? 1 : 0,
+              transition: "opacity 0.4s ease 0.4s",
+            }}
+          />
+        </svg>
+      )}
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <span
+          className="uppercase tracking-widest text-xs"
+          style={{
+            color: "#000000",
+            fontWeight: 700,
+            letterSpacing: "0.18em",
+            background: "rgba(255,255,255,0.45)",
+            borderRadius: "2px",
+            padding: "4px 8px",
+            width: "fit-content",
+          }}
+        >
+          {item.tag}
+        </span>
+
+        <div
+          className="font-bold"
+          style={{
+            fontSize: "clamp(2.2rem, 4.5vw, 3.2rem)",
+            color: item.color,
+            letterSpacing: "-0.03em",
+            fontVariantNumeric: "tabular-nums",
+            lineHeight: 1,          // ← add this
+            display: "flex",
+          }}
+        >
+          {chars.map((c, i) => (
+            <OdometerDigit key={i} digit={c} active={active} delay={i * 70} />
+          ))}
+        </div>
+
+        <p className="font-semibold" style={{ fontSize: "0.95rem", color: "#ffffff" }}>{item.label}</p>
+
+        <div style={{ width: "100%", height: "2px", background: "rgba(255,255,255,0.1)", borderRadius: "1px", overflow: "hidden" }}>
+          <div
+            style={{
+              height: "100%",
+              width: active ? `${item.barPct}%` : "0%",
+              background: item.color,
+              transition: `width 1s cubic-bezier(0.16,1,0.3,1) ${300 + index * 120}ms`,
+            }}
+          />
+        </div>
+
+        <div style={{ marginTop: "0.4rem" }}>
+          <h4 className="font-semibold" style={{ fontSize: "1rem", color: "#ffffff", marginBottom: "0.4rem" }}>{item.client}</h4>
+          <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.7 }}>{item.desc}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ── Section wrapper — same pattern as ServicesSection / HowItWorksSection ──
+const ImpactSection = () => {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentH, setContentH] = useState(0);
+
+  useEffect(() => {
+    if (!contentRef.current) return;
+    const ro = new ResizeObserver(() => setContentH(contentRef.current?.offsetHeight ?? 0));
+    ro.observe(contentRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <DarkSection id="measurable-impact" className="flex flex-col" minHeight>
+      <TopTape />
+      <DotGrid contentBottom={contentH / 1.02} animate={false} />
+      <div
+        ref={contentRef}
+        className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
+        style={{ position: "relative", zIndex: 1, paddingTop: "clamp(3rem, 7.5vh, 6rem)", paddingBottom: "clamp(3rem, 7.5vh, 6rem)" }}
+      >
+        <p className="mb-3 uppercase tracking-widest text-xs" style={{ color: "#000000", fontWeight: 700, letterSpacing: "0.2em", background: "rgba(255,255,255,0.45)", borderRadius: "2px", padding: "4px 8px", width: "fit-content" }}>
+          Proven
+        </p>
+        <h2 className="font-bold" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "0.6rem" }}>
+          Numbers behind the noise.
+        </h2>
+        <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", marginBottom: "clamp(2rem, 5vh, 4rem)", maxWidth: "34rem" }}>
+          Outcomes we can point to, not case studies we polish.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "clamp(1.5rem, 4vw, 2rem)" }}>
+          {IMPACT_CASES.map((item, i) => (
+            <ImpactCard key={item.client} item={item} index={i} />
+          ))}
+        </div>
+      </div>
+    </DarkSection>
+  );
+};
 // ── Contact / Footer Section ──────────────────────────────────────────────────
 const ContactSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -1453,6 +1826,7 @@ const ContactSection = () => {
 
       {/* Footer tape – SVG BottomTape geometry with footer text overlaid */}
       <FooterTape />
+
     </DarkSection>
   )
 };
@@ -1567,6 +1941,7 @@ export default function Home() {
         <ServicesSection />
         <HowItWorksSection />
         {/* <WhyGrydinSection /> */}
+        <ImpactSection />
         <ContactSection />
         <WhatsAppButton />
       </main>

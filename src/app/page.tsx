@@ -282,6 +282,8 @@ const HeroImageSlider = () => {
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [held, setHeld] = useState(false);
+  const [hasEnteredView, setHasEnteredView] = useState(false);   // ← new
+  const containerRef = useRef<HTMLDivElement>(null);   // ← new
 
   const aspectCacheRef = useRef<Record<string, string>>({});
   const [mobileAspect, setMobileAspect] = useState<string>("3 / 4"); // fallback while loading
@@ -290,6 +292,21 @@ const HeroImageSlider = () => {
   const pausedElapsedRef = useRef<number>(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isPointerDownRef = useRef(false);
+
+  useEffect(() => {
+    if (!containerRef.current || hasEnteredView) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEnteredView(true);
+          observer.disconnect();   // fire once, never again
+        }
+      },
+      { threshold: 0 }   // any portion visible
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [hasEnteredView]);
 
   useEffect(() => {
     if (!isMobile) return;
@@ -317,7 +334,7 @@ const HeroImageSlider = () => {
 
   // main progress driver — runs whenever not held
   useEffect(() => {
-    if (held) return;
+    if (held || !hasEnteredView) return;   // ← added !hasEnteredView
     startRef.current = performance.now() - pausedElapsedRef.current;
     const tick = (now: number) => {
       const elapsed = now - startRef.current;
@@ -332,7 +349,7 @@ const HeroImageSlider = () => {
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [index, held]);
+  }, [index, held, hasEnteredView]);   // ← add hasEnteredView to deps
 
   // reset paused-elapsed whenever image actually changes
   useEffect(() => { pausedElapsedRef.current = 0; }, [index]);
@@ -376,7 +393,7 @@ const HeroImageSlider = () => {
   const getSrc = (i: number) => (isMobile ? HERO_IMAGES[i].srcMobile : HERO_IMAGES[i].src);
 
   return (
-    <div className="w-full flex flex-col items-center" style={{ padding: "0 5vw", marginTop: "clamp(2rem, 6vh, 4rem)", gap: "0.9rem" }}>
+    <div ref={containerRef} className="w-full flex flex-col items-center" style={{ padding: "0 5vw", marginTop: "clamp(2rem, 6vh, 4rem)", gap: "0.9rem" }}>
 
       <div
         onPointerDown={handlePointerDown}
@@ -596,114 +613,113 @@ const HeroSection = () => {
           <source src="/medium.mp4" type="video/mp4" />
         </video>
       </div> */}
-      <HeroImageSlider />
     </DarkSection>
   );
 };
 
-// ── Services Section ──────────────────────────────────────────────────────────
-const ShineCard = ({ onDone }: { onDone: () => void }) => {
-  const [progress, setProgress] = useState(0);
-  const rafRef = useRef<number>(0);
-  const startRef = useRef<number>(0);
-  const DURATION = 1200;
+// // ── Services Section ──────────────────────────────────────────────────────────
+// const ShineCard = ({ onDone }: { onDone: () => void }) => {
+//   const [progress, setProgress] = useState(0);
+//   const rafRef = useRef<number>(0);
+//   const startRef = useRef<number>(0);
+//   const DURATION = 1200;
 
-  useEffect(() => {
-    startRef.current = performance.now();
-    const animate = (now: number) => {
-      const p = (now - startRef.current) / DURATION;
-      if (p >= 1) { setProgress(1); onDone(); return; }
-      setProgress(p);
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, []);
+//   useEffect(() => {
+//     startRef.current = performance.now();
+//     const animate = (now: number) => {
+//       const p = (now - startRef.current) / DURATION;
+//       if (p >= 1) { setProgress(1); onDone(); return; }
+//       setProgress(p);
+//       rafRef.current = requestAnimationFrame(animate);
+//     };
+//     rafRef.current = requestAnimationFrame(animate);
+//     return () => cancelAnimationFrame(rafRef.current);
+//   }, []);
 
-  return (
-    <div style={{
-      position: "absolute",
-      inset: 0,
-      pointerEvents: "none",
-      zIndex: 2,
-      overflow: "hidden",
-    }}>
-      <div style={{
-        position: "absolute",
-        top: "-150%",
-        left: "-100%",
-        width: "80%",
-        height: "400%",
-        background: "linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.07) 50%, transparent 75%)",
-        transform: `translateX(${progress * 380}%) skewX(-15deg)`,
-      }} />
-    </div>
-  );
-};
+//   return (
+//     <div style={{
+//       position: "absolute",
+//       inset: 0,
+//       pointerEvents: "none",
+//       zIndex: 2,
+//       overflow: "hidden",
+//     }}>
+//       <div style={{
+//         position: "absolute",
+//         top: "-150%",
+//         left: "-100%",
+//         width: "80%",
+//         height: "400%",
+//         background: "linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.07) 50%, transparent 75%)",
+//         transform: `translateX(${progress * 380}%) skewX(-15deg)`,
+//       }} />
+//     </div>
+//   );
+// };
 
-const ServicesGrid = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+// const ServicesGrid = () => {
+//   const [activeIndex, setActiveIndex] = useState(0);
+//   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const advance = (current: number) => {
-    const next = current + 1;
-    if (next >= SERVICES.length) {
-      timeoutRef.current = setTimeout(() => setActiveIndex(0), 5000);
-    } else {
-      setActiveIndex(next);
-    }
-  };
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
-  return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-3"
-      style={{ gap: "clamp(1.5rem, 4vw, 2.5rem)" }}
-    >
-      {SERVICES.map((s, i) => (
-        <div
-          key={s.title}
-          style={{ position: "relative", overflow: "hidden" }}
-          className="flex flex-col gap-4"
-        >
-          {activeIndex === i && <ShineCard onDone={() => advance(i)} />}
-          <div style={{ color: s.color }}>{s.icon}</div>
-          <h3
-            className="font-semibold"
-            style={{
-              fontSize: "1.05rem",
-              color: "#ffffff",
-              letterSpacing: "-0.01em",
-            }}
-          >
-            {s.title}
-          </h3>
-          <p
-            className="leading-relaxed"
-            style={{
-              fontSize: "0.88rem",
-              color: "rgba(255,255,255,0.45)",
-              lineHeight: 1.75,
-              textAlign: "justify",
-            }}
-          >
-            {s.desc}
-          </p>
-          <a
-            href="/services"
-            className="inline-flex items-center gap-1 text-xs font-semibold mt-2 transition-opacity hover:opacity-50"
-            style={{ color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em" }}
-          >
-            Learn more <ArrowRight size={12} />
-          </a>
-        </div>
-      ))}
-    </div>
-  );
-};
+//   const advance = (current: number) => {
+//     const next = current + 1;
+//     if (next >= SERVICES.length) {
+//       timeoutRef.current = setTimeout(() => setActiveIndex(0), 5000);
+//     } else {
+//       setActiveIndex(next);
+//     }
+//   };
+//   useEffect(() => {
+//     return () => {
+//       if (timeoutRef.current) clearTimeout(timeoutRef.current);
+//     };
+//   }, []);
+//   return (
+//     <div
+//       className="grid grid-cols-1 md:grid-cols-3"
+//       style={{ gap: "clamp(1.5rem, 4vw, 2.5rem)" }}
+//     >
+//       {SERVICES.map((s, i) => (
+//         <div
+//           key={s.title}
+//           style={{ position: "relative", overflow: "hidden" }}
+//           className="flex flex-col gap-4"
+//         >
+//           {activeIndex === i && <ShineCard onDone={() => advance(i)} />}
+//           <div style={{ color: s.color }}>{s.icon}</div>
+//           <h3
+//             className="font-semibold"
+//             style={{
+//               fontSize: "1.05rem",
+//               color: "#ffffff",
+//               letterSpacing: "-0.01em",
+//             }}
+//           >
+//             {s.title}
+//           </h3>
+//           <p
+//             className="leading-relaxed"
+//             style={{
+//               fontSize: "0.88rem",
+//               color: "rgba(255,255,255,0.45)",
+//               lineHeight: 1.75,
+//               textAlign: "justify",
+//             }}
+//           >
+//             {s.desc}
+//           </p>
+//           <a
+//             href="/services"
+//             className="inline-flex items-center gap-1 text-xs font-semibold mt-2 transition-opacity hover:opacity-50"
+//             style={{ color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em" }}
+//           >
+//             Learn more <ArrowRight size={12} />
+//           </a>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
 
 const ServicesSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -760,7 +776,7 @@ const ServicesSection = () => {
         >
           Six ways we eliminate the unseen.
         </h2>
-        <ServicesGrid />
+        <HeroImageSlider />
       </div>
     </DarkSection>
   );

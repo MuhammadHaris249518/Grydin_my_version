@@ -6,7 +6,7 @@ import { useTypewriter } from "../globalscope/typewriter";
 import { X } from "lucide-react";
 import DotGrid from "./../globalscope/DotGrid";
 import Navbar from "./../globalscope/Navbar";
-import { FooterTape } from "../contact/page"
+import { FooterTape } from "../globalscope/FooterTape";
 
 // ── Tape sizing (identical to about/contact) ──────────────────────────────────
 const TAPE_H_MAX = 72;

@@ -1,16 +1,36 @@
 "use client";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
+// Kept for backwards compatibility with any code still importing these,
+// but FooterTape no longer relies on them for sizing.
 export const TapeCtx = createContext({ tapeH: 72, arcR: 36 });
 export const useTape = () => useContext(TapeCtx);
 
+// Same constants/formula the working page used for its footer tape.
+const TAPE_H_SLOW_MAX = 72;
+const TAPE_H_SLOW_MIN = 58;
+const VW_COEFF_SLOW = 6;
+
+function computeTapeHSlow(width: number) {
+    const vw = (VW_COEFF_SLOW / 100) * width;
+    return Math.min(TAPE_H_SLOW_MAX, Math.max(TAPE_H_SLOW_MIN, vw));
+}
+
 export const FooterTape = () => {
-    const { tapeH, arcR } = useTape();
+    const [tapeH, setTapeH] = useState(TAPE_H_SLOW_MAX);
+
+    useEffect(() => {
+        const update = () => setTapeH(computeTapeHSlow(window.innerWidth));
+        update();
+        window.addEventListener("resize", update, { passive: true });
+        return () => window.removeEventListener("resize", update);
+    }, []);
+
+    const arcR = tapeH / 2;
     const VB_W = 1920;
     const VB_H = 140;
 
     return (
-        // ... paste the exact JSX body of FooterTape from contact/page.tsx here, unchanged
         <div style={{ position: "relative", width: "100%", height: `${tapeH}px`, flexShrink: 0 }}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"

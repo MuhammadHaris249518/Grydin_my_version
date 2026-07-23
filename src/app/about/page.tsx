@@ -331,11 +331,22 @@ const BeliefCard = ({
   const [progress, setProgress] = useState(0);
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
-  const TRACE_DURATION = 7000;
+  const TRACE_DURATION = 10000;
   const [glowOpacity, setGlowOpacity] = useState(0);
   const glowRafRef = useRef<number>(0);
   const glowStartRef = useRef<number>(0);
+  const [flashOn, setFlashOn] = useState(false);
+  const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  useEffect(() => {
+    if (!isActive) return; // only flash when this card flips to show its front
+    setFlashOn(true);
+    if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+    flashTimerRef.current = setTimeout(() => setFlashOn(false), 900);
+    return () => {
+      if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+    };
+  }, [isActive]); // fires every time this card flips (either direction)
   // measure card
   useEffect(() => {
     if (!cardRef.current) return;
@@ -383,7 +394,9 @@ const BeliefCard = ({
   }, [isActive, resetKey]);
 
   const flipped = !isActive;
-
+  const cardFill = flashOn
+    ? "linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.07))"
+    : "rgba(255,255,255,0.015)";
   return (
     <div
       ref={cardRef}
@@ -402,18 +415,22 @@ const BeliefCard = ({
           minHeight: "120px",
           transformStyle: "preserve-3d",
           transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          transition: "transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
+          transition: "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         {/* FRONT */}
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            height: `calc(100% + ${TRACE_BOTTOM_EXTRA}px)`,
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
-            padding: "1rem 1.2rem 9rem 1.2rem",
+            //padding: "1rem 1.2rem 9rem 1.2rem",
             boxSizing: "border-box",
+
           }}
         >
           {isActive && dims.w > 0 && (
@@ -424,28 +441,37 @@ const BeliefCard = ({
               glowOpacity={glowOpacity}
             />
           )}
-          <h3
+          <div
             style={{
-              fontSize: "0.92rem",
-              color: "#ffffff",
-              fontWeight: 600,
-              marginBottom: "0.5rem",
-              letterSpacing: "-0.01em",
+              padding: "1rem 1.2rem 1.5rem 1.2rem",
+              boxSizing: "border-box",
+              background: cardFill,
+              transition: "background 0.9s ease",
             }}
           >
-            {item.title}
-          </h3>
-          <p
-            style={{
-              fontSize: "0.84rem",
-              color: "rgba(255,255,255,0.42)",
-              lineHeight: 1.75,
-              margin: 0,
-              textAlign: "justify",
-            }}
-          >
-            {item.body}
-          </p>
+            <h3
+              style={{
+                fontSize: "0.92rem",
+                color: "#ffffff",
+                fontWeight: 600,
+                marginBottom: "0.5rem",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {item.title}
+            </h3>
+            <p
+              style={{
+                fontSize: "0.84rem",
+                color: "rgba(255,255,255,0.42)",
+                lineHeight: 1.75,
+                margin: 0,
+                textAlign: "justify",
+              }}
+            >
+              {item.body}
+            </p>
+          </div>
         </div>
 
         {/* BACK – grey border only */}
@@ -465,20 +491,45 @@ const BeliefCard = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            background: cardFill,
+            transition: "background 0.9s ease",
           }}
         >
           <span
             style={{
+              position: "relative",
+              display: "inline-block",
               fontSize: "0.88rem",
               fontWeight: 600,
-              color: "rgba(255,255,255,0.12)",
               letterSpacing: "-0.01em",
               paddingLeft: "1.2rem",
               paddingRight: "1.2rem",
               textAlign: "center",
+              color: "rgba(255,255,255,0.12)",
             }}
           >
             {item.title}
+            <span
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage:
+                  "linear-gradient(90deg, transparent 0%, transparent 42%, rgba(255,255,255,0.95) 50%, transparent 58%, transparent 100%)",
+                backgroundSize: "250% 100%",
+                backgroundRepeat: "no-repeat",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                color: "transparent",
+                animation: "beliefShine 4.5s linear infinite",
+                willChange: "background-position",   // ← hints browser to isolate this layer
+                contain: "paint",                     // ← stops paint work here from being blocked by/blocking siblings
+                pointerEvents: "none",
+              }}
+            >
+              {item.title}
+            </span>
           </span>
         </div>
       </div>

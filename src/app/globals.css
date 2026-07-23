@@ -57,7 +57,35 @@ html.hide-scrollbar *::-webkit-scrollbar-thumb:hover {
   background: transparent !important;
   transition: background 0.5s ease;
 }
+
 html {
   overflow: overlay;
 }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0
+  }
+}
+
+@keyframes beliefShine {
+  0% {
+    background-position: 100% 0;
+  }
+
+  /* 2.5s swipe */
+  55.56% {
+    background-position: 0% 0;
+  }
+
+  /* 2s pause */
+  100% {
+    background-position: 0% 0;
+  }
+}

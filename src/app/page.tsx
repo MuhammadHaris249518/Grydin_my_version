@@ -265,12 +265,12 @@ function useIsMobile(breakpoint = 768) {
 }
 
 const HERO_IMAGES = [
-  { src: "/hero-1.png", srcMobile: "/hero-1-mobile.png", service: "AI Agents" },
-  { src: "/hero-2.png", srcMobile: "/hero-2-mobile.png", service: "Workflow Automation" },
-  { src: "/hero-3.png", srcMobile: "/hero-3-mobile.png", service: "Full-Stack Development" },
-  { src: "/hero-4.png", srcMobile: "/hero-4-mobile.png", service: "Custom Software" },
-  { src: "/hero-5.png", srcMobile: "/hero-5-mobile.png", service: "AI Integration" },
-  { src: "/hero-6.png", srcMobile: "/hero-6-mobile.png", service: "System Integration" },
+  { src: "/h1.png", srcMobile: "/hm1.png", service: "AI Agents" },
+  { src: "/h2.png", srcMobile: "/hm2.png", service: "Workflow Automation" },
+  { src: "/h3.png", srcMobile: "/hm3.png", service: "Full-Stack Development" },
+  { src: "/h4.png", srcMobile: "/hm4.png", service: "Custom Software" },
+  { src: "/h5.png", srcMobile: "/hm5.png", service: "AI Integration" },
+  { src: "/h6.png", srcMobile: "/hm6.png", service: "System Integration" },
 ];
 
 const SLIDE_DURATION = 8500;

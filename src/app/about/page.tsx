@@ -31,7 +31,17 @@ const useTape = () => useContext(TapeCtx);
 
 const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
 const VB_W = 1000;
-
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [breakpoint]);
+  return isMobile;
+}
 // ── Tapes ─────────────────────────────────────────────────────────────────────
 // const BottomTape = ({ withFooter = false }: { withFooter?: boolean }) => {
 //   const { tapeH, arcR } = useTape();
@@ -197,7 +207,7 @@ const AnimatedDivider = () => {
       <div style={{
         position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)",
         height: "1px",
-        background: phase === "done" || phase === "waiting" ? "rgba(255,255,255,0.08)" : "transparent",
+        background: "rgba(255,255,255,0.38)"
       }} />
       {(phase === "tracing" || phase === "holding") && visible && (
         <div style={{ position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)" }}>
@@ -211,6 +221,7 @@ const AnimatedDivider = () => {
             top: 0, height: "1px",
             background: `rgba(255,255,255,${0.3 + glowOpacity * 0.7})`,
             boxShadow: `0 0 ${4 + glowOpacity * 6}px rgba(255,255,255,${glowOpacity * 0.6})`,
+            //background: `rgba(255,255,255,${glowOpacity * 0.3})`,
           }} />
           <div style={{
             position: "absolute", left: `${(1 - traceProgress) * 50}%`, right: `${(1 - traceProgress) * 50}%`,
@@ -335,18 +346,18 @@ const BeliefCard = ({
   const [glowOpacity, setGlowOpacity] = useState(0);
   const glowRafRef = useRef<number>(0);
   const glowStartRef = useRef<number>(0);
-  const [flashOn, setFlashOn] = useState(false);
-  const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  //const [flashOn, setFlashOn] = useState(false);
+  //const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    if (!isActive) return; // only flash when this card flips to show its front
-    setFlashOn(true);
-    if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
-    flashTimerRef.current = setTimeout(() => setFlashOn(false), 900);
-    return () => {
-      if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
-    };
-  }, [isActive]); // fires every time this card flips (either direction)
+  // useEffect(() => {
+  //   if (!isActive) return; // only flash when this card flips to show its front
+  //   setFlashOn(true);
+  //   if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+  //   flashTimerRef.current = setTimeout(() => setFlashOn(false), 900);
+  //   return () => {
+  //     if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
+  //   };
+  // }, [isActive]); // fires every time this card flips 
   // measure card
   useEffect(() => {
     if (!cardRef.current) return;
@@ -394,9 +405,7 @@ const BeliefCard = ({
   }, [isActive, resetKey]);
 
   const flipped = !isActive;
-  const cardFill = flashOn
-    ? "linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.07))"
-    : "rgba(255,255,255,0.015)";
+  const cardFill = "linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.07))";
   return (
     <div
       ref={cardRef}
@@ -415,7 +424,7 @@ const BeliefCard = ({
           minHeight: "120px",
           transformStyle: "preserve-3d",
           transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          transition: "transform 0.9s cubic-bezier(0.4, 0, 0.2, 1)",
+          transition: "transform 0.65s cubic-bezier(0.4, 0, 0.2, 1)",
         }}
       >
         {/* FRONT */}
@@ -443,10 +452,14 @@ const BeliefCard = ({
           )}
           <div
             style={{
+              minHeight: "140px", // pick a value that fits your longest body text comfortably
               padding: "1rem 1.2rem 1.5rem 1.2rem",
               boxSizing: "border-box",
               background: cardFill,
               transition: "background 0.9s ease",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
             }}
           >
             <h3
@@ -625,6 +638,112 @@ const WhatsAppButton = () => (
   </a>
 );
 
+const OriginVisual = () => {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState({ w: 0, h: 0 });
+  const [inView, setInView] = useState(false);
+  const [traceProgress, setTraceProgress] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const rafRef = useRef<number>(0);
+  const isMobile = useIsMobile();
+  const [mobileAspect, setMobileAspect] = useState<string>("3 / 4"); // fallback while the real image loads
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const src = "/about-mobile.png";
+    const img = new Image();
+    img.onload = () => setMobileAspect(`${img.naturalWidth} / ${img.naturalHeight}`);
+    img.src = src;
+  }, [isMobile]);
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const ro = new ResizeObserver(() => {
+      if (wrapRef.current) setDims({ w: wrapRef.current.offsetWidth, h: wrapRef.current.offsetHeight });
+    });
+    ro.observe(wrapRef.current);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold: 0.3 }
+    );
+    obs.observe(wrapRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!inView) return;
+    const DURATION = 1400;
+    const start = performance.now();
+    const animate = (now: number) => {
+      const p = Math.min((now - start) / DURATION, 1);
+      setTraceProgress(p);
+      if (p < 1) rafRef.current = requestAnimationFrame(animate);
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [inView]);
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!wrapRef.current) return;
+    const rect = wrapRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: py * -5, y: px * 5 });
+  };
+
+  return (
+    <div
+      ref={wrapRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={() => setTilt({ x: 0, y: 0 })}
+      style={{
+        position: "relative", width: "100%", aspectRatio: isMobile ? mobileAspect : "16 / 9", overflow: "hidden",
+        opacity: inView ? 1 : 0,
+        transform: inView ? "scale(1)" : "scale(0.94)",
+        transition: "opacity 1s ease, transform 1s cubic-bezier(0.4,0,0.2,1)",
+        perspective: "1000px",
+      }}
+    >
+      <div style={{ width: "100%", height: "100%", transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)`, transition: "transform 0.3s ease-out" }}>
+        <img
+          key={`origin-${isMobile}`}
+          src={isMobile ? "/about-mobile.png" : "/about.png"}
+          alt="GrydIn systems visual"
+          className="origin-visual-img"
+          style={{ width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", display: "block" }}
+        />
+        <div className="origin-visual-sheen" />
+        <div className="origin-visual-grain" />
+      </div>
+      {dims.w > 0 && (
+        <BoundaryTracer progress={traceProgress} width={dims.w} height={dims.h} glowOpacity={inView && traceProgress < 1 ? 1 : 0} />
+      )}
+      <style jsx>{`
+        .origin-visual-img { animation: originKenBurns 22s ease-in-out infinite alternate; }
+        .origin-visual-sheen {
+          position: absolute; inset: 0; pointer-events: none;
+          background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.16) 48%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.16) 52%, transparent 65%);
+          background-size: 250% 250%; background-position: -50% -50%;
+          mix-blend-mode: screen;
+          animation: originSheen 6.5s ease-in-out infinite; animation-delay: 1.6s;
+        }
+        .origin-visual-grain {
+          position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
+          mix-blend-mode: overlay;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+          animation: originGrainShift 1s steps(2) infinite;
+        }
+        @keyframes originKenBurns { from { transform: scale(1); } to { transform: scale(1.06); } }
+        @keyframes originSheen { 0% { background-position: -50% -50%; } 45%,100% { background-position: 100% 100%; } }
+        @keyframes originGrainShift { 0% { transform: translate(0,0); } 100% { transform: translate(-2%, 2%); } }
+      `}</style>
+    </div>
+  );
+};
 // ── About Page ────────────────────────────────────────────────────────────────
 export default function About() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
@@ -899,7 +1018,6 @@ export default function About() {
             >
               Origin
             </p>
-
             <p
               style={{
                 fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
@@ -919,6 +1037,21 @@ export default function About() {
               <br />
               GrydIn exists to fix that. Precisely, without the overhaul.
             </p>
+            <div
+              style={{
+                position: "relative",
+                marginTop: "40px",
+                left: "50%",
+                width: "100vw",
+                marginLeft: "-50vw",
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ width: "90vw", maxWidth: "1400px" }}>
+                <OriginVisual />
+              </div>
+            </div>
 
             <AnimatedDivider />
 

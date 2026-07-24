@@ -650,7 +650,7 @@ const OriginVisual = () => {
 
   useEffect(() => {
     if (!isMobile) return;
-    const src = "/about-mobile.png";
+    const src = "/abm.png";
     const img = new Image();
     img.onload = () => setMobileAspect(`${img.naturalWidth} / ${img.naturalHeight}`);
     img.src = src;
@@ -711,7 +711,7 @@ const OriginVisual = () => {
       <div style={{ width: "100%", height: "100%", transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)`, transition: "transform 0.3s ease-out" }}>
         <img
           key={`origin-${isMobile}`}
-          src={isMobile ? "/about-mobile.png" : "/about.png"}
+          src={isMobile ? "/abm.png" : "/ab.png"}
           alt="GrydIn systems visual"
           className="origin-visual-img"
           style={{ width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", display: "block" }}

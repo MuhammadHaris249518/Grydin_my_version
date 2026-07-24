@@ -1,7 +1,11 @@
 "use client";
 import { createContext, useContext } from "react";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ArrowRight, Zap, Brain, Plug, Repeat, Layers, Code } from "lucide-react";
+import {
+  Menu, X, ArrowRight, Zap, Brain, Plug, Repeat, Layers, Code,
+  ShieldCheck, Gauge, Share2, FileText, MonitorSmartphone, Database,
+  Cloud, BrainCircuit, ScanText, SlidersHorizontal, Link2, RefreshCw, Braces, Target, AlertTriangle, Crosshair, Workflow, Puzzle, Rocket,
+} from "lucide-react";
 import { useTypewriter } from "./globalscope/typewriter";
 import DotGrid from "./globalscope/DotGrid";
 import Navbar from "./globalscope/Navbar";
@@ -50,17 +54,36 @@ const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Diagnose",
-    //desc: "We map your workflow end to end – every gap, bottleneck, and invisible process costing you time. Nothing gets built until we understand exactly what's broken.",
+    tagline: "UNDERSTAND BEFORE BUILDING.",
+    desc: "We map your workflow end to end – every gap, bottleneck, and invisible process costing you time. Nothing gets built until we understand exactly what's broken.",
+    points: [
+      { icon: <Target size={18} strokeWidth={1.6} />, title: "Process Discovery", desc: "We uncover how work really flows." },
+      { icon: <AlertTriangle size={18} strokeWidth={1.6} />, title: "Gap & Bottleneck Analysis", desc: "We find what's slowing you down." },
+      { icon: <Crosshair size={18} strokeWidth={1.6} />, title: "Data & System Audit", desc: "We examine systems, data and integrations in depth." },
+    ],
   },
   {
     step: "02",
     title: "Design",
-    //desc: "We scope only what moves the needle. No bloated proposals, no unnecessary complexity. You see the exact plan before a single line of code is written.",
+    tagline: "ARCHITECT WITH INTENT.",
+    desc: "We scope only what moves the needle. No bloated proposals, no unnecessary complexity. You see the exact plan before a single line of code is written.",
+    points: [
+      { icon: <Target size={18} strokeWidth={1.6} />, title: "Solution Architecture", desc: "We craft scalable, future-proof architectures tailored to your goals." },
+      { icon: <Workflow size={18} strokeWidth={1.6} />, title: "Workflow Blueprint", desc: "Every step, condition, and integration mapped with precision." },
+      { icon: <Puzzle size={18} strokeWidth={1.6} />, title: "Seamless Integrations", desc: "APIs, data, and tools connected into one unified ecosystem." },
+      { icon: <ShieldCheck size={18} strokeWidth={1.6} />, title: "Built for Reliability", desc: "Security, performance, and observability designed in from the start." },
+    ],
   },
   {
     step: "03",
     title: "Deploy",
-    //desc: "We ship fast, integrate quietly, and hand off documentation your team can actually use. The system runs in the background. You barely notice – except in the results.",
+    tagline: "AUTOMATE. INTEGRATE. DELIVER.",
+    desc: "We ship fast, integrate quietly, and hand off documentation your team can actually use. The system runs in the background. You barely notice – except in the results.",
+    points: [
+      { icon: <Rocket size={18} strokeWidth={1.6} />, title: "Seamless Deployment", desc: "Automated delivery with zero disruption and minimal downtime." },
+      { icon: <Link2 size={18} strokeWidth={1.6} />, title: "Deep Integrations", desc: "Connect with the tools you use daily. Everything works, together." },
+      { icon: <FileText size={18} strokeWidth={1.6} />, title: "Full Documentation", desc: "Clear guides and references so your team stays confident and independent." },
+    ],
   },
 ];
 
@@ -108,120 +131,6 @@ const TopTape = () => {
   );
 };
 
-// const FooterTape = () => {
-//   const { tapeHSlow: tapeH, arcRSlow: arcR } = useTape();
-//   const VB_W = 1920;
-//   const VB_H = 140;
-
-//   return (
-//     <div style={{ position: "relative", width: "100%", height: `${tapeH}px`, flexShrink: 0 }}>
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox={`0 0 ${VB_W} ${VB_H}`}
-//         preserveAspectRatio="none"
-//         aria-hidden="true"
-//         style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}
-//       >
-//         <defs>
-//           <linearGradient id="footertape-left" y1="70" x2="941.3" y2="70" gradientUnits="userSpaceOnUse">
-//             <stop offset="0" stopOpacity="0.2" />
-//             <stop offset="1" />
-//           </linearGradient>
-//           <linearGradient id="footertape-right" x1="900.68" y1="70" x2="1920" y2="70" gradientUnits="userSpaceOnUse">
-//             <stop offset="0" stopColor="#fff" />
-//             <stop offset="0.18" stopColor="#fff" stopOpacity="0.85" />
-//             <stop offset="1" stopColor="#fff" stopOpacity="0.2" />
-//           </linearGradient>
-//         </defs>
-//         <polygon points="902.67 70 939.31 70 900.68 140 0 140 0 0 941.3 0 902.67 70" fill="url(#footertape-left)" />
-//         <polygon points="1920 0 1920 140 900.68 140 939.31 70 902.67 70 941.3 0 1920 0" fill="url(#footertape-right)" />
-//       </svg>
-
-//       {/* Logo + wordmark + copyright — sits on the LEFT (black gradient), so white */}
-//       <div
-//         style={{
-//           position: "absolute",
-//           top: `${arcR * 0.55}px`,
-//           left: "clamp(2rem, 4.3vw, 55px)",
-//           height: `${arcR}px`,
-//           display: "flex",
-//           alignItems: "center",
-//           gap: "10px",
-//           zIndex: 1,
-//         }}
-//       >
-//         <img
-//           src="/logowhite.png"
-//           alt="GrydIn"
-//           width={12}
-//           height={12}
-//           style={{ objectFit: "contain" }}
-//         />
-//         <svg
-//           xmlns="http://www.w3.org/2000/svg"
-//           viewBox="0 0 123.86 30.24"
-//           role="img"
-//           aria-label="GrydIn"
-//           style={{ height: "12px", width: "auto", display: "block", marginTop: "1px" }}
-//         >
-//           <defs>
-//             <linearGradient id="footer-logo-gradient-1" x1="99.59" y1="13.45" x2="99.59" y2="13.34" gradientUnits="userSpaceOnUse">
-//               <stop offset="0" stopColor="#e6e6e6" />
-//               <stop offset="1" stopColor="#ffffff" />
-//             </linearGradient>
-//           </defs>
-//           <path d="M99.59,13.34a.45.45,0,0,1,0,.11s0-.08,0-.11Z" fillRule="evenodd" fill="url(#footer-logo-gradient-1)" />
-//           <path d="M102,5.66a.28.28,0,0,1,0,.13.28.28,0,0,0,0-.13c0-1,0-2,0-3C102,3.67,102,4.67,102,5.66Z" fillRule="evenodd" fill="#ffffff" />
-//           <path d="M27.78,18.82c0,.92,0,1.83,0,2.75-.19,2.31-2.55,3.16-4.58,2.92a.16.16,0,0,1-.06-.13V15.62c0-.12,0-.23,0-.35a2.17,2.17,0,0,1,0-.26.17.17,0,0,0,.16-.06,3.55,3.55,0,0,1,1.18-1.65l.08-.08c.32-.37,3.16-2.61,3.2-2.73a.15.15,0,0,1,.05.13c0,1.32,0,2.63,0,3.94V15.8c0,.54,0,1.07,0,1.6Z" fillRule="evenodd" fill="#ffffff" />
-//           <path d="M51.59,13.13a.41.41,0,0,0-.1.14A.33.33,0,0,1,51.59,13.13Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M27.28,0H18q-3,0-6,0C2.84.65-3.14,10.71,1.74,18.83a12.47,12.47,0,0,0,4.35,4.25,11.32,11.32,0,0,0,2.23,1,7.54,7.54,0,0,0,1.13.3c2.2.42,4.65.15,6.89.24.32,0,.43-.12.61-.34.88-1.07,1.76-2.14,2.65-3.2.07-.06.28-.29,0-.28q-3.81,0-7.62,0a9.44,9.44,0,0,1-1.91-.34,8,8,0,0,1-2.81-1.56,8.4,8.4,0,0,1-2.51-4A8.88,8.88,0,0,1,12.84,3.76H23.5A2.54,2.54,0,0,0,25.28,3c.8-.94,1.6-1.87,2.41-2.79a.11.11,0,0,0,0-.13A1.63,1.63,0,0,0,27.28,0ZM14.59.29a.11.11,0,0,1-.1-.06.08.08,0,0,1,.09,0h.3a.08.08,0,0,0-.07,0,.14.14,0,0,0,.12.06C14.82.3,14.7.29,14.59.29Zm1.56,0h0Zm.59-.12a.71.71,0,0,1-.38,0l.34,0c.15,0,.29,0,.42.06Zm8,0H22.06A.24.24,0,0,1,22.28.1h2.5C24.92.14,24.92.17,24.77.19Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M14.93.29c-.11,0-.23,0-.34,0a.11.11,0,0,1-.1-.06.08.08,0,0,1,.09,0h.3a.08.08,0,0,0-.07,0A.14.14,0,0,0,14.93.29Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M92.57,0H88.22a.22.22,0,0,0-.2.08q0,3.54,0,7.08a.62.62,0,0,1-.07.33.83.83,0,0,1-.34.07H80.78A9.5,9.5,0,0,0,76.2,8.75,7.72,7.72,0,0,0,73.09,12c-1.7,3.42-1.19,8.08,1.86,10.59a8.73,8.73,0,0,0,4.72,2c.37,0,.74.06,1.11.07h6.38a5.67,5.67,0,0,0,4.58-2,5,5,0,0,0,1-2.85q0-9.81,0-19.62A.21.21,0,0,0,92.57,0ZM84.29,21.11c-1.22,0-2.43,0-3.64,0a4.1,4.1,0,0,1-3.79-4.18c-.12-2.19.14-4.11,2.19-5.29a4.81,4.81,0,0,1,1.82-.51H88a.11.11,0,0,1,.06.11c0,1.76,0,3.52,0,5.28,0,.53,0,1.06,0,1.59a3.26,3.26,0,0,1-.58,1.49A3.89,3.89,0,0,1,84.29,21.11Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M72.87,7.73q-6.7,10-13.32,20.08a6.21,6.21,0,0,1-1.29,1.32,5.6,5.6,0,0,1-2.78,1.05c-1.1.1-2.38,0-3.5,0q-.1-.06,0-.18l.31-.44c1.45-2,2.88-3.94,4.29-5.92a1.08,1.08,0,0,0-.11-1.31c-1.14-1.71-2.26-3.42-3.38-5.13-.71-1.07-1.42-2.13-2.12-3.2L46.65,7.61a.09.09,0,0,1,.09-.05c1.61,0,3.27,0,4.88,0a13.17,13.17,0,0,1,1.56,2.1c.69,1,1.37,1.95,2,2.92q2,2.84,4,5.68a.69.69,0,0,0,1.23-.08l7.2-10.33a.57.57,0,0,1,.58-.32c1.54,0,3.08,0,4.62,0Q73,7.58,72.87,7.73Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M44.4,11c0,.19-.24.13-.36.14H40a4.81,4.81,0,0,0-.84.1,3.94,3.94,0,0,0-1.68.79l-.09.09a2.59,2.59,0,0,0-.82,1.63c0,3.54,0,7.08,0,10.63,0,.11-.06.16-.18.16H32a.2.2,0,0,1-.19-.09q0-6,0-12.08a5.78,5.78,0,0,1,.38-1.79,5.21,5.21,0,0,1,.89-1.34,5.37,5.37,0,0,1,3.75-1.65h7a1.23,1.23,0,0,1,.38,0C44.52,7.84,44.35,10.46,44.4,11Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M123.85,24.09a.5.5,0,0,1-.13.39,1,1,0,0,1-.3,0H119.6a.21.21,0,0,1-.21-.09c0-3.14,0-6.29,0-9.43v-.09a3.66,3.66,0,0,0-.75-2,3.78,3.78,0,0,0-2.26-1.45,3.18,3.18,0,0,0-.62-.07c-1.64,0-3.28,0-4.92,0a.17.17,0,0,0-.19.09q0,6.33,0,12.66a1.54,1.54,0,0,1,0,.3c-.07.13-.26.12-.39.13h-3.55a1,1,0,0,1-.38-.05.48.48,0,0,1-.11-.38q0-7.89,0-15.78a2.88,2.88,0,0,1,0-.59.12.12,0,0,1,.11,0l1.05,0c3.09,0,6.18,0,9.26,0a7.39,7.39,0,0,1,7.12,6.42,7,7,0,0,1,.08,1.12C123.83,18.18,123.83,21.13,123.85,24.09Z" fill="#ffffff" fillRule="evenodd" />
-//           <path d="M27.74,10.49c0,.12-2.88,2.36-3.2,2.73l-.08.08A3.55,3.55,0,0,0,23.28,15a.17.17,0,0,1-.16.06,2.83,2.83,0,0,0,0-.77,34.17,34.17,0,0,0-4.74-.11H9.87c-.09,0-.11,0-.07-.1.3-.28.59-.56.9-.83.7-.64,1.39-1.29,2.08-1.94a3.72,3.72,0,0,1,2.81-.78h2.92l8.74,0A4,4,0,0,1,27.74,10.49Z" fillRule="evenodd" fill="#ffffff" />
-//           <path d="M102.06,19.52V7.11c0-2.25,0-4.5,0-6.75,0-.08,0-.34-.13-.25-.46.39-.92.79-1.36,1.2l-.52.46c-.33.28-.66.56-1,.85-.84.71-1.47,1.08-1.45,2.32V19.6c0,1.59,0,3.17,0,4.75,0,.25.42.14.55.17h3.46a.79.79,0,0,0,.37-.07A39.38,39.38,0,0,0,102.06,19.52Zm-2.48-6.08v-.11h0A.41.41,0,0,0,99.58,13.44Z" fillRule="evenodd" fill="#ffffff" />
-//         </svg>
-//         <span
-//           style={{
-//             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-//             color: "rgba(255,255,255,0.6)",
-//             letterSpacing: "0.05em",
-//             marginLeft: "2px",
-//           }}
-//         >
-//           © {new Date().getFullYear()}
-//         </span>
-//       </div>
-
-//       {/* Tagline — sits on the RIGHT (white gradient), so black, matching nav links */}
-//       <div
-//         style={{
-//           position: "absolute",
-//           top: `${arcR * 0.55}px`,
-//           right: "6.5vw",
-//           height: `${arcR}px`,
-//           display: "flex",
-//           alignItems: "center",
-//           zIndex: 1,
-//         }}
-//       >
-//         <span
-//           style={{
-//             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-//             color: "#0a0a0a",
-//             fontWeight: 600,
-//             letterSpacing: "0.06em",
-//           }}
-//         >
-//           Built for the gaps in your business.
-//         </span>
-//       </div>
-//     </div>
-//   );
-// };
-
 // ── Dark section wrapper ──────────────────────────────────────────────────────
 const DarkSection = ({
   children,
@@ -266,16 +175,200 @@ function useIsMobile(breakpoint = 768) {
 }
 
 const HERO_IMAGES = [
-  { src: "/h1.png", srcMobile: "/hm1.png", service: "AI Agents" },
-  { src: "/h2.png", srcMobile: "/hm2.png", service: "Workflow Automation" },
-  { src: "/h3.png", srcMobile: "/hm3.png", service: "Full-Stack Development" },
-  { src: "/h4.png", srcMobile: "/hm4.png", service: "Custom Software" },
-  { src: "/h5.png", srcMobile: "/hm5.png", service: "AI Integration" },
-  { src: "/h6.png", srcMobile: "/hm6.png", service: "System Integration" },
+  {
+    art: "/hi1.png", artMobile: "/hi1.png",
+    service: "AI Agents",
+    color: "#22d3ee",
+    titleWhite: "AI ",
+    titleColor: "Agents",
+    tagline: "Workflows that run themselves.",
+    subheading: "Intelligent agents that plan, decide, and execute across your tools – autonomously.",
+    points: [
+      { icon: <Brain size={18} strokeWidth={1.6} />, title: "Autonomous Execution", desc: "Handles multi-step tasks and makes decisions in real time." },
+      { icon: <Plug size={18} strokeWidth={1.6} />, title: "Seamless Integration", desc: "Connects with your apps, APIs and data – effortlessly." },
+      { icon: <ShieldCheck size={18} strokeWidth={1.6} />, title: "Reliable & Transparent", desc: "Built-in monitoring, logs and smart fallbacks." },
+    ],
+  },
+  {
+    art: "/hi2.png", artMobile: "/hi2.png",
+    service: "Workflow Automation",
+    color: "#f59e0b",
+    titleWhite: "Workflow ",
+    titleColor: "Automation",
+    tagline: "We connect the dots across your tools",
+    subheading: "and eliminate the manual in between.",
+    points: [
+      { icon: <Gauge size={18} strokeWidth={1.6} />, title: "Smarter Workflows", desc: "We find the gaps and build automations that just work." },
+      { icon: <Share2 size={18} strokeWidth={1.6} />, title: "Seamless Orchestration", desc: "Automate across apps and teams without changing your stack." },
+      { icon: <FileText size={18} strokeWidth={1.6} />, title: "Built to Last", desc: "Clear docs and simple handoffs your team can rely on." },
+    ],
+  },
+  {
+    art: "/hi3.png", artMobile: "/hi3.png",
+    service: "Full-Stack Development",
+    color: "#3b82f6",
+    titleWhite: "Full-Stack ",
+    titleColor: "Development",
+    tagline: "From idea to live product.",
+    subheading: "Built clean. Built to scale.",
+    points: [
+      { icon: <MonitorSmartphone size={18} strokeWidth={1.6} />, title: "Complete Web & Mobile", desc: "Responsive web apps and cross-platform mobile experiences." },
+      { icon: <Code size={18} strokeWidth={1.6} />, title: "APIs & Integrations", desc: "Robust APIs and third-party integrations that power your product." },
+      { icon: <Database size={18} strokeWidth={1.6} />, title: "Scalable Architecture", desc: "Clean code, efficient databases, and services built to handle growth." },
+    ],
+  },
+  {
+    art: "/hi4.png", artMobile: "/hi4.png",
+    service: "Custom Software",
+    color: "#3b82f6",
+    titleWhite: "Custom ",
+    titleColor: "Software",
+    tagline: "Purpose-built systems designed",
+    subheading: "for the way you operate.",
+    points: [
+      { icon: <Code size={18} strokeWidth={1.6} />, title: "Built Around You", desc: "Solutions tailored to your processes and goals." },
+      { icon: <Layers size={18} strokeWidth={1.6} />, title: "End-to-End Development", desc: "From backend to frontend – we build it all." },
+      { icon: <Cloud size={18} strokeWidth={1.6} />, title: "Powerful & Scalable", desc: "Clean code, solid architecture, ready to grow with you." },
+    ],
+  },
+  {
+    art: "/hi5.png", artMobile: "/hi5.png",
+    service: "AI Integration",
+    color: "#10b981",
+    titleWhite: "AI ",
+    titleColor: "Integration",
+    tagline: "Smarter workflows.",
+    subheading: "Powered by intelligence.",
+    points: [
+      { icon: <BrainCircuit size={18} strokeWidth={1.6} />, title: "Intelligent Automation", desc: "Embed AI into your tools and automate complex workflows." },
+      { icon: <ScanText size={18} strokeWidth={1.6} />, title: "Document Processing", desc: "Extract, understand, and organize documents at scale." },
+      { icon: <SlidersHorizontal size={18} strokeWidth={1.6} />, title: "Custom Models", desc: "Fine-tuned models and prompts built around your data." },
+    ],
+  },
+  {
+    art: "/hi6.png", artMobile: "/hi6.png",
+    service: "System Integration",
+    color: "#f43f5e",
+    titleWhite: "System ",
+    titleColor: "Integration",
+    tagline: "One connected stack.",
+    subheading: "Zero manual handoffs.",
+    points: [
+      { icon: <Link2 size={18} strokeWidth={1.6} />, title: "Connect Everything", desc: "APIs and platforms working together as one." },
+      { icon: <RefreshCw size={18} strokeWidth={1.6} />, title: "Real-Time Sync", desc: "Data flows across your tools instantly and accurately." },
+      { icon: <Braces size={18} strokeWidth={1.6} />, title: "Built for Any System", desc: "Connect modern apps or legacy systems – without replacing them." },
+    ],
+  },
 ];
 
 const SLIDE_DURATION = 8500;
 const HOLD_THRESHOLD = 400; // ms — below this = tap, above = hold
+
+const ArtImage = ({
+  aspect, index, prevIndex, isMobile, held, current, getArtSrc,
+  handlePointerDown, handlePointerUp, handlePointerLeaveRef,
+}: {
+  aspect: string;
+  index: number;
+  prevIndex: number | null;
+  isMobile: boolean;
+  held: boolean;
+  current: (typeof HERO_IMAGES)[number];
+  getArtSrc: (i: number) => string;
+  handlePointerDown: () => void;
+  handlePointerUp: () => void;
+  handlePointerLeaveRef: () => void;
+}) => (
+  <div
+    onPointerDown={handlePointerDown}
+    onPointerUp={handlePointerUp}
+    onPointerLeave={handlePointerLeaveRef}
+    style={{
+      position: "relative",
+      width: "100%",
+      aspectRatio: aspect,
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "rgba(0,0,0,0.6)",
+      overflow: "hidden",
+      borderRadius: "4px",
+      cursor: "pointer",
+      userSelect: "none",
+      touchAction: "manipulation",
+    }}
+  >
+    {prevIndex !== null && (
+      <img key={`out-${prevIndex}-${isMobile}`} src={getArtSrc(prevIndex)} alt=""
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain",
+          animation: "heroFadeOut 0.9s cubic-bezier(0.4,0,0.2,1) forwards"
+        }} />
+    )}
+    <img key={`in-${index}-${isMobile}`} src={getArtSrc(index)} alt={current.service}
+      style={{
+        position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain",
+        transform: "scale(1)", // ← adjust zoom amount here
+        animation: "heroFadeIn 1.1s cubic-bezier(0.4,0,0.2,1) forwards",
+        filter: held ? "brightness(1.05)" : "none",
+        transition: "filter 0.3s ease"
+      }} />
+    {held && (
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        border: "2px solid rgba(255,255,255,0.55)",
+      }} />
+    )}
+    <style jsx>{`
+      @keyframes heroFadeIn { from { opacity:0; transform:scale(1.04);} to { opacity:1; transform:scale(1);} }
+      @keyframes heroFadeOut { from { opacity:1; transform:scale(1);} to { opacity:0; transform:scale(0.98);} }
+    `}</style>
+  </div>
+);
+
+const ProgressBar = ({
+  index, progress, held, onDotClick,
+}: {
+  index: number;
+  progress: number;
+  held: boolean;
+  onDotClick: (i: number) => void;
+}) => (
+  <div style={{ display: "flex", gap: "5px", width: "100%" }}>
+    {HERO_IMAGES.map((_, i) => (
+      <div
+        key={i}
+        onClick={(e) => { e.stopPropagation(); onDotClick(i); }}
+        style={{ flex: 1, height: "2px", borderRadius: "1px", background: "rgba(255,255,255,0.15)", overflow: "hidden", cursor: "pointer" }}
+      >
+        <div style={{
+          height: "100%",
+          width: i < index ? "100%" : i === index ? `${progress * 100}%` : "0%",
+          background: held && i === index ? "#fff" : "rgba(255,255,255,0.75)",
+          boxShadow: held && i === index ? "0 0 6px rgba(255,255,255,0.8)" : "none",
+        }} />
+      </div>
+    ))}
+  </div>
+);
+
+const PointsList = ({ current }: { current: (typeof HERO_IMAGES)[number] }) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
+    {current.points.map((pt, i) => (
+      <div key={pt.title} style={{ display: "flex", gap: "12px", alignItems: "flex-start", borderTop: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none", paddingTop: i > 0 ? "1.1rem" : 0 }}>
+        <div style={{
+          flexShrink: 0, width: "34px", height: "34px", borderRadius: "6px",
+          background: "rgba(255,255,255,0.05)", border: `1px solid ${current.color}55`,
+          color: current.color, display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          {pt.icon}
+        </div>
+        <div>
+          <h4 style={{ fontSize: "0.92rem", fontWeight: 600, color: "#fff", margin: 0, marginBottom: "2px" }}>{pt.title}</h4>
+          <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.6, margin: 0 }}>{pt.desc}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
 const HeroImageSlider = () => {
   const isMobile = useIsMobile();
@@ -283,11 +376,11 @@ const HeroImageSlider = () => {
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
   const [held, setHeld] = useState(false);
-  const [hasEnteredView, setHasEnteredView] = useState(false);   // ← new
-  const containerRef = useRef<HTMLDivElement>(null);   // ← new
+  const [hasEnteredView, setHasEnteredView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const aspectCacheRef = useRef<Record<string, string>>({});
-  const [mobileAspect, setMobileAspect] = useState<string>("3 / 4"); // fallback while loading
+  const [mobileAspect, setMobileAspect] = useState<string>("3 / 4");
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
   const pausedElapsedRef = useRef<number>(0);
@@ -300,10 +393,10 @@ const HeroImageSlider = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setHasEnteredView(true);
-          observer.disconnect();   // fire once, never again
+          observer.disconnect();
         }
       },
-      { threshold: 0 }   // any portion visible
+      { threshold: 0 }
     );
     observer.observe(containerRef.current);
     return () => observer.disconnect();
@@ -311,7 +404,7 @@ const HeroImageSlider = () => {
 
   useEffect(() => {
     if (!isMobile) return;
-    const src = HERO_IMAGES[index].srcMobile;
+    const src = HERO_IMAGES[index].artMobile;
     const cached = aspectCacheRef.current[src];
     if (cached) {
       setMobileAspect(cached);
@@ -325,6 +418,7 @@ const HeroImageSlider = () => {
     };
     img.src = src;
   }, [index, isMobile]);
+
   const goTo = (next: number) => {
     setPrevIndex(index);
     setIndex(next);
@@ -333,9 +427,8 @@ const HeroImageSlider = () => {
 
   const advance = () => goTo((index + 1) % HERO_IMAGES.length);
 
-  // main progress driver — runs whenever not held
   useEffect(() => {
-    if (held || !hasEnteredView) return;   // ← added !hasEnteredView
+    if (held || !hasEnteredView) return;
     startRef.current = performance.now() - pausedElapsedRef.current;
     const tick = (now: number) => {
       const elapsed = now - startRef.current;
@@ -350,9 +443,8 @@ const HeroImageSlider = () => {
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [index, held, hasEnteredView]);   // ← add hasEnteredView to deps
+  }, [index, held, hasEnteredView]);
 
-  // reset paused-elapsed whenever image actually changes
   useEffect(() => { pausedElapsedRef.current = 0; }, [index]);
 
   useEffect(() => {
@@ -361,29 +453,27 @@ const HeroImageSlider = () => {
     return () => clearTimeout(t);
   }, [prevIndex]);
 
-  // ── Pointer handling: distinguishes tap vs hold, works for mouse + touch ──
   const handlePointerDown = () => {
     isPointerDownRef.current = true;
     holdTimerRef.current = setTimeout(() => {
       if (!isPointerDownRef.current) return;
-      // crossed threshold → this is a HOLD → pin current frame
       cancelAnimationFrame(rafRef.current);
       pausedElapsedRef.current = performance.now() - startRef.current;
       setHeld(true);
     }, HOLD_THRESHOLD);
   };
-
+  const handlePointerLeave = () => {
+    isPointerDownRef.current = false;
+    if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+  };
   const handlePointerUp = () => {
     isPointerDownRef.current = false;
     if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
     if (!held) {
-      // released before threshold → it was a TAP → skip to next instantly
       advance();
     }
-    // if held===true, do nothing here — global listener below handles resume
   };
 
-  // while held, ANY click/tap anywhere resumes playback from where it paused
   useEffect(() => {
     if (!held) return;
     const resume = () => setHeld(false);
@@ -391,79 +481,110 @@ const HeroImageSlider = () => {
     return () => document.removeEventListener("pointerdown", resume);
   }, [held]);
 
-  const getSrc = (i: number) => (isMobile ? HERO_IMAGES[i].srcMobile : HERO_IMAGES[i].src);
+  const getArtSrc = (i: number) => (isMobile ? HERO_IMAGES[i].artMobile : HERO_IMAGES[i].art);
+  const current = HERO_IMAGES[index];
 
-  return (
-    <div ref={containerRef} className="w-full flex flex-col items-center" style={{ padding: "0 5vw", marginTop: "clamp(2rem, 6vh, 4rem)", gap: "0.9rem" }}>
+  // ── DESKTOP: split layout, left = text, right = art ──
+  if (!isMobile) {
+    return (
+      <div ref={containerRef} className="w-full" style={{ marginTop: "clamp(2rem, 6vh, 4rem)" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
+          {/* Left: text content, swaps with index */}
+          <div key={index} style={{ display: "flex", flexDirection: "column", gap: "1.4rem", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+            <div>
+              <h3 style={{ fontSize: "clamp(1.6rem, 2.6vw, 2.2rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
+                <span style={{ color: "#fff" }}>{current.titleWhite}</span>
+                <span style={{ color: current.color }}>{current.titleColor}</span>
+              </h3>
+              <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.55)", marginTop: "0.5rem" }}>{current.tagline}</p>
+              <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.55)", margin: 0 }}>{current.subheading}</p>
+            </div>
+            <PointsList current={current} />
+          </div>
 
-      <div
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={() => { isPointerDownRef.current = false; if (holdTimerRef.current) clearTimeout(holdTimerRef.current); }}
-        style={{
-          position: "relative",
-          width: "90vw",
-          maxWidth: "1400px",
-          aspectRatio: isMobile ? mobileAspect : "16 / 9", // ← was hardcoded "3 / 4"
-          border: "1px solid rgba(255,255,255,0.08)",
-          background: "rgba(0,0,0,0.6)",
-          overflow: "hidden",
-          borderRadius: "4px",
-          cursor: "pointer",
-          userSelect: "none",
-          touchAction: "manipulation",
-        }}
-      >
-        {prevIndex !== null && (
-          <img key={`out-${prevIndex}-${isMobile}`} src={getSrc(prevIndex)} alt=""
-            style={{
-              position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", // ← was always "cover"
-              animation: "heroFadeOut 0.9s cubic-bezier(0.4,0,0.2,1) forwards"
-            }} />
-        )}
-        <img key={`in-${index}-${isMobile}`} src={getSrc(index)} alt={HERO_IMAGES[index].service}
-          style={{
-            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", // ← was always "cover"
-            animation: "heroFadeIn 1.1s cubic-bezier(0.4,0,0.2,1) forwards",
-            filter: held ? "brightness(1.05)" : "none",
-            transition: "filter 0.3s ease"
-          }} />
+          {/* Right: art image */}
+          <ArtImage
+            aspect="16 / 13"
+            index={index}
+            prevIndex={prevIndex}
+            isMobile={isMobile}
+            held={held}
+            current={current}
+            getArtSrc={getArtSrc}
+            handlePointerDown={handlePointerDown}
+            handlePointerUp={handlePointerUp}
+            handlePointerLeaveRef={handlePointerLeave}
+          />
+        </div>
 
-        {held && (
-          <div style={{
-            position: "absolute", inset: 0, pointerEvents: "none",
-            border: "2px solid rgba(255,255,255,0.55)",
-          }} />
-        )}
+        <div style={{ marginTop: "1.2rem" }}>
+          <ProgressBar
+            index={index}
+            progress={progress}
+            held={held}
+            onDotClick={(i) => { cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }}
+          />
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", marginTop: "10px", color: "rgba(255,255,255,0.45)", display: "flex", alignItems: "center", gap: "6px" }}>
+            {current.service}
+            {held && <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>· paused</span>}
+          </p>
+        </div>
 
         <style jsx>{`
-          @keyframes heroFadeIn { from { opacity:0; transform:scale(1.04);} to { opacity:1; transform:scale(1);} }
-          @keyframes heroFadeOut { from { opacity:1; transform:scale(1);} to { opacity:0; transform:scale(0.98);} }
+          @keyframes heroTextIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         `}</style>
       </div>
+    );
+  }
 
-      {/* progress bar — freezes exactly in sync with held state */}
-      <div style={{ display: "flex", gap: "5px", width: "90vw", maxWidth: "1400px" }}>
-        {HERO_IMAGES.map((_, i) => (
-          <div
-            key={i}
-            onClick={(e) => { e.stopPropagation(); cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }}
-            style={{ flex: 1, height: "2px", borderRadius: "1px", background: "rgba(255,255,255,0.15)", overflow: "hidden", cursor: "pointer" }}
-          >
-            <div style={{
-              height: "100%",
-              width: i < index ? "100%" : i === index ? `${progress * 100}%` : "0%",
-              background: held && i === index ? "#fff" : "rgba(255,255,255,0.75)",
-              boxShadow: held && i === index ? "0 0 6px rgba(255,255,255,0.8)" : "none",
-            }} />
-          </div>
-        ))}
+  // ── MOBILE: stacked layout — heading/tagline → art → subheading/points → progress ──
+  return (
+    <div ref={containerRef} className="w-full flex flex-col items-center" style={{ padding: "0 5vw", marginTop: "clamp(2rem, 6vh, 4rem)", gap: "1.2rem" }}>
+      <div key={`head-${index}`} style={{ width: "100%", textAlign: "center", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+        <h3 style={{ fontSize: "clamp(1.4rem, 6vw, 1.8rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
+          <span style={{ color: "#fff" }}>{current.titleWhite}</span>
+          <span style={{ color: current.color }}>{current.titleColor}</span>
+        </h3>
+        <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", marginTop: "0.4rem", marginBottom: 0 }}>{current.tagline}</p>
       </div>
 
-      <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", marginBottom: "10px", color: "rgba(255,255,255,0.45)", display: "flex", alignItems: "center", gap: "6px" }}>
-        {HERO_IMAGES[index].service}
+      <div style={{ width: "90vw", maxWidth: "1400px" }}>
+        <ArtImage
+          aspect={mobileAspect}
+          index={index}
+          prevIndex={prevIndex}
+          isMobile={isMobile}
+          held={held}
+          current={current}
+          getArtSrc={getArtSrc}
+          handlePointerDown={handlePointerDown}
+          handlePointerUp={handlePointerUp}
+          handlePointerLeaveRef={handlePointerLeave}
+        />
+      </div>
+
+      <div key={`body-${index}`} style={{ width: "100%", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+        <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", textAlign: "center", marginBottom: "1.2rem" }}>{current.subheading}</p>
+        <PointsList current={current} />
+      </div>
+
+      <div style={{ width: "90vw", maxWidth: "1400px" }}>
+        <ProgressBar
+          index={index}
+          progress={progress}
+          held={held}
+          onDotClick={(i) => { cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }}
+        />
+      </div>
+
+      <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", display: "flex", alignItems: "center", gap: "6px" }}>
+        {current.service}
         {held && <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>· paused</span>}
       </p>
+
+      <style jsx>{`
+        @keyframes heroTextIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      `}</style>
     </div>
   );
 };
@@ -618,110 +739,6 @@ const HeroSection = () => {
   );
 };
 
-// // ── Services Section ──────────────────────────────────────────────────────────
-// const ShineCard = ({ onDone }: { onDone: () => void }) => {
-//   const [progress, setProgress] = useState(0);
-//   const rafRef = useRef<number>(0);
-//   const startRef = useRef<number>(0);
-//   const DURATION = 1200;
-
-//   useEffect(() => {
-//     startRef.current = performance.now();
-//     const animate = (now: number) => {
-//       const p = (now - startRef.current) / DURATION;
-//       if (p >= 1) { setProgress(1); onDone(); return; }
-//       setProgress(p);
-//       rafRef.current = requestAnimationFrame(animate);
-//     };
-//     rafRef.current = requestAnimationFrame(animate);
-//     return () => cancelAnimationFrame(rafRef.current);
-//   }, []);
-
-//   return (
-//     <div style={{
-//       position: "absolute",
-//       inset: 0,
-//       pointerEvents: "none",
-//       zIndex: 2,
-//       overflow: "hidden",
-//     }}>
-//       <div style={{
-//         position: "absolute",
-//         top: "-150%",
-//         left: "-100%",
-//         width: "80%",
-//         height: "400%",
-//         background: "linear-gradient(105deg, transparent 25%, rgba(255,255,255,0.07) 50%, transparent 75%)",
-//         transform: `translateX(${progress * 380}%) skewX(-15deg)`,
-//       }} />
-//     </div>
-//   );
-// };
-
-// const ServicesGrid = () => {
-//   const [activeIndex, setActiveIndex] = useState(0);
-//   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-//   const advance = (current: number) => {
-//     const next = current + 1;
-//     if (next >= SERVICES.length) {
-//       timeoutRef.current = setTimeout(() => setActiveIndex(0), 5000);
-//     } else {
-//       setActiveIndex(next);
-//     }
-//   };
-//   useEffect(() => {
-//     return () => {
-//       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-//     };
-//   }, []);
-//   return (
-//     <div
-//       className="grid grid-cols-1 md:grid-cols-3"
-//       style={{ gap: "clamp(1.5rem, 4vw, 2.5rem)" }}
-//     >
-//       {SERVICES.map((s, i) => (
-//         <div
-//           key={s.title}
-//           style={{ position: "relative", overflow: "hidden" }}
-//           className="flex flex-col gap-4"
-//         >
-//           {activeIndex === i && <ShineCard onDone={() => advance(i)} />}
-//           <div style={{ color: s.color }}>{s.icon}</div>
-//           <h3
-//             className="font-semibold"
-//             style={{
-//               fontSize: "1.05rem",
-//               color: "#ffffff",
-//               letterSpacing: "-0.01em",
-//             }}
-//           >
-//             {s.title}
-//           </h3>
-//           <p
-//             className="leading-relaxed"
-//             style={{
-//               fontSize: "0.88rem",
-//               color: "rgba(255,255,255,0.45)",
-//               lineHeight: 1.75,
-//               textAlign: "justify",
-//             }}
-//           >
-//             {s.desc}
-//           </p>
-//           <a
-//             href="/services"
-//             className="inline-flex items-center gap-1 text-xs font-semibold mt-2 transition-opacity hover:opacity-50"
-//             style={{ color: "rgba(255,255,255,0.7)", letterSpacing: "0.06em" }}
-//           >
-//             Learn more <ArrowRight size={12} />
-//           </a>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
-
 const ServicesSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
@@ -782,164 +799,11 @@ const ServicesSection = () => {
     </DarkSection>
   );
 };
-// ── How It Works Section ──────────────────────────────────────────────────────
-
-// const TracedBox = ({
-//   children,
-//   onProgress,
-// }: {
-//   children: React.ReactNode;
-//   onProgress?: (p: number) => void;
-// }) => {
-//   const ref = useRef<HTMLDivElement>(null);
-//   const [progress, setProgress] = useState(0);
-//   const [phase, setPhase] = useState<"tracing" | "holding" | "hidden" | "waiting">("waiting");
-//   const [glowOpacity, setGlowOpacity] = useState(0);
-//   const glowRafRef = useRef<number>(0);
-//   const glowStartRef = useRef<number>(0);
-//   const rafRef = useRef<number>(0);
-//   const startTimeRef = useRef<number>(0);
-//   const TRACE_DURATION = 1800;
-//   const HOLD = 10000;
-//   const PAUSE = 3500;
-//   const PAD = 16;
-
-//   useEffect(() => {
-//     let timeout: ReturnType<typeof setTimeout>;
-
-//     const startTrace = () => {
-//       setPhase("tracing");
-//       setProgress(0);
-//       onProgress?.(0);
-//       startTimeRef.current = performance.now();
-//       const animate = (now: number) => {
-//         const p = Math.min((now - startTimeRef.current) / TRACE_DURATION, 1);
-//         setProgress(p);
-//         onProgress?.(p);              // ← mirror out
-//         if (p < 1) {
-//           rafRef.current = requestAnimationFrame(animate);
-//         } else {
-//           setPhase("holding");
-//           // start glow loop
-//           const GLOW_PERIOD = 2000;
-//           glowStartRef.current = 0;
-//           const animateGlow = (now: number) => {
-//             if (!glowStartRef.current) glowStartRef.current = now;
-//             const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
-//             const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
-//             setGlowOpacity(opacity);
-//             glowRafRef.current = requestAnimationFrame(animateGlow);
-//           };
-//           glowRafRef.current = requestAnimationFrame(animateGlow);
-
-//           timeout = setTimeout(() => {
-//             cancelAnimationFrame(glowRafRef.current);
-//             setGlowOpacity(0);
-//             setProgress(0);
-//             onProgress?.(1);
-//             setPhase("hidden");
-//             timeout = setTimeout(() => {
-//               setPhase("waiting");
-//               timeout = setTimeout(startTrace, PAUSE);
-//             }, 100);
-//           }, HOLD);
-//         }
-//       };
-//       rafRef.current = requestAnimationFrame(animate);
-//     };
-
-//     timeout = setTimeout(startTrace, 300);
-//     return () => {
-//       clearTimeout(timeout);
-//       cancelAnimationFrame(rafRef.current);
-//       cancelAnimationFrame(glowRafRef.current);
-//     };
-//   }, []);
-
-//   const el = ref.current;
-//   const W = el ? el.offsetWidth + PAD * 2 : 0;
-//   const H = el ? el.offsetHeight + PAD * 2 : 0;
-//   const perimeter = W && H ? 2 * (W + H) : 0;
-
-//   // Perimeter segments starting from top-center going clockwise:
-//   // right half of top → right side → bottom → left side → left half of top
-//   const getPath = (p: number) => {
-//     if (!W || !H) return "";
-//     const dist = p * perimeter;
-//     const topRight = W / 2;
-//     const rightSide = topRight + H;
-//     const bottom = rightSide + W;
-//     const leftSide = bottom + H;
-//     const topLeft = leftSide + W / 2;
-
-//     // Right direction from center-top
-//     let rightPath = "";
-//     // Left direction from center-top (mirror)
-//     let leftPath = "";
-
-//     // Right branch: center-top → top-right → right-bottom → bottom-left → center-bottom
-//     const rDist = dist / 2;
-//     if (rDist <= topRight) {
-//       rightPath = `M ${W / 2} 0 L ${W / 2 + rDist} 0`;
-//     } else if (rDist <= topRight + H) {
-//       rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${rDist - topRight}`;
-//     } else if (rDist <= topRight + H + W) {
-//       rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L ${W - (rDist - topRight - H)} ${H}`;
-//     } else {
-//       const remaining = rDist - topRight - H - W;
-//       rightPath = `M ${W / 2} 0 L ${W} 0 L ${W} ${H} L 0 ${H} L 0 ${H - remaining}`;
-//     }
-
-//     // Left branch: center-top → top-left → left-bottom → bottom-right → center-bottom
-//     const lDist = dist / 2;
-//     if (lDist <= topRight) {
-//       leftPath = `M ${W / 2} 0 L ${W / 2 - lDist} 0`;
-//     } else if (lDist <= topRight + H) {
-//       leftPath = `M ${W / 2} 0 L 0 0 L 0 ${lDist - topRight}`;
-//     } else if (lDist <= topRight + H + W) {
-//       leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${lDist - topRight - H} ${H}`;
-//     } else {
-//       const remaining = lDist - topRight - H - W;
-//       leftPath = `M ${W / 2} 0 L 0 0 L 0 ${H} L ${W} ${H} L ${W} ${H - remaining}`;
-//     }
-
-//     return `${rightPath} ${leftPath}`;
-//   };
-
-//   return (
-//     <div ref={ref} style={{ position: "relative", padding: `${PAD}px` }}>
-//       {phase !== "hidden" && W > 0 && (
-//         <svg
-//           style={{
-//             position: "absolute",
-//             top: `-${PAD}px`, left: `-${PAD}px`,
-//             width: `${W}px`, height: `${H}px`,
-//             pointerEvents: "none", overflow: "visible",
-//             opacity: 1,
-//           }}
-//         >
-//           <path
-//             d={getPath(progress)}
-//             fill="none"
-//             stroke={`rgba(255,255,255,${0.3 + glowOpacity * 0.7})`}
-//             strokeWidth="1"
-//             filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 9}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//           />
-//         </svg>
-//       )}
-//       {children}
-//     </div>
-//   );
-// };
-
 const STEP_IMAGES = [
-  { src: "/step-diagnose.png", srcMobile: "/step-diagnose-mobile.png", alt: "Diagnose dashboard" },
-  { src: "/step-design.png", srcMobile: "/step-design-mobile.png", alt: "Design dashboard" },
-  { src: "/step-deploy.png", srcMobile: "/step-deploy-mobile.png", alt: "Deploy dashboard" },
+  { art: "/sdg.png", artMobile: "/sdg.png", alt: "Diagnose art" },
+  { art: "/sds.png", artMobile: "/sds.png", alt: "Design art" },
+  { art: "/sdp.png", artMobile: "/sdp.png", alt: "Deploy art" },
 ];
-
 const SLIDE_TRANSITION = 700;   // ms — carousel push transition
 const TRACE_DURATION = 1500;  // ms — border draw + scanline reveal
 const HOLD_DURATION = 7000;  // ms — fully revealed, static
@@ -988,7 +852,7 @@ const StepSlide = ({
 }: {
   item: (typeof HOW_IT_WORKS)[number];
   image: string;
-  mobileAspect: string;   // ← add to type
+  mobileAspect: string;
   isActive: boolean;
   phase: "trace" | "hold";
   progress: number;
@@ -999,56 +863,25 @@ const StepSlide = ({
 }) => {
   const boxRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
-  // const [glowOpacity, setGlowOpacity] = useState(0);
-  // const glowRafRef = useRef<number>(0);
-  // const glowStartRef = useRef<number>(0);
 
-  // useEffect(() => {
-  //   if (!boxRef.current) return;
-  //   const el = boxRef.current;
-  //   const ro = new ResizeObserver(() => {
-  //     setDims({ w: el.offsetWidth, h: el.offsetHeight });
-  //   });
-  //   ro.observe(el);
-  //   return () => ro.disconnect();
-  // }, []);
   useEffect(() => {
     if (!boxRef.current) return;
     const el = boxRef.current;
-    const ro = new ResizeObserver((entries) => {
-      const rect = entries[0].contentRect;
+    const ro = new ResizeObserver(() => {
       setDims({ w: Math.round(el.offsetWidth), h: Math.round(el.offsetHeight) });
     });
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-  const holding = isActive && phase === "hold";
-  // useEffect(() => {
-  //   const holding = isActive && phase === "hold";
-  //   if (!holding) {
-  //     cancelAnimationFrame(glowRafRef.current);
-  //     setGlowOpacity(0);
-  //     glowStartRef.current = 0;
-  //     return;
-  //   }
-  //   const GLOW_PERIOD = 2000;
-  //   const animateGlow = (now: number) => {
-  //     if (!glowStartRef.current) glowStartRef.current = now;
-  //     const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
-  //     const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
-  //     setGlowOpacity(opacity);
-  //     glowRafRef.current = requestAnimationFrame(animateGlow);
-  //   };
-  //   glowRafRef.current = requestAnimationFrame(animateGlow);
-  //   return () => cancelAnimationFrame(glowRafRef.current);
-  // }, [isActive, phase]);
 
+  const holding = isActive && phase === "hold";
   const tracing = isActive && phase === "trace";
   const revealed = !isActive || phase === "hold";
   const clipBottom = tracing ? Math.max(0, (1 - progress) * 100) : 0;
   const borderProgress = tracing ? progress : isActive ? 1 : 0;
 
-  return (
+  // ── Art box: border trace + scanline reveal — UNCHANGED animation, just renamed usage ──
+  const ArtBox = ({ aspect }: { aspect: string }) => (
     <div
       ref={boxRef}
       onPointerDown={onPointerDown}
@@ -1099,72 +932,124 @@ const StepSlide = ({
           50% { opacity: 1; }
         }
       `}</style>
-      <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem", alignItems: "center" }}>
-        <div
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: aspect,
+          overflow: "hidden",
+          borderRadius: "3px",
+          border: "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(0,0,0,0.5)",
+        }}
+      >
+        <img
+          src={image}
+          alt={item.title}
           style={{
-            position: "relative",
+            transform: "scale(1)", // ← adjust zoom amount here
+            position: "absolute",
+            inset: 0,
             width: "100%",
-            aspectRatio: isMobile ? mobileAspect : "16 / 9",
-            overflow: "hidden",
-            borderRadius: "3px",
-            border: "1px solid rgba(255,255,255,0.08)",
-            background: "rgba(0,0,0,0.5)",
+            height: "100%",
+            objectFit: "contain",
+            clipPath: `inset(0 0 ${clipBottom}% 0)`,
+            filter: revealed ? "brightness(1)" : "brightness(0.55)",
+            transition: "filter 0.3s ease-out",
           }}
-        >
-          <img
-            src={image}
-            alt={item.title}
+        />
+        {tracing && (
+          <div
             style={{
               position: "absolute",
-              inset: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: isMobile ? "contain" : "cover",
-              clipPath: `inset(0 0 ${clipBottom}% 0)`,
-              filter: revealed ? "brightness(1)" : "brightness(0.55)",
-              transition: "filter 0.3s ease-out",
+              left: 0,
+              right: 0,
+              top: `${progress * 100}%`,
+              height: "2px",
+              background: "rgba(34,211,238,0.9)",
+              boxShadow: "0 0 12px 2px rgba(34,211,238,0.7), 0 0 30px 6px rgba(34,211,238,0.25)",
+              pointerEvents: "none",
             }}
           />
-          {tracing && (
-            <div
-              style={{
-                position: "absolute",
-                left: 0,
-                right: 0,
-                top: `${progress * 100}%`,
-                height: "2px",
-                background: "rgba(34,211,238,0.9)",
-                boxShadow: "0 0 12px 2px rgba(34,211,238,0.7), 0 0 30px 6px rgba(34,211,238,0.25)",
-                pointerEvents: "none",
-              }}
-            />
-          )}
-        </div>
+        )}
+      </div>
+    </div>
+  );
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.5rem",
-            maxWidth: "640px",
-            textAlign: "center",
-            alignItems: "center",
-          }}
-        >
-          <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
-            {item.step}
-          </span>
-          <h3 style={{ fontSize: "1.3rem", color: "#ffffff", fontWeight: 600, letterSpacing: "-0.01em", margin: 0 }}>
-            {item.title}
-          </h3>
-          {/* <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, margin: 0, textAlign: "center" }}>
-            {item.desc}
-          </p> */}
+  const PointsList = () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      {item.points.map((pt, i) => (
+        <div key={pt.title} style={{ display: "flex", gap: "12px", alignItems: "flex-start", borderTop: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none", paddingTop: i > 0 ? "1rem" : 0 }}>
+          <div style={{
+            flexShrink: 0, width: "32px", height: "32px", borderRadius: "6px",
+            background: "rgba(255,255,255,0.05)", border: "1px solid rgba(34,211,238,0.35)",
+            color: "rgba(34,211,238,0.9)", display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            {pt.icon}
+          </div>
+          <div>
+            <h4 style={{ fontSize: "0.9rem", fontWeight: 600, color: "#fff", margin: 0, marginBottom: "2px" }}>{pt.title}</h4>
+            <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.6, margin: 0 }}>{pt.desc}</p>
+          </div>
         </div>
+      ))}
+    </div>
+  );
+
+  // ── DESKTOP: left text / right art ──
+  if (!isMobile) {
+    return (
+      <div style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center", padding: "0 14px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
+          <div>
+            <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
+              STEP {item.step}
+            </span>
+            <h3 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#ffffff", fontWeight: 700, letterSpacing: "-0.02em", margin: "0.3rem 0" }}>
+              {item.title}
+            </h3>
+            <p style={{ fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.15em", color: "rgba(34,211,238,0.85)", textTransform: "uppercase", margin: 0 }}>
+              {item.tagline}
+            </p>
+            <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginTop: "1rem" }}>
+              {item.desc}
+            </p>
+          </div>
+          <PointsList />
+        </div>
+        <ArtBox aspect="16 / 13" />
+      </div>
+    );
+  }
+  // ── MOBILE: heading/tagline → art → desc/points, stacked ──
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.1rem" }}>
+      <div style={{ width: "100%", textAlign: "center", padding: "0 5vw" }}>
+        <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
+          STEP {item.step}
+        </span>
+        <h3 style={{ fontSize: "1.3rem", color: "#ffffff", fontWeight: 600, letterSpacing: "-0.01em", margin: "0.3rem 0" }}>
+          {item.title}
+        </h3>
+        <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", color: "rgba(34,211,238,0.85)", textTransform: "uppercase", margin: 0 }}>
+          {item.tagline}
+        </p>
+      </div>
+
+      <div style={{ width: "90vw", maxWidth: "1400px" }}>
+        <ArtBox aspect={mobileAspect} />
+      </div>
+
+      <div style={{ width: "100%", padding: "0 5vw" }}>
+        <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, textAlign: "center", marginBottom: "1.2rem" }}>
+          {item.desc}
+        </p>
+        <PointsList />
       </div>
     </div>
   );
 };
+
 // ── carousel orchestrator ───────────────────────────────────────────────────
 const StepCarousel = () => {
   const isMobile = useIsMobile();
@@ -1196,19 +1081,7 @@ const StepCarousel = () => {
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
-  useEffect(() => {
-    if (!isMobile) return;
-    STEP_IMAGES.forEach(({ srcMobile }) => {
-      if (aspectCacheRef.current[srcMobile]) return; // already cached
-      const img = new Image();
-      img.onload = () => {
-        const ratio = `${img.naturalWidth} / ${img.naturalHeight}`;
-        aspectCacheRef.current[srcMobile] = ratio;
-        setAspects((prev) => ({ ...prev, [srcMobile]: ratio }));
-      };
-      img.src = srcMobile;
-    });
-  }, [isMobile]);
+
   const advanceStep = () => {
     setTransitioning(true);
     setTimeout(() => {
@@ -1280,7 +1153,7 @@ const StepCarousel = () => {
 
   return (
     <div ref={containerRef} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
-      <div style={{ position: "relative", width: "88vw", maxWidth: "1500px", overflow: "hidden" }}>
+      <div style={{ position: "relative", width: "90vw", maxWidth: "1500px", overflow: "hidden" }}>
         <div
           style={{
             display: "flex",
@@ -1293,8 +1166,8 @@ const StepCarousel = () => {
             <div key={item.step} style={{ flex: `0 0 ${100 / HOW_IT_WORKS.length}%` }}>
               <StepSlide
                 item={item}
-                image={isMobile ? STEP_IMAGES[i].srcMobile : STEP_IMAGES[i].src}
-                mobileAspect={aspects[STEP_IMAGES[i].srcMobile] || "3 / 4"}   // ← new prop
+                image={isMobile ? STEP_IMAGES[i].artMobile : STEP_IMAGES[i].art}
+                mobileAspect={"16 / 13"}
                 isActive={i === index}
                 phase={phase}
                 progress={i === index ? progress : 0}

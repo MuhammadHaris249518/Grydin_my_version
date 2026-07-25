@@ -539,8 +539,8 @@ const HeroImageSlider = () => {
 
   // ── MOBILE: stacked layout — heading/tagline → art → subheading/points → progress ──
   return (
-    <div ref={containerRef} className="w-full flex flex-col items-center" style={{ padding: "0 5vw", marginTop: "clamp(2rem, 6vh, 4rem)", gap: "1.2rem" }}>
-      <div key={`head-${index}`} style={{ width: "100%", textAlign: "center", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+    <div ref={containerRef} className="w-full flex flex-col items-center" style={{ marginTop: "clamp(2rem, 6vh, 4rem)", gap: "1.2rem" }}>
+      <div key={`head-${index}`} style={{ width: "100%", textAlign: "center", padding: "0 5vw", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
         <h3 style={{ fontSize: "clamp(1.4rem, 6vw, 1.8rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
           <span style={{ color: "#fff" }}>{current.titleWhite}</span>
           <span style={{ color: current.color }}>{current.titleColor}</span>
@@ -548,7 +548,7 @@ const HeroImageSlider = () => {
         <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", marginTop: "0.4rem", marginBottom: 0 }}>{current.tagline}</p>
       </div>
 
-      <div style={{ width: "90vw", maxWidth: "1400px" }}>
+      <div style={{ width: "calc(100% + 3rem)", margin: "0 -1.5rem" }}>
         <ArtImage
           aspect={mobileAspect}
           index={index}
@@ -563,7 +563,7 @@ const HeroImageSlider = () => {
         />
       </div>
 
-      <div key={`body-${index}`} style={{ width: "100%", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+      <div key={`body-${index}`} style={{ width: "100%", padding: "0 5vw", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
         <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", textAlign: "center", marginBottom: "1.2rem" }}>{current.subheading}</p>
         <PointsList current={current} />
       </div>
@@ -577,7 +577,7 @@ const HeroImageSlider = () => {
         />
       </div>
 
-      <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", display: "flex", alignItems: "center", gap: "6px" }}>
+      <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", display: "flex", alignItems: "center", gap: "6px", padding: "0 5vw" }}>
         {current.service}
         {held && <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", letterSpacing: "0.1em" }}>· paused</span>}
       </p>
@@ -893,7 +893,7 @@ const StepSlide = ({
         cursor: "pointer",
         userSelect: "none",
         touchAction: "manipulation",
-        padding: "14px",
+        padding: isMobile ? 0 : "14px",
       }}
     >
       {dims.w > 0 && (
@@ -1036,7 +1036,7 @@ const StepSlide = ({
         </p>
       </div>
 
-      <div style={{ width: "90vw", maxWidth: "1400px" }}>
+      <div style={{ width: "100%" }}>
         <ArtBox aspect={mobileAspect} />
       </div>
 
@@ -1153,7 +1153,12 @@ const StepCarousel = () => {
 
   return (
     <div ref={containerRef} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
-      <div style={{ position: "relative", width: "90vw", maxWidth: "1500px", overflow: "hidden" }}>
+      <div style={{
+        position: "relative",
+        width: isMobile ? "calc(100% + 3rem)" : "90vw",
+        maxWidth: isMobile ? "none" : "1500px",
+        overflow: "hidden",
+      }}>
         <div
           style={{
             display: "flex",

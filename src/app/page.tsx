@@ -176,7 +176,7 @@ function useIsMobile(breakpoint = 768) {
 
 const HERO_IMAGES = [
   {
-    art: "/hi1.png", artMobile: "/hi1m.png",
+    art: "/hi1.png", artMobile: "/him1.png",
     service: "AI Agents",
     color: "#22d3ee",
     titleWhite: "AI ",
@@ -190,7 +190,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi2.png", artMobile: "/hi2m.png",
+    art: "/hi2.png", artMobile: "/him2.png",
     service: "Workflow Automation",
     color: "#f59e0b",
     titleWhite: "Workflow ",
@@ -204,7 +204,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi3.png", artMobile: "/hi3m.png",
+    art: "/hi3.png", artMobile: "/him3.png",
     service: "Full-Stack Development",
     color: "#3b82f6",
     titleWhite: "Full-Stack ",
@@ -218,7 +218,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi4.png", artMobile: "/hi4m.png",
+    art: "/hi4.png", artMobile: "/him4.png",
     service: "Custom Software",
     color: "#3b82f6",
     titleWhite: "Custom ",
@@ -232,7 +232,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi5.png", artMobile: "/hi5m.png",
+    art: "/hi5.png", artMobile: "/him5.png",
     service: "AI Integration",
     color: "#10b981",
     titleWhite: "AI ",
@@ -246,7 +246,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi6.png", artMobile: "/hi6m.png",
+    art: "/hi6.png", artMobile: "/him6.png",
     service: "System Integration",
     color: "#f43f5e",
     titleWhite: "System ",

@@ -176,7 +176,7 @@ function useIsMobile(breakpoint = 768) {
 
 const HERO_IMAGES = [
   {
-    art: "/hi1.png", artMobile: "/hi1.png",
+    art: "/hi1.png", artMobile: "/him1.png",
     service: "AI Agents",
     color: "#22d3ee",
     titleWhite: "AI ",
@@ -190,7 +190,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi2.png", artMobile: "/hi2.png",
+    art: "/hi2.png", artMobile: "/him2.png",
     service: "Workflow Automation",
     color: "#f59e0b",
     titleWhite: "Workflow ",
@@ -204,7 +204,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi3.png", artMobile: "/hi3.png",
+    art: "/hi3.png", artMobile: "/him3.png",
     service: "Full-Stack Development",
     color: "#3b82f6",
     titleWhite: "Full-Stack ",
@@ -218,7 +218,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi4.png", artMobile: "/hi4.png",
+    art: "/hi4.png", artMobile: "/him4.png",
     service: "Custom Software",
     color: "#3b82f6",
     titleWhite: "Custom ",
@@ -232,7 +232,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi5.png", artMobile: "/hi5.png",
+    art: "/hi5.png", artMobile: "/him5.png",
     service: "AI Integration",
     color: "#10b981",
     titleWhite: "AI ",
@@ -246,7 +246,7 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi6.png", artMobile: "/hi6.png",
+    art: "/hi6.png", artMobile: "/him6.png",
     service: "System Integration",
     color: "#f43f5e",
     titleWhite: "System ",
@@ -800,9 +800,9 @@ const ServicesSection = () => {
   );
 };
 const STEP_IMAGES = [
-  { art: "/sdg.png", artMobile: "/sdg.png", alt: "Diagnose art" },
-  { art: "/sds.png", artMobile: "/sds.png", alt: "Design art" },
-  { art: "/sdp.png", artMobile: "/sdp.png", alt: "Deploy art" },
+  { art: "/sdg.png", artMobile: "/sdgm.png", alt: "Diagnose art" },
+  { art: "/sds.png", artMobile: "/sdsm.png", alt: "Design art" },
+  { art: "/sdp.png", artMobile: "/sdpm.png", alt: "Deploy art" },
 ];
 const SLIDE_TRANSITION = 700;   // ms — carousel push transition
 const TRACE_DURATION = 1500;  // ms — border draw + scanline reveal
@@ -1167,7 +1167,7 @@ const StepCarousel = () => {
               <StepSlide
                 item={item}
                 image={isMobile ? STEP_IMAGES[i].artMobile : STEP_IMAGES[i].art}
-                mobileAspect={"16 / 13"}
+                mobileAspect={isMobile ? "16 / 16" : "16 / 13"}
                 isActive={i === index}
                 phase={phase}
                 progress={i === index ? progress : 0}

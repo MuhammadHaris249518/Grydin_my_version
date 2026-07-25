@@ -971,10 +971,12 @@ export default function About() {
               }}
             >
               GrydIn is a software and AI automation studio based in Pakistan,
-              building for businesses globally. We surface the invisible work
-              slowing your team down – then eliminate it. No disruption to what
-              already works. No bloat. Just precise systems running quietly in
-              the background.
+              building for businesses globally. We{" "}
+              <span style={{ color: "rgba(255,255,255,0.92)", fontWeight: 500 }}>
+                surface the invisible work slowing your team down
+              </span>{" "}
+              – then eliminate it. No disruption to what already works. No
+              bloat. Just precise systems running quietly in the background.
             </p>
 
             <AnimatedDivider />
@@ -1029,10 +1031,13 @@ export default function About() {
               }}
             >
               We kept seeing the same problem across businesses we worked with –
-              teams spending real hours on work that wasn't theirs to do. Moving
-              data between systems. Chasing approvals. Running the same report
-              on a loop. Not because they lacked capability. Because no one had
-              ever wired the tools together properly.
+              teams spending real hours on work that wasn't theirs to do.{" "}
+              <span style={{ color: "rgba(255,255,255,0.92)", fontWeight: 500 }}>
+                Moving data between systems. Chasing approvals. Running the same
+                report on a loop.
+              </span>{" "}
+              Not because they lacked capability. Because no one had ever wired
+              the tools together properly.
               <br />
               <br />
               GrydIn exists to fix that. Precisely, without the overhaul.

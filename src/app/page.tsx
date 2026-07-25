@@ -597,9 +597,17 @@ const HeroSection = () => {
   const [contentH, setContentH] = useState(0);
 
   useEffect(() => {
-    if (videoRef.current) videoRef.current.play().catch(() => { });
+    const v = videoRef.current;
+    if (!v) return;
+    v.play().catch(() => { });
+    const handler = () => {
+      if (v.currentTime > v.duration - 0.15) {
+        v.currentTime = 0;
+      }
+    };
+    v.addEventListener("timeupdate", handler);
+    return () => v.removeEventListener("timeupdate", handler);
   }, []);
-
   useEffect(() => {
     if (!contentRef.current) return;
     const ro = new ResizeObserver(() => {
@@ -614,6 +622,28 @@ const HeroSection = () => {
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
       <DotGrid contentBottom={contentH / 1.04} animate={false} />
+
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <source src="/video2.mp4" type="video/mp4" />
+      </video>
+
       {/* Text content – padded, centred */}
       <div
         className="flex flex-col text-center px-6 justify-center items-center"

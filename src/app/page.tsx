@@ -594,7 +594,7 @@ const ScrollCue = ({ visible }: { visible: boolean }) => (
   <div
     style={{
       position: "absolute",
-      bottom: "clamp(1.5rem, 4vh, 2.5rem)",
+      bottom: "clamp(4.5rem, 14vh, 7.5rem)",
       left: "50%",
       transform: "translateX(-50%)",
       zIndex: 1,
@@ -720,7 +720,7 @@ const HeroSection = () => {
           minHeight: "100dvh",
           position: "relative",
           zIndex: 1,
-          paddingTop: isMobile ? "25dvh" : undefined,
+          paddingTop: isMobile ? "20dvh" : undefined,
           opacity: revealed ? 1 : 0,
           transform: revealed ? "translateY(0)" : "translateY(26px)",
           filter: revealed ? "blur(0px)" : "blur(16px)",

@@ -350,7 +350,7 @@ const PrincipleArt = ({
 
   useEffect(() => {
     setTraceProgress(0);
-    const DURATION = 1100;
+    const DURATION = 1300;
     const start = performance.now();
     const tick = (now: number) => {
       const p = Math.min((now - start) / DURATION, 1);

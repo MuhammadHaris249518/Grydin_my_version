@@ -673,7 +673,7 @@ export default function About() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const REVEAL_DURATION = 1100;
+  const REVEAL_DURATION = 1300;
   const [mounted, setMounted] = useState(false);
   const [startTyping, setStartTyping] = useState(false);
   const [revealDuration, setRevealDuration] = useState(REVEAL_DURATION);

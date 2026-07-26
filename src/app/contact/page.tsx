@@ -325,7 +325,7 @@ export default function Contact() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [copied, setCopied] = useState(false);
   const islamabadTime = useIslamabadClock();
-  const REVEAL_DURATION = 1100; // ms — must match the transition duration below
+  const REVEAL_DURATION = 1300; // ms — must match the transition duration below
 
   const [mounted, setMounted] = useState(false);
   const [startTyping, setStartTyping] = useState(false);

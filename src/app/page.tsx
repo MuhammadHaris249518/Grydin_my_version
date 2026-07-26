@@ -594,7 +594,7 @@ const ScrollCue = ({ visible }: { visible: boolean }) => (
   <div
     style={{
       position: "absolute",
-      bottom: "clamp(4.5rem, 14vh, 7.5rem)",
+      bottom: "75px",
       left: "50%",
       transform: "translateX(-50%)",
       zIndex: 1,
@@ -650,7 +650,26 @@ const HeroSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
   const isMobile = useIsMobile();
+  const ctaRef = useRef<HTMLAnchorElement>(null);
+  const [showCue, setShowCue] = useState(false);
 
+  const BOTTOM_GAP = 75;  // fixed distance from the very bottom of the viewport
+  const CUE_HEIGHT = 50;  // approx rendered height of the ScrollCue itself
+
+  useEffect(() => {
+    const measure = () => {
+      if (!ctaRef.current) return;
+      const rect = ctaRef.current.getBoundingClientRect();
+      const viewportH = window.innerHeight;
+
+      const cueTop = viewportH - BOTTOM_GAP - CUE_HEIGHT;
+      // only show if the cue's position would sit below the button, with a small clearance
+      setShowCue(cueTop > rect.bottom + 16);
+    };
+    measure();
+    window.addEventListener("resize", measure, { passive: true });
+    return () => window.removeEventListener("resize", measure);
+  }, []);
   const REVEAL_DELAY = 250;      // ms before the blur/opacity reveal starts
   const REVEAL_DURATION = 1500;  // ms — must match the transition duration below
 
@@ -781,6 +800,7 @@ const HeroSection = () => {
         </p>
 
         <a
+          ref={ctaRef}
           href="/contact"
           style={{
             display: "inline-flex",
@@ -811,7 +831,7 @@ const HeroSection = () => {
           Start a project <ArrowRight size={14} strokeWidth={2.2} />
         </a>
       </div>
-      {isMobile && <ScrollCue visible={revealed} />}
+      {isMobile && showCue && <ScrollCue visible={revealed} />}
       {/* Video – full width, height derived from 16/9 aspect ratio */}
       {/* <div
         className="relative mt-8 w-full"

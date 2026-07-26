@@ -589,12 +589,12 @@ const HeroImageSlider = () => {
   );
 };
 
-
-const ScrollCue = ({ visible }: { visible: boolean }) => (
+const ScrollCue = ({ visible, cueRef }: { visible: boolean; cueRef: React.RefObject<HTMLDivElement | null> }) => (
   <div
+    ref={cueRef}
     style={{
-      position: "fixed",
-      bottom: "65px",
+      position: "absolute",
+      bottom: "60px",
       left: "50%",
       transform: "translateX(-50%)",
       zIndex: 1,
@@ -651,31 +651,26 @@ const HeroSection = () => {
   const [contentH, setContentH] = useState(0);
   const isMobile = useIsMobile();
   const ctaRef = useRef<HTMLAnchorElement>(null);
-
+  const cueRef = useRef<HTMLDivElement | null>(null);
   const [showCue, setShowCue] = useState(false);
-  const [scrolledPast, setScrolledPast] = useState(false);
 
-  useEffect(() => {
-    const handler = () => setScrolledPast(window.scrollY > 40);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-  const BOTTOM_GAP = 75;  // fixed distance from the very bottom of the viewport
-  const CUE_HEIGHT = 50;  // approx rendered height of the ScrollCue itself
+  const BOTTOM_GAP = 60;   // must match ScrollCue's own `bottom` value
+  const SAFE_BUFFER = 40;  // real clearance required between button and cue
 
   useEffect(() => {
     const measure = () => {
       if (!ctaRef.current) return;
-      const rect = ctaRef.current.getBoundingClientRect();
+      const btnRect = ctaRef.current.getBoundingClientRect();
+      const cueHeight = cueRef.current?.offsetHeight ?? 50;
       const viewportH = window.innerHeight;
 
-      const cueTop = viewportH - BOTTOM_GAP - CUE_HEIGHT;
-      // only show if the cue's position would sit below the button, with a small clearance
-      setShowCue(cueTop > rect.bottom + 16);
+      const cueTop = viewportH - BOTTOM_GAP - cueHeight;
+      setShowCue(cueTop > btnRect.bottom + SAFE_BUFFER);
     };
     measure();
+    const t = setTimeout(measure, 50);
     window.addEventListener("resize", measure, { passive: true });
-    return () => window.removeEventListener("resize", measure);
+    return () => { clearTimeout(t); window.removeEventListener("resize", measure); };
   }, []);
   const REVEAL_DELAY = 250;      // ms before the blur/opacity reveal starts
   const REVEAL_DURATION = 1500;  // ms — must match the transition duration below
@@ -838,7 +833,7 @@ const HeroSection = () => {
           Start a project <ArrowRight size={14} strokeWidth={2.2} />
         </a>
       </div>
-      {isMobile && showCue && !scrolledPast && <ScrollCue visible={revealed} />}
+      {isMobile && showCue && <ScrollCue visible={revealed} cueRef={cueRef} />}
       {/* Video – full width, height derived from 16/9 aspect ratio */}
       {/* <div
         className="relative mt-8 w-full"

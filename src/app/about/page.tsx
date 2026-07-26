@@ -42,82 +42,6 @@ function useIsMobile(breakpoint = 768) {
   }, [breakpoint]);
   return isMobile;
 }
-// ── Tapes ─────────────────────────────────────────────────────────────────────
-// const BottomTape = ({ withFooter = false }: { withFooter?: boolean }) => {
-//   const { tapeH, arcR } = useTape();
-//   return (
-//     <div               
-//       style={{
-//         position: "relative",
-//         width: "100%",
-//         height: `${tapeH}px`,
-//         flexShrink: 0,   
-//       }}
-//     >
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox={`0 0 ${VB_W} ${tapeH}`}
-//         preserveAspectRatio="none"
-//         aria-hidden="true"
-//         style={{
-//           position: "absolute",
-//           inset: 0,
-//           width: "100%",
-//           height: "100%",
-//           display: "block",
-//         }}
-//       >
-//         <path
-//           d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`}
-//           fill="white"
-//         />
-//       </svg>
-//       {withFooter && (
-//         <div
-//           style={{
-//             position: "absolute",
-//             bottom: 10,
-//             left: `${arcR * 1.25}px`,
-//             right: `${arcR * 1.25}px`,
-//             height: `${arcR}px`,
-//             display: "flex",
-//             alignItems: "center",
-//             justifyContent: "space-between",
-//             zIndex: 1,
-//           }}
-//         >
-//           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-//             <img
-//               src="/logo.png"
-//               alt="GrydIn"
-//               width={10}
-//               height={10}
-//               style={{ objectFit: "contain" }}
-//             />
-//             <span
-//               style={{
-//                 fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-//                 color: "rgba(0,0,0,.6)",
-//                 letterSpacing: "0.05em",
-//               }}
-//             >
-//               GrydIn © {new Date().getFullYear()}
-//             </span>
-//           </div>
-//           <span
-//             style={{
-//               fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-//               color: "rgba(0,0,0,.6)",
-//               letterSpacing: "0.06em",
-//             }}
-//           >
-//             Built for the gaps in your business.
-//           </span>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
 
 // ── Divider ───────────────────────────────────────────────────────────────────
 
@@ -748,6 +672,40 @@ const OriginVisual = () => {
 export default function About() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const REVEAL_DURATION = 1100;
+  const [mounted, setMounted] = useState(false);
+  const [startTyping, setStartTyping] = useState(false);
+  const [revealDuration, setRevealDuration] = useState(REVEAL_DURATION);
+  const seenRef = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    const key = "grydin-revealed-about";
+
+    if (seenRef.current === null) {
+      try {
+        seenRef.current = sessionStorage.getItem(key) === "1";
+      } catch (e) {
+        seenRef.current = false;
+      }
+      if (!seenRef.current) {
+        try { sessionStorage.setItem(key, "1"); } catch (e) { }
+      }
+    }
+
+    const alreadySeen = seenRef.current;
+
+    if (alreadySeen) {
+      setRevealDuration(0);
+      setMounted(true);
+      setStartTyping(true);
+      return;
+    }
+
+    const t1 = requestAnimationFrame(() => setMounted(true));
+    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DURATION);
+    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
+  }, []);
   useEffect(() => {
     const styleId = "scrollbar-hide-style";
 
@@ -790,7 +748,7 @@ export default function About() {
   }, []);
 
   const arcR = tapeH / 2;
-  const { displayed: typed, ref: typeRef } = useTypewriter("We build the layer between");
+  const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "We build the layer between" : "");
   return (
     <TapeCtx.Provider value={{ tapeH, arcR }}>
       <main
@@ -900,6 +858,10 @@ export default function About() {
               maxWidth: "860px",
               margin: "0 auto",
               padding: "4rem 2rem 5rem",
+              opacity: mounted ? 1 : 0,
+              transform: mounted ? "translateY(0)" : "translateY(28px)",
+              filter: mounted ? "blur(0px)" : "blur(12px)",
+              transition: `opacity ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), transform ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), filter ${revealDuration}ms cubic-bezier(0.16,1,0.3,1)`,
             }}
           >
             {/* ── Eyebrow + Intro ── */}

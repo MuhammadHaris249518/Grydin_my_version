@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
+import Link from "next/link";
 import {
   Copy,
   Mail,
@@ -324,10 +325,42 @@ export default function Contact() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [copied, setCopied] = useState(false);
   const islamabadTime = useIslamabadClock();
+  const REVEAL_DURATION = 1100; // ms — must match the transition duration below
+
   const [mounted, setMounted] = useState(false);
+  const [startTyping, setStartTyping] = useState(false);
+  const [revealDuration, setRevealDuration] = useState(REVEAL_DURATION);
+
+  const seenRef = useRef<boolean | null>(null);
+
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 150);
-    return () => clearTimeout(t);
+    const key = "grydin-revealed-contact";
+
+    // resolve "already seen" exactly once per true mount — StrictMode's
+    // double-invoke reuses this cached value instead of re-reading storage
+    if (seenRef.current === null) {
+      try {
+        seenRef.current = sessionStorage.getItem(key) === "1";
+      } catch (e) {
+        seenRef.current = false;
+      }
+      if (!seenRef.current) {
+        try { sessionStorage.setItem(key, "1"); } catch (e) { }
+      }
+    }
+
+    const alreadySeen = seenRef.current;
+
+    if (alreadySeen) {
+      setRevealDuration(0);
+      setMounted(true);
+      setStartTyping(true);
+      return;
+    }
+
+    const t1 = requestAnimationFrame(() => setMounted(true));
+    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DURATION);
+    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
   }, []);
   useEffect(() => {
     const styleId = "scrollbar-hide-style";
@@ -372,7 +405,7 @@ export default function Contact() {
 
   const arcR = tapeH / 2;
 
-  const { displayed: typed, ref: typeRef } = useTypewriter("See a gap");
+  const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "See a gap" : "");
   return (
     <TapeCtx.Provider value={{ tapeH, arcR }}>
       <main
@@ -452,7 +485,7 @@ export default function Contact() {
               gap: "1.1rem",
             }}
           >
-            {NAV_LINKS.map((link) => (
+            {/* {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -469,6 +502,24 @@ export default function Contact() {
               >
                 {link.label}
               </a>
+            ))} */}
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                style={{
+                  color: "white",
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.15em",
+                  textDecoration: "none",
+                  transition: "opacity 0.15s",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.4")}
+                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+              >
+                {link.label}
+              </Link>
             ))}
           </nav>
         </div>
@@ -495,7 +546,7 @@ export default function Contact() {
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(28px)",
                 filter: mounted ? "blur(0px)" : "blur(12px)",
-                transition: "opacity 1.3s cubic-bezier(0.16,1,0.3,1), transform 1.3s cubic-bezier(0.16,1,0.3,1), filter 1.3s cubic-bezier(0.16,1,0.3,1)",
+                transition: `opacity ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), transform ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), filter ${revealDuration}ms cubic-bezier(0.16,1,0.3,1)`,
               }}
             >
               {/* ── Eyebrow + Intro ── */}

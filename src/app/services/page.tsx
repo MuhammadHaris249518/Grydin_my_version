@@ -863,6 +863,41 @@ const WhatsAppButton = () => (
 export default function Services() {
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const REVEAL_DURATION = 1100;
+  const [mounted, setMounted] = useState(false);
+  const [startTyping, setStartTyping] = useState(false);
+  const [revealDuration, setRevealDuration] = useState(REVEAL_DURATION);
+  const seenRef = useRef<boolean | null>(null);
+
+  useEffect(() => {
+    const key = "grydin-revealed-services";
+
+    if (seenRef.current === null) {
+      try {
+        seenRef.current = sessionStorage.getItem(key) === "1";
+      } catch (e) {
+        seenRef.current = false;
+      }
+      if (!seenRef.current) {
+        try { sessionStorage.setItem(key, "1"); } catch (e) { }
+      }
+    }
+
+    const alreadySeen = seenRef.current;
+
+    if (alreadySeen) {
+      setRevealDuration(0);
+      setMounted(true);
+      setStartTyping(true);
+      return;
+    }
+
+    const t1 = requestAnimationFrame(() => setMounted(true));
+    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DURATION);
+    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
+  }, []);
+
   useEffect(() => {
     const styleId = "scrollbar-hide-style";
 
@@ -906,7 +941,7 @@ export default function Services() {
 
   const arcR = tapeH / 2;
   const { displayed: typed, ref: typeRef } = useTypewriter(
-    "Scoped to your problem.",
+    startTyping ? "Scoped to your problem." : "",
   );
   return (
     <TapeCtx.Provider value={{ tapeH, arcR }}>
@@ -1018,6 +1053,10 @@ export default function Services() {
               maxWidth: "860px",
               margin: "0 auto",
               padding: "4rem 2rem 5rem",
+              opacity: mounted ? 1 : 0,
+              transform: mounted ? "translateY(0)" : "translateY(28px)",
+              filter: mounted ? "blur(0px)" : "blur(12px)",
+              transition: `opacity ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), transform ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), filter ${revealDuration}ms cubic-bezier(0.16,1,0.3,1)`,
             }}
           >
             {/* ── Eyebrow + Intro ── */}

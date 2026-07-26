@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-
+import Link from "next/link";
 const NAV_LINKS = [
   { label: "HOME", href: "/" },
   { label: "SERVICES", href: "/services" },
@@ -105,7 +105,16 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
               transition: "transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease",
             }}
           >
-            <a
+            {/* <a
+              href="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                textDecoration: "none",
+              }}
+            > */}
+            <Link
               href="/"
               style={{
                 display: "flex",
@@ -147,7 +156,8 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
                 <path d="M27.74,10.49c0,.12-2.88,2.36-3.2,2.73l-.08.08A3.55,3.55,0,0,0,23.28,15a.17.17,0,0,1-.16.06,2.83,2.83,0,0,0,0-.77,34.17,34.17,0,0,0-4.74-.11H9.87c-.09,0-.11,0-.07-.1.3-.28.59-.56.9-.83.7-.64,1.39-1.29,2.08-1.94a3.72,3.72,0,0,1,2.81-.78h2.92l8.74,0A4,4,0,0,1,27.74,10.49Z" fillRule="evenodd" fill="#ffffff" />
                 <path d="M102.06,19.52V7.11c0-2.25,0-4.5,0-6.75,0-.08,0-.34-.13-.25-.46.39-.92.79-1.36,1.2l-.52.46c-.33.28-.66.56-1,.85-.84.71-1.47,1.08-1.45,2.32V19.6c0,1.59,0,3.17,0,4.75,0,.25.42.14.55.17h3.46a.79.79,0,0,0,.37-.07A39.38,39.38,0,0,0,102.06,19.52Zm-2.48-6.08v-.11h0A.41.41,0,0,0,99.58,13.44Z" fillRule="evenodd" fill="#ffffff" />
               </svg>
-            </a>
+              {/* </a> */}
+            </Link>
           </div>
 
           {/* Right – nav links + hamburger */}
@@ -170,7 +180,7 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
               className="hidden md:flex items-center"
               style={{ gap: "2rem" }}
             >
-              {NAV_LINKS.map((link) => (
+              {/* {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
@@ -184,6 +194,21 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
                 >
                   {link.label}
                 </a>
+              ))} */}
+              {NAV_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-xs font-semibold tracking-widest transition-opacity duration-150 hover:opacity-30"
+                  style={{
+                    color: "#0a0a0a",
+                    fontWeight: 800,
+                    letterSpacing: "0.12em",
+                    textDecoration: "none",
+                  }}
+                >
+                  {link.label}
+                </Link>
               ))}
             </div>
             <button
@@ -263,7 +288,7 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
             gap: "1.1rem",
           }}
         >
-          {NAV_LINKS.map((link) => (
+          {/* {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
@@ -281,6 +306,25 @@ const Navbar = ({ tapeH, arcR }: { tapeH: number; arcR: number }) => {
             >
               {link.label}
             </a>
+          ))} */}
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              style={{
+                color: "white",
+                fontSize: "0.95rem",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textDecoration: "none",
+                transition: "opacity 0.15s",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.4")}
+              onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+            >
+              {link.label}
+            </Link>
           ))}
         </nav>
       </div>

@@ -653,7 +653,7 @@ const HeroSection = () => {
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const [showCue, setShowCue] = useState(false);
 
-  const BOTTOM_GAP = 75;  // fixed distance from the very bottom of the viewport
+  const BOTTOM_GAP = 50;  // fixed distance from the very bottom of the viewport
   const CUE_HEIGHT = 50;  // approx rendered height of the ScrollCue itself
 
   useEffect(() => {

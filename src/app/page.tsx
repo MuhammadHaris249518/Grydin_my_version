@@ -593,8 +593,8 @@ const HeroImageSlider = () => {
 const ScrollCue = ({ visible }: { visible: boolean }) => (
   <div
     style={{
-      position: "absolute",
-      bottom: "75px",
+      position: "fixed",
+      bottom: "65px",
       left: "50%",
       transform: "translateX(-50%)",
       zIndex: 1,
@@ -651,8 +651,15 @@ const HeroSection = () => {
   const [contentH, setContentH] = useState(0);
   const isMobile = useIsMobile();
   const ctaRef = useRef<HTMLAnchorElement>(null);
-  const [showCue, setShowCue] = useState(false);
 
+  const [showCue, setShowCue] = useState(false);
+  const [scrolledPast, setScrolledPast] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolledPast(window.scrollY > 40);
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  }, []);
   const BOTTOM_GAP = 75;  // fixed distance from the very bottom of the viewport
   const CUE_HEIGHT = 50;  // approx rendered height of the ScrollCue itself
 
@@ -831,7 +838,7 @@ const HeroSection = () => {
           Start a project <ArrowRight size={14} strokeWidth={2.2} />
         </a>
       </div>
-      {isMobile && showCue && <ScrollCue visible={revealed} />}
+      {isMobile && showCue && !scrolledPast && <ScrollCue visible={revealed} />}
       {/* Video – full width, height derived from 16/9 aspect ratio */}
       {/* <div
         className="relative mt-8 w-full"

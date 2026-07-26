@@ -594,7 +594,7 @@ const ScrollCue = ({ visible, cueRef }: { visible: boolean; cueRef: React.RefObj
     ref={cueRef}
     style={{
       position: "absolute",
-      bottom: "60px",
+      bottom: "65px",
       left: "50%",
       transform: "translateX(-50%)",
       zIndex: 1,
@@ -654,7 +654,7 @@ const HeroSection = () => {
   const cueRef = useRef<HTMLDivElement | null>(null);
   const [showCue, setShowCue] = useState(false);
 
-  const BOTTOM_GAP = 60;   // must match ScrollCue's own `bottom` value
+  const BOTTOM_GAP = 65;   // must match ScrollCue's own `bottom` value
   const SAFE_BUFFER = 40;  // real clearance required between button and cue
 
   useEffect(() => {

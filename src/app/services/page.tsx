@@ -1,7 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-import { ArrowRight, Zap, Brain, CheckCircle, Repeat, Layers, Plug, Code } from "lucide-react";
+import { ArrowRight, Zap, Brain, Repeat, Layers, Plug, Code } from "lucide-react";
 import { useTypewriter } from "../globalscope/typewriter";
 import { X } from "lucide-react";
 import DotGrid from "./../globalscope/DotGrid";
@@ -20,6 +20,43 @@ const NAV_LINKS = [
   { label: "CONTACT", href: "/contact" },
 ];
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [breakpoint]);
+  return isMobile;
+}
+
+function buildTracePath(W: number, H: number, progress: number) {
+  if (!W || !H) return "";
+  const perimeter = 2 * (W + H);
+  const dist = progress * perimeter;
+  const topRight = W / 2;
+  const branch = (d: number, dir: "right" | "left") => {
+    const sign = dir === "right" ? 1 : -1;
+    let path = `M ${W / 2} 0`;
+    if (d <= topRight) {
+      path += ` L ${W / 2 + sign * d} 0`;
+    } else if (d <= topRight + H) {
+      const s2 = d - topRight;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${s2}`;
+    } else if (d <= topRight + H + W) {
+      const s3 = d - topRight - H;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? W - s3 : s3} ${H}`;
+    } else {
+      const s4 = d - topRight - H - W;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? 0 : W} ${H} L ${dir === "right" ? 0 : W} ${H - s4}`;
+    }
+    return path;
+  };
+  const half = dist / 2;
+  return `${branch(half, "right")} ${branch(half, "left")}`;
+}
 function computeTapeH(width: number) {
   const vw = (VW_COEFF / 100) * width;
   return Math.min(TAPE_H_MAX, Math.max(TAPE_H_MIN, vw));
@@ -30,81 +67,6 @@ const useTape = () => useContext(TapeCtx);
 
 const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
 const VB_W = 1000;
-
-// ── Tapes ─────────────────────────────────────────────────────────────────────
-// const BottomTape = () => {
-//   const { tapeH, arcR } = useTape();
-//   return (
-//     <div
-//       style={{
-//         position: "relative",
-//         width: "100%",
-//         height: `${tapeH}px`,
-//         flexShrink: 0,
-//       }}
-//     >
-//       <svg
-//         xmlns="http://www.w3.org/2000/svg"
-//         viewBox={`0 0 ${VB_W} ${tapeH}`}
-//         preserveAspectRatio="none"
-//         aria-hidden="true"
-//         style={{
-//           position: "absolute",
-//           inset: 0,
-//           width: "100%",
-//           height: "100%",
-//           display: "block",
-//         }}
-//       >
-//         <path
-//           d={`M 0 ${tapeH} L ${VB_W} ${tapeH} L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 1 ${VB_W - arcR} 0 L ${arcR} 0 A ${arcR} ${arcR} 0 0 1 0 ${arcR} Z`}
-//           fill="white"
-//         />
-//       </svg>
-//       <div
-//         style={{
-//           position: "absolute",
-//           bottom: 10,
-//           left: `${arcR * 1.25}px`,
-//           right: `${arcR * 1.25}px`,
-//           height: `${arcR}px`,
-//           display: "flex",
-//           alignItems: "center",
-//           justifyContent: "space-between",
-//           zIndex: 1,
-//         }}
-//       >
-//         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-//           <img
-//             src="/logo.png"
-//             alt="GrydIn"
-//             width={10}
-//             height={10}
-//             style={{ objectFit: "contain" }}
-//           />
-//           <span
-//             style={{
-//               fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-//               color: "rgba(0,0,0,.6)",
-//               letterSpacing: "0.05em",
-//             }}
-//           >
-//             GrydIn © {new Date().getFullYear()}
-//           </span>
-//         </div>
-//         <span
-//           style={{
-//             fontSize: "clamp(0.6rem, 1vw, 0.75rem)",
-//             color: "rgba(0,0,0,.6)",
-//             letterSpacing: "0.06em",
-//           }}
-//         >
-//           Built for the gaps in your business.
-//         </span>
-//       </div>
-//     </div>
-//   );
-// };
 
 
 const useDividerAnimation = () => {
@@ -199,7 +161,7 @@ const AnimatedDivider = () => {
       <div style={{
         position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)",
         height: "1px",
-        background: phase === "done" || phase === "waiting" ? "rgba(255,255,255,0.08)" : "transparent",
+        background: "rgba(255,255,255,0.38)",
       }} />
 
       {/* Traced line with glow */}
@@ -323,6 +285,528 @@ const SERVICES = [
       "Startups building their first product, or businesses replacing a broken system with something built properly from the ground up.",
   },
 ];
+
+
+const PRINCIPLES = [
+  {
+    num: "01",
+    label: "Diagnosis first.",
+    body: "Every engagement starts with mapping your workflow. We don't write a single line until we understand exactly what's broken and why.",
+    art: "/pr1.png",
+    artMobile: "/pr1.png",
+    color: "#22d3ee",
+  },
+  {
+    num: "02",
+    label: "Fixed scope.",
+    body: "We agree on what gets built before anything starts. No scope creep, no surprise invoices, no moving goalposts.",
+    art: "/pr2.png",
+    artMobile: "/pr2.png",
+    color: "#f59e0b",
+  },
+  {
+    num: "03",
+    label: "Fast to first deploy.",
+    body: "Most projects ship a working first deployment within two weeks. We move fast without cutting corners.",
+    art: "/pr3.png",
+    artMobile: "/pr3.png",
+    color: "#10b981",
+  },
+  {
+    num: "04",
+    label: "Post-launch accountability.",
+    body: "We don't disappear after handoff. Documentation is always included. Follow-on support is always available.",
+    art: "/pr4.png",
+    artMobile: "/pr4.png",
+    color: "#3b82f6",
+  },
+];
+
+const PRINCIPLE_DURATION = 6000;
+const PRINCIPLE_HOLD_THRESHOLD = 400;
+const PrincipleArt = ({
+  item, isMobile, held, getSrc, onPointerDown, onPointerUp, onPointerLeave,
+}: {
+  item: (typeof PRINCIPLES)[number];
+  isMobile: boolean;
+  held: boolean;
+  getSrc: () => string;
+  onPointerDown: () => void;
+  onPointerUp: () => void;
+  onPointerLeave: () => void;
+}) => {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [dims, setDims] = useState({ w: 0, h: 0 });
+  const [traceProgress, setTraceProgress] = useState(0);
+  const rafRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (!boxRef.current) return;
+    const el = boxRef.current;
+    const ro = new ResizeObserver(() => setDims({ w: el.clientWidth, h: el.clientHeight }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    setTraceProgress(0);
+    const DURATION = 1100;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / DURATION, 1);
+      setTraceProgress(p);
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [item.num]);
+
+  const clipBottom = Math.max(0, (1 - traceProgress) * 100);
+  //const numeralSharp = traceProgress > 0.7;
+
+  return (
+    <div
+      ref={boxRef}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerLeave={onPointerLeave}
+      style={{ position: "relative", width: "100%", cursor: "pointer", userSelect: "none", touchAction: "manipulation" }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 1.5,
+          pointerEvents: "none",
+          clipPath: `inset(${100 - clipBottom}% 0 0 0)`,
+        }}
+      >
+        <span
+          style={{
+            fontSize: "clamp(3.5rem, 8vw, 6rem)",
+            fontWeight: 800,
+            color: item.color,
+            lineHeight: 1,
+            textShadow: `0 0 24px ${item.color}99, 0 0 48px ${item.color}55`,
+          }}
+        >
+          {item.num}
+        </span>
+      </div>
+
+      {dims.w > 0 && !isMobile && (
+        <svg
+          shapeRendering="crispEdges"
+          style={{ position: "absolute", top: 0, left: 0, width: `${dims.w}px`, height: `${dims.h}px`, pointerEvents: "none", overflow: "visible", zIndex: 2 }}
+        >
+          <path d={buildTracePath(dims.w, dims.h, traceProgress)} fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
+
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: isMobile ? "5 / 5" : "16 / 16",
+          overflow: "hidden",
+          borderRadius: isMobile ? 0 : "3px",
+          border: isMobile ? "none" : "1px solid rgba(255,255,255,0.08)",
+          background: "rgba(0,0,0,0.5)",
+          zIndex: 1,
+        }}
+      >
+        <img
+          src={getSrc()}
+          alt={item.label}
+          style={{
+            position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "contain",
+            clipPath: `inset(0 0 ${clipBottom}% 0)`,
+            filter: held ? "brightness(1.05)" : "brightness(1)",
+            transition: "filter 0.3s ease",
+          }}
+        />
+        {traceProgress < 1 && (
+          <div style={{
+            position: "absolute", left: 0, right: 0, top: `${traceProgress * 100}%`, height: "2px",
+            background: `${item.color}dd`,
+            boxShadow: `0 0 12px 2px ${item.color}b3, 0 0 30px 6px ${item.color}40`,
+            pointerEvents: "none",
+          }} />
+        )}
+      </div>
+    </div>
+  );
+};
+
+const PrincipleTextBlock = ({ current }: { current: (typeof PRINCIPLES)[number] }) => (
+  <div key={current.num} style={{ display: "flex", flexDirection: "column", gap: "0.8rem", animation: "principleTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+    <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: current.color, textTransform: "uppercase" }}>
+      Principle {current.num}
+    </span>
+    <h3 style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.7rem)", color: "#ffffff", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
+      {current.label}
+    </h3>
+    <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.8, margin: 0, textAlign: "justify" }}>
+      {current.body}
+    </p>
+    <style jsx>{`@keyframes principleTextIn { from { opacity:0; transform:translateY(8px);} to { opacity:1; transform:translateY(0);} }`}</style>
+  </div>
+);
+
+const PrincipleProgressDots = ({
+  index, progress, held, onDotClick,
+}: {
+  index: number;
+  progress: number;
+  held: boolean;
+  onDotClick: (i: number) => void;
+}) => (
+  <div style={{ display: "flex", gap: "5px", width: "100%" }}>
+    {PRINCIPLES.map((_, i) => (
+      <div key={i} onClick={(e) => { e.stopPropagation(); onDotClick(i); }}
+        style={{ flex: 1, height: "2px", borderRadius: "1px", background: "rgba(255,255,255,0.15)", overflow: "hidden", cursor: "pointer" }}>
+        <div style={{
+          height: "100%",
+          width: i < index ? "100%" : i === index ? `${progress * 100}%` : "0%",
+          background: held && i === index ? "#fff" : "rgba(255,255,255,0.75)",
+        }} />
+      </div>
+    ))}
+  </div>
+);
+
+const PrincipleSlider = () => {
+  const isMobile = useIsMobile();
+  const [index, setIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [held, setHeld] = useState(false);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>(0);
+  const startRef = useRef<number>(0);
+  const pausedElapsedRef = useRef<number>(0);
+  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isPointerDownRef = useRef(false);
+
+  useEffect(() => {
+    if (!containerRef.current || hasEnteredView) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHasEnteredView(true); observer.disconnect(); } },
+      { threshold: 0.6 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [hasEnteredView]);
+
+  const goTo = (next: number) => { setIndex(next); setHeld(false); };
+  const advance = () => goTo((index + 1) % PRINCIPLES.length);
+
+  useEffect(() => {
+    if (held || !hasEnteredView) return;
+    startRef.current = performance.now() - pausedElapsedRef.current;
+    const tick = (now: number) => {
+      const elapsed = now - startRef.current;
+      const p = Math.min(elapsed / PRINCIPLE_DURATION, 1);
+      setProgress(p);
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+      else { pausedElapsedRef.current = 0; advance(); }
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [index, held, hasEnteredView]);
+
+  useEffect(() => { pausedElapsedRef.current = 0; }, [index]);
+
+  const handlePointerDown = () => {
+    isPointerDownRef.current = true;
+    holdTimerRef.current = setTimeout(() => {
+      if (!isPointerDownRef.current) return;
+      cancelAnimationFrame(rafRef.current);
+      pausedElapsedRef.current = performance.now() - startRef.current;
+      setHeld(true);
+    }, PRINCIPLE_HOLD_THRESHOLD);
+  };
+  const handlePointerLeave = () => {
+    isPointerDownRef.current = false;
+    if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+  };
+  const handlePointerUp = () => {
+    isPointerDownRef.current = false;
+    if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
+    if (!held) advance();
+  };
+
+  useEffect(() => {
+    if (!held) return;
+    const resume = () => setHeld(false);
+    document.addEventListener("pointerdown", resume, { once: true });
+    return () => document.removeEventListener("pointerdown", resume);
+  }, [held]);
+
+  const current = PRINCIPLES[index];
+  const getSrc = () => (isMobile ? current.artMobile : current.art);
+
+  if (!isMobile) {
+    return (
+      <div
+        ref={containerRef}
+        className="w-full"
+        style={{
+          opacity: hasEnteredView ? 1 : 0,
+          transform: hasEnteredView ? "translateY(0)" : "translateY(24px)",
+          filter: hasEnteredView ? "blur(0px)" : "blur(10px)",
+          transition: "opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1), filter 1.2s cubic-bezier(0.16,1,0.3,1)",
+        }}
+      >
+        <div style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center" }}>
+          <PrincipleTextBlock current={current} />
+          <PrincipleArt item={current} isMobile={isMobile} held={held} getSrc={getSrc}
+            onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onPointerLeave={handlePointerLeave} />
+        </div>
+        <div style={{ marginTop: "1.4rem" }}>
+          <PrincipleProgressDots index={index} progress={progress} held={held}
+            onDotClick={(i) => { cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }} />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="w-full flex flex-col"
+      style={{
+        gap: "1.2rem",
+        opacity: hasEnteredView ? 1 : 0,
+        transform: hasEnteredView ? "translateY(0)" : "translateY(24px)",
+        filter: hasEnteredView ? "blur(0px)" : "blur(10px)",
+        transition: "opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1), filter 1.2s cubic-bezier(0.16,1,0.3,1)",
+      }}
+    >
+      <PrincipleTextBlock current={current} />
+      <div style={{ width: "calc(100% + 3rem)", margin: "0 -1.5rem" }}>
+        <PrincipleArt item={current} isMobile={isMobile} held={held} getSrc={getSrc}
+          onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onPointerLeave={handlePointerLeave} />
+      </div>
+      <PrincipleProgressDots index={index} progress={progress} held={held}
+        onDotClick={(i) => { cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }} />
+    </div>
+  );
+};
+
+
+const CHECK_D = "M6.5 12.5l3.5 3.5l7.5-7.5";
+const CIRCLE_R = 10;
+
+const AnimatedTick = ({ color, active }: { color: string; active: boolean }) => {
+  const checkRef = useRef<SVGPathElement>(null);
+  const [checkLen, setCheckLen] = useState(0);
+  const [circleProgress, setCircleProgress] = useState(0);
+  const [checkProgress, setCheckProgress] = useState(0);
+  const [opacity, setOpacity] = useState(0);
+  const rafRef = useRef<number>(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const loopRef = useRef(0);
+
+  useEffect(() => {
+    if (checkRef.current) setCheckLen(checkRef.current.getTotalLength());
+  }, []);
+
+  useEffect(() => {
+    if (!active || !checkLen) {
+      setCircleProgress(0);
+      setCheckProgress(0);
+      setOpacity(0);
+      loopRef.current = 0;
+      cancelAnimationFrame(rafRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
+      return;
+    }
+
+    const CIRCLE_DURATION = 500;
+    const CHECK_DURATION = 300;
+    const HOLD_DURATION = 5000;
+    const FADE_DURATION = 400;
+    const WAIT_DURATION = 3000;
+    const MAX_LOOPS = 2; // settles fully-drawn on the 3rd pass
+
+    const runCircle = () => {
+      setOpacity(1);
+      const start = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - start) / CIRCLE_DURATION, 1);
+        setCircleProgress(p);
+        if (p < 1) rafRef.current = requestAnimationFrame(tick);
+        else runCheck();
+      };
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const runCheck = () => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - start) / CHECK_DURATION, 1);
+        setCheckProgress(p);
+        if (p < 1) {
+          rafRef.current = requestAnimationFrame(tick);
+        } else if (loopRef.current >= MAX_LOOPS) {
+          // settled — stays fully drawn, no more cycles
+        } else {
+          timerRef.current = setTimeout(runFade, HOLD_DURATION);
+        }
+      };
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    const runFade = () => {
+      const start = performance.now();
+      const tick = (now: number) => {
+        const p = Math.min((now - start) / FADE_DURATION, 1);
+        setOpacity(1 - p);
+        if (p < 1) {
+          rafRef.current = requestAnimationFrame(tick);
+        } else {
+          setCircleProgress(0);
+          setCheckProgress(0);
+          timerRef.current = setTimeout(() => {
+            loopRef.current += 1;
+            runCircle();
+          }, WAIT_DURATION);
+        }
+      };
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
+    runCircle();
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [active, checkLen]);
+
+  const circumference = 2 * Math.PI * CIRCLE_R;
+
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" style={{ flexShrink: 0, marginTop: "2px", opacity }}>
+      <circle
+        cx="12" cy="12" r={CIRCLE_R} fill="none" stroke={color} strokeWidth="1.6"
+        strokeLinecap="round" transform="rotate(-90 12 12)"
+        strokeDasharray={circumference}
+        strokeDashoffset={circumference * (1 - circleProgress)}
+      />
+      <path
+        ref={checkRef} d={CHECK_D} fill="none" stroke={color} strokeWidth="1.8"
+        strokeLinecap="round" strokeLinejoin="round"
+        strokeDasharray={checkLen}
+        strokeDashoffset={checkLen * (1 - checkProgress)}
+      />
+    </svg>
+  );
+};
+
+const ServiceBlock = ({ service, isLast }: { service: (typeof SERVICES)[number]; isLast: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const TOP_EXIT_RATIO = 0.5;    // tweak independently
+    const BOTTOM_EXIT_RATIO = 0.4; // tweak independently
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const ratio = entry.intersectionRatio;
+
+        if (ratio >= 0.4) {
+          setInView(true);
+          return;
+        }
+
+        const rect = entry.boundingClientRect;
+        const rootH = entry.rootBounds?.height ?? window.innerHeight;
+
+        // exiting the top: element's top edge has scrolled above the viewport
+        const exitingTop = rect.top < 0;
+        // exiting the bottom: element's bottom edge has scrolled below the viewport
+        const exitingBottom = rect.bottom > rootH;
+
+        if (exitingTop && ratio <= TOP_EXIT_RATIO) setInView(false);
+        else if (exitingBottom && ratio <= BOTTOM_EXIT_RATIO) setInView(false);
+      },
+      { threshold: [0, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1] }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+  const REVEAL_DURATION = "1.1s";
+  const REVEAL_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+  return (
+    <div ref={ref}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3rem", alignItems: "start" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "1rem",
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateX(0) translateY(0)" : "translateX(-24px) translateY(10px)",
+            filter: inView ? "blur(0px)" : "blur(6px)",
+            transition: `opacity ${REVEAL_DURATION} ${REVEAL_EASE}, transform ${REVEAL_DURATION} ${REVEAL_EASE}, filter ${REVEAL_DURATION} ${REVEAL_EASE}`,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", color: service.color }}>
+            {service.icon}
+            <h2 style={{ fontSize: "1.05rem", color: "#ffffff", fontWeight: 600, letterSpacing: "-0.01em", margin: 0 }}>
+              {service.title}
+            </h2>
+          </div>
+          <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.8, margin: 0, textAlign: "justify" }}>
+            {service.summary}
+          </p>
+          <div style={{ marginTop: "0.5rem" }}>
+            <p style={{ fontSize: "0.72rem", fontWeight: 700, color: "rgba(255,255,255,0.55)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.4rem" }}>
+              Suited for
+            </p>
+            <p style={{ fontSize: "0.84rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.7, margin: 0, textAlign: "justify" }}>
+              {service.suited}
+            </p>
+          </div>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.6rem",
+            opacity: inView ? 1 : 0,
+            transform: inView ? "translateX(0) translateY(0)" : "translateX(24px) translateY(10px)",
+            filter: inView ? "blur(0px)" : "blur(6px)",
+            transition: `opacity ${REVEAL_DURATION} ${REVEAL_EASE} 150ms, transform ${REVEAL_DURATION} ${REVEAL_EASE} 150ms, filter ${REVEAL_DURATION} ${REVEAL_EASE} 150ms`,
+          }}
+        >
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, color: "rgba(255,255,255,0.45)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.6rem" }}>
+            What's included
+          </p>
+          {service.deliverables.map((d, j) => (
+            <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem" }}>
+              <AnimatedTick color={service.color} active={inView} />
+              <span style={{ fontSize: "0.86rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.65, textAlign: "justify" }}>
+                {d}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+      {!isLast && <AnimatedDivider />}
+    </div>
+  );
+};
+
 
 const WhatsAppButton = () => (
   <a
@@ -597,136 +1081,7 @@ export default function Services() {
             {/* ── Service blocks ── */}
             <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
               {SERVICES.map((service, i) => (
-                <div key={service.title}>
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: "3rem",
-                      alignItems: "start",
-                    }}
-                  >
-                    {/* Left – title + summary + suited for */}
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "1rem",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "0.6rem",
-                          color: service.color,
-                        }}
-                      >
-                        {service.icon}
-                        <h2
-                          style={{
-                            fontSize: "1.05rem",
-                            color: "#ffffff",
-                            fontWeight: 600,
-                            letterSpacing: "-0.01em",
-                            margin: 0,
-                          }}
-                        >
-                          {service.title}
-                        </h2>
-                      </div>
-                      <p
-                        style={{
-                          fontSize: "0.88rem",
-                          color: "rgba(255,255,255,0.45)",
-                          lineHeight: 1.8,
-                          margin: 0,
-                          textAlign: "justify",
-                        }}
-                      >
-                        {service.summary}
-                      </p>
-                      <div style={{ marginTop: "0.5rem" }}>
-                        <p
-                          style={{
-                            fontSize: "0.72rem",
-                            fontWeight: 700,
-                            color: "rgba(255,255,255,0.55)",
-                            letterSpacing: "0.12em",
-                            textTransform: "uppercase",
-                            marginBottom: "0.4rem",
-                          }}
-                        >
-                          Suited for
-                        </p>
-                        <p
-                          style={{
-                            fontSize: "0.84rem",
-                            color: "rgba(255,255,255,0.38)",
-                            lineHeight: 1.7,
-                            margin: 0,
-                            textAlign: "justify",
-                          }}
-                        >
-                          {service.suited}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Right – deliverables */}
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.6rem",
-                      }}
-                    >
-                      <p
-                        style={{
-                          fontSize: "0.72rem",
-                          fontWeight: 700,
-                          color: "rgba(255,255,255,0.45)",
-                          letterSpacing: "0.12em",
-                          textTransform: "uppercase",
-                          marginBottom: "0.6rem",
-                        }}
-                      >
-                        What's included
-                      </p>
-                      {service.deliverables.map((d, j) => (
-                        <div
-                          key={j}
-                          style={{
-                            display: "flex",
-                            alignItems: "flex-start",
-                            gap: "0.6rem",
-                          }}
-                        >
-                          <CheckCircle
-                            size={13}
-                            strokeWidth={1.6}
-                            style={{
-                              color: service.color,
-                              marginTop: "3px",
-                              flexShrink: 0,
-                            }}
-                          />
-                          <span
-                            style={{
-                              fontSize: "0.86rem",
-                              color: "rgba(255,255,255,0.45)",
-                              lineHeight: 1.65,
-                              textAlign: "justify",
-                            }}
-                          >
-                            {d}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  {i < SERVICES.length - 1 && <AnimatedDivider />}
-                </div>
+                <ServiceBlock key={service.title} service={service} isLast={i === SERVICES.length - 1} />
               ))}
             </div>
 
@@ -750,57 +1105,7 @@ export default function Services() {
               Built on four principles
             </p>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-                gap: "2rem",
-                textAlign: "justify",
-              }}
-            >
-              {[
-                {
-                  label: "Diagnosis first.",
-                  body: "Every engagement starts with mapping your workflow. We don't write a single line until we understand exactly what's broken and why.",
-                },
-                {
-                  label: "Fixed scope.",
-                  body: "We agree on what gets built before anything starts. No scope creep, no surprise invoices, no moving goalposts.",
-                },
-                {
-                  label: "Fast to first deploy.",
-                  body: "Most projects ship a working first deployment within two weeks. We move fast without cutting corners.",
-                },
-                {
-                  label: "Post-launch accountability.",
-                  body: "We don't disappear after handoff. Documentation is always included. Follow-on support is always available.",
-                },
-              ].map((item) => (
-                <div key={item.label}>
-                  <h3
-                    style={{
-                      fontSize: "0.88rem",
-                      color: "#ffffff",
-                      fontWeight: 600,
-                      marginBottom: "0.5rem",
-                      letterSpacing: "-0.01em",
-                    }}
-                  >
-                    {item.label}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: "0.82rem",
-                      color: "rgba(255,255,255,0.4)",
-                      lineHeight: 1.75,
-                      margin: 0,
-                    }}
-                  >
-                    {item.body}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <PrincipleSlider />
 
             <AnimatedDivider />
 
@@ -833,9 +1138,12 @@ export default function Services() {
               }}
             >
               Every project is scoped before it's priced. We don't publish fixed
-              rates because no two problems are identical – and a number without
-              context is just a guess. After an initial diagnosis call, you get
-              a clear, fixed quote. No ranges, no retainer traps, no surprises
+              rates because no two problems are identical – and{" "}
+              <span style={{ color: "rgba(255,255,255,0.92)", fontWeight: 500 }}>
+                a number without context is just a guess
+              </span>
+              . After an initial diagnosis call, you get a clear, fixed quote.
+              No ranges, no retainer traps, no surprises.
             </p>
 
             <AnimatedDivider />

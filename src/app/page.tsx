@@ -588,6 +588,60 @@ const HeroImageSlider = () => {
     </div>
   );
 };
+
+
+const ScrollCue = ({ visible }: { visible: boolean }) => (
+  <div
+    style={{
+      position: "absolute",
+      bottom: "clamp(1.5rem, 4vh, 2.5rem)",
+      left: "50%",
+      transform: "translateX(-50%)",
+      zIndex: 1,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "6px",
+      opacity: visible ? 1 : 0,
+      transition: "opacity 1s ease 0.3s",
+    }}
+  >
+    <span style={{
+      fontSize: "0.62rem",
+      fontWeight: 700,
+      letterSpacing: "0.2em",
+      textTransform: "uppercase",
+      color: "rgba(255,255,255,0.35)",
+    }}>
+      Scroll
+    </span>
+    <div style={{ position: "relative", width: "14px", height: "22px" }}>
+      <svg width="14" height="22" viewBox="0 0 14 22" style={{ position: "absolute", inset: 0 }}>
+        <rect x="1" y="1" width="12" height="20" rx="6" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="1.2" />
+      </svg>
+      <span style={{
+        position: "absolute",
+        left: "50%",
+        top: "5px",
+        width: "3px",
+        height: "5px",
+        borderRadius: "2px",
+        background: "rgba(255,255,255,0.7)",
+        transform: "translateX(-50%)",
+        animation: "scrollCueDrop 1.8s ease-in-out infinite",
+      }} />
+    </div>
+    <style jsx>{`
+      @keyframes scrollCueDrop {
+        0% { opacity: 0; transform: translate(-50%, 0px); }
+        30% { opacity: 1; }
+        80% { opacity: 0; transform: translate(-50%, 9px); }
+        100% { opacity: 0; transform: translate(-50%, 9px); }
+      }
+    `}</style>
+  </div>
+);
+
 // ── Hero Section ──────────────────────────────────────────────────────────────
 
 const HeroSection = () => {
@@ -595,6 +649,19 @@ const HeroSection = () => {
   const { tapeH } = useTape();
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
+  const isMobile = useIsMobile();
+
+  const REVEAL_DELAY = 250;      // ms before the blur/opacity reveal starts
+  const REVEAL_DURATION = 1500;  // ms — must match the transition duration below
+
+  const [revealed, setRevealed] = useState(false);
+  const [startTyping, setStartTyping] = useState(false);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setRevealed(true), REVEAL_DELAY);
+    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DELAY + REVEAL_DURATION);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
 
   useEffect(() => {
     const v = videoRef.current;
@@ -617,7 +684,7 @@ const HeroSection = () => {
     return () => ro.disconnect();
   }, []);
 
-  const { displayed: typed, ref: typeRef } = useTypewriter("Grid the unseen");
+  const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "Grid the unseen" : "");
   return (
     <DarkSection id="hero" className="flex flex-col" minHeight>
       <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
@@ -646,13 +713,18 @@ const HeroSection = () => {
 
       {/* Text content – padded, centred */}
       <div
-        className="flex flex-col text-center px-6 justify-center items-center"
+        className={`flex flex-col text-center px-6 items-center ${isMobile ? "justify-start" : "justify-center"}`}
         ref={contentRef}
         style={{
           flexShrink: 0,
           minHeight: "100dvh",
           position: "relative",
           zIndex: 1,
+          paddingTop: isMobile ? "25dvh" : undefined,
+          opacity: revealed ? 1 : 0,
+          transform: revealed ? "translateY(0)" : "translateY(26px)",
+          filter: revealed ? "blur(0px)" : "blur(16px)",
+          transition: `opacity ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1), transform ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1), filter ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1)`,
         }}
       >
         <p
@@ -739,7 +811,7 @@ const HeroSection = () => {
           Start a project <ArrowRight size={14} strokeWidth={2.2} />
         </a>
       </div>
-
+      {isMobile && <ScrollCue visible={revealed} />}
       {/* Video – full width, height derived from 16/9 aspect ratio */}
       {/* <div
         className="relative mt-8 w-full"
@@ -835,7 +907,7 @@ const STEP_IMAGES = [
   { art: "/sdp.png", artMobile: "/sdpm.png", alt: "Deploy art" },
 ];
 const SLIDE_TRANSITION = 700;   // ms — carousel push transition
-const TRACE_DURATION = 1500;  // ms — border draw + scanline reveal
+const TRACE_DURATION = 900;  // ms — border draw + scanline reveal
 const HOLD_DURATION = 7000;  // ms — fully revealed, static
 
 // ── shared border-trace path builder (lifted from TracedBox) ──────────────

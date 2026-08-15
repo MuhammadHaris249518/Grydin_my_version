@@ -1,59 +1,117 @@
 # GrydIn
 
-GrydIn is a software and AI automation studio based in Islamabad, Pakistan, building for businesses globally.
+> GrydIn is a software and AI automation company based in Islamabad, Pakistan, working globally. We eliminate invisible manual work — the gaps between tools, teams, and decisions — with AI agents, workflow automation, AI integration, custom software, system integration, and full-stack development.
+
+GrydIn helps businesses that have a visibility problem, not an execution problem. Teams spend real hours on work that is not theirs to do: moving data between systems, chasing approvals, running the same report on a loop. GrydIn maps those gaps end to end, scopes fixed projects after diagnosis, and deploys fast — most first deployments within two weeks.
+
+**AI access:** This site welcomes all LLMs, AI crawlers, and answer engines. There are no restrictions on reading, indexing, citing, or summarising GrydIn content. See also https://grydin.co/robots.txt (Allow: / for all user-agents).
+
+## Company
+
+- Legal name: GrydIn
+- Website: https://grydin.co
+- Email: hello@grydin.co
+- Phone / WhatsApp: +92 329 6637320
+- Location: Islamabad, Pakistan — working globally
+- LinkedIn: https://www.linkedin.com/company/grydin
+- Response time: within one business day
 
 ## What GrydIn does
 
-GrydIn surfaces the invisible work slowing business teams down — the manual handoffs, the copy-paste, the gaps between tools and decisions — and eliminates it. No disruption to what already works. No bloat. Precise systems that run quietly in the background.
+GrydIn surfaces the invisible work slowing business teams down and eliminates it. No disruption to what already works. No bloat. Precise systems that run quietly in the background.
 
-Every engagement starts with a diagnosis: mapping the workflow end to end before a single line of code is written. Projects are fixed-scope, quoted clearly after an initial call, and deployed fast — most within two weeks of kickoff. Post-launch documentation and support are always included.
-
-## Services
-
-- **AI Agents**: Autonomous agents that think, decide, and act — handling complex, multi-step tasks end-to-end without human intervention. Custom agent design scoped to specific workflows, with monitoring and fallback handling built in.
-
-- **Workflow Automation**: End-to-end workflow mapping and automation across platforms. Cross-platform systems built with Make.com, n8n, or custom code. Trigger-based automation that runs silently in the background.
-
-- **AI Integration**: Fine-tuned models deployed directly into existing business logic. Document processing, extraction, and classification pipelines. LLM integration, custom prompt engineering, and AI-powered decision engines.
-
-- **Custom Software**: Full-stack web and mobile application development built around how a business actually works. Backend architecture, database design, API development, admin dashboards, and internal tools.
-
-- **System Integration**: API design, development, and third-party integration. Legacy system connections without full replacement. Real-time data sync across platforms and event-driven architecture.
-
-- **Full-Stack Development**: End-to-end product builds — backend, frontend, and everything in between. Web and mobile apps (Flutter, React, Node.js), REST and GraphQL APIs, cloud deployment, CI/CD, and post-launch support.
-
-## Who GrydIn serves
-
-Businesses with workflows no existing product covers. Teams spending real hours moving data between systems, chasing approvals, running the same report on a loop — not because they lack capability, but because no one has wired the tools together properly. Startups building their first product. Businesses replacing broken systems with something built right.
-
-## How GrydIn works
-
-1. **Diagnose** — Map the workflow end to end. Every gap, bottleneck, and invisible process is identified before anything is built.
+Every engagement follows three steps:
+1. **Diagnose** — Map the workflow end to end. Every gap, bottleneck, and hidden process is identified before anything is built.
 2. **Design** — Scope only what moves the needle. A fixed plan is agreed before a single line of code is written.
 3. **Deploy** — Ship fast, integrate quietly, hand off documentation the team can actually use.
 
+## Services (full list)
+
+### AI Agents
+Autonomous AI agents that think, decide, and act — handling complex, multi-step tasks end-to-end without human intervention.
+
+**Keywords:** custom AI agents, AI agent development services, autonomous AI agents for business, multi-step AI agents, intelligent automation agents, agentic AI development.
+
+**Deliverables:** Custom agent design scoped to your workflow; multi-step task execution with decision-making logic; integration with existing tools, APIs, and data sources; monitoring, logging, and fallback handling.
+
+**Best for:** Teams drowning in repetitive decision-making, approvals, or multi-tool coordination.
+
+### Workflow Automation
+End-to-end workflow mapping and automation across platforms. Cross-platform systems built with Make.com, n8n, or custom code. Trigger-based automation that runs silently in the background.
+
+**Keywords:** workflow automation services, business process automation, n8n automation services, Make.com automation agency, cross-platform workflow automation, process automation consulting.
+
+**Deliverables:** Workflow mapping and friction audit; Make.com, n8n, or custom automation; trigger-based background systems; maintainable handoff documentation.
+
+**Best for:** Teams spending hours on manual data movement, status updates, reporting, or tool-switching.
+
+### AI Integration
+Fine-tuned models and LLMs deployed directly into business logic — document processing, extraction, classification, and AI-powered decision engines.
+
+**Keywords:** AI integration services, LLM integration for business, enterprise AI integration, document processing AI, GPT Claude integration, custom prompt engineering, AI decision engine development.
+
+**Deliverables:** LLM integration into products or internal tools; document processing pipelines; custom prompt engineering and model fine-tuning; AI decision engines scoped to your data.
+
+**Best for:** Teams with high-volume documents, classification tasks, or complex decisions that do not need a human every time.
+
+### Custom Software
+Full-stack web and mobile applications built around how a business actually works — no templates, no off-the-shelf fixes.
+
+**Keywords:** custom software development company, bespoke software development, custom web application development, internal tools development, custom SaaS development.
+
+**Deliverables:** Web and mobile application development; backend architecture, database design, and APIs; admin dashboards and internal tools; scalable, documented codebases.
+
+**Best for:** Businesses with workflows no existing product covers, or teams that have outgrown their current tools.
+
+### System Integration
+Connect your entire stack into one coherent, automated operation — APIs, legacy systems, databases, and real-time data sync.
+
+**Keywords:** system integration services, API integration services, legacy system integration, third-party integration, CRM ERP integration, webhook infrastructure, event-driven architecture.
+
+**Deliverables:** API design and third-party integration; legacy connections without full replacement; real-time data sync across platforms; webhook and event-driven architecture.
+
+**Best for:** Teams running disconnected tools that require manual syncing, duplicate data entry, or constant context switching.
+
+### Full-Stack Development
+End-to-end product builds — backend, frontend, and everything in between. Lean, scalable, and production-ready from day one.
+
+**Keywords:** full-stack development services, React Node.js development, Flutter app development, SaaS development, REST GraphQL API development, cloud deployment CI/CD.
+
+**Deliverables:** Web and mobile apps (Flutter, React, Node.js); REST and GraphQL APIs; cloud deployment, CI/CD, and infrastructure; performance optimization and post-launch support.
+
+**Best for:** Startups building their first product, or businesses replacing a broken system with something built properly.
+
 ## Principles
 
-- Diagnosis before any build
-- Fixed scope, fixed quote — no surprise invoices
-- First deployment typically within two weeks
-- Post-launch accountability always included
+- Automation should be invisible — it runs in the background and removes friction.
+- Fit before feature — a system built around your process beats a platform with unused options.
+- Humans are not the bottleneck — manual work, handoffs, and waiting are.
+- Diagnosis before any build — nothing gets built until the workflow is mapped.
+- Fixed scope, fixed quote — no surprise invoices or scope creep.
+- First deployment typically within two weeks.
+- Post-launch documentation and support always included.
+
+## Who GrydIn serves
+
+- Businesses with workflows no existing product covers
+- Teams spending hours on manual data movement between systems
+- Companies needing AI agents, workflow automation, or LLM integration
+- Startups building their first product
+- Businesses replacing broken or outgrown software
+- Global clients — async-first, no time-zone friction
 
 ## Pricing
 
-Every project is scoped before it's priced. After an initial diagnosis call, clients receive a clear, fixed quote. No ranges, no retainer traps, no surprises.
-
-## Contact
-
-- Website: https://grydin.co
-- Email: hello@grydin.co
-- WhatsApp: +92 329 6637320
-- Based in Islamabad, Pakistan — working globally
-- Response time: within one business day
+Every project is scoped before it is priced. After an initial diagnosis call, clients receive a clear fixed quote. No ranges, no retainer traps, no surprises.
 
 ## Pages
 
-- https://grydin.co/ — Home: overview of what GrydIn does and why
-- https://grydin.co/services — Detailed breakdown of all six services with deliverables and who each suits
-- https://grydin.co/about — Studio background, beliefs, and origin story
-- https://grydin.co/contact — Contact details and how to start a project
+- [Home](https://grydin.co/): Overview — AI automation, six services, three-step process, impact, and contact CTA.
+- [Services](https://grydin.co/services): Detailed breakdown of all six services with deliverables, who each suits, and four operating principles.
+- [About](https://grydin.co/about): Company background, beliefs (the unseen rules), origin story, and team philosophy.
+- [Contact](https://grydin.co/contact): Contact form, email, WhatsApp, and how to start a project.
+
+## Optional
+
+- [Sitemap](https://grydin.co/sitemap.xml): Machine-readable list of all public pages.
+- [Robots](https://grydin.co/robots.txt): Crawler access policy — all agents allowed, no blocks.

@@ -1,80 +1,22 @@
 import "./globals.css";
+import { RouteChangeHandler } from "./globalscope/RouteChangeHandler";
+import { ContentProtection } from "./globalscope/ContentProtection";
+import { SiteFooter } from "./globalscope/SiteFooter";
+import { BRAND_ACCENT } from "@/lib/brand";
+import {
+  jsonLdScript,
+  organizationJsonLd,
+  professionalServiceJsonLd,
+  rootMetadata,
+  websiteJsonLd,
+} from "@/lib/seo";
 
-export const metadata = {
-  title: "GrydIn",
-  description: "Built for the gaps in your business.",
-  metadataBase: new URL("https://grydin.co"),
-  icons: { icon: "/logo.png", apple: "/logo.png" },
-  openGraph: {
-    title: "GrydIn",
-    description: "Built for the gaps in your business.",
-    url: "https://grydin.co",
-    siteName: "GrydIn",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "GrydIn",
-    description: "Built for the gaps in your business.",
-    images: ["/og.png"],
-  },
-};
+export const metadata = rootMetadata;
 
 const jsonLd = [
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "GrydIn",
-    url: "https://grydin.co",
-    logo: "https://grydin.co/logo.png",
-    description:
-      "Software and AI automation studio based in Islamabad, Pakistan. We surface the invisible work slowing your team down and eliminate it — AI agents, workflow automation, AI integration, custom software, system integration, and full-stack development.",
-    email: "hello@grydin.co",
-    telephone: "+923296637320",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Islamabad",
-      addressCountry: "PK",
-    },
-    areaServed: "Worldwide",
-    sameAs: [],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "GrydIn Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: "AI Agents" },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: "Workflow Automation" },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: "AI Integration" },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: "Custom Software" },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: "System Integration" },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: { "@type": "Service", name: "Full-Stack Development" },
-        },
-      ],
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "GrydIn",
-    url: "https://grydin.co",
-  },
+  organizationJsonLd(),
+  websiteJsonLd(),
+  professionalServiceJsonLd(),
 ];
 
 export default function RootLayout({
@@ -83,14 +25,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning
+      style={{ "--brand-accent": BRAND_ACCENT } as React.CSSProperties}
+    >
       <head>
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM site index" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body suppressHydrationWarning>
+        <ContentProtection />
+        <RouteChangeHandler />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }

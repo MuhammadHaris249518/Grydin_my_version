@@ -68,7 +68,7 @@ export const FooterTape = () => {
                 }}
             >
                 <img
-                    src="/logowhite.png"
+                    src="/brand/logo.png"
                     alt="GrydIn"
                     width={12}
                     height={12}
@@ -133,7 +133,7 @@ export const FooterTape = () => {
                         letterSpacing: "0.06em",
                     }}
                 >
-                    Built for the gaps in your business.
+                    We bridge the gaps in your business.
                 </span>
             </div>
 

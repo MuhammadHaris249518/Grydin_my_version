@@ -4,9 +4,10 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useTypewriter } from "../globalscope/typewriter";
 import { Menu, X } from "lucide-react";
-import Navbar from "../globalscope/Navbar";
+import Navbar, { NAVBAR_TOP_OFFSET } from "../globalscope/Navbar";
 import DotGrid from "../globalscope/DotGrid";
-import { FooterTape } from "../globalscope/FooterTape";
+import { AccentWord } from "../globalscope/AccentWord";
+import { DARK_PAGE_BG } from "@/lib/theme";
 // ── Tape sizing (same system as landing page) ─────────────────────────────────
 const TAPE_H_MAX = 72;
 const TAPE_H_MIN = 58;
@@ -29,7 +30,6 @@ function computeTapeH(width: number) {
 const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
 const useTape = () => useContext(TapeCtx);
 
-const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
 const VB_W = 1000;
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(false);
@@ -338,6 +338,10 @@ const BeliefCard = ({
         perspective: "800px",
         cursor: "pointer",
         minHeight: "120px",
+        minWidth: 0,
+        width: "100%",
+        maxWidth: "100%",
+        overflow: "hidden",
       }}
     >
       <div
@@ -496,7 +500,7 @@ const BeliefCards = () => {
   };
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "2rem" }}>
+    <div className="belief-cards-grid">
       {BELIEFS.map((item, i) => (
         <BeliefCard
           key={item.title}
@@ -511,57 +515,6 @@ const BeliefCards = () => {
   );
 };
 
-const WhatsAppButton = () => (
-  <a
-    href={`https://wa.me/923296637320?text=Hi%20GrydIn%2C%20I%20came%20across%20your%20website%20and%20I%20think%20there%27s%20a%20gap%20in%20my%20business%20you%20might%20be%20able%20to%20close.%20I%27d%20like%20to%20discuss%20it.`}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Chat on WhatsApp"
-    style={{
-      position: "fixed",
-      bottom: "44px",
-      right: "28px",
-      zIndex: 200,
-      width: "48px",
-      height: "48px",
-      background: "white",
-      borderRadius: "2px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      boxShadow: "0 2px 16px rgba(0,0,0,0.18)",
-      transition: "background 0.2s, transform 0.2s",
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.background = "#181717";
-      e.currentTarget.style.transform = "scale(1.08)";
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.background = "white";
-      e.currentTarget.style.transform = "scale(1)";
-    }}
-  >
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      style={{ color: "#000000" }}
-    >
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-        fill="currentColor"
-      />
-      <path
-        d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        fill="none"
-      />
-    </svg>
-  </a>
-);
-
 const OriginVisual = () => {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
@@ -570,15 +523,7 @@ const OriginVisual = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const rafRef = useRef<number>(0);
   const isMobile = useIsMobile();
-  const [mobileAspect, setMobileAspect] = useState<string>("3 / 4"); // fallback while the real image loads
 
-  useEffect(() => {
-    if (!isMobile) return;
-    const src = "/abm.png";
-    const img = new Image();
-    img.onload = () => setMobileAspect(`${img.naturalWidth} / ${img.naturalHeight}`);
-    img.src = src;
-  }, [isMobile]);
   useEffect(() => {
     if (!wrapRef.current) return;
     const ro = new ResizeObserver(() => {
@@ -619,26 +564,68 @@ const OriginVisual = () => {
     setTilt({ x: py * -5, y: px * 5 });
   };
 
+  if (isMobile) {
+    return (
+      <div
+        ref={wrapRef}
+        style={{
+          width: "100%",
+          maxWidth: "100%",
+          lineHeight: 0,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "scale(1)" : "scale(0.98)",
+          transition: "opacity 1s ease, transform 1s cubic-bezier(0.4,0,0.2,1)",
+        }}
+      >
+        <img
+          src="/images/about/about-desktop.png"
+          alt="GrydIn systems visual"
+          width={1536}
+          height={1024}
+          style={{
+            width: "100%",
+            maxWidth: "100%",
+            height: "auto",
+            display: "block",
+            objectFit: "contain",
+            borderRadius: "4px",
+          }}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       ref={wrapRef}
       onPointerMove={handlePointerMove}
       onPointerLeave={() => setTilt({ x: 0, y: 0 })}
       style={{
-        position: "relative", width: "100%", aspectRatio: isMobile ? mobileAspect : "16 / 9", overflow: "hidden",
+        position: "relative",
+        width: "100%",
+        aspectRatio: "16 / 10",
+        overflow: "hidden",
+        borderRadius: "4px",
         opacity: inView ? 1 : 0,
         transform: inView ? "scale(1)" : "scale(0.94)",
         transition: "opacity 1s ease, transform 1s cubic-bezier(0.4,0,0.2,1)",
         perspective: "1000px",
       }}
     >
-      <div style={{ width: "100%", height: "100%", transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)`, transition: "transform 0.3s ease-out" }}>
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)`,
+          transition: "transform 0.3s ease-out",
+        }}
+      >
         <img
-          key={`origin-${isMobile}`}
-          src={isMobile ? "/abm.png" : "/ab.png"}
+          src="/images/about/about-desktop.png"
           alt="GrydIn systems visual"
           className="origin-visual-img"
-          style={{ width: "100%", height: "100%", objectFit: isMobile ? "contain" : "cover", display: "block" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
         <div className="origin-visual-sheen" />
         <div className="origin-visual-grain" />
@@ -849,15 +836,17 @@ export default function About() {
           </nav>
         </div>
         {/* ── Single dark section – full page content ── */}
-        <section style={{ background: DARK_BG, width: "100%" }}>
-          <Navbar tapeH={tapeH} arcR={arcR} />
-          <div style={{ height: tapeH }} />
+        <section style={{ background: DARK_PAGE_BG, width: "100%" }}>
+          <Navbar />
+          <div style={{ height: NAVBAR_TOP_OFFSET }} />
 
           <div
             style={{
               maxWidth: "860px",
               margin: "0 auto",
-              padding: "4rem 2rem 5rem",
+              padding: "4rem clamp(1rem, 4vw, 2rem) 5rem",
+              overflowX: "clip",
+              boxSizing: "border-box",
               opacity: mounted ? 1 : 0,
               transform: mounted ? "translateY(0)" : "translateY(28px)",
               filter: mounted ? "blur(0px)" : "blur(12px)",
@@ -918,7 +907,7 @@ export default function About() {
               <span
                 style={{ display: "block", color: "rgba(255,255,255,0.4)" }}
               >
-                your people and the repetition.
+                your <AccentWord>people</AccentWord> and the repetition.
               </span>
             </h1>
 
@@ -932,13 +921,10 @@ export default function About() {
                 textAlign: "justify",
               }}
             >
-              GrydIn is a software and AI automation studio based in Pakistan,
-              building for businesses globally. We{" "}
-              <span style={{ color: "rgba(255,255,255,0.92)", fontWeight: 500 }}>
-                surface the invisible work slowing your team down
-              </span>{" "}
-              – then eliminate it. No disruption to what already works. No
-              bloat. Just precise systems running quietly in the background.
+              GrydIn is a Software and Business AI Automation company based in Pakistan,
+              building for businesses globally. We surface the invisible work slowing
+              your team down – then eliminate it. No disruption to what already works.
+              No bloat. Just precise systems running quietly in the background.
             </p>
 
             <AnimatedDivider />
@@ -992,32 +978,17 @@ export default function About() {
                 textAlign: "justify",
               }}
             >
-              We kept seeing the same problem across businesses we worked with –
-              teams spending real hours on work that wasn't theirs to do.{" "}
-              <span style={{ color: "rgba(255,255,255,0.92)", fontWeight: 500 }}>
-                Moving data between systems. Chasing approvals. Running the same
-                report on a loop.
-              </span>{" "}
-              Not because they lacked capability. Because no one had ever wired
+              We kept seeing the same <AccentWord>problem</AccentWord> across businesses we worked with –
+              teams spending real hours on work that wasn&apos;t theirs to do. Moving
+              data between systems. Chasing approvals. Running the same report on a
+              loop. Not because they lacked capability. Because no one had ever wired
               the tools together properly.
               <br />
               <br />
               GrydIn exists to fix that. Precisely, without the overhaul.
             </p>
-            <div
-              style={{
-                position: "relative",
-                marginTop: "40px",
-                left: "50%",
-                width: "100vw",
-                marginLeft: "-50vw",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <div style={{ width: "90vw", maxWidth: "1400px" }}>
-                <OriginVisual />
-              </div>
+            <div className="origin-visual-wrap" style={{ marginTop: "40px" }}>
+              <OriginVisual />
             </div>
 
             <AnimatedDivider />
@@ -1083,14 +1054,12 @@ export default function About() {
                   e.currentTarget.style.color = "#000000";
                 }}
               >
-                Start a project <ArrowRight size={14} strokeWidth={2.2} />
+                Grid Your Vision <ArrowRight size={14} strokeWidth={2.2} />
               </a>
             </div>
           </div>
 
-          <FooterTape />
         </section>
-        <WhatsAppButton />
       </main>
     </TapeCtx.Provider>
   );

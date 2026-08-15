@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useContext } from "react";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   Menu, X, ArrowRight, Zap, Brain, Plug, Repeat, Layers, Code,
   ShieldCheck, Gauge, Share2, FileText, MonitorSmartphone, Database,
@@ -8,42 +9,39 @@ import {
 } from "lucide-react";
 import { useTypewriter } from "./globalscope/typewriter";
 import DotGrid from "./globalscope/DotGrid";
-import Navbar from "./globalscope/Navbar";
-import { FooterTape } from "./globalscope/FooterTape";
+import Navbar, { NAVBAR_TOP_OFFSET } from "./globalscope/Navbar";
+import { CollabsMarquee } from "./globalscope/CollabsMarquee";
+import { AccentWord } from "./globalscope/AccentWord";
+import { BRAND_ACCENT, brandAccentAlpha, brandAccentHexAlpha } from "@/lib/brand";
+import { DARK_PAGE_BG, DARK_SECTION_BG, LIGHT_PAGE_BG } from "@/lib/theme";
 
 const SERVICES = [
   {
-    color: "#22d3ee",
     icon: <Zap size={28} strokeWidth={1.4} />,
     title: "AI Agents",
     desc: "Autonomous agents that think, decide, and act – handling complex tasks end-to-end without human intervention.",
   },
   {
-    color: "#f59e0b",
     icon: <Repeat size={28} strokeWidth={1.4} />,
     title: "Workflow Automation",
     desc: "We map the gaps between your tools, teams, and decisions – then automate them. No migration. No disruption.",
   },
   {
-    color: "#10b981",
     icon: <Brain size={28} strokeWidth={1.4} />,
     title: "AI Integration",
     desc: "From document processing to decision engines – fine-tuned models deployed directly into your existing business logic.",
   },
   {
-    color: "#3b82f6",
     icon: <Layers size={28} strokeWidth={1.4} />,
     title: "Custom Software",
     desc: "Built around how your business actually works. No templates, no off-the-shelf fixes – just the right system for your exact problem.",
   },
   {
-    color: "#f43f5e",
     icon: <Plug size={28} strokeWidth={1.4} />,
     title: "System Integration",
     desc: "Connect your entire stack – APIs, platforms, databases – into one coherent, automated operation.",
   },
   {
-    color: "#a855f7",
     icon: <Code size={28} strokeWidth={1.4} />,
     title: "Full-Stack Development",
     desc: "End-to-end product builds – backend, frontend, and everything in between. Lean, scalable, and production-ready.",
@@ -55,34 +53,37 @@ const HOW_IT_WORKS = [
     step: "01",
     title: "Diagnose",
     tagline: "UNDERSTAND BEFORE BUILDING.",
-    desc: "We map your workflow end to end – every gap, bottleneck, and invisible process costing you time. Nothing gets built until we understand exactly what's broken.",
+    desc: "We map your workflow end to end – every gap, bottleneck, and hidden process costing you time. Nothing gets built until we know what's broken.",
     points: [
-      { icon: <Target size={18} strokeWidth={1.6} />, title: "Process Discovery", desc: "We uncover how work really flows." },
-      { icon: <AlertTriangle size={18} strokeWidth={1.6} />, title: "Gap & Bottleneck Analysis", desc: "We find what's slowing you down." },
-      { icon: <Crosshair size={18} strokeWidth={1.6} />, title: "Data & System Audit", desc: "We examine systems, data and integrations in depth." },
+      { icon: <Target size={18} strokeWidth={1.6} />, title: "Process Discovery", desc: "We uncover how work really flows across your team." },
+      { icon: <AlertTriangle size={18} strokeWidth={1.6} />, title: "Gap & Bottleneck Analysis", desc: "We find what's slowing you down — and why." },
+      { icon: <Crosshair size={18} strokeWidth={1.6} />, title: "Data & System Audit", desc: "We audit systems, data, and integrations in depth." },
     ],
   },
   {
     step: "02",
     title: "Design",
     tagline: "ARCHITECT WITH INTENT.",
-    desc: "We scope only what moves the needle. No bloated proposals, no unnecessary complexity. You see the exact plan before a single line of code is written.",
+    desc: "We scope only what moves the needle. No bloat, no unnecessary complexity. You see the exact plan before anything is built.",
     points: [
-      { icon: <Target size={18} strokeWidth={1.6} />, title: "Solution Architecture", desc: "We craft scalable, future-proof architectures tailored to your goals." },
-      { icon: <Workflow size={18} strokeWidth={1.6} />, title: "Workflow Blueprint", desc: "Every step, condition, and integration mapped with precision." },
-      { icon: <Puzzle size={18} strokeWidth={1.6} />, title: "Seamless Integrations", desc: "APIs, data, and tools connected into one unified ecosystem." },
-      { icon: <ShieldCheck size={18} strokeWidth={1.6} />, title: "Built for Reliability", desc: "Security, performance, and observability designed in from the start." },
+      { icon: <Target size={18} strokeWidth={1.6} />, title: "Solution Architecture", desc: "Scalable architecture tailored to your goals." },
+      { icon: <Workflow size={18} strokeWidth={1.6} />, title: "Workflow Blueprint", desc: "Every step, condition, and integration mapped." },
+      {
+        icon: <ShieldCheck size={18} strokeWidth={1.6} />,
+        title: "Integrations & Reliability",
+        desc: "Tools unified in one secure, observable ecosystem.",
+      },
     ],
   },
   {
     step: "03",
     title: "Deploy",
     tagline: "AUTOMATE. INTEGRATE. DELIVER.",
-    desc: "We ship fast, integrate quietly, and hand off documentation your team can actually use. The system runs in the background. You barely notice – except in the results.",
+    desc: "We ship fast, integrate quietly, and hand off docs your team can actually use. The system runs quietly – you notice it in the results.",
     points: [
-      { icon: <Rocket size={18} strokeWidth={1.6} />, title: "Seamless Deployment", desc: "Automated delivery with zero disruption and minimal downtime." },
-      { icon: <Link2 size={18} strokeWidth={1.6} />, title: "Deep Integrations", desc: "Connect with the tools you use daily. Everything works, together." },
-      { icon: <FileText size={18} strokeWidth={1.6} />, title: "Full Documentation", desc: "Clear guides and references so your team stays confident and independent." },
+      { icon: <Rocket size={18} strokeWidth={1.6} />, title: "Seamless Deployment", desc: "Automated delivery with zero disruption or downtime." },
+      { icon: <Link2 size={18} strokeWidth={1.6} />, title: "Deep Integrations", desc: "Your daily tools connected — all working together." },
+      { icon: <FileText size={18} strokeWidth={1.6} />, title: "Full Documentation", desc: "Clear guides so your team stays independent." },
     ],
   },
 ];
@@ -113,23 +114,6 @@ function computeTapeHSlow(width: number) {
 }
 const TapeCtx = createContext({ tapeH: TAPE_H, arcR: ARC_R, tapeHSlow: TAPE_H, arcRSlow: ARC_R / 2 });
 const useTape = () => useContext(TapeCtx);
-const DARK_BG = "linear-gradient(to bottom, #4D4D4D 0%, #000000 76.92%, #000000 100%) top / 100% 130vh no-repeat, repeating-linear-gradient(to bottom, #000000 0vh, #3A3A3A 100vh, #3A3A3A 130vh, #000000 230vh) 0 130vh / 100% 230vh repeat-y";
-
-// ── SVG Tape components ───────────────────────────────────────────────────────
-const VB_W = 1000;
-
-// TopTape: true transparent quarter-circle cutouts at bottom-left and bottom-right.
-const TopTape = () => {
-  const { tapeH, arcR } = useTape();
-  return (
-    <div aria-hidden="true" style={{ position: "relative", width: "100%", height: `${tapeH}px`, flexShrink: 0, pointerEvents: "none" }}>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${VB_W} ${tapeH}`} preserveAspectRatio="none"
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}>
-        <path d={`M 0 0 L ${VB_W} 0 L ${VB_W} ${arcR} A ${arcR} ${arcR} 0 0 0 ${VB_W - arcR} ${tapeH} L ${arcR} ${tapeH} A ${arcR} ${arcR} 0 0 0 0 ${arcR} Z`} fill="white" />
-      </svg>
-    </div>
-  );
-};
 
 // ── Dark section wrapper ──────────────────────────────────────────────────────
 const DarkSection = ({
@@ -138,20 +122,23 @@ const DarkSection = ({
   className = "",
   autoHeight = false,
   minHeight = false,
+  fitViewport = false,
 }: {
   children: React.ReactNode;
   id?: string;
   className?: string;
   autoHeight?: boolean;
   minHeight?: boolean;
+  fitViewport?: boolean;
 }) => (
   <section
     id={id}
     className={`relative w-full ${className}`}
     style={{
-      height: autoHeight ? "auto" : minHeight ? "auto" : "100vh",
-      minHeight: minHeight ? "100vh" : undefined,
-      background: DARK_BG,
+      height: fitViewport ? "100dvh" : autoHeight ? "auto" : minHeight ? "auto" : "100vh",
+      minHeight: fitViewport ? undefined : minHeight ? "100vh" : undefined,
+      maxHeight: fitViewport ? "100dvh" : undefined,
+      background: DARK_SECTION_BG,
       overflow: "hidden",
     }}
   >
@@ -176,9 +163,8 @@ function useIsMobile(breakpoint = 768) {
 
 const HERO_IMAGES = [
   {
-    art: "/hi1.png", artMobile: "/him1.png",
+    art: "/images/hero/slide-01-desktop.png", artMobile: "/images/hero/slide-01-mobile.png",
     service: "AI Agents",
-    color: "#22d3ee",
     titleWhite: "AI ",
     titleColor: "Agents",
     tagline: "Workflows that run themselves.",
@@ -190,9 +176,8 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi2.png", artMobile: "/him2.png",
+    art: "/images/hero/slide-02-desktop.png", artMobile: "/images/hero/slide-02-mobile.png",
     service: "Workflow Automation",
-    color: "#f59e0b",
     titleWhite: "Workflow ",
     titleColor: "Automation",
     tagline: "We connect the dots across your tools",
@@ -204,9 +189,8 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi3.png", artMobile: "/him3.png",
+    art: "/images/hero/slide-03-desktop.png", artMobile: "/images/hero/slide-03-mobile.png",
     service: "Full-Stack Development",
-    color: "#3b82f6",
     titleWhite: "Full-Stack ",
     titleColor: "Development",
     tagline: "From idea to live product.",
@@ -218,9 +202,8 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi4.png", artMobile: "/him4.png",
+    art: "/images/hero/slide-04-desktop.png", artMobile: "/images/hero/slide-04-mobile.png",
     service: "Custom Software",
-    color: "#3b82f6",
     titleWhite: "Custom ",
     titleColor: "Software",
     tagline: "Purpose-built systems designed",
@@ -232,9 +215,8 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi5.png", artMobile: "/him5.png",
+    art: "/images/hero/slide-05-desktop.png", artMobile: "/images/hero/slide-05-mobile.png",
     service: "AI Integration",
-    color: "#10b981",
     titleWhite: "AI ",
     titleColor: "Integration",
     tagline: "Smarter workflows.",
@@ -246,9 +228,8 @@ const HERO_IMAGES = [
     ],
   },
   {
-    art: "/hi6.png", artMobile: "/him6.png",
+    art: "/images/hero/slide-06-desktop.png", artMobile: "/images/hero/slide-06-mobile.png",
     service: "System Integration",
-    color: "#f43f5e",
     titleWhite: "System ",
     titleColor: "Integration",
     tagline: "One connected stack.",
@@ -356,8 +337,8 @@ const PointsList = ({ current }: { current: (typeof HERO_IMAGES)[number] }) => (
       <div key={pt.title} style={{ display: "flex", gap: "12px", alignItems: "flex-start", borderTop: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none", paddingTop: i > 0 ? "1.1rem" : 0 }}>
         <div style={{
           flexShrink: 0, width: "34px", height: "34px", borderRadius: "6px",
-          background: "rgba(255,255,255,0.05)", border: `1px solid ${current.color}55`,
-          color: current.color, display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(255,255,255,0.05)", border: `1px solid ${brandAccentHexAlpha(0.33)}`,
+          color: BRAND_ACCENT, display: "flex", alignItems: "center", justifyContent: "center",
         }}>
           {pt.icon}
         </div>
@@ -494,7 +475,7 @@ const HeroImageSlider = () => {
             <div>
               <h3 style={{ fontSize: "clamp(1.6rem, 2.6vw, 2.2rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
                 <span style={{ color: "#fff" }}>{current.titleWhite}</span>
-                <span style={{ color: current.color }}>{current.titleColor}</span>
+                <span style={{ color: BRAND_ACCENT }}>{current.titleColor}</span>
               </h3>
               <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.55)", marginTop: "0.5rem" }}>{current.tagline}</p>
               <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.55)", margin: 0 }}>{current.subheading}</p>
@@ -537,18 +518,23 @@ const HeroImageSlider = () => {
     );
   }
 
-  // ── MOBILE: stacked layout — heading/tagline → art → subheading/points → progress ──
+  // ── MOBILE: content first, image at the end ──
   return (
     <div ref={containerRef} className="w-full flex flex-col items-center" style={{ marginTop: "clamp(2rem, 6vh, 4rem)", gap: "1.2rem" }}>
-      <div key={`head-${index}`} style={{ width: "100%", textAlign: "center", padding: "0 5vw", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+      <div key={`head-${index}`} style={{ width: "100%", textAlign: "center", padding: "0 0.25rem", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
         <h3 style={{ fontSize: "clamp(1.4rem, 6vw, 1.8rem)", fontWeight: 700, letterSpacing: "-0.02em", margin: 0 }}>
           <span style={{ color: "#fff" }}>{current.titleWhite}</span>
-          <span style={{ color: current.color }}>{current.titleColor}</span>
+          <span style={{ color: BRAND_ACCENT }}>{current.titleColor}</span>
         </h3>
         <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", marginTop: "0.4rem", marginBottom: 0 }}>{current.tagline}</p>
       </div>
 
-      <div style={{ width: "calc(100% + 3rem)", margin: "0 -1.5rem" }}>
+      <div key={`body-${index}`} style={{ width: "100%", padding: "0 0.25rem", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
+        <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", textAlign: "center", marginBottom: "1.2rem" }}>{current.subheading}</p>
+        <PointsList current={current} />
+      </div>
+
+      <div style={{ width: "100%" }}>
         <ArtImage
           aspect={mobileAspect}
           index={index}
@@ -563,12 +549,7 @@ const HeroImageSlider = () => {
         />
       </div>
 
-      <div key={`body-${index}`} style={{ width: "100%", padding: "0 5vw", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
-        <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.55)", textAlign: "center", marginBottom: "1.2rem" }}>{current.subheading}</p>
-        <PointsList current={current} />
-      </div>
-
-      <div style={{ width: "90vw", maxWidth: "1400px" }}>
+      <div style={{ width: "100%" }}>
         <ProgressBar
           index={index}
           progress={progress}
@@ -645,8 +626,8 @@ const ScrollCue = ({ visible, cueRef }: { visible: boolean; cueRef: React.RefObj
 // ── Hero Section ──────────────────────────────────────────────────────────────
 
 const HeroSection = () => {
+  const pathname = usePathname();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { tapeH } = useTape();
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
   const isMobile = useIsMobile();
@@ -672,30 +653,33 @@ const HeroSection = () => {
     window.addEventListener("resize", measure, { passive: true });
     return () => { clearTimeout(t); window.removeEventListener("resize", measure); };
   }, []);
-  const REVEAL_DELAY = 250;      // ms before the blur/opacity reveal starts
-  const REVEAL_DURATION = 1500;  // ms — must match the transition duration below
+  const REVEAL_DURATION = 650;
+  const TYPE_START = 380;
 
   const [revealed, setRevealed] = useState(false);
   const [startTyping, setStartTyping] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setRevealed(true), REVEAL_DELAY);
-    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DELAY + REVEAL_DURATION);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
+    setRevealed(false);
+    setStartTyping(false);
+    const t1 = requestAnimationFrame(() => setRevealed(true));
+    const t2 = setTimeout(() => setStartTyping(true), TYPE_START);
+    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
+  }, [pathname]);
 
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
-    v.play().catch(() => { });
+    v.playbackRate = 0.4;
+    const play = () => { v.play().catch(() => { }); };
+    if (v.readyState >= 2) play();
+    else v.addEventListener("loadeddata", play, { once: true });
     const handler = () => {
-      if (v.currentTime > v.duration - 0.15) {
-        v.currentTime = 0;
-      }
+      if (v.duration && v.currentTime > v.duration - 0.15) v.currentTime = 0;
     };
     v.addEventListener("timeupdate", handler);
     return () => v.removeEventListener("timeupdate", handler);
-  }, []);
+  }, [pathname]);
   useEffect(() => {
     if (!contentRef.current) return;
     const ro = new ResizeObserver(() => {
@@ -707,17 +691,32 @@ const HeroSection = () => {
 
   const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "Grid the unseen" : "");
   return (
-    <DarkSection id="hero" className="flex flex-col" minHeight>
-      <div style={{ height: `${tapeH}px`, flexShrink: 0 }} />
+    <DarkSection id="hero" className="flex flex-col" fitViewport>
+      <div style={{ height: `${NAVBAR_TOP_OFFSET}px`, flexShrink: 0 }} />
       <DotGrid contentBottom={contentH / 1.04} animate={false} />
 
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: "none",
+          background:
+            "radial-gradient(ellipse 70% 55% at 50% 42%, rgba(137,145,64,0.07) 0%, transparent 62%), radial-gradient(ellipse 90% 60% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%)",
+          opacity: revealed ? 1 : 0,
+          transition: `opacity ${REVEAL_DURATION}ms ease`,
+        }}
+      />
+
       <video
+        key={pathname}
         ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="metadata"
         style={{
           position: "absolute",
           top: 0,
@@ -727,29 +726,34 @@ const HeroSection = () => {
           objectFit: "cover",
           zIndex: 0,
           pointerEvents: "none",
+          transform: "scaleY(-1)",
+          opacity: revealed ? 0.38 : 0,
+          transition: `opacity ${REVEAL_DURATION}ms ease`,
         }}
       >
-        <source src="/video2.mp4" type="video/mp4" />
+        <source src="/videos/landing-bg-video.webm" type="video/webm" />
+        <source src="/videos/landing-bg-video.mp4" type="video/mp4" />
       </video>
 
       {/* Text content – padded, centred */}
       <div
-        className={`flex flex-col text-center px-6 items-center ${isMobile ? "justify-start" : "justify-center"}`}
+        className={`flex flex-col text-center items-center ${isMobile ? "hero-content-mobile justify-start px-3" : "justify-center px-6"}`}
         ref={contentRef}
         style={{
-          flexShrink: 0,
-          minHeight: "100dvh",
+          flex: 1,
+          minHeight: 0,
           position: "relative",
           zIndex: 1,
-          paddingTop: isMobile ? "20dvh" : undefined,
+          paddingTop: isMobile ? "clamp(1rem, 8dvh, 3rem)" : undefined,
+          paddingBottom: isMobile ? "2rem" : undefined,
           opacity: revealed ? 1 : 0,
-          transform: revealed ? "translateY(0)" : "translateY(26px)",
-          filter: revealed ? "blur(0px)" : "blur(16px)",
+          transform: revealed ? "translateY(0)" : "translateY(18px)",
+          filter: revealed ? "blur(0px)" : "blur(10px)",
           transition: `opacity ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1), transform ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1), filter ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1)`,
         }}
       >
         <p
-          className="mb-4 tracking-widest uppercase text-xs font-medium mt-20"
+          className={`mb-4 tracking-widest uppercase text-xs font-medium ${isMobile ? "hero-eyebrow-mobile" : ""}`}
           style={{
             color: "#000000",
             fontWeight: 700,
@@ -759,7 +763,15 @@ const HeroSection = () => {
             padding: "4px 8px",
           }}
         >
-          Built for the gaps in your business
+          {isMobile ? (
+            <>
+              WE GRID WHAT YOUR
+              <br />
+              BUSINESS OVERLOOKS
+            </>
+          ) : (
+            "We grid what your business overlooks"
+          )}
         </p>
 
         <h1
@@ -782,7 +794,6 @@ const HeroSection = () => {
           />
           <br />
           <span style={{ color: "rgba(255,255,255,0.45)" }}>
-            {/* <span style={{ color: "rgba(222, 2, 2, 0.45)" }}> */}
             Keep the humans.
           </span>
         </h1>
@@ -792,13 +803,13 @@ const HeroSection = () => {
           style={{
             fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
             color: "rgba(255,255,255,0.5)",
-            textAlign: "justify",
+            textAlign: isMobile ? "center" : "justify",
           }}
         >
-          Businesses don't have an execution problem. They have a visibility
-          problem. Work piles up in the gaps between tools, teams, and decisions
-          – repetitive, complex, and invisible. GrydIn maps those gaps and
-          automates them.
+          Businesses don&apos;t have an execution problem. They have a{" "}
+          <AccentWord>visibility</AccentWord> problem. Work piles up in the gaps
+          between tools, teams, and decisions – repetitive, complex, and invisible.
+          GrydIn maps those gaps and automates them.
         </p>
 
         <a
@@ -808,7 +819,7 @@ const HeroSection = () => {
             display: "inline-flex",
             alignItems: "center",
             gap: "8px",
-            padding: "10px 24px",
+            padding: "11px 26px",
             background: "white",
             color: "#000000",
             fontWeight: 600,
@@ -817,20 +828,23 @@ const HeroSection = () => {
             letterSpacing: "0.04em",
             textDecoration: "none",
             width: "fit-content",
-            transition: "gap 0.2s",
+            transition: "gap 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s",
+            boxShadow: "0 0 0 0 transparent",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.gap = "1rem";
-            e.currentTarget.style.background = "#181717";
-            e.currentTarget.style.color = "white";
+            e.currentTarget.style.gap = "12px";
+            e.currentTarget.style.background = "#111111";
+            e.currentTarget.style.color = "#ffffff";
+            e.currentTarget.style.boxShadow = `0 0 24px ${brandAccentAlpha(0.25)}`;
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.gap = "0.5rem";
+            e.currentTarget.style.gap = "8px";
             e.currentTarget.style.background = "white";
             e.currentTarget.style.color = "#000000";
+            e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
           }}
         >
-          Start a project <ArrowRight size={14} strokeWidth={2.2} />
+          Grid Your Vision <ArrowRight size={14} strokeWidth={2.2} />
         </a>
       </div>
       {isMobile && showCue && <ScrollCue visible={revealed} cueRef={cueRef} />}
@@ -876,11 +890,8 @@ const ServicesSection = () => {
     return () => ro.disconnect();
   }, []);
 
-  const { tapeH } = useTape();
-
   return (
     <DarkSection id="services" className="flex flex-col" minHeight>
-      <TopTape />
       <DotGrid contentBottom={contentH / 1.02} animate={false} />
       <div
         ref={contentRef}
@@ -908,7 +919,7 @@ const ServicesSection = () => {
           Built for
         </p>
         <h2
-          className="font-bold"
+          className="font-bold section-heading-nowrap"
           style={{
             fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
             color: "#ffffff",
@@ -916,7 +927,7 @@ const ServicesSection = () => {
             marginBottom: "clamp(1rem, 4vh, 4rem)",
           }}
         >
-          Six ways we eliminate the unseen.
+          Six ways we grid the unseen.
         </h2>
         <HeroImageSlider />
       </div>
@@ -924,52 +935,87 @@ const ServicesSection = () => {
   );
 };
 const STEP_IMAGES = [
-  { art: "/sdg.png", artMobile: "/sdgm.png", alt: "Diagnose art" },
-  { art: "/sds.png", artMobile: "/sdsm.png", alt: "Design art" },
-  { art: "/sdp.png", artMobile: "/sdpm.png", alt: "Deploy art" },
+  { art: "/images/steps/diagnose-desktop.png", artMobile: "/images/steps/diagnose-mobile.png", alt: "Diagnose art" },
+  { art: "/images/steps/design-desktop.png", artMobile: "/images/steps/design-mobile.png", alt: "Design art" },
+  { art: "/images/steps/deploy-desktop.png", artMobile: "/images/steps/deploy-mobile.png", alt: "Deploy art" },
 ];
-const SLIDE_TRANSITION = 700;   // ms — carousel push transition
-const TRACE_DURATION = 900;  // ms — border draw + scanline reveal
-const HOLD_DURATION = 7000;  // ms — fully revealed, static
+const STEP_SLIDE_DURATION = 8500;
+const STEP_HOLD_THRESHOLD = 400;
 
-// ── shared border-trace path builder (lifted from TracedBox) ──────────────
-function buildTracePath(W: number, H: number, progress: number) {
-  if (!W || !H) return "";
-  const perimeter = 2 * (W + H);
-  const dist = progress * perimeter;
-  const topRight = W / 2;
+const StepArtImage = ({
+  src,
+  alt,
+  aspect,
+  held,
+  onPointerDown,
+  onPointerUp,
+  onPointerLeave,
+}: {
+  src: string;
+  alt: string;
+  aspect: string;
+  held: boolean;
+  onPointerDown: () => void;
+  onPointerUp: () => void;
+  onPointerLeave: () => void;
+}) => (
+  <div
+    onPointerDown={onPointerDown}
+    onPointerUp={onPointerUp}
+    onPointerLeave={onPointerLeave}
+    style={{
+      position: "relative",
+      width: "100%",
+      aspectRatio: aspect,
+      border: "1px solid rgba(255,255,255,0.08)",
+      background: "rgba(0,0,0,0.6)",
+      overflow: "hidden",
+      borderRadius: "4px",
+      cursor: "pointer",
+      userSelect: "none",
+      touchAction: "manipulation",
+    }}
+  >
+    <img
+      key={src}
+      src={src}
+      alt={alt}
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        animation: "heroFadeIn 1.1s cubic-bezier(0.4,0,0.2,1) forwards",
+        filter: held ? "brightness(1.05)" : "none",
+        transition: "filter 0.3s ease",
+      }}
+    />
+    {held && (
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          border: "2px solid rgba(255,255,255,0.55)",
+        }}
+      />
+    )}
+    <style jsx>{`
+      @keyframes heroFadeIn {
+        from { opacity: 0; transform: scale(1.04); }
+        to { opacity: 1; transform: scale(1); }
+      }
+    `}</style>
+  </div>
+);
 
-  const branch = (d: number, dir: "right" | "left") => {
-    const sign = dir === "right" ? 1 : -1;
-    let path = `M ${W / 2} 0`;
-    if (d <= topRight) {
-      path += ` L ${W / 2 + sign * d} 0`;
-    } else if (d <= topRight + H) {
-      const s2 = d - topRight;
-      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${s2}`;
-    } else if (d <= topRight + H + W) {
-      const s3 = d - topRight - H;
-      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? W - s3 : s3} ${H}`;
-    } else {
-      const s4 = d - topRight - H - W;
-      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? 0 : W} ${H} L ${dir === "right" ? 0 : W} ${H - s4}`;
-    }
-    return path;
-  };
-
-  const half = dist / 2;
-  return `${branch(half, "right")} ${branch(half, "left")}`;
-}
-
-// ── one step's box: border trace + scanline image reveal ──────────────────
 const StepSlide = ({
   item,
   image,
   mobileAspect,
-  isActive,
-  phase,
-  progress,
   isMobile,
+  held,
   onPointerDown,
   onPointerUp,
   onPointerLeave,
@@ -977,137 +1023,20 @@ const StepSlide = ({
   item: (typeof HOW_IT_WORKS)[number];
   image: string;
   mobileAspect: string;
-  isActive: boolean;
-  phase: "trace" | "hold";
-  progress: number;
   isMobile: boolean;
+  held: boolean;
   onPointerDown: () => void;
   onPointerUp: () => void;
   onPointerLeave: () => void;
 }) => {
-  const boxRef = useRef<HTMLDivElement>(null);
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-
-  useEffect(() => {
-    if (!boxRef.current) return;
-    const el = boxRef.current;
-    const ro = new ResizeObserver(() => {
-      setDims({ w: Math.round(el.offsetWidth), h: Math.round(el.offsetHeight) });
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-
-  const holding = isActive && phase === "hold";
-  const tracing = isActive && phase === "trace";
-  const revealed = !isActive || phase === "hold";
-  const clipBottom = tracing ? Math.max(0, (1 - progress) * 100) : 0;
-  const borderProgress = tracing ? progress : isActive ? 1 : 0;
-
-  // ── Art box: border trace + scanline reveal — UNCHANGED animation, just renamed usage ──
-  const ArtBox = ({ aspect }: { aspect: string }) => (
-    <div
-      ref={boxRef}
-      onPointerDown={onPointerDown}
-      onPointerUp={onPointerUp}
-      onPointerLeave={onPointerLeave}
-      style={{
-        position: "relative",
-        width: "100%",
-        cursor: "pointer",
-        userSelect: "none",
-        touchAction: "manipulation",
-        padding: isMobile ? 0 : "14px",
-      }}
-    >
-      {dims.w > 0 && (
-        <svg
-          shapeRendering="crispEdges"
-          style={{ position: "absolute", top: 0, left: 0, width: `${dims.w}px`, height: `${dims.h}px`, pointerEvents: "none", overflow: "visible" }}
-        >
-          <path
-            d={buildTracePath(dims.w, dims.h, borderProgress)}
-            fill="none"
-            stroke="rgba(255,255,255,0.35)"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {holding && (
-            <path
-              d={buildTracePath(dims.w, dims.h, borderProgress)}
-              fill="none"
-              stroke="rgba(255,255,255,1)"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{
-                filter:
-                  "drop-shadow(0 0 4px rgba(255,255,255,0.95)) drop-shadow(0 0 14px rgba(255,255,255,0.6)) drop-shadow(0 0 28px rgba(255,255,255,0.35))",
-                animation: "traceGlowPulse 2s ease-in-out infinite",
-              }}
-            />
-          )}
-        </svg>
-      )}
-      <style jsx>{`
-        @keyframes traceGlowPulse {
-          0%, 100% { opacity: 0; }
-          50% { opacity: 1; }
-        }
-      `}</style>
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          aspectRatio: aspect,
-          overflow: "hidden",
-          borderRadius: "3px",
-          border: "1px solid rgba(255,255,255,0.08)",
-          background: "rgba(0,0,0,0.5)",
-        }}
-      >
-        <img
-          src={image}
-          alt={item.title}
-          style={{
-            transform: "scale(1)", // ← adjust zoom amount here
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "contain",
-            clipPath: `inset(0 0 ${clipBottom}% 0)`,
-            filter: revealed ? "brightness(1)" : "brightness(0.55)",
-            transition: "filter 0.3s ease-out",
-          }}
-        />
-        {tracing && (
-          <div
-            style={{
-              position: "absolute",
-              left: 0,
-              right: 0,
-              top: `${progress * 100}%`,
-              height: "2px",
-              background: "rgba(34,211,238,0.9)",
-              boxShadow: "0 0 12px 2px rgba(34,211,238,0.7), 0 0 30px 6px rgba(34,211,238,0.25)",
-              pointerEvents: "none",
-            }}
-          />
-        )}
-      </div>
-    </div>
-  );
-
   const PointsList = () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
       {item.points.map((pt, i) => (
         <div key={pt.title} style={{ display: "flex", gap: "12px", alignItems: "flex-start", borderTop: i > 0 ? "1px solid rgba(255,255,255,0.08)" : "none", paddingTop: i > 0 ? "1rem" : 0 }}>
           <div style={{
             flexShrink: 0, width: "32px", height: "32px", borderRadius: "6px",
-            background: "rgba(255,255,255,0.05)", border: "1px solid rgba(34,211,238,0.35)",
-            color: "rgba(34,211,238,0.9)", display: "flex", alignItems: "center", justifyContent: "center",
+            background: "rgba(255,255,255,0.05)", border: `1px solid ${brandAccentAlpha(0.35)}`,
+            color: brandAccentAlpha(0.9), display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             {pt.icon}
           </div>
@@ -1124,7 +1053,7 @@ const StepSlide = ({
   if (!isMobile) {
     return (
       <div style={{ display: "grid", gridTemplateColumns: "4fr 8fr", gap: "clamp(2rem, 5vw, 4rem)", alignItems: "center", padding: "0 14px" }}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
+        <div key={item.step} style={{ display: "flex", flexDirection: "column", gap: "1.2rem", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
           <div>
             <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
               STEP {item.step}
@@ -1132,7 +1061,7 @@ const StepSlide = ({
             <h3 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "#ffffff", fontWeight: 700, letterSpacing: "-0.02em", margin: "0.3rem 0" }}>
               {item.title}
             </h3>
-            <p style={{ fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.15em", color: "rgba(34,211,238,0.85)", textTransform: "uppercase", margin: 0 }}>
+            <p style={{ fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.15em", color: brandAccentAlpha(0.85), textTransform: "uppercase", margin: 0 }}>
               {item.tagline}
             </p>
             <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, marginTop: "1rem" }}>
@@ -1141,35 +1070,53 @@ const StepSlide = ({
           </div>
           <PointsList />
         </div>
-        <ArtBox aspect="16 / 13" />
+        <StepArtImage
+          src={image}
+          alt={item.title}
+          aspect="16 / 13"
+          held={held}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerLeave}
+        />
       </div>
     );
   }
-  // ── MOBILE: heading/tagline → art → desc/points, stacked ──
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.1rem" }}>
-      <div style={{ width: "100%", textAlign: "center", padding: "0 5vw" }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.1rem", width: "100%", minWidth: 0 }}>
+      <div key={`head-${item.step}`} style={{ width: "100%", textAlign: "center", padding: "0 0.25rem", animation: "heroTextIn 0.6s cubic-bezier(0.4,0,0.2,1)" }}>
         <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.2em", color: "rgba(255,255,255,0.35)", textTransform: "uppercase" }}>
           STEP {item.step}
         </span>
         <h3 style={{ fontSize: "1.3rem", color: "#ffffff", fontWeight: 600, letterSpacing: "-0.01em", margin: "0.3rem 0" }}>
           {item.title}
         </h3>
-        <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", color: "rgba(34,211,238,0.85)", textTransform: "uppercase", margin: 0 }}>
+        <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", color: brandAccentAlpha(0.85), textTransform: "uppercase", margin: 0 }}>
           {item.tagline}
         </p>
       </div>
 
-      <div style={{ width: "100%" }}>
-        <ArtBox aspect={mobileAspect} />
-      </div>
-
-      <div style={{ width: "100%", padding: "0 5vw" }}>
+      <div className="step-mobile-body" style={{ width: "100%", padding: "0 0.25rem" }}>
         <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.75, textAlign: "center", marginBottom: "1.2rem" }}>
           {item.desc}
         </p>
         <PointsList />
       </div>
+
+      <div style={{ width: "100%" }}>
+        <StepArtImage
+          src={image}
+          alt={item.title}
+          aspect={mobileAspect}
+          held={held}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          onPointerLeave={onPointerLeave}
+        />
+      </div>
+      <style jsx>{`
+        @keyframes heroTextIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      `}</style>
     </div>
   );
 };
@@ -1178,87 +1125,76 @@ const StepSlide = ({
 const StepCarousel = () => {
   const isMobile = useIsMobile();
   const [index, setIndex] = useState(0);
-  const [phase, setPhase] = useState<"trace" | "hold">("trace");
   const [progress, setProgress] = useState(0);
   const [held, setHeld] = useState(false);
-  const [transitioning, setTransitioning] = useState(false);
+  const [hasEnteredView, setHasEnteredView] = useState(false);
 
   const rafRef = useRef<number>(0);
   const startRef = useRef<number>(0);
   const pausedElapsedRef = useRef<number>(0);
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isPointerDownRef = useRef(false);
-
-  const phaseDuration = phase === "trace" ? TRACE_DURATION : HOLD_DURATION;
-  // ── shared aspect-ratio cache for all step images ──
-  const aspectCacheRef = useRef<Record<string, string>>({});
-  const [aspects, setAspects] = useState<Record<string, string>>({});
   const containerRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(true);
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || hasEnteredView) return;
     const observer = new IntersectionObserver(
-      ([entry]) => setInView(entry.isIntersecting),
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasEnteredView(true);
+          observer.disconnect();
+        }
+      },
       { threshold: 0.1 }
     );
     observer.observe(containerRef.current);
     return () => observer.disconnect();
-  }, []);
+  }, [hasEnteredView]);
 
-  const advanceStep = () => {
-    setTransitioning(true);
-    setTimeout(() => {
-      setIndex((i) => (i + 1) % HOW_IT_WORKS.length);
-      setPhase("trace");
-      setProgress(0);
-      pausedElapsedRef.current = 0;
-      setHeld(false);
-      setTransitioning(false);
-    }, SLIDE_TRANSITION);
+  const goTo = (next: number) => {
+    setIndex(next);
+    setHeld(false);
+    pausedElapsedRef.current = 0;
   };
 
+  const advance = () => goTo((index + 1) % HOW_IT_WORKS.length);
+
   useEffect(() => {
-    if (held || transitioning || !inView) {
-      if (!held && !transitioning && !inView && startRef.current) {
-        pausedElapsedRef.current = performance.now() - startRef.current;
-      }
-      return;
-    }
+    if (held || !hasEnteredView) return;
     startRef.current = performance.now() - pausedElapsedRef.current;
     const tick = (now: number) => {
       const elapsed = now - startRef.current;
-      const p = Math.min(elapsed / phaseDuration, 1);
+      const p = Math.min(elapsed / STEP_SLIDE_DURATION, 1);
       setProgress(p);
       if (p < 1) {
         rafRef.current = requestAnimationFrame(tick);
       } else {
         pausedElapsedRef.current = 0;
-        if (phase === "trace") setPhase("hold");
-        else advanceStep();
+        advance();
       }
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [phase, held, transitioning, index, inView]);
+  }, [index, held, hasEnteredView]);
+
+  useEffect(() => { pausedElapsedRef.current = 0; }, [index]);
 
   const handlePointerDown = () => {
-    if (transitioning) return;
     isPointerDownRef.current = true;
     holdTimerRef.current = setTimeout(() => {
       if (!isPointerDownRef.current) return;
       cancelAnimationFrame(rafRef.current);
       pausedElapsedRef.current = performance.now() - startRef.current;
       setHeld(true);
-    }, HOLD_THRESHOLD);
+    }, STEP_HOLD_THRESHOLD);
   };
 
   const handlePointerUp = () => {
     isPointerDownRef.current = false;
     if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
-    if (!held && !transitioning) {
+    if (!held) {
       cancelAnimationFrame(rafRef.current);
-      advanceStep();
+      advance();
     }
   };
 
@@ -1267,7 +1203,6 @@ const StepCarousel = () => {
     if (holdTimerRef.current) clearTimeout(holdTimerRef.current);
   };
 
-  // any tap anywhere resumes a held step
   useEffect(() => {
     if (!held) return;
     const resume = () => setHeld(false);
@@ -1279,8 +1214,8 @@ const StepCarousel = () => {
     <div ref={containerRef} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
       <div style={{
         position: "relative",
-        width: isMobile ? "calc(100% + 3rem)" : "90vw",
-        maxWidth: isMobile ? "none" : "1500px",
+        width: "100%",
+        maxWidth: isMobile ? "100%" : "1500px",
         overflow: "hidden",
       }}>
         <div
@@ -1288,7 +1223,7 @@ const StepCarousel = () => {
             display: "flex",
             width: `${HOW_IT_WORKS.length * 100}%`,
             transform: `translateX(-${(index * 100) / HOW_IT_WORKS.length}%)`,
-            transition: `transform ${SLIDE_TRANSITION}ms cubic-bezier(0.4,0,0.2,1)`,
+            transition: "transform 700ms cubic-bezier(0.4,0,0.2,1)",
           }}
         >
           {HOW_IT_WORKS.map((item, i) => (
@@ -1296,11 +1231,9 @@ const StepCarousel = () => {
               <StepSlide
                 item={item}
                 image={isMobile ? STEP_IMAGES[i].artMobile : STEP_IMAGES[i].art}
-                mobileAspect={isMobile ? "16 / 16" : "16 / 13"}
-                isActive={i === index}
-                phase={phase}
-                progress={i === index ? progress : 0}
+                mobileAspect="16 / 16"
                 isMobile={isMobile}
+                held={held && i === index}
                 onPointerDown={handlePointerDown}
                 onPointerUp={handlePointerUp}
                 onPointerLeave={handlePointerLeave}
@@ -1310,19 +1243,22 @@ const StepCarousel = () => {
         </div>
       </div>
 
-      <div style={{ display: "flex", gap: "6px" }}>
-        {HOW_IT_WORKS.map((_, i) => (
-          <div
-            key={i}
-            style={{
-              width: i === index ? "20px" : "6px",
-              height: "3px",
-              borderRadius: "1px",
-              background: i === index ? "#fff" : "rgba(255,255,255,0.25)",
-              transition: "width 0.3s ease, background 0.3s ease",
-            }}
-          />
-        ))}
+      <div style={{ width: "100%", maxWidth: isMobile ? "100%" : "min(90vw, 1500px)" }}>
+        <div style={{ display: "flex", gap: "5px", width: "100%" }}>
+          {HOW_IT_WORKS.map((_, i) => (
+            <div
+              key={i}
+              onClick={() => { cancelAnimationFrame(rafRef.current); pausedElapsedRef.current = 0; goTo(i); }}
+              style={{ flex: 1, height: "2px", borderRadius: "1px", background: "rgba(255,255,255,0.15)", overflow: "hidden", cursor: "pointer" }}
+            >
+              <div style={{
+                height: "100%",
+                width: i < index ? "100%" : i === index ? `${progress * 100}%` : "0%",
+                background: held && i === index ? "#fff" : "rgba(255,255,255,0.75)",
+              }} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -1332,7 +1268,6 @@ const StepCarousel = () => {
 const HowItWorksSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
-  const { tapeH } = useTape();
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -1345,7 +1280,6 @@ const HowItWorksSection = () => {
 
   return (
     <DarkSection id="how-it-works" className="flex flex-col" minHeight>
-      <TopTape />
       <DotGrid contentBottom={contentH / 1.02} animate={false} />
       <div
         className="max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col justify-center flex-1"
@@ -1372,7 +1306,7 @@ const HowItWorksSection = () => {
           Built on
         </p>
         <h2
-          className="font-bold"
+          className="font-bold section-heading-nowrap"
           style={{
             fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)",
             color: "#ffffff",
@@ -1380,7 +1314,7 @@ const HowItWorksSection = () => {
             marginBottom: "clamp(1rem, 4vh, 4rem)",
           }}
         >
-          Three steps to invisible.
+          Three steps to the unseen.
         </h2>
 
         <StepCarousel />
@@ -1429,10 +1363,8 @@ const WhyGrydinSection = () => {
     return () => ro.disconnect();
   }, []);
 
-  const { tapeH } = useTape();
   return (
     <DarkSection id="why-gridin" className="flex flex-col" minHeight>
-      <TopTape />
       <DotGrid contentBottom={contentH} animate={false} />
       <div ref={(el) => { (ref as React.MutableRefObject<HTMLDivElement | null>).current = el; (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = el; }} className="max-w-5xl mx-auto w-full px-6 md:px-12" style={{ position: "relative", zIndex: 1, paddingTop: "clamp(0.8rem, 3vh, 2rem)", paddingBottom: "clamp(2rem, 5vh, 4rem)" }}>
         <p className="mb-3 uppercase tracking-widest text-xs" style={{ fontWeight: 700, color: "#000000", letterSpacing: "0.2em" }}>Why us</p>
@@ -1457,6 +1389,29 @@ const WhyGrydinSection = () => {
 
 //measurable impact section
 
+function buildTracePath(W: number, H: number, progress: number) {
+  if (!W || !H) return "";
+  const perimeter = 2 * (W + H);
+  const dist = progress * perimeter;
+  const topRight = W / 2;
+  const branch = (d: number, dir: "right" | "left") => {
+    const sign = dir === "right" ? 1 : -1;
+    let path = `M ${W / 2} 0`;
+    if (d <= topRight) path += ` L ${W / 2 + sign * d} 0`;
+    else if (d <= topRight + H) {
+      const s2 = d - topRight;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${s2}`;
+    } else if (d <= topRight + H + W) {
+      const s3 = d - topRight - H;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? W - s3 : s3} ${H}`;
+    } else {
+      const s4 = d - topRight - H - W;
+      path += ` L ${dir === "right" ? W : 0} 0 L ${dir === "right" ? W : 0} ${H} L ${dir === "right" ? 0 : W} ${H} L ${dir === "right" ? 0 : W} ${H - s4}`;
+    }
+    return path;
+  };
+  return `${branch(dist / 2, "right")} ${branch(dist / 2, "left")}`;
+}
 
 const IMPACT_CASES = [
   {
@@ -1465,7 +1420,6 @@ const IMPACT_CASES = [
     label: "Faster Dispatch Turnaround",
     client: "Meridian Freight Co.",
     desc: "Deployed an AI agent to triage incoming freight requests and auto-assign drivers, cutting manual dispatch review to minutes.",
-    color: "#22d3ee",
     barPct: 47,
   },
   {
@@ -1474,7 +1428,6 @@ const IMPACT_CASES = [
     label: "Drop in Manual Reconciliation Hours",
     client: "Ledgerly Financial",
     desc: "Automated cross-ledger transaction matching, removing the weekly reconciliation backlog their finance team used to run by hand.",
-    color: "#f59e0b",
     barPct: 58,
   },
   {
@@ -1483,7 +1436,6 @@ const IMPACT_CASES = [
     label: "Increase in Booking Completion",
     client: "Aurelia Stays",
     desc: "Connected their booking engine, PMS, and channel manager into one system, replacing manual re-entry across three platforms with a single source of truth.",
-    color: "#10b981",
     barPct: 31,
   },
 ];
@@ -1529,15 +1481,15 @@ const ImpactCard = ({ item, index }: { item: (typeof IMPACT_CASES)[number]; inde
   const cardRef = useRef<HTMLDivElement>(null);
   const [dims, setDims] = useState({ w: 0, h: 0 });
   const [active, setActive] = useState(false);
+  const hasAnimatedRef = useRef(false);
   const [traceProgress, setTraceProgress] = useState(0);
   const rafRef = useRef<number>(0);
   const [hovered, setHovered] = useState(false);
-  const isMobile = useIsMobile();   // ← add this
+  const isMobile = useIsMobile();
   useEffect(() => {
     if (!cardRef.current) return;
     const el = cardRef.current;
-    const ro = new ResizeObserver((entries) => {
-      //const r = entries[0].contentRect;
+    const ro = new ResizeObserver(() => {
       setDims({ w: Math.round(el.clientWidth), h: Math.round(el.clientHeight) });
     });
     ro.observe(el);
@@ -1545,48 +1497,25 @@ const ImpactCard = ({ item, index }: { item: (typeof IMPACT_CASES)[number]; inde
   }, []);
 
   useEffect(() => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || hasAnimatedRef.current) return;
     const el = cardRef.current;
 
-    const enterObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
-        if (isMobile) {
-          if (entry.intersectionRatio >= 0.7) setActive(true);
-        } else {
-          if (entry.isIntersecting) setActive(true);
-        }
+        if (!entry.isIntersecting || hasAnimatedRef.current) return;
+        hasAnimatedRef.current = true;
+        setActive(true);
+        observer.disconnect();
       },
-      isMobile
-        ? { threshold: [0, 0.7, 1] }
-        : { threshold: 0, rootMargin: "-50% 0px -50% 0px" }
+      isMobile ? { threshold: 0.35 } : { threshold: 0.25 }
     );
 
-    const exitObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (isMobile) {
-          if (entry.intersectionRatio < 0.15) setActive(false);
-        } else {
-          if (!entry.isIntersecting) setActive(false);
-        }
-      },
-      isMobile
-        ? { threshold: [0, 0.15, 1] }
-        : { threshold: 0, rootMargin: "-35% 0px -35% 0px" }
-    );
-
-    enterObserver.observe(el);
-    exitObserver.observe(el);
-    return () => {
-      enterObserver.disconnect();
-      exitObserver.disconnect();
-    };
+    observer.observe(el);
+    return () => observer.disconnect();
   }, [isMobile]);
 
   useEffect(() => {
-    if (!active) {
-      setTraceProgress(0); // reset so re-entry always redraws from 0, not from wherever it left off
-      return;
-    }
+    if (!active) return;
     const DURATION = 900;
     const start = performance.now();
     const tick = (now: number) => {
@@ -1671,7 +1600,7 @@ const ImpactCard = ({ item, index }: { item: (typeof IMPACT_CASES)[number]; inde
           className="font-bold"
           style={{
             fontSize: "clamp(2.2rem, 4.5vw, 3.2rem)",
-            color: item.color,
+            color: BRAND_ACCENT,
             letterSpacing: "-0.03em",
             fontVariantNumeric: "tabular-nums",
             lineHeight: 1,          // ← add this
@@ -1690,7 +1619,7 @@ const ImpactCard = ({ item, index }: { item: (typeof IMPACT_CASES)[number]; inde
             style={{
               height: "100%",
               width: active ? `${item.barPct}%` : "0%",
-              background: item.color,
+              background: BRAND_ACCENT,
               transition: `width 1s cubic-bezier(0.16,1,0.3,1) ${300 + index * 120}ms`,
             }}
           />
@@ -1719,7 +1648,6 @@ const ImpactSection = () => {
 
   return (
     <DarkSection id="measurable-impact" className="flex flex-col" minHeight>
-      <TopTape />
       <DotGrid contentBottom={contentH / 1.02} animate={false} />
       <div
         ref={contentRef}
@@ -1729,11 +1657,11 @@ const ImpactSection = () => {
         <p className="mb-3 uppercase tracking-widest text-xs" style={{ color: "#000000", fontWeight: 700, letterSpacing: "0.2em", background: "rgba(255,255,255,0.45)", borderRadius: "2px", padding: "4px 8px", width: "fit-content" }}>
           Proven
         </p>
-        <h2 className="font-bold" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "0.6rem" }}>
+        <h2 className="font-bold section-heading-nowrap" style={{ fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", color: "#ffffff", letterSpacing: "-0.025em", marginBottom: "0.6rem" }}>
           Numbers behind the noise.
         </h2>
-        <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", marginBottom: "clamp(2rem, 5vh, 4rem)", maxWidth: "34rem" }}>
-          Outcomes we can point to, not case studies we polish.
+        <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", marginBottom: "clamp(1.5rem, 4vh, 3rem)", maxWidth: "34rem" }}>
+        <AccentWord>Outcomes</AccentWord> we can point to, drawn from recent case studies.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: "clamp(1.5rem, 4vw, 2rem)" }}>
           {IMPACT_CASES.map((item, i) => (
@@ -1748,7 +1676,6 @@ const ImpactSection = () => {
 const ContactSection = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentH, setContentH] = useState(0);
-  const { tapeH } = useTape();
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -1760,14 +1687,13 @@ const ContactSection = () => {
   }, []);
   return (
     <DarkSection id="contact" className="flex flex-col justify-between" minHeight>
-      <TopTape />
       <DotGrid contentBottom={contentH / 1.12} animate={false} />
       <div
         className="flex-1 max-w-5xl mx-auto w-full px-6 md:px-12 flex flex-col md:flex-row gap-16 justify-center md:justify-between items-center"
         ref={contentRef}
         style={{
-          paddingTop: "clamp(4rem, 10vh, 8rem)",
-          paddingBottom: "clamp(4rem, 10vh, 8rem)",
+          paddingTop: "clamp(2.5rem, 6vh, 5rem)",
+          paddingBottom: "clamp(2.5rem, 6vh, 5rem)",
           position: "relative",
           zIndex: 1,
         }}
@@ -1796,7 +1722,7 @@ const ContactSection = () => {
               lineHeight: 1.15,
             }}
           >
-            See a gap worth closing?
+            See a <AccentWord>gap</AccentWord> worth closing?
           </h2>
           <p
             style={{
@@ -1843,63 +1769,9 @@ const ContactSection = () => {
         </div>
       </div>
 
-      {/* Footer tape – SVG BottomTape geometry with footer text overlaid */}
-      <FooterTape />
-
     </DarkSection>
   )
 };
-
-const WhatsAppButton = () => (
-  <a
-    href={`https://wa.me/923296637320?text=Hi%20GrydIn%2C%20I%20came%20across%20your%20website%20and%20I%20think%20there%27s%20a%20gap%20in%20my%20business%20you%20might%20be%20able%20to%20close.%20I%27d%20like%20to%20discuss%20it.`}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Chat on WhatsApp"
-    style={{
-      position: "fixed",
-      bottom: "44px",
-      right: "28px",
-      zIndex: 200,
-      width: "48px",
-      height: "48px",
-      background: "white",
-      borderRadius: "2px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      boxShadow: "0 2px 16px rgba(0,0,0,0.18)",
-      transition: "background 0.2s, transform 0.2s",
-    }}
-    onMouseEnter={(e) => {
-      e.currentTarget.style.background = "#181717";
-      e.currentTarget.style.transform = "scale(1.08)";
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.background = "white";
-      e.currentTarget.style.transform = "scale(1)";
-    }}
-  >
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      style={{ color: "#000000" }}
-    >
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"
-        fill="currentColor"
-      />
-      <path
-        d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.418A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        fill="none"
-      />
-    </svg>
-  </a>
-);
 
 export default function Home() {
   const [tapeH, setTapeH] = useState(TAPE_H);
@@ -1954,15 +1826,16 @@ export default function Home() {
     <TapeCtx.Provider
       value={{ tapeH, arcR, tapeHSlow, arcRSlow: tapeHSlow / 2 }}
     >
-      <main style={{ background: "white", overflowX: "hidden" }}>
-        <Navbar tapeH={tapeHSlow} arcR={arcRSlow} />
-        <HeroSection />
-        <ServicesSection />
-        <HowItWorksSection />
-        {/* <WhyGrydinSection /> */}
-        <ImpactSection />
-        <ContactSection />
-        <WhatsAppButton />
+      <main style={{ background: LIGHT_PAGE_BG, overflowX: "hidden" }}>
+        <Navbar />
+        <div style={{ background: DARK_PAGE_BG }}>
+          <HeroSection />
+          <CollabsMarquee />
+          <ServicesSection />
+          <HowItWorksSection />
+          <ImpactSection />
+          <ContactSection />
+        </div>
       </main>
     </TapeCtx.Provider>
   );

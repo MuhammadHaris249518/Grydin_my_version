@@ -255,7 +255,7 @@ const TopTape = () => {
 //             letterSpacing: "0.06em",
 //           }}
 //         >
-//           Built for the gaps in your business.
+//           We grid what your business overlooks.
 //         </span>
 //       </div>
 //     </div>
@@ -1050,7 +1050,7 @@ const HeroSection = () => {
             padding: "4px 8px",
           }}
         >
-          Built for the gaps in your business
+          We grid what your business overlooks
         </p>
 
         <h1
@@ -1120,7 +1120,7 @@ const HeroSection = () => {
             e.currentTarget.style.color = "#000000";
           }}
         >
-          Start a project <ArrowRight size={14} strokeWidth={2.2} />
+          Grid Your Vision <ArrowRight size={14} strokeWidth={2.2} />
         </a>
       </div>
 
@@ -2141,7 +2141,7 @@ const HowItWorksSection = () => {
             marginBottom: "clamp(1rem, 4vh, 4rem)",
           }}
         >
-          Three steps to invisible.
+          Three steps to the unseen.
         </h2>
 
         <StepCarousel />
@@ -2716,7 +2716,7 @@ export default function Home() {
       value={{ tapeH, arcR, tapeHSlow, arcRSlow: tapeHSlow / 2 }}
     >
       <main style={{ background: "white", overflowX: "hidden" }}>
-        <Navbar tapeH={tapeHSlow} arcR={arcRSlow} />
+        <Navbar />
         <HeroSection />
         <ServicesSection />
         <HowItWorksSection />

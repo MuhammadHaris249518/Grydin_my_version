@@ -8,6 +8,7 @@
 
 html {
   scroll-behavior: smooth;
+  --brand-accent: #899140;
 }
 
 html,
@@ -16,6 +17,24 @@ body {
   padding: 0;
   background: white;
   overflow-x: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+input,
+textarea,
+select,
+[data-allow-copy] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
 }
 
 a {
@@ -71,6 +90,65 @@ html {
 
   50% {
     opacity: 0
+  }
+}
+
+@media (max-width: 768px) {
+  .section-heading-nowrap {
+    white-space: nowrap;
+    font-size: clamp(1.28rem, 4.1vw, 1.72rem) !important;
+  }
+
+  .hero-eyebrow-mobile {
+    letter-spacing: 0.16em;
+    padding-left: 6px;
+    padding-right: 6px;
+    line-height: 1.55;
+  }
+
+  .hero-content-mobile {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+}
+
+.origin-visual-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.origin-visual-wrap > * {
+  width: 100%;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 768px) {
+  .step-mobile-body {
+    min-height: 24rem;
+  }
+
+  .belief-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 769px) {
+  .belief-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
   }
 }
 

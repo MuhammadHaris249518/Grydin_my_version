@@ -1,9 +1,34 @@
-export const metadata = { title: "Contact | GrydIn" };
+import {
+  contactFaq,
+  contactMetadata,
+  faqJsonLd,
+  jsonLdScript,
+  webPageJsonLd,
+} from "@/lib/seo";
+
+export const metadata = contactMetadata;
+
+const jsonLd = [
+  webPageJsonLd({
+    path: "/contact",
+    name: contactMetadata.title as string,
+    description: contactMetadata.description as string,
+  }),
+  faqJsonLd([...contactFaq]),
+];
 
 export default function ContactLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
+      />
+      {children}
+    </>
+  );
 }

@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // API routes (/api/contact) require server runtime — do not use static export.
+  output: "export",
+  // Cloudflare Pages serves static files from /out. Contact form uses functions/api/contact.ts.
 };
 
 export default nextConfig;

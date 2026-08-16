@@ -499,8 +499,8 @@ export default function Contact() {
                 Describe what&apos;s slowing your business down. No pitch, no sales
                 deck – just an <AccentWord>honest</AccentWord>, scoped response within one business day.
               </p>
-
-              <AvailabilityBadge />
+{/* 
+              <AvailabilityBadge /> */}
 
               <AnimatedDivider />
 

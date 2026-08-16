@@ -921,10 +921,11 @@ export default function About() {
                 textAlign: "justify",
               }}
             >
-              GrydIn is a Software and Business AI Automation company based in Pakistan,
-              building for businesses globally. We surface the invisible work slowing
-              your team down – then eliminate it. No disruption to what already works.
-              No bloat. Just precise systems running quietly in the background.
+              GrydIn is an AI-native technology company, based in Pakistan,
+              building for businesses globally. We surface the invisible work
+              slowing your team down – then eliminate it. No disruption to what
+              already works. No bloat. Just precise systems running quietly in
+              the background.
             </p>
 
             <AnimatedDivider />
@@ -978,11 +979,12 @@ export default function About() {
                 textAlign: "justify",
               }}
             >
-              We kept seeing the same <AccentWord>problem</AccentWord> across businesses we worked with –
-              teams spending real hours on work that wasn&apos;t theirs to do. Moving
-              data between systems. Chasing approvals. Running the same report on a
-              loop. Not because they lacked capability. Because no one had ever wired
-              the tools together properly.
+              We kept seeing the same <AccentWord>problem</AccentWord> across
+              businesses we worked with – teams spending real hours on work that
+              wasn&apos;t theirs to do. Moving data between systems. Chasing
+              approvals. Running the same report on a loop. Not because they
+              lacked capability. Because no one had ever wired the tools
+              together properly.
               <br />
               <br />
               GrydIn exists to fix that. Precisely, without the overhaul.
@@ -1058,7 +1060,6 @@ export default function About() {
               </a>
             </div>
           </div>
-
         </section>
       </main>
     </TapeCtx.Provider>

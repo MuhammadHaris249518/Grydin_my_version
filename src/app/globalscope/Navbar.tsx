@@ -55,7 +55,7 @@ const GetStartedButton = ({ onClick }: { onClick?: () => void }) => (
       alignItems: "center",
       gap: "6px",
       padding: "8px 16px",
-      borderRadius: "999px",
+      borderRadius: "2px",
       background: "rgba(255,255,255,0.07)",
       border: "1px solid rgba(255,255,255,0.18)",
       color: "rgba(255,255,255,0.88)",
@@ -130,7 +130,7 @@ const Navbar = () => {
             gap: "1rem",
             minHeight: "52px",
             padding: "8px 10px 8px 18px",
-            borderRadius: "999px",
+            borderRadius: "2px",
             background: scrolled
               ? "rgba(12,12,12,0.72)"
               : "rgba(255,255,255,0.06)",

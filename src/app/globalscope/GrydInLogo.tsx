@@ -25,7 +25,7 @@ export const GrydInLogo = ({ variant = "navbar" }: GrydInLogoProps) => {
       }}
     >
       <img
-        src="/brand/logo.png"
+        src="/brand/GrydIn.png"
         alt=""
         width={iconSize}
         height={iconSize}

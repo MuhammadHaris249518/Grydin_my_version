@@ -1,5 +1,10 @@
 /** Default site accent — olive. Override with NEXT_PUBLIC_BRAND_ACCENT in .env.local */
-export const BRAND_ACCENT_DEFAULT = "#899140";
+
+// #94b55e
+// #68877f
+// #6e8fa3
+
+export const BRAND_ACCENT_DEFAULT = "#68877f";
 
 export const BRAND_ACCENT =
   process.env.NEXT_PUBLIC_BRAND_ACCENT?.trim() || BRAND_ACCENT_DEFAULT;

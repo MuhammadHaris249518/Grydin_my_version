@@ -273,7 +273,7 @@ export function organizationJsonLd() {
     name: SITE.legalName,
     alternateName: SITE.name,
     url: SITE_URL,
-    logo: `${SITE_URL}/brand/logo.png`,
+    logo: `${SITE_URL}/brand/GrydIn.png`,
     image: `${SITE_URL}/brand/og-image.png`,
     description:
       "Software and AI automation company based in Islamabad, Pakistan. GrydIn eliminates invisible manual work with AI agents, workflow automation, AI integration, custom software, system integration, and full-stack development.",

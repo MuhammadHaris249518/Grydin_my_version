@@ -3,14 +3,41 @@ export const SITE = {
   legalName: "GrydIn",
   tagline: "We bridge the gaps in your business.",
   email: "hello@grydin.co",
+  /** Opens default mail app with To, subject, and body prefilled. */
+  contactMailtoHref: (() => {
+    const subject = "Inquiry for GrydIn";
+    const body =
+      "Hi GrydIn team,\n\nI'd like to discuss:\n\n[Your message here]\n\nBest regards,\n[Your name]";
+    return `mailto:hello@grydin.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  })(),
   phoneDisplay: "+92 329 6637320",
   phoneTel: "+923296637320",
-  locationLine: "Pakistan – working globally",
-  locationDisplay: "Islamabad, Pakistan – working globally",
-  city: "Islamabad",
   linkedin: "https://www.linkedin.com/company/grydin",
   whatsappUrl:
-    "https://wa.me/923296637320?text=Hi%20GrydIn%2C%20I%20came%20across%20your%20website%20and%20I%20think%20there%27s%20a%20gap%20in%20my%20business%20you%20might%20be%20able%20to%20close.%20I%27d%20like%20to%20discuss%20it.",
+    "https://wa.me/923296637320?text=Hi%20GrydIn%2C%20I%27d%20like%20to",
+  office: {
+    lines: [
+      "Office # 26",
+      "The Box Software Technology Park",
+      "F-11 Markaz, Islamabad",
+      "44000",
+    ],
+    streetAddress: "Office # 26, The Box Software Technology Park, F-11 Markaz",
+    locality: "Islamabad",
+    postalCode: "44000",
+    country: "PK",
+    mapsUrl: "https://maps.app.goo.gl/3kzXdkA1Dr6gbXYv5",
+    lat: 33.6838634,
+    lng: 72.9892686,
+    directionsUrl:
+      "https://www.google.com/maps/dir//Office+%23+26,+3rd+Floor,+GrydIn,+The+Box+Software+Technology+Park,+F-11+Markaz+F+11+Markaz+F-11,+Islamabad,+44000,+Pakistan/@33.6838634,72.9892686,17z/data=!4m16!1m7!3m6!1s0x38dfbd96dfa1f27f:0x844d50455d33433!2sGrydIn!8m2!3d33.6838634!4d72.9892686!16s%2Fg%2F11zyvkz0m9!4m7!1m0!1m5!1m1!1s0x38dfbd96dfa1f27f:0x844d50455d33433!2m2!1d72.9892686!2d33.6838634?entry=ttu",
+    /** Full line as on Google Maps place listing (share preview). */
+    mapsInfoAddress:
+      "Office # 26, 3rd Floor, The Box Software Technology Park, F-11 Markaz, Islamabad, 44000, Pakistan",
+    /** Map-only embed — z=12 slightly closer on F-11 / GrydIn. */
+    mapsEmbedSrc:
+      "https://maps.google.com/maps?q=GrydIn+F-11+Markaz+Islamabad+Pakistan&hl=en&z=12&output=embed",
+  },
 } as const;
 
 export const SITEMAP_LINKS = [

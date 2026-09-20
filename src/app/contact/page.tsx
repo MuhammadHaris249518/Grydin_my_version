@@ -6,6 +6,7 @@ import { useTypewriter } from "../globalscope/typewriter";
 import { Menu, X } from "lucide-react";
 import Navbar, { NAVBAR_TOP_OFFSET } from "../globalscope/Navbar";
 import { ContactForm } from "../globalscope/ContactForm";
+import { ContactReachSection } from "../globalscope/ContactReachSection";
 import DotGrid from "../globalscope/DotGrid";
 import { AccentWord } from "../globalscope/AccentWord";
 import { BRAND_ACCENT, brandAccentAlpha } from "@/lib/brand";
@@ -416,18 +417,17 @@ export default function Contact() {
             minHeight: "100vh",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
           }}
         >
           <Navbar />
           <div style={{ height: NAVBAR_TOP_OFFSET }} />
 
-          <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
+          <div style={{ flex: 1, padding: "clamp(1.5rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem)" }}>
             <div
               style={{
                 maxWidth: "920px",
                 margin: "0 auto",
-                padding: "2rem",
+                padding: "0 clamp(1rem, 4vw, 2rem)",
                 width: "100%",
                 opacity: mounted ? 1 : 0,
                 transform: mounted ? "translateY(0)" : "translateY(28px)",
@@ -505,6 +505,8 @@ export default function Contact() {
               <AnimatedDivider />
 
               <ContactForm />
+
+              <ContactReachSection />
             </div>
           </div>
 

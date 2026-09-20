@@ -11,7 +11,7 @@ export const metadata = contactMetadata;
 const jsonLd = [
   webPageJsonLd({
     path: "/contact",
-    name: contactMetadata.title as string,
+    name: "GrydIn - Contact",
     description: contactMetadata.description as string,
   }),
   faqJsonLd([...contactFaq]),

@@ -1,4 +1,4 @@
-# GrydIn — open to all crawlers and LLMs. No access restrictions.
+# GrydIn - open to all crawlers and LLMs. No access restrictions.
 # LLM navigation index: https://grydin.co/llms.txt
 
 User-agent: *

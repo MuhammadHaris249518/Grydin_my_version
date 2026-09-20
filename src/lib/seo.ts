@@ -3,12 +3,30 @@ import { SITE } from "@/app/globalscope/site-config";
 
 export const SITE_URL = "https://grydin.co";
 
+const OFFICE_ADDRESS_LINE = SITE.office.lines.join(", ");
+
+function organizationPostalAddress() {
+  return {
+    "@type": "PostalAddress",
+    streetAddress: SITE.office.streetAddress,
+    addressLocality: SITE.office.locality,
+    postalCode: SITE.office.postalCode,
+    addressCountry: SITE.office.country,
+  };
+}
+
 const OG_IMAGE = {
   url: "/brand/og-image.png",
   width: 1200,
   height: 630,
-  alt: "GrydIn — AI automation and custom software company",
+  alt: "GrydIn - AI automation and custom software company",
 };
+
+/** Browser tab favicon only — transparent black mark (Logo - black.png). */
+export const SITE_FAVICON = "/brand/logo-black.png";
+
+/** Google Search result site icon only — white square (logo-white-bg.png). */
+export const GOOGLE_SITE_ICON = "/brand/logo-white-bg.png";
 
 export const SERVICE_SEO = [
   {
@@ -31,7 +49,7 @@ export const SERVICE_SEO = [
     name: "Workflow Automation",
     slug: "workflow-automation",
     summary:
-      "End-to-end workflow mapping and automation across tools using Make.com, n8n, or custom code — without migration or disruption.",
+      "End-to-end workflow mapping and automation across tools using Make.com, n8n, or custom code - without migration or disruption.",
     keywords: [
       "workflow automation services",
       "business process automation",
@@ -47,7 +65,7 @@ export const SERVICE_SEO = [
     name: "AI Integration",
     slug: "ai-integration",
     summary:
-      "LLM and AI model integration into existing products, pipelines, and decision systems — scoped to your data and business logic.",
+      "LLM and AI model integration into existing products, pipelines, and decision systems - scoped to your data and business logic.",
     keywords: [
       "AI integration services",
       "LLM integration for business",
@@ -63,7 +81,7 @@ export const SERVICE_SEO = [
     name: "Custom Software",
     slug: "custom-software",
     summary:
-      "Bespoke web and mobile software built around how your business actually works — dashboards, internal tools, and scalable backends.",
+      "Bespoke web and mobile software built around how your business actually works - dashboards, internal tools, and scalable backends.",
     keywords: [
       "custom software development company",
       "bespoke software development",
@@ -94,7 +112,7 @@ export const SERVICE_SEO = [
     name: "Full-Stack Development",
     slug: "full-stack-development",
     summary:
-      "Production-ready product builds — React, Node.js, Flutter, APIs, cloud deployment, CI/CD, and post-launch support.",
+      "Production-ready product builds - React, Node.js, Flutter, APIs, cloud deployment, CI/CD, and post-launch support.",
     keywords: [
       "full-stack development services",
       "React Node.js development company",
@@ -141,12 +159,14 @@ const baseTwitter = {
 };
 
 function buildMetadata({
-  title,
+  documentTitle,
+  socialTitle,
   description,
   path,
   keywords,
 }: {
-  title: string;
+  documentTitle: string;
+  socialTitle: string;
   description: string;
   path: string;
   keywords: string[];
@@ -154,7 +174,7 @@ function buildMetadata({
   const url = `${SITE_URL}${path}`;
 
   return {
-    title: { absolute: title },
+    title: { absolute: documentTitle },
     description,
     keywords,
     alternates: { canonical: url },
@@ -171,22 +191,23 @@ function buildMetadata({
     },
     openGraph: {
       ...baseOpenGraph,
-      title,
+      title: socialTitle,
       description,
       url,
     },
     twitter: {
       ...baseTwitter,
-      title,
+      title: socialTitle,
       description,
     },
   };
 }
 
 export const homeMetadata = buildMetadata({
-  title: "GrydIn | AI Automation, Workflow Automation & Custom Software",
+  documentTitle: "GrydIn",
+  socialTitle: "GrydIn | AI Automation, Workflow Automation & Custom Software",
   description:
-    "GrydIn is an AI automation and custom software company based in Islamabad, Pakistan — working globally. We eliminate invisible manual work with AI agents, workflow automation, AI integration, system integration, and full-stack development. Diagnosis first. Fixed scope. First deployment in under two weeks.",
+    "GrydIn is an AI automation and custom software company with an office at The Box Software Technology Park, F-11 Markaz, Islamabad. We eliminate invisible manual work with AI agents, workflow automation, AI integration, system integration, and full-stack development. Diagnosis first. Fixed scope. First deployment in under two weeks.",
   path: "/",
   keywords: [
     ...GLOBAL_KEYWORDS,
@@ -198,9 +219,10 @@ export const homeMetadata = buildMetadata({
 });
 
 export const servicesMetadata = buildMetadata({
-  title: "AI Automation Services — Agents, Workflows, Integration & Software",
+  documentTitle: "GrydIn - Services",
+  socialTitle: "AI Automation Services - Agents, Workflows, Integration & Software",
   description:
-    "Explore GrydIn's six core services: custom AI agents, workflow automation (Make.com & n8n), AI integration, custom software, system integration, and full-stack development. Fixed-scope projects with clear deliverables — scoped after diagnosis, deployed fast.",
+    "Explore GrydIn's six core services: custom AI agents, workflow automation (Make.com & n8n), AI integration, custom software, system integration, and full-stack development. Fixed-scope projects with clear deliverables - scoped after diagnosis, deployed fast.",
   path: "/services",
   keywords: [
     ...GLOBAL_KEYWORDS,
@@ -209,9 +231,10 @@ export const servicesMetadata = buildMetadata({
 });
 
 export const aboutMetadata = buildMetadata({
-  title: "About GrydIn — AI Automation Company in Islamabad, Working Globally",
+  documentTitle: "GrydIn - About",
+  socialTitle: "About GrydIn - AI Automation Company in Islamabad",
   description:
-    "GrydIn surfaces the invisible work slowing teams down — manual handoffs, copy-paste, and gaps between tools — then eliminates it without disruption. Learn our beliefs, origin story, and how we diagnose before we build.",
+    "GrydIn surfaces the invisible work slowing teams down - manual handoffs, copy-paste, and gaps between tools - then eliminates it without disruption. Learn our beliefs, origin story, and how we diagnose before we build.",
   path: "/about",
   keywords: [
     ...GLOBAL_KEYWORDS,
@@ -224,9 +247,10 @@ export const aboutMetadata = buildMetadata({
 });
 
 export const contactMetadata = buildMetadata({
-  title: "Contact GrydIn — Start Your Automation or Software Project",
+  documentTitle: "GrydIn - Contact",
+  socialTitle: "Contact GrydIn - Start Your Automation or Software Project",
   description:
-    "Tell GrydIn what's slowing your business down. No pitch deck — an honest, scoped response within one business day. Email hello@grydin.co, WhatsApp +92 329 6637320, or use our contact form.",
+    "Tell GrydIn what's slowing your business down. No pitch deck - an honest, scoped response within one business day. Email hello@grydin.co, WhatsApp +92 329 6637320, or use our contact form.",
   path: "/contact",
   keywords: [
     ...GLOBAL_KEYWORDS,
@@ -241,14 +265,21 @@ export const contactMetadata = buildMetadata({
 export const rootMetadata: Metadata = {
   ...homeMetadata,
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: "GrydIn | AI Automation, Workflow Automation & Custom Software",
-    template: "%s | GrydIn",
-  },
   authors: [{ name: SITE.legalName, url: SITE_URL }],
   creator: SITE.legalName,
   publisher: SITE.legalName,
   category: "technology",
+  icons: {
+    icon: [{ url: SITE_FAVICON, sizes: "48x48", type: "image/png" }],
+    other: [
+      {
+        rel: "icon",
+        url: GOOGLE_SITE_ICON,
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 function serviceOfferCatalog() {
@@ -273,17 +304,18 @@ export function organizationJsonLd() {
     name: SITE.legalName,
     alternateName: SITE.name,
     url: SITE_URL,
-    logo: `${SITE_URL}/brand/GrydIn.png`,
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_URL}${GOOGLE_SITE_ICON}`,
+      width: 512,
+      height: 512,
+    },
     image: `${SITE_URL}/brand/og-image.png`,
     description:
-      "Software and AI automation company based in Islamabad, Pakistan. GrydIn eliminates invisible manual work with AI agents, workflow automation, AI integration, custom software, system integration, and full-stack development.",
+      "Software and AI automation company. GrydIn eliminates invisible manual work with AI agents, workflow automation, AI integration, custom software, system integration, and full-stack development.",
     email: SITE.email,
     telephone: SITE.phoneTel,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: SITE.city,
-      addressCountry: "PK",
-    },
+    address: organizationPostalAddress(),
     areaServed: "Worldwide",
     knowsAbout: SERVICE_SEO.map((service) => service.name),
     sameAs: [SITE.linkedin],
@@ -319,11 +351,7 @@ export function professionalServiceJsonLd() {
     description: homeMetadata.description,
     priceRange: "$$",
     areaServed: "Worldwide",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: SITE.city,
-      addressCountry: "PK",
-    },
+    address: organizationPostalAddress(),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "GrydIn Automation & Software Services",
@@ -416,7 +444,7 @@ export const servicesFaq = [
   {
     question: "How does GrydIn pricing work?",
     answer:
-      "Every project is scoped before it is priced. After an initial diagnosis call, clients receive a clear fixed quote — no ranges, no retainer traps, and no surprise invoices.",
+      "Every project is scoped before it is priced. After an initial diagnosis call, clients receive a clear fixed quote - no ranges, no retainer traps, and no surprise invoices.",
   },
 ] as const;
 
@@ -424,17 +452,17 @@ export const contactFaq = [
   {
     question: "How do I start a project with GrydIn?",
     answer:
-      "Use the contact form at grydin.co/contact, email hello@grydin.co, or message on WhatsApp. Describe what's slowing your business down — you'll receive an honest, scoped response within one business day.",
+      "Use the contact form at grydin.co/contact, email hello@grydin.co, or message on WhatsApp. Describe what's slowing your business down - you'll receive an honest, scoped response within one business day.",
   },
   {
     question: "What should I include in my first message to GrydIn?",
     answer:
-      "Share the workflow or problem slowing your team — manual handoffs, tool gaps, repetitive reporting, approval bottlenecks, or a product you need built. No pitch deck required.",
+      "Share the workflow or problem slowing your team - manual handoffs, tool gaps, repetitive reporting, approval bottlenecks, or a product you need built. No pitch deck required.",
   },
   {
     question: "What is GrydIn's response time?",
     answer:
-      "GrydIn responds within one business day. Based in Islamabad, Pakistan — working globally.",
+      `GrydIn responds within one business day. Office: ${OFFICE_ADDRESS_LINE}.`,
   },
 ] as const;
 

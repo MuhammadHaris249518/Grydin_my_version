@@ -12,7 +12,7 @@ export const metadata = servicesMetadata;
 const jsonLd = [
   webPageJsonLd({
     path: "/services",
-    name: servicesMetadata.title as string,
+    name: "GrydIn - Services",
     description: servicesMetadata.description as string,
   }),
   servicesPageJsonLd(),

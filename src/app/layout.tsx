@@ -1,7 +1,9 @@
 import "./globals.css";
+import { Inter } from "next/font/google";
 import { RouteChangeHandler } from "./globalscope/RouteChangeHandler";
 import { ContentProtection } from "./globalscope/ContentProtection";
 import { SiteFooter } from "./globalscope/SiteFooter";
+import Navbar from "./globalscope/Navbar";
 import { BRAND_ACCENT } from "@/lib/brand";
 import {
   jsonLdScript,
@@ -10,6 +12,13 @@ import {
   rootMetadata,
   websiteJsonLd,
 } from "@/lib/seo";
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata = rootMetadata;
 
@@ -37,9 +46,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
         />
       </head>
-      <body suppressHydrationWarning>
+      <body className={`${inter.variable} font-sans`} suppressHydrationWarning>
         <ContentProtection />
         <RouteChangeHandler />
+        <Navbar />
         {children}
         <SiteFooter />
       </body>

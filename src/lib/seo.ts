@@ -158,20 +158,35 @@ const baseTwitter = {
   images: [OG_IMAGE.url],
 };
 
-function buildMetadata({
+export function buildMetadata({
   documentTitle,
   socialTitle,
   description,
   path,
   keywords,
+  ogImage,
 }: {
   documentTitle: string;
   socialTitle: string;
   description: string;
   path: string;
   keywords: string[];
+  ogImage?: string;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
+
+  const ogImages = ogImage
+    ? [
+        {
+          url: ogImage.startsWith("http") ? ogImage : ogImage,
+          width: 1200,
+          height: 630,
+          alt: socialTitle,
+        },
+      ]
+    : [OG_IMAGE];
+
+  const twitterImages = ogImage ? [ogImage] : [OG_IMAGE.url];
 
   return {
     title: { absolute: documentTitle },
@@ -194,11 +209,13 @@ function buildMetadata({
       title: socialTitle,
       description,
       url,
+      images: ogImages,
     },
     twitter: {
       ...baseTwitter,
       title: socialTitle,
       description,
+      images: twitterImages,
     },
   };
 }
@@ -227,6 +244,57 @@ export const servicesMetadata = buildMetadata({
   keywords: [
     ...GLOBAL_KEYWORDS,
     ...SERVICE_SEO.flatMap((service) => [...service.keywords]),
+  ],
+});
+
+export const projectsMetadata = buildMetadata({
+  documentTitle: "GrydIn - Projects & Products",
+  socialTitle: "Our Work & Concept Products | GrydIn",
+  description:
+    "Explore GrydIn's client case studies and concept products. Real automation, AI agents, and custom software delivered with fixed scopes and measurable outcomes.",
+  path: "/projects",
+  keywords: [
+    ...GLOBAL_KEYWORDS,
+    "GrydIn projects",
+    "client case studies",
+    "AI case studies",
+    "automation portfolio",
+    "GridPilot",
+    "FlowMap",
+    "DocuGrid",
+    "SyncBridge",
+  ],
+});
+
+export const solutionsMetadata = buildMetadata({
+  documentTitle: "GrydIn - Industry Solutions",
+  socialTitle: "Tailored AI & Automation Solutions by Industry | GrydIn",
+  description:
+    "Explore GrydIn's industry-specific automation and software solutions for legal, real estate, retail, healthcare, energy, and logistics businesses worldwide.",
+  path: "/solutions",
+  keywords: [
+    ...GLOBAL_KEYWORDS,
+    "industry automation",
+    "legal AI automation",
+    "real estate workflow automation",
+    "ecommerce automation",
+    "healthcare software",
+  ],
+});
+
+export const blogMetadata = buildMetadata({
+  documentTitle: "GrydIn - Insights & Newsroom",
+  socialTitle: "Insights, News & Announcements | GrydIn Newsroom",
+  description:
+    "Read the latest engineering insights, product news, and company announcements from GrydIn. Practical perspectives on AI agents, workflows, and modern systems.",
+  path: "/blog",
+  keywords: [
+    ...GLOBAL_KEYWORDS,
+    "AI automation blog",
+    "workflow automation insights",
+    "GrydIn newsroom",
+    "AI engineering articles",
+    "software technology updates",
   ],
 });
 
@@ -469,3 +537,180 @@ export const contactFaq = [
 export function jsonLdScript(data: unknown) {
   return JSON.stringify(data);
 }
+
+export function breadcrumbJsonLd(items: Array<{ name: string; url?: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => {
+      const entry: {
+        "@type": string;
+        position: number;
+        name: string;
+        item?: string;
+      } = {
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+      };
+      if (item.url) {
+        entry.item = item.url.startsWith("http") ? item.url : `${SITE_URL}${item.url}`;
+      }
+      return entry;
+    }),
+  };
+}
+
+export function collectionPageJsonLd({
+  path,
+  name,
+  description,
+  items,
+}: {
+  path: string;
+  name: string;
+  description: string;
+  items?: Array<{ name: string; url: string; description?: string }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}${path}#collection`,
+    url: `${SITE_URL}${path}`,
+    name,
+    description,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    ...(items && items.length > 0
+      ? {
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: items.map((it, idx) => ({
+              "@type": "ListItem",
+              position: idx + 1,
+              name: it.name,
+              url: it.url.startsWith("http") ? it.url : `${SITE_URL}${it.url}`,
+              ...(it.description ? { description: it.description } : {}),
+            })),
+          },
+        }
+      : {}),
+  };
+}
+
+export function blogPostingJsonLd(post: {
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  updated?: string;
+  author: string;
+  category?: string;
+  cover?: string;
+  keywords?: string[];
+  tags?: string[];
+}) {
+  const isNews = post.category === "news";
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const imageUrl = post.cover
+    ? post.cover.startsWith("http")
+      ? post.cover
+      : `${SITE_URL}${post.cover}`
+    : `${SITE_URL}/brand/og-image.png`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": isNews ? "NewsArticle" : "BlogPosting",
+    "@id": `${url}#article`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.updated || post.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    url,
+    image: imageUrl,
+    author: {
+      "@type": "Person",
+      name: post.author,
+    },
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    keywords: post.keywords?.join(", ") || post.tags?.join(", ") || "",
+    inLanguage: "en",
+  };
+}
+
+export function softwareApplicationJsonLd(product: {
+  name: string;
+  summary: string;
+  slug: string;
+  category?: string;
+  status?: string;
+}) {
+  const url = `${SITE_URL}/products/${product.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${url}#software`,
+    name: product.name,
+    headline: product.summary,
+    description: product.summary,
+    url,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    publisher: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+  };
+}
+
+export function projectJsonLd(project: {
+  title: string;
+  summary: string;
+  slug: string;
+  client?: string;
+  year?: number;
+}) {
+  const url = `${SITE_URL}/projects/${project.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `${url}#project`,
+    name: project.title,
+    headline: project.summary,
+    description: project.summary,
+    url,
+    creator: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    ...(project.client ? { provider: { "@type": "Organization", name: project.client } } : {}),
+    ...(project.year ? { dateCreated: `${project.year}` } : {}),
+  };
+}
+
+export function solutionJsonLd(solution: {
+  name: string;
+  headline?: string;
+  summary: string;
+  slug: string;
+}) {
+  const url = `${SITE_URL}/solutions/${solution.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${url}#solution`,
+    name: solution.name,
+    description: solution.summary,
+    url,
+    serviceType: "Industry Automation Solution",
+    provider: {
+      "@id": `${SITE_URL}/#organization`,
+    },
+    areaServed: "Worldwide",
+  };
+}
+

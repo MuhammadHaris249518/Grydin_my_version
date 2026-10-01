@@ -9,10 +9,9 @@ import {
   Cloud, BrainCircuit, ScanText, SlidersHorizontal, Link2, RefreshCw, Braces, Target, AlertTriangle, Crosshair, Workflow, Puzzle, Rocket,
 } from "lucide-react";
 import { useTypewriter } from "./globalscope/typewriter";
-import DotGrid from "./globalscope/DotGrid";
-import Navbar, { NAVBAR_TOP_OFFSET } from "./globalscope/Navbar";
 import { CollabsMarquee } from "./globalscope/CollabsMarquee";
 import { AccentWord } from "./globalscope/AccentWord";
+import DotGrid from "./globalscope/DotGrid";
 import { BRAND_ACCENT, brandAccentAlpha, brandAccentHexAlpha } from "@/lib/brand";
 import { DARK_PAGE_BG, DARK_SECTION_BG, LIGHT_PAGE_BG } from "@/lib/theme";
 
@@ -1649,7 +1648,6 @@ export default function Home() {
       value={{ tapeH, arcR, tapeHSlow, arcRSlow: tapeHSlow / 2 }}
     >
       <main style={{ background: LIGHT_PAGE_BG, overflowX: "hidden" }}>
-        <Navbar />
         <div style={{ background: DARK_PAGE_BG }}>
           <HeroSection />
           <CollabsMarquee />

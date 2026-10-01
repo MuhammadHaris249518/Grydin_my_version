@@ -34,7 +34,6 @@ import {
   HelpCircle,
   LucideIcon,
 } from "lucide-react";
-import Navbar from "../globalscope/Navbar";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type ServiceCategory =
@@ -345,8 +344,7 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-[#04172e] text-slate-100 selection:bg-[#0d8b99] selection:text-white">
-      {/* ── Global Top Navbar ── */}
-      <Navbar />
+
 
       {/* ── 1. Hero Section ── */}
       <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden border-b border-white/10">

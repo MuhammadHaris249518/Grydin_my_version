@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Linkedin } from "lucide-react";
-import { SITE, SITEMAP_LINKS, SERVICE_LINKS } from "./site-config";
+import { SITE, SITEMAP_LINKS, SERVICE_LINKS, BLOG_LINKS } from "./site-config";
 import { GrydInLogo } from "./GrydInLogo";
 import { BRAND_ACCENT } from "@/lib/brand";
 
@@ -72,8 +72,8 @@ export const SiteFooter = () => {
           display: "grid",
           gridTemplateColumns: isMobile
             ? "1fr"
-            : "minmax(200px, 1.15fr) minmax(0, 1fr) minmax(0, 1fr)",
-          gap: isMobile ? "2rem" : "clamp(2rem, 5vw, 3.25rem)",
+            : "minmax(200px, 1.15fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr)",
+          gap: isMobile ? "2rem" : "clamp(1.5rem, 4vw, 3rem)",
           alignItems: "start",
         }}
       >
@@ -116,6 +116,15 @@ export const SiteFooter = () => {
           <p style={columnHeading}>Services</p>
           <nav style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
             {SERVICE_LINKS.map((link) => (
+              <FooterLink key={link.label} href={link.href} label={link.label} />
+            ))}
+          </nav>
+        </div>
+
+        <div style={{ minWidth: 0 }}>
+          <p style={columnHeading}>Newsroom</p>
+          <nav style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+            {BLOG_LINKS.map((link) => (
               <FooterLink key={link.label} href={link.href} label={link.label} />
             ))}
           </nav>

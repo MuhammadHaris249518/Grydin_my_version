@@ -43,7 +43,10 @@ export const SITE = {
 export const SITEMAP_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
@@ -54,4 +57,10 @@ export const SERVICE_LINKS = [
   { label: "Custom Software", href: "/services" },
   { label: "System Integration", href: "/services" },
   { label: "Full-Stack Development", href: "/services" },
+] as const;
+
+export const BLOG_LINKS = [
+  { label: "Insights", href: "/blog/category/blog" },
+  { label: "News", href: "/blog/category/news" },
+  { label: "Announcements", href: "/blog/category/announcements" },
 ] as const;

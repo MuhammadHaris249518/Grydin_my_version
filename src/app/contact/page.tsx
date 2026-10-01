@@ -3,8 +3,6 @@ import { useRef } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { useTypewriter } from "../globalscope/typewriter";
-import { Menu, X } from "lucide-react";
-import Navbar, { NAVBAR_TOP_OFFSET } from "../globalscope/Navbar";
 import { ContactForm } from "../globalscope/ContactForm";
 import { ContactReachSection } from "../globalscope/ContactReachSection";
 import DotGrid from "../globalscope/DotGrid";
@@ -21,12 +19,7 @@ function computeTapeH(width: number) {
   return Math.min(TAPE_H_MAX, Math.max(TAPE_H_MIN, vw));
 }
 
-const NAV_LINKS = [
-  { label: "HOME", href: "/" },
-  { label: "SERVICES", href: "/services" },
-  { label: "ABOUT", href: "/about" },
-  { label: "CONTACT", href: "/contact" },
-];
+
 
 const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
 const useTape = () => useContext(TapeCtx);
@@ -210,7 +203,6 @@ const AvailabilityBadge = () => (
 );
 
 export default function Contact() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const [tapeH, setTapeH] = useState(TAPE_H_MAX);
   const REVEAL_DURATION = 1300; // ms — must match the transition duration below
 
@@ -312,115 +304,14 @@ export default function Contact() {
         >
           <DotGrid contentBottom={tapeH} animate={false} />
         </div>
-        {/* Drawer backdrop */}
-        <div
-          onClick={() => setMenuOpen(false)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 99,
-            background: "rgba(0,0,0,0.35)",
-            opacity: menuOpen ? 1 : 0,
-            pointerEvents: menuOpen ? "auto" : "none",
-            transition: "opacity 0.35s ease",
-          }}
-        />
-
-        {/* Right drawer */}
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            right: 0,
-            height: "100vh",
-            width: "fit-content",
-            paddingRight: "3.5rem",
-            zIndex: 100,
-            background: "linear-gradient(to bottom, #000000 0%, #4D4D4D 100%)",
-            transform: menuOpen ? "translateX(0)" : "translateX(100%)",
-            transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-            display: "flex",
-            flexDirection: "column",
-            borderTopLeftRadius: "18px",
-            borderBottomLeftRadius: "18px",
-          }}
-        >
-          <button
-            onClick={() => setMenuOpen(false)}
-            aria-label="Close menu"
-            style={{
-              position: "absolute",
-              top: "14px",
-              right: "16px",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              lineHeight: 0,
-            }}
-          >
-            <X size={20} color="white" />
-          </button>
-          <nav
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              justifyContent: "flex-start",
-              paddingTop: "72px",
-              paddingLeft: "28px",
-              gap: "1.1rem",
-            }}
-          >
-            {/* {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                style={{
-                  color: "white",
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.15em",
-                  textDecoration: "none",
-                  transition: "opacity 0.15s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.4")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-              >
-                {link.label}
-              </a>
-            ))} */}
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                style={{
-                  color: "white",
-                  fontSize: "0.95rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.15em",
-                  textDecoration: "none",
-                  transition: "opacity 0.15s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.4")}
-                onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
         <section
           style={{
             background: DARK_PAGE_BG,
             width: "100%",
             minHeight: "100vh",
             display: "flex",
-            flexDirection: "column",
-          }}
+            }}
         >
-          <Navbar />
-          <div style={{ height: NAVBAR_TOP_OFFSET }} />
 
           <div style={{ flex: 1, padding: "clamp(1.5rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem)" }}>
             <div

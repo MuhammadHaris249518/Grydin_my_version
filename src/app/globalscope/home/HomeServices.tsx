@@ -49,29 +49,29 @@ const SERVICES_DATA = [
 
 export function HomeServices() {
   return (
-    <section id="services" className="relative w-full py-20 md:py-28 bg-[#f4f7fa] border-b border-surface-line overflow-hidden">
-      {/* Background subtle mesh glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#0d8b99]/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#0d8b99]/5 rounded-full blur-3xl pointer-events-none" />
+    <section id="services" className="relative w-full py-20 md:py-28 bg-[#04172e] border-b border-white/10 overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#0d8b99]/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#0b7884]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Core Capabilities</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
             Six Ways We Eliminate Operational Friction
           </h2>
 
-          <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
             We build intelligent, high-reliability systems tailored to your specific bottlenecks — no bloat, no disruption.
           </p>
         </div>
 
-        {/* 6 Themed Grid Boxes with Teal Theme Color (#0d8b99) & Crisp White Text */}
+        {/* 6 Crisp White Cards on Deep Hero Navy (#04172e) Background */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {SERVICES_DATA.map((service) => {
             const Icon = service.icon;
@@ -79,36 +79,33 @@ export function HomeServices() {
               <Link
                 key={service.title}
                 href={service.href}
-                className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl p-7 sm:p-8 flex flex-col justify-between border border-white/20 hover:border-white/50 transition-all duration-300 hover:shadow-2xl hover:shadow-[#0d8b99]/30 hover:-translate-y-1.5 overflow-hidden text-white"
+                className="group relative bg-white rounded-2xl p-7 sm:p-8 flex flex-col justify-between border border-transparent hover:border-[#0d8b99] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#0d8b99]/20 hover:-translate-y-1.5 overflow-hidden"
               >
-                {/* Ambient corner light on hover */}
-                <div className="absolute -top-16 -right-16 w-40 h-40 bg-white/15 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+                {/* Top teal highlight line on hover */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#0d8b99] transition-colors duration-300" />
 
-                {/* Top accent highlight bar */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-white/30 group-hover:bg-white transition-colors duration-300" />
-
-                <div className="relative z-10">
-                  {/* Glowing Icon Container */}
-                  <div className="w-14 h-14 rounded-xl bg-white/20 border border-white/30 text-white flex items-center justify-center mb-6 group-hover:bg-white group-hover:text-[#0d8b99] group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
+                <div>
+                  {/* Teal Icon Container */}
+                  <div className="w-14 h-14 rounded-xl bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center mb-6 group-hover:bg-[#0d8b99] group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-xs">
                     <Icon className="w-7 h-7" strokeWidth={2} />
                   </div>
 
-                  {/* Crisp White Title */}
-                  <h3 className="text-xl sm:text-2xl font-black text-white mb-3 tracking-tight group-hover:translate-x-0.5 transition-transform">
+                  {/* Dark Bold Title */}
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-3 group-hover:text-[#0d8b99] transition-colors tracking-tight">
                     {service.title}
                   </h3>
 
-                  {/* High-Contrast White Description */}
-                  <p className="text-sm text-white/90 leading-relaxed mb-6 font-normal">
+                  {/* High-legibility Slate Description */}
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
                     {service.desc}
                   </p>
 
-                  {/* Glassmorphic Tag Chips */}
+                  {/* Clean Gray Tag Chips */}
                   <div className="flex flex-wrap gap-2 mb-6">
                     {service.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-semibold bg-white/20 text-white border border-white/25 px-3 py-1 rounded-md backdrop-blur-sm group-hover:bg-white/30 transition-colors"
+                        className="text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200/80 px-3 py-1 rounded-md group-hover:bg-slate-200 transition-colors"
                       >
                         {tag}
                       </span>
@@ -116,10 +113,10 @@ export function HomeServices() {
                   </div>
                 </div>
 
-                {/* Card Action Link with White & Arrow */}
-                <div className="relative z-10 pt-4 border-t border-white/20 flex items-center justify-between text-sm font-bold text-white group-hover:text-white transition-colors">
+                {/* Footer link with circular arrow icon */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-sm font-bold text-slate-800 group-hover:text-[#0d8b99] transition-colors">
                   <span className="tracking-wide">Explore capability</span>
-                  <div className="w-8 h-8 rounded-full bg-white/20 border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-[#0d8b99] group-hover:translate-x-1 transition-all">
+                  <div className="w-8 h-8 rounded-full bg-slate-100 text-slate-600 group-hover:bg-[#0d8b99] group-hover:text-white flex items-center justify-center group-hover:translate-x-1 transition-all">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
@@ -133,7 +130,7 @@ export function HomeServices() {
           <Button href="/services" variant="primary" size="lg" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>
             Explore All Engineering Services
           </Button>
-          <Button href="/solutions" variant="outline-dark" size="lg">
+          <Button href="/solutions" variant="outline-light" size="lg">
             See Industry-Specific Solutions
           </Button>
         </div>

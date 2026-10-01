@@ -52,54 +52,51 @@ const PILLARS = [
 
 export function HomeWhyUs() {
   return (
-    <section id="why-us" className="relative w-full py-20 md:py-28 bg-white border-b border-surface-line overflow-hidden">
+    <section id="why-us" className="relative w-full py-20 md:py-28 bg-[#031326] border-b border-white/10 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#0d8b99]/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#0d8b99]/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
             <Award className="w-3.5 h-3.5" />
             <span>Why Choose GrydIn</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
             Engineered for Certainty, Built for Speed
           </h2>
 
-          <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
             We replace open-ended consulting retainers with forensic diagnosis, guaranteed delivery timelines, and fixed scopes. No vendor lock-in, no vague billable hours.
           </p>
         </div>
 
-        {/* 4 Theme-Colored (#0d8b99 Teal) Performance Metric Boxes */}
+        {/* 4 Crisp White Performance Metric Boxes on Deep Blue Background */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 sm:mb-16">
           {METRICS.map((metric) => {
             const Icon = metric.icon;
             return (
               <div
                 key={metric.label}
-                className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl p-7 border border-white/20 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#0d8b99]/25 hover:-translate-y-1 overflow-hidden flex flex-col justify-between text-white"
+                className="group relative bg-white rounded-2xl p-7 border border-transparent hover:border-[#0d8b99] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#0d8b99]/20 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
               >
-                {/* Subtle corner light */}
-                <div className="absolute -top-12 -right-12 w-28 h-28 bg-white/15 rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
-
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+                    <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight group-hover:text-[#0d8b99] transition-colors">
                       {metric.value}
                     </span>
-                    <div className="w-11 h-11 rounded-xl bg-white/20 border border-white/30 text-white flex items-center justify-center group-hover:bg-white group-hover:text-[#0d8b99] transition-all">
+                    <div className="w-11 h-11 rounded-xl bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center group-hover:bg-[#0d8b99] group-hover:text-white transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <p className="text-base font-bold text-white mb-1.5">{metric.label}</p>
-                  <p className="text-xs text-white/90 leading-relaxed font-normal">{metric.detail}</p>
+                  <p className="text-base font-bold text-slate-900 mb-1.5">{metric.label}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed font-normal">{metric.detail}</p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-white/20 flex items-center gap-1.5 text-[11px] font-semibold text-white/90">
+                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#0d8b99]">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Verified Production Metric</span>
                 </div>
@@ -108,34 +105,34 @@ export function HomeWhyUs() {
           })}
         </div>
 
-        {/* 3 Theme-Colored (#0d8b99 Teal) Architecture Pillar Boxes */}
+        {/* 3 Crisp White Architecture Pillar Boxes on Deep Blue Background */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl p-7 sm:p-8 border border-white/20 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#0d8b99]/25 flex flex-col justify-between overflow-hidden text-white"
+              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-transparent hover:border-[#0d8b99] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#0d8b99]/20 flex flex-col justify-between overflow-hidden"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-white text-[#0d8b99] flex items-center justify-center font-black text-sm shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-[#0d8b99] text-white flex items-center justify-center font-black text-sm shadow-md">
                     {pillar.step}
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-white bg-white/20 border border-white/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#0d8b99] bg-[#0d8b99]/10 border border-[#0d8b99]/20 px-3 py-1 rounded-full">
                     {pillar.tag}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d8b99] transition-colors">
                   {pillar.title}
                 </h3>
 
-                <p className="text-sm text-white/90 leading-relaxed font-normal">
+                <p className="text-sm text-slate-600 leading-relaxed font-normal">
                   {pillar.desc}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/20 flex items-center gap-2 text-xs font-semibold text-white/90">
-                <CheckCircle2 className="w-4 h-4 text-white" />
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-500">
+                <CheckCircle2 className="w-4 h-4 text-[#0d8b99]" />
                 <span>GrydIn Standard Guarantee</span>
               </div>
             </div>
@@ -143,7 +140,7 @@ export function HomeWhyUs() {
         </div>
 
         {/* Action Banner with prominent "Check Our Work" button linking to /projects */}
-        <div className="bg-gradient-to-r from-[#031326] via-[#04172e] to-[#08284d] rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/15">
+        <div className="bg-gradient-to-r from-[#020e1d] via-[#04172e] to-[#072547] rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/15">
           <div className="absolute top-0 right-0 w-96 h-96 bg-[#0d8b99]/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-xl text-center lg:text-left relative z-10">

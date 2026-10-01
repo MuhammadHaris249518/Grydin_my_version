@@ -110,7 +110,7 @@ export default function Home() {
       <JsonLd data={websiteJsonLd()} />
       <JsonLd data={professionalServiceJsonLd()} />
 
-      <main className="w-full overflow-x-hidden bg-white">
+      <main className="w-full overflow-x-hidden bg-[#04172e]">
         {/* 1. Approved Hero Section (100% Untouched) */}
         <HeroSection />
 

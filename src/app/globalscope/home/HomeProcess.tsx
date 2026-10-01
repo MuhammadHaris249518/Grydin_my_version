@@ -76,69 +76,69 @@ const PROCESS_STEPS = [
 
 export function HomeProcess() {
   return (
-    <section id="methodology" className="relative w-full py-20 md:py-28 bg-[#f4f7fa] border-b border-surface-line overflow-hidden">
+    <section id="methodology" className="relative w-full py-20 md:py-28 bg-[#04172e] border-b border-white/10 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
             <GitPullRequest className="w-3.5 h-3.5" />
             <span>Methodology</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink mb-4 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
             How We Ship in Under Two Weeks
           </h2>
 
-          <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
             A battle-tested framework engineered to deliver production-grade software and automations without endless scoping meetings or bloated budgets.
           </p>
         </div>
 
-        {/* 3 Theme-Colored (#0d8b99 Teal) Process Boxes */}
+        {/* 3 Crisp White Process Boxes on Deep Hero Navy (#04172e) Background */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
           {PROCESS_STEPS.map((step, idx) => (
             <div
               key={step.step}
-              className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl border border-white/20 hover:border-white/50 p-8 flex flex-col justify-between hover:shadow-2xl hover:shadow-[#0d8b99]/30 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden text-white"
+              className="group relative bg-white rounded-2xl border border-transparent hover:border-[#0d8b99] p-8 flex flex-col justify-between hover:shadow-2xl hover:shadow-[#0d8b99]/20 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
             >
-              {/* Subtle top accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-white/30 group-hover:bg-white transition-colors duration-300" />
+              {/* Top highlight bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#0d8b99] transition-colors duration-300" />
 
               <div>
                 {/* Step header */}
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-4xl sm:text-5xl font-black text-white/40 group-hover:text-white transition-colors">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-200 group-hover:text-[#0d8b99] transition-colors">
                     {step.step}
                   </span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-white bg-white/20 border border-white/30 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#0d8b99] bg-[#0d8b99]/10 border border-[#0d8b99]/20 px-3 py-1 rounded-full">
                     {step.phase}
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-bold text-white mb-1.5">{step.phase}</h3>
-                <p className="text-xs font-bold uppercase tracking-wider text-white/80 mb-4">
+                <h3 className="text-2xl font-bold text-slate-900 mb-1.5">{step.phase}</h3>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">
                   {step.tagline}
                 </p>
 
-                <p className="text-sm text-white/90 leading-relaxed mb-6 font-normal">
+                <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
                   {step.desc}
                 </p>
 
-                {/* Sub-points inside glassmorphic containers */}
-                <div className="space-y-3 pt-4 border-t border-white/20">
+                {/* Sub-points inside clean gray containers */}
+                <div className="space-y-3 pt-4 border-t border-slate-100">
                   {step.points.map((pt) => {
                     const Icon = pt.icon;
                     return (
                       <div
                         key={pt.title}
-                        className="flex items-start gap-3 bg-white/15 border border-white/20 rounded-xl p-3 hover:bg-white/25 transition-colors"
+                        className="flex items-start gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:bg-slate-100 transition-colors"
                       >
-                        <div className="w-7 h-7 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0 mt-0.5 border border-white/30">
+                        <div className="w-7 h-7 rounded-lg bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center shrink-0 mt-0.5 border border-[#0d8b99]/20">
                           <Icon className="w-4 h-4" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-bold text-white mb-0.5">{pt.title}</h4>
-                          <p className="text-xs text-white/85 leading-relaxed font-normal">
+                          <h4 className="text-xs font-bold text-slate-900 mb-0.5">{pt.title}</h4>
+                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
                             {pt.desc}
                           </p>
                         </div>
@@ -148,9 +148,9 @@ export function HomeProcess() {
                 </div>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-white/20 flex items-center justify-between text-xs font-semibold text-white/90">
+              <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
                 <span>Phase {idx + 1} of 3</span>
-                <div className="flex items-center gap-1.5 text-white">
+                <div className="flex items-center gap-1.5 text-[#0d8b99]">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Guaranteed Delivery</span>
                 </div>
@@ -160,7 +160,7 @@ export function HomeProcess() {
         </div>
 
         <div className="mt-14 text-center">
-          <p className="text-sm sm:text-base text-ink-muted mb-4">
+          <p className="text-sm sm:text-base text-slate-300 mb-4">
             Want to see how this framework applies to your specific stack?
           </p>
           <Button href="/contact" variant="primary" size="md" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>

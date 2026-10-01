@@ -2,6 +2,7 @@
 import { createContext, useContext } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
   Menu, X, ArrowRight, Zap, Brain, Plug, Repeat, Layers, Code,
   ShieldCheck, Gauge, Share2, FileText, MonitorSmartphone, Database,
@@ -626,254 +627,75 @@ const ScrollCue = ({ visible, cueRef }: { visible: boolean; cueRef: React.RefObj
 // ── Hero Section ──────────────────────────────────────────────────────────────
 
 const HeroSection = () => {
-  const pathname = usePathname();
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [contentH, setContentH] = useState(0);
-  const isMobile = useIsMobile();
-  const ctaRef = useRef<HTMLAnchorElement>(null);
-  const cueRef = useRef<HTMLDivElement | null>(null);
-  const [showCue, setShowCue] = useState(false);
-
-  const BOTTOM_GAP = 65;   // must match ScrollCue's own `bottom` value
-  const SAFE_BUFFER = 40;  // real clearance required between button and cue
-
-  useEffect(() => {
-    const measure = () => {
-      if (!ctaRef.current) return;
-      const btnRect = ctaRef.current.getBoundingClientRect();
-      const cueHeight = cueRef.current?.offsetHeight ?? 50;
-      const viewportH = window.innerHeight;
-
-      const cueTop = viewportH - BOTTOM_GAP - cueHeight;
-      setShowCue(cueTop > btnRect.bottom + SAFE_BUFFER);
-    };
-    measure();
-    const t = setTimeout(measure, 50);
-    window.addEventListener("resize", measure, { passive: true });
-    return () => { clearTimeout(t); window.removeEventListener("resize", measure); };
-  }, []);
-  const REVEAL_DURATION = 650;
-  const TYPE_START = 380;
-
-  const [revealed, setRevealed] = useState(false);
-  const [startTyping, setStartTyping] = useState(false);
-
-  useEffect(() => {
-    setRevealed(false);
-    setStartTyping(false);
-    const t1 = requestAnimationFrame(() => setRevealed(true));
-    const t2 = setTimeout(() => setStartTyping(true), TYPE_START);
-    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
-  }, [pathname]);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.playbackRate = 0.4;
-    const play = () => { v.play().catch(() => { }); };
-    if (v.readyState >= 2) play();
-    else v.addEventListener("loadeddata", play, { once: true });
-    const handler = () => {
-      if (v.duration && v.currentTime > v.duration - 0.15) v.currentTime = 0;
-    };
-    v.addEventListener("timeupdate", handler);
-    return () => v.removeEventListener("timeupdate", handler);
-  }, [pathname]);
-  useEffect(() => {
-    if (!contentRef.current) return;
-    const ro = new ResizeObserver(() => {
-      setContentH(contentRef.current?.offsetHeight ?? 0);
-    });
-    ro.observe(contentRef.current);
-    return () => ro.disconnect();
-  }, []);
-
-  const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "Grid the unseen" : "");
   return (
-    <DarkSection id="hero" className="flex flex-col" fitViewport>
-      <div style={{ height: `${NAVBAR_TOP_OFFSET}px`, flexShrink: 0 }} />
-      <DotGrid contentBottom={contentH / 1.04} animate={false} />
-
+    <section
+      id="hero"
+      className="relative w-full overflow-hidden bg-[#04172e] min-h-[500px] md:min-h-[560px] lg:min-h-[600px] flex items-center"
+    >
+      {/* Background Image of the Corporate Meeting Room */}
       <div
-        aria-hidden
+        className="absolute inset-0 z-0 bg-cover"
         style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
-          pointerEvents: "none",
-          background:
-            "radial-gradient(ellipse 70% 55% at 50% 42%, rgba(137,145,64,0.07) 0%, transparent 62%), radial-gradient(ellipse 90% 60% at 50% 50%, rgba(255,255,255,0.04) 0%, transparent 70%)",
-          opacity: revealed ? 1 : 0,
-          transition: `opacity ${REVEAL_DURATION}ms ease`,
+          backgroundImage: `url('/images/hero/hero-banner.jpg')`,
+          backgroundPosition: "right 30% center",
+          backgroundRepeat: "no-repeat",
         }}
       />
 
-      <video
-        key={pathname}
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: 0,
-          pointerEvents: "none",
-          transform: "scaleY(-1)",
-          opacity: revealed ? 0.38 : 0,
-          transition: `opacity ${REVEAL_DURATION}ms ease`,
-        }}
-      >
-        <source src="/videos/landing-bg-video.webm" type="video/webm" />
-        <source src="/videos/landing-bg-video.mp4" type="video/mp4" />
-      </video>
-
-      {/* Text content – padded, centred */}
+      {/* Desktop horizontal smooth blend gradient: Navy #04172e on left to transparent on right */}
       <div
-        className={`flex flex-col text-center items-center ${isMobile ? "hero-content-mobile justify-start px-3" : "justify-center px-6"}`}
-        ref={contentRef}
+        className="absolute inset-0 z-10 hidden md:block"
         style={{
-          flex: 1,
-          minHeight: 0,
-          position: "relative",
-          zIndex: 1,
-          paddingTop: isMobile ? "clamp(1rem, 8dvh, 3rem)" : undefined,
-          paddingBottom: isMobile ? "2rem" : undefined,
-          opacity: revealed ? 1 : 0,
-          transform: revealed ? "translateY(0)" : "translateY(18px)",
-          filter: revealed ? "blur(0px)" : "blur(10px)",
-          transition: `opacity ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1), transform ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1), filter ${REVEAL_DURATION}ms cubic-bezier(0.16,1,0.3,1)`,
+          background:
+            "linear-gradient(90deg, #04172e 0%, #04172e 38%, rgba(4, 23, 46, 0.95) 45%, rgba(4, 23, 46, 0.7) 56%, rgba(4, 23, 46, 0.2) 70%, rgba(4, 23, 46, 0) 82%)",
         }}
-      >
-        <p
-          className={`mb-4 tracking-widest uppercase text-xs font-medium ${isMobile ? "hero-eyebrow-mobile" : ""}`}
-          style={{
-            color: "#000000",
-            fontWeight: 700,
-            letterSpacing: "0.22em",
-            background: "rgba(255,255,255,0.45)",
-            borderRadius: "2px",
-            padding: "4px 8px",
-          }}
-        >
-          {isMobile ? (
-            <>
-              WE GRID WHAT YOUR
-              <br />
-              BUSINESS OVERLOOKS
-            </>
-          ) : (
-            "We grid what your business overlooks"
-          )}
-        </p>
+      />
 
-        <h1
-          ref={typeRef}
-          className="font-bold leading-tight mb-5 max-w-3xl"
-          style={{
-            fontSize: "clamp(2rem, 5vw, 3.8rem)",
-            color: "#ffffff",
-            letterSpacing: "-0.03em",
-            lineHeight: 1.1,
-          }}
-        >
-          {typed}
-          <span
+      {/* Mobile/Tablet vertical gradient for maximum text contrast */}
+      <div
+        className="absolute inset-0 z-10 md:hidden"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(4, 23, 46, 0.96) 0%, rgba(4, 23, 46, 0.9) 65%, rgba(4, 23, 46, 0.75) 100%)",
+        }}
+      />
+
+      {/* Hero Content */}
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-24">
+        <div className="max-w-xl lg:max-w-2xl text-left">
+          <h1
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black uppercase text-white tracking-tight leading-[1.12]"
             style={{
-              borderRight: "2px solid rgba(255,255,255,0.6)",
-              marginLeft: "2px",
-              animation: "blink 1s step-end infinite",
+              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             }}
-          />
-          <br />
-          <span style={{ color: "rgba(255,255,255,0.45)" }}>
-            Keep the humans.
-          </span>
-        </h1>
+          >
+            EMPOWERING YOUR <br className="hidden sm:inline" />
+            BUSINESS WITH TECH
+          </h1>
 
-        <p
-          className="mb-7 max-w-xl leading-relaxed"
-          style={{
-            fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
-            color: "rgba(255,255,255,0.5)",
-            textAlign: isMobile ? "center" : "justify",
-          }}
-        >
-          Businesses don&apos;t have an execution problem. They have a{" "}
-          <AccentWord>visibility</AccentWord> problem. Work piles up in the gaps
-          between tools, teams, and decisions – repetitive, complex, and invisible.
-          GrydIn maps those gaps and automates them.
-        </p>
+          <p className="mt-4 md:mt-5 text-sm sm:text-base md:text-lg text-slate-200 font-normal leading-relaxed">
+            Innovating Today for Tomorrow&apos;s Solutions. <br className="hidden sm:inline" />
+            Custom Software, Cloud, and AI.
+          </p>
 
-        <a
-          ref={ctaRef}
-          href="/contact"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "8px",
-            padding: "11px 26px",
-            background: "white",
-            color: "#000000",
-            fontWeight: 600,
-            fontSize: "0.85rem",
-            borderRadius: "2px",
-            letterSpacing: "0.04em",
-            textDecoration: "none",
-            width: "fit-content",
-            transition: "gap 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s",
-            boxShadow: "0 0 0 0 transparent",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.gap = "12px";
-            e.currentTarget.style.background = "#111111";
-            e.currentTarget.style.color = "#ffffff";
-            e.currentTarget.style.boxShadow = `0 0 24px ${brandAccentAlpha(0.25)}`;
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.gap = "8px";
-            e.currentTarget.style.background = "white";
-            e.currentTarget.style.color = "#000000";
-            e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
-          }}
-        >
-          Grid Your Vision <ArrowRight size={14} strokeWidth={2.2} />
-        </a>
+          <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-6 py-3 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              GET STARTED
+            </Link>
+
+            <Link
+              href="/about"
+              className="inline-flex items-center justify-center px-6 py-3 bg-transparent hover:bg-white/10 text-white text-xs sm:text-sm font-bold uppercase tracking-wider border-2 border-white rounded-md transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+            >
+              LEARN MORE
+            </Link>
+          </div>
+        </div>
       </div>
-      {isMobile && showCue && <ScrollCue visible={revealed} cueRef={cueRef} />}
-      {/* Video – full width, height derived from 16/9 aspect ratio */}
-      {/* <div
-        className="relative mt-8 w-full"
-        style={{
-          aspectRatio: "16/9",
-          flexShrink: 0,
-          border: "1px solid rgba(255,255,255,0.08)",
-          background: "rgba(0,0,0,0.6)",
-        }}
-      >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        >
-          <source src="/medium.mp4" type="video/mp4" />
-        </video>
-      </div> */}
-    </DarkSection>
+    </section>
   );
 };
 

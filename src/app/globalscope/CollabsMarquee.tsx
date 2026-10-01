@@ -62,28 +62,29 @@ const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
   </div>
 );
 
-export const CollabsMarquee = () => (
+export const CollabsMarquee = ({ background = "#04172e" }: { background?: string }) => (
   <section
     aria-label="Partner logos"
     style={{
       width: "100%",
-      background: "transparent",
-      paddingTop: "clamp(2.5rem, 5vh, 3.5rem)",
-      paddingBottom: "clamp(2.5rem, 5vh, 3.5rem)",
+      background,
+      borderTop: "1px solid rgba(255,255,255,0.07)",
+      borderBottom: "1px solid rgba(255,255,255,0.07)",
+      paddingTop: "clamp(2rem, 3.5vh, 2.75rem)",
+      paddingBottom: "clamp(2rem, 3.5vh, 2.75rem)",
       overflow: "hidden",
     }}
   >
     <p
       style={{
         textAlign: "center",
-        fontSize: "clamp(0.62rem, 1.2vw, 0.78rem)",
+        fontSize: "clamp(0.65rem, 1.1vw, 0.78rem)",
         fontWeight: 700,
-        letterSpacing: "0.32em",
+        letterSpacing: "0.26em",
         textTransform: "uppercase",
-        color: "rgba(255,255,255,0.72)",
-        marginBottom: "clamp(1.5rem, 3vh, 2rem)",
+        color: "rgba(255,255,255,0.88)",
+        marginBottom: "clamp(1.25rem, 2.5vh, 1.75rem)",
         padding: "0 1.5rem",
-        textShadow: "0 0 24px rgba(255,255,255,0.12)",
       }}
     >
       Powering growth for global innovators

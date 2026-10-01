@@ -4,7 +4,7 @@
 // #68877f
 // #6e8fa3
 
-export const BRAND_ACCENT_DEFAULT = "#8cad57";
+export const BRAND_ACCENT_DEFAULT = "#0d8b99";
 
 export const BRAND_ACCENT =
   process.env.NEXT_PUBLIC_BRAND_ACCENT?.trim() || BRAND_ACCENT_DEFAULT;

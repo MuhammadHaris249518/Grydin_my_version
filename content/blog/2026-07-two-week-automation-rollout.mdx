@@ -1,0 +1,50 @@
+---
+title: "A Two-Week Automation Rollout: What Actually Happens"
+description: "How GrydIn takes an enterprise workflow from diagnosis call to production deployment in fourteen days with fixed scope."
+category: "blog"
+date: "2026-07-10"
+author: "grydin-team"
+tags: ["Delivery", "Fixed Scope", "Methodology"]
+---
+
+Traditional software consulting engagements are notorious for multi-month discovery phases, endless change orders, and delayed deliveries. When leaders hear that GrydIn delivers functional production deployments within two weeks, the immediate question is: *what actually happens in those fourteen days?*
+
+Here is a step-by-step breakdown of how our async-first, diagnosis-driven delivery model functions.
+
+## Days 1 to 3: The Workflow Diagnosis
+
+We do not start by writing code or designing user interfaces. We start with a forensic audit of the friction point.
+
+- **Screen-Share Shadowing**: We observe how team members actually execute the task today, rather than reading high-level documentation that may be outdated.
+- **Data Schema Mapping**: We identify every data structure, API endpoint, edge case, and failure mode.
+- **Fixed-Scope Contract**: By day three, we agree on an explicit deliverable list with clear success criteria and a single fixed quote.
+
+<Callout type="warning">
+We never start building without an agreed-upon boundary. If an edge case is out of scope for version one, it is documented for version two.
+</Callout>
+
+## Days 4 to 9: Architecture & Pipeline Assembly
+
+During the second block, engineering proceeds without constant meeting interruptions. We build in isolated environments:
+
+1. **Authentication & Webhooks**: Connecting target APIs, database connections, and secure secret storage.
+2. **Core Logic Implementation**: Whether building in n8n, Make, or custom TypeScript microservices, the end-to-end data pipeline is constructed.
+3. **Automated Error Handlers**: Every downstream API failure triggers dead-letter queues and alerting so silent failures are impossible.
+
+<Stat value="14 Days" label="Standard turnaround from diagnosis kickoff to live production deployment" />
+
+## Days 10 to 12: Staging & Synthetic Data Testing
+
+Before touching production databases, the pipeline runs against synthetic edge cases and historical data replays.
+
+- Can it handle duplicate webhooks without duplicate database inserts?
+- Does it gracefully handle malformed email bodies or corrupted PDFs?
+- Are execution logs human-readable and accessible to non-technical operators?
+
+## Days 13 to 14: Shadow Deployment and Handover
+
+We deploy in "shadow mode" alongside manual staff for 24 to 48 hours to confirm zero discrepancy between automated outputs and human operations.
+
+Once verified, the switch is flipped. The team receives comprehensive operational documentation, video walkthroughs, and guaranteed monitoring support.
+
+Fixed scope does not mean cutting corners. It means concentrating intense focus on a single high-value bottleneck until it is permanently solved.

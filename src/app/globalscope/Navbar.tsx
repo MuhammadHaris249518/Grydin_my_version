@@ -6,6 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GrydInLogo } from "./GrydInLogo";
 
+import { SearchDialog } from "./SearchDialog";
+
 export const NAVBAR_TOP_OFFSET = 0;
 
 const NAV_LINKS = [
@@ -22,12 +24,22 @@ export const Navbar = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setMenuOpen(false);
     setSearchOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -37,81 +49,62 @@ export const Navbar = () => {
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 w-full bg-white border-b border-surface-line shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-[70px] flex items-center justify-between gap-4">
-        {/* Logo */}
-        <GrydInLogo variant="navbar" theme="light" />
+    <>
+      <header className="sticky top-0 left-0 right-0 z-50 w-full bg-white border-b border-surface-line shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-[70px] flex items-center justify-between gap-4">
+          {/* Logo */}
+          <GrydInLogo variant="navbar" theme="light" />
 
-        {/* Desktop Navigation (lg:flex for 7 links) */}
-        <nav
-          className="hidden lg:flex items-center gap-5 xl:gap-7"
-          aria-label="Main navigation"
-        >
-          {NAV_LINKS.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.label}
-                href={link.href}
-                aria-current={isActive ? "page" : undefined}
-                className={`text-[12px] xl:text-[13px] font-bold uppercase tracking-wider transition-colors duration-150 ${
-                  isActive
-                    ? "text-teal"
-                    : "text-ink hover:text-teal"
-                }`}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Right CTA and Search */}
-        <div className="flex items-center gap-3 sm:gap-4">
-          {/* Search Toggle (placeholder wired in Phase 6) */}
-          <div className="relative flex items-center">
-            {searchOpen ? (
-              <div className="flex items-center bg-gray-50 border border-gray-200 rounded-full px-3 py-1.5 transition-all">
-                <Search size={16} className="text-gray-500 mr-2 shrink-0" />
-                <input
-                  type="text"
-                  placeholder="Search site..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  autoFocus
-                  className="bg-transparent border-none outline-none text-xs text-gray-800 w-28 sm:w-40"
-                />
-                <button
-                  type="button"
-                  onClick={() => setSearchOpen(false)}
-                  className="text-gray-400 hover:text-gray-600 ml-1 p-0.5"
-                  aria-label="Close search"
-                >
-                  <X size={14} />
-                </button>
-              </div>
-            ) : (
-              <button
-                type="button"
-                onClick={() => setSearchOpen(true)}
-                className="p-2 text-ink hover:text-teal transition-colors rounded-full"
-                aria-label="Search"
-              >
-                <Search size={18} strokeWidth={2.2} />
-              </button>
-            )}
-          </div>
-
-          {/* Desktop "GET IN TOUCH" Button */}
-          <Link
-            href="/contact"
-            className="hidden sm:inline-flex items-center justify-center bg-teal hover:bg-teal-dark text-white text-[12px] xl:text-[13px] font-bold uppercase tracking-wider px-5 py-2.5 rounded-md transition-all shadow-sm hover:shadow active:scale-[0.98]"
+          {/* Desktop Navigation (lg:flex for 7 links) */}
+          <nav
+            className="hidden lg:flex items-center gap-5 xl:gap-7"
+            aria-label="Main navigation"
           >
-            GET IN TOUCH
-          </Link>
+            {NAV_LINKS.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`text-[12px] xl:text-[13px] font-bold uppercase tracking-wider transition-colors duration-150 ${
+                    isActive
+                      ? "text-teal"
+                      : "text-ink hover:text-teal"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Right CTA and Search */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Search Button */}
+            <button
+              type="button"
+              onClick={() => setSearchOpen(true)}
+              className="p-2 text-ink hover:text-teal transition-colors rounded-full flex items-center gap-1.5 cursor-pointer"
+              aria-label="Search site"
+              title="Search (Ctrl+K)"
+            >
+              <Search size={18} strokeWidth={2.2} />
+              <kbd className="hidden xl:inline-block text-[10px] text-ink-muted bg-surface-soft border border-surface-line px-1.5 py-0.5 rounded font-medium">
+                ⌘K
+              </kbd>
+            </button>
+
+            {/* Desktop "GET IN TOUCH" Button */}
+            <Link
+              href="/contact"
+              className="hidden sm:inline-flex items-center justify-center bg-teal hover:bg-teal-dark text-white text-[12px] xl:text-[13px] font-bold uppercase tracking-wider px-5 py-2.5 rounded-md transition-all shadow-sm hover:shadow active:scale-[0.98]"
+            >
+              GET IN TOUCH
+            </Link>
 
           {/* Mobile Menu Button (< lg) */}
           <button
@@ -163,6 +156,12 @@ export const Navbar = () => {
         </div>
       )}
     </header>
+
+    <SearchDialog
+      isOpen={searchOpen}
+      onClose={() => setSearchOpen(false)}
+    />
+  </>
   );
 };
 

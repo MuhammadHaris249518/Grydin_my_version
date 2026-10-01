@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Target, AlertTriangle, Crosshair, Workflow, ShieldCheck, Rocket, Link2, FileText, CheckCircle2 } from "lucide-react";
-import { Section } from "../ui/Section";
+import { ArrowRight, Target, AlertTriangle, Crosshair, Workflow, ShieldCheck, Rocket, Link2, FileText, CheckCircle2, GitPullRequest } from "lucide-react";
 import { Button } from "../ui/Button";
 
 const PROCESS_STEPS = [
@@ -77,76 +76,98 @@ const PROCESS_STEPS = [
 
 export function HomeProcess() {
   return (
-    <Section
-      id="methodology"
-      tone="white"
-      eyebrow="Methodology"
-      title="How We Ship in Under Two Weeks"
-      intro="A battle-tested framework engineered to deliver production-grade software and automations without endless scoping meetings or bloated budgets."
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-        {PROCESS_STEPS.map((step, idx) => (
-          <div
-            key={step.step}
-            className="bg-white rounded-2xl border border-surface-line p-8 flex flex-col justify-between hover:shadow-lg hover:border-slate-300 transition-all duration-300 relative group"
-          >
-            {/* Step badge */}
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <span className="text-3xl sm:text-4xl font-black text-slate-200 group-hover:text-teal transition-colors">
-                  {step.step}
-                </span>
-                <span className="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 px-3 py-1 rounded-full">
-                  {step.phase}
-                </span>
-              </div>
-
-              <h3 className="text-xl font-bold text-ink mb-1">{step.phase}</h3>
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">
-                {step.tagline}
-              </p>
-
-              <p className="text-sm text-ink-muted leading-relaxed mb-6">
-                {step.desc}
-              </p>
-
-              {/* Sub-points */}
-              <div className="space-y-4 pt-4 border-t border-surface-line/60">
-                {step.points.map((pt) => {
-                  const Icon = pt.icon;
-                  return (
-                    <div key={pt.title} className="flex items-start gap-3">
-                      <div className="w-7 h-7 rounded-md bg-surface-soft text-teal flex items-center justify-center shrink-0 mt-0.5">
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs font-bold text-ink">{pt.title}</h4>
-                        <p className="text-xs text-ink-muted leading-relaxed">
-                          {pt.desc}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            <div className="mt-8 pt-4 border-t border-surface-line/60 flex items-center justify-between text-xs font-semibold text-slate-500">
-              <span>Phase {idx + 1} of 3</span>
-              <CheckCircle2 className="w-4 h-4 text-teal" />
-            </div>
+    <section id="methodology" className="relative w-full py-20 md:py-28 bg-[#f4f7fa] border-b border-surface-line overflow-hidden">
+      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-teal text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-navy-700">
+            <GitPullRequest className="w-3.5 h-3.5" />
+            <span>Methodology</span>
           </div>
-        ))}
-      </div>
 
-      <div className="mt-12 text-center">
-        <p className="text-sm text-ink-muted mb-4">
-          Want to see how this framework applies to your specific stack?
-        </p>
-        <Button href="/contact" variant="primary" size="md" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>
-          Schedule a Process Diagnosis
-        </Button>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-ink mb-4 leading-tight">
+            How We Ship in Under Two Weeks
+          </h2>
+
+          <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
+            A battle-tested framework engineered to deliver production-grade software and automations without endless scoping meetings or bloated budgets.
+          </p>
+        </div>
+
+        {/* 3 Theme-Colored Process Boxes */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+          {PROCESS_STEPS.map((step, idx) => (
+            <div
+              key={step.step}
+              className="group relative bg-gradient-to-br from-[#061f3d] via-[#04172e] to-[#020e1d] rounded-2xl border border-white/10 hover:border-teal/60 p-8 flex flex-col justify-between hover:shadow-2xl hover:shadow-teal/15 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+            >
+              {/* Subtle top accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-teal transition-colors duration-300" />
+
+              <div>
+                {/* Step header */}
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-4xl sm:text-5xl font-black text-white/30 group-hover:text-teal transition-colors">
+                    {step.step}
+                  </span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-teal bg-white/10 border border-white/15 px-3 py-1 rounded-full">
+                    {step.phase}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-1.5">{step.phase}</h3>
+                <p className="text-xs font-bold uppercase tracking-wider text-teal mb-4">
+                  {step.tagline}
+                </p>
+
+                <p className="text-sm text-slate-300 leading-relaxed mb-6 font-normal">
+                  {step.desc}
+                </p>
+
+                {/* Sub-points inside glassmorphic containers */}
+                <div className="space-y-3 pt-4 border-t border-white/10">
+                  {step.points.map((pt) => {
+                    const Icon = pt.icon;
+                    return (
+                      <div
+                        key={pt.title}
+                        className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-3 hover:bg-white/10 transition-colors"
+                      >
+                        <div className="w-7 h-7 rounded-lg bg-teal/20 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/30">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-xs font-bold text-white mb-0.5">{pt.title}</h4>
+                          <p className="text-xs text-slate-300 leading-relaxed font-normal">
+                            {pt.desc}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-slate-400">
+                <span>Phase {idx + 1} of 3</span>
+                <div className="flex items-center gap-1.5 text-teal">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Guaranteed Delivery</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-14 text-center">
+          <p className="text-sm sm:text-base text-ink-muted mb-4">
+            Want to see how this framework applies to your specific stack?
+          </p>
+          <Button href="/contact" variant="primary" size="md" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>
+            Schedule a Process Diagnosis
+          </Button>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }

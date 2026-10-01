@@ -109,10 +109,14 @@ Every project is scoped before it is priced. After an initial diagnosis call, cl
 
 - [Home](https://grydin.co/): Overview - AI automation, six services, three-step process, impact, and contact CTA.
 - [Services](https://grydin.co/services): Detailed breakdown of all six services with deliverables, who each suits, and four operating principles.
+- [Solutions](https://grydin.co/solutions): Industry-specific automation architectures for Legal, Real Estate, Retail, Healthcare, Energy, and Logistics.
+- [Projects](https://grydin.co/projects): Client case studies across industries alongside proprietary concept tools (GridPilot, FlowMap, DocuGrid, SyncBridge).
 - [About](https://grydin.co/about): Company background, beliefs (the unseen rules), origin story, and team philosophy.
+- [Blog & Newsroom](https://grydin.co/blog): Technical insights, company announcements, industry research, and architecture breakdowns.
 - [Contact](https://grydin.co/contact): Contact form, email, WhatsApp, office address, map, and how to start a project.
 
-## Optional
+## Feeds & Meta
 
-- [Sitemap](https://grydin.co/sitemap.xml): Machine-readable list of all public pages.
+- [Sitemap](https://grydin.co/sitemap.xml): Machine-readable dynamic sitemap of all public pages, categories, and articles.
+- [RSS Feed](https://grydin.co/blog/feed.xml): RSS 2.0 feed of engineering publications and news.
 - [Robots](https://grydin.co/robots.txt): Crawler access policy - all agents allowed, no blocks.

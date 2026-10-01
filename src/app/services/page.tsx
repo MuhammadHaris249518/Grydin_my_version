@@ -997,6 +997,30 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      {/* ── Related Industry Solutions Strip ── */}
+      <section className="py-12 bg-white border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d8b99] block mb-1">
+              Sector Specialization
+            </span>
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[#0f172a] tracking-tight">
+              Looking for solutions tailored to your specific industry?
+            </h3>
+            <p className="text-sm text-[#475569] mt-1">
+              Explore specialized workflows for Legal, Real Estate, Retail, Healthcare, Energy, and Logistics.
+            </p>
+          </div>
+          <Link
+            href="/solutions"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#04172e] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#082545] transition-colors shrink-0"
+          >
+            <span>Explore Industry Solutions</span>
+            <ArrowRight size={15} className="text-[#2dd4bf]" />
+          </Link>
+        </div>
+      </section>
+
       {/* ── 8. Solution Scoping & Consultation CTA ── */}
       <section className="py-20 md:py-28 relative overflow-hidden">
         {/* Glow backdrop */}

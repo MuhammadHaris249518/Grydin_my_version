@@ -393,9 +393,9 @@ export default function Contact() {
 {/* 
               <AvailabilityBadge /> */}
 
-              <AnimatedDivider />
-
-              <ContactForm />
+              <div id="form" className="scroll-mt-24">
+                <ContactForm />
+              </div>
 
               <ContactReachSection />
             </div>

@@ -8,28 +8,24 @@ const METRICS = [
     label: "Global Clients",
     detail: "US, UK, Australia, Middle East & Pakistan",
     icon: Users,
-    glow: "from-teal/30 to-transparent",
   },
   {
     value: "45+",
     label: "Production Systems",
     detail: "Live automations, AI agents & bespoke platforms",
     icon: Cpu,
-    glow: "from-sky-500/30 to-transparent",
   },
   {
     value: "< 14 Days",
     label: "First Deployment",
     detail: "Rapid turnaround from diagnosis to live release",
     icon: Clock,
-    glow: "from-emerald-500/30 to-transparent",
   },
   {
     value: "100%",
     label: "Fixed-Scope Pricing",
     detail: "Capped budgets with zero retainer traps",
     icon: FileCheck,
-    glow: "from-blue-500/30 to-transparent",
   },
 ];
 
@@ -58,12 +54,12 @@ export function HomeWhyUs() {
   return (
     <section id="why-us" className="relative w-full py-20 md:py-28 bg-white border-b border-surface-line overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-teal/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#0d8b99]/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-teal text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-navy-700">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
             <Award className="w-3.5 h-3.5" />
             <span>Why Choose GrydIn</span>
           </div>
@@ -77,35 +73,33 @@ export function HomeWhyUs() {
           </p>
         </div>
 
-        {/* 4 Theme-Colored Performance Metric Boxes */}
+        {/* 4 Theme-Colored (#0d8b99 Teal) Performance Metric Boxes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 sm:mb-16">
           {METRICS.map((metric) => {
             const Icon = metric.icon;
             return (
               <div
                 key={metric.label}
-                className="group relative bg-gradient-to-br from-[#061f3d] via-[#04172e] to-[#020e1d] rounded-2xl p-7 border border-white/10 hover:border-teal/60 transition-all duration-300 hover:shadow-xl hover:shadow-teal/15 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
+                className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl p-7 border border-white/20 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#0d8b99]/25 hover:-translate-y-1 overflow-hidden flex flex-col justify-between text-white"
               >
                 {/* Subtle corner light */}
-                <div
-                  className={`absolute -top-12 -right-12 w-28 h-28 bg-gradient-to-br ${metric.glow} rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none`}
-                />
+                <div className="absolute -top-12 -right-12 w-28 h-28 bg-white/15 rounded-full blur-xl group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
 
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl sm:text-4xl font-black text-white tracking-tight group-hover:text-teal transition-colors">
+                    <span className="text-3xl sm:text-4xl font-black text-white tracking-tight">
                       {metric.value}
                     </span>
-                    <div className="w-11 h-11 rounded-xl bg-white/10 border border-white/15 text-teal flex items-center justify-center group-hover:bg-teal group-hover:text-white transition-all">
+                    <div className="w-11 h-11 rounded-xl bg-white/20 border border-white/30 text-white flex items-center justify-center group-hover:bg-white group-hover:text-[#0d8b99] transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
                   <p className="text-base font-bold text-white mb-1.5">{metric.label}</p>
-                  <p className="text-xs text-slate-300 leading-relaxed font-normal">{metric.detail}</p>
+                  <p className="text-xs text-white/90 leading-relaxed font-normal">{metric.detail}</p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-white/10 flex items-center gap-1.5 text-[11px] font-semibold text-teal">
+                <div className="mt-5 pt-3 border-t border-white/20 flex items-center gap-1.5 text-[11px] font-semibold text-white/90">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Verified Production Metric</span>
                 </div>
@@ -114,34 +108,34 @@ export function HomeWhyUs() {
           })}
         </div>
 
-        {/* 3 Theme-Colored Architecture Pillar Boxes */}
+        {/* 3 Theme-Colored (#0d8b99 Teal) Architecture Pillar Boxes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
           {PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              className="group relative bg-gradient-to-br from-[#061f3d] via-[#04172e] to-[#020e1d] rounded-2xl p-7 sm:p-8 border border-white/10 hover:border-teal/60 transition-all duration-300 hover:shadow-xl hover:shadow-teal/15 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl p-7 sm:p-8 border border-white/20 hover:border-white/50 transition-all duration-300 hover:shadow-xl hover:shadow-[#0d8b99]/25 flex flex-col justify-between overflow-hidden text-white"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center font-black text-sm shadow-md shadow-teal/30">
+                  <div className="w-10 h-10 rounded-xl bg-white text-[#0d8b99] flex items-center justify-center font-black text-sm shadow-md">
                     {pillar.step}
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal bg-white/10 border border-white/15 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-wider text-white bg-white/20 border border-white/30 px-3 py-1 rounded-full">
                     {pillar.tag}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-teal transition-colors">
+                <h3 className="text-xl font-bold text-white mb-3">
                   {pillar.title}
                 </h3>
 
-                <p className="text-sm text-slate-300 leading-relaxed font-normal">
+                <p className="text-sm text-white/90 leading-relaxed font-normal">
                   {pillar.desc}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/10 flex items-center gap-2 text-xs font-semibold text-slate-400">
-                <CheckCircle2 className="w-4 h-4 text-teal" />
+              <div className="mt-6 pt-4 border-t border-white/20 flex items-center gap-2 text-xs font-semibold text-white/90">
+                <CheckCircle2 className="w-4 h-4 text-white" />
                 <span>GrydIn Standard Guarantee</span>
               </div>
             </div>
@@ -150,10 +144,10 @@ export function HomeWhyUs() {
 
         {/* Action Banner with prominent "Check Our Work" button linking to /projects */}
         <div className="bg-gradient-to-r from-[#031326] via-[#04172e] to-[#08284d] rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/15">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-teal/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-[#0d8b99]/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-xl text-center lg:text-left relative z-10">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d8b99] mb-3">
               Proven Track Record
             </p>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-3 leading-snug">

@@ -8,7 +8,7 @@ export function HomeMapSection() {
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-teal text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-navy-700">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
             <Building className="w-3.5 h-3.5" />
             <span>Physical Presence & Engineering Hub</span>
           </div>
@@ -23,15 +23,15 @@ export function HomeMapSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-          {/* Left Column: Theme-Colored Office Command Card (5 cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between bg-gradient-to-br from-[#061f3d] via-[#04172e] to-[#020e1d] p-8 sm:p-9 rounded-2xl border border-white/10 shadow-2xl text-white relative overflow-hidden">
+          {/* Left Column: Theme-Colored (#0d8b99 Teal) Office Command Card (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] p-8 sm:p-9 rounded-2xl border border-white/20 shadow-2xl text-white relative overflow-hidden">
             {/* Ambient corner light */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-teal/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/15 rounded-full blur-3xl pointer-events-none" />
 
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-5">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-300 bg-emerald-500/20 px-3 py-1 rounded-md border border-emerald-500/30">
+                <span className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-wider text-white bg-white/20 px-3 py-1 rounded-md border border-white/30">
                   Active Engineering Hub
                 </span>
               </div>
@@ -39,18 +39,18 @@ export function HomeMapSection() {
               <h3 className="text-2xl sm:text-3xl font-black text-white mb-2 tracking-tight">
                 The Box Software Technology Park
               </h3>
-              <p className="text-sm text-slate-300 mb-6 leading-relaxed font-normal">
+              <p className="text-sm text-white/90 mb-6 leading-relaxed font-normal">
                 F-11 Markaz, Islamabad — GrydIn headquarters for high-reliability systems development and client strategy.
               </p>
 
               <div className="space-y-4 mb-8">
                 {/* Address */}
-                <div className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-teal/20 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/30">
+                <div className="flex items-start gap-3 bg-white/15 border border-white/20 rounded-xl p-3.5">
+                  <div className="w-9 h-9 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0 mt-0.5 border border-white/30">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal mb-0.5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-white/80 mb-0.5">
                       Office Address
                     </p>
                     <p className="text-sm font-semibold text-white leading-snug">
@@ -60,39 +60,39 @@ export function HomeMapSection() {
                 </div>
 
                 {/* Operating Hours */}
-                <div className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-teal/20 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/30">
+                <div className="flex items-start gap-3 bg-white/15 border border-white/20 rounded-xl p-3.5">
+                  <div className="w-9 h-9 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0 mt-0.5 border border-white/30">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal mb-0.5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-white/80 mb-0.5">
                       Office & Visiting Hours
                     </p>
                     <p className="text-sm font-semibold text-white">
                       Monday – Friday: 9:00 AM – 6:00 PM PKT
                     </p>
-                    <p className="text-xs text-slate-300 mt-0.5">
+                    <p className="text-xs text-white/85 mt-0.5">
                       Global async cloud engineering: 24/7
                     </p>
                   </div>
                 </div>
 
                 {/* Direct Contacts */}
-                <div className="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-teal/20 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/30">
+                <div className="flex items-start gap-3 bg-white/15 border border-white/20 rounded-xl p-3.5">
+                  <div className="w-9 h-9 rounded-lg bg-white/20 text-white flex items-center justify-center shrink-0 mt-0.5 border border-white/30">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal mb-0.5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-white/80 mb-0.5">
                       Direct Contact
                     </p>
                     <p className="text-sm font-semibold text-white">
-                      <a href={`tel:${SITE.phoneTel}`} className="hover:text-teal transition-colors">
+                      <a href={`tel:${SITE.phoneTel}`} className="hover:underline transition-all">
                         {SITE.phoneDisplay}
                       </a>
                     </p>
-                    <p className="text-xs text-slate-300">
-                      <a href={`mailto:${SITE.email}`} className="hover:text-teal transition-colors">
+                    <p className="text-xs text-white/85">
+                      <a href={`mailto:${SITE.email}`} className="hover:underline transition-all">
                         {SITE.email}
                       </a>
                     </p>
@@ -101,12 +101,12 @@ export function HomeMapSection() {
               </div>
 
               {/* Facility Badges in glassmorphism */}
-              <div className="flex flex-wrap gap-2 pt-4 border-t border-white/10 mb-8">
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/10 text-white px-3 py-1.5 rounded-lg border border-white/15 backdrop-blur-sm">
-                  <Shield className="w-3.5 h-3.5 text-teal" /> NDA Protected Facility
+              <div className="flex flex-wrap gap-2 pt-4 border-t border-white/20 mb-8">
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/20 text-white px-3 py-1.5 rounded-lg border border-white/25 backdrop-blur-sm">
+                  <Shield className="w-3.5 h-3.5" /> NDA Protected Facility
                 </span>
-                <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/10 text-white px-3 py-1.5 rounded-lg border border-white/15 backdrop-blur-sm">
-                  <Wifi className="w-3.5 h-3.5 text-teal" /> Redundant Fiber
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/20 text-white px-3 py-1.5 rounded-lg border border-white/25 backdrop-blur-sm">
+                  <Wifi className="w-3.5 h-3.5" /> Redundant Fiber
                 </span>
               </div>
             </div>
@@ -117,7 +117,7 @@ export function HomeMapSection() {
                 href={SITE.office.directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-teal/25 transition-all text-center"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white hover:bg-slate-100 text-[#0d8b99] text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all text-center"
               >
                 <Navigation className="w-4 h-4" />
                 Get Directions
@@ -127,9 +127,9 @@ export function HomeMapSection() {
                 href={SITE.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/10 hover:bg-white/15 text-white text-xs sm:text-sm font-bold uppercase tracking-wider border border-white/20 rounded-xl transition-all text-center"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-bold uppercase tracking-wider border border-white/30 rounded-xl transition-all text-center"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
+                <MessageCircle className="w-4 h-4 text-emerald-300" />
                 WhatsApp Us
               </a>
             </div>
@@ -137,10 +137,10 @@ export function HomeMapSection() {
 
           {/* Right Column: Google Maps Interactive Embed (7 cols) */}
           <div className="lg:col-span-7 flex flex-col">
-            <div className="relative w-full h-full min-h-[420px] sm:min-h-[480px] rounded-2xl border-2 border-navy-700/50 overflow-hidden shadow-2xl bg-[#04172e]">
+            <div className="relative w-full h-full min-h-[420px] sm:min-h-[480px] rounded-2xl border-2 border-[#0d8b99]/30 overflow-hidden shadow-2xl bg-[#04172e]">
               {/* Top Map Header Badge */}
               <div className="absolute top-4 left-4 z-10 bg-[#04172e]/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-white/15 shadow-xl flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-teal" />
+                <MapPin className="w-4 h-4 text-[#0d8b99]" />
                 <div>
                   <p className="text-xs font-bold text-white leading-tight">GrydIn HQ Location</p>
                   <p className="text-[10px] text-slate-300 leading-tight">F-11 Markaz, Islamabad</p>
@@ -153,7 +153,7 @@ export function HomeMapSection() {
                   href={SITE.office.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold bg-[#04172e]/90 hover:bg-[#04172e] text-white px-3.5 py-2 rounded-xl border border-white/15 shadow-xl hover:text-teal transition-colors backdrop-blur-md"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold bg-[#04172e]/90 hover:bg-[#04172e] text-white px-3.5 py-2 rounded-xl border border-white/15 shadow-xl hover:text-[#0d8b99] transition-colors backdrop-blur-md"
                 >
                   <span>Open in Google Maps</span>
                   <ExternalLink className="w-3.5 h-3.5" />

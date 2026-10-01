@@ -1,26 +1,8 @@
 import Link from "next/link";
-import { ArrowRight, Calendar, Clock, Newspaper, Sparkles } from "lucide-react";
+import { ArrowRight, Calendar, Clock, Newspaper } from "lucide-react";
 import { Button } from "../ui/Button";
 import { BlogPost, BlogCategory } from "@/lib/content-schema";
 import { CATEGORY_NAMES } from "@/lib/blog";
-
-const CATEGORY_STYLES: Record<BlogCategory, { bg: string; text: string; border: string }> = {
-  announcements: {
-    bg: "bg-amber-500/20 text-amber-300",
-    text: "text-amber-300",
-    border: "border-amber-500/30",
-  },
-  news: {
-    bg: "bg-emerald-500/20 text-emerald-300",
-    text: "text-emerald-300",
-    border: "border-emerald-500/30",
-  },
-  blog: {
-    bg: "bg-sky-500/20 text-sky-300",
-    text: "text-sky-300",
-    border: "border-sky-500/30",
-  },
-};
 
 function formatDate(dateStr: string) {
   try {
@@ -47,7 +29,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-navy text-teal text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm border border-navy-700">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
             <Newspaper className="w-3.5 h-3.5" />
             <span>Newsroom & Insights</span>
           </div>
@@ -61,51 +43,48 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
           </p>
         </div>
 
-        {/* 3 Theme-Colored Newsroom Boxes */}
+        {/* 3 Theme-Colored (#0d8b99 Teal) Newsroom Boxes */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
           {featuredPosts.map((post) => {
-            const categoryStyle = CATEGORY_STYLES[post.category] || CATEGORY_STYLES.blog;
             const categoryLabel = CATEGORY_NAMES[post.category] || post.category;
 
             return (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group relative bg-gradient-to-br from-[#061f3d] via-[#04172e] to-[#020e1d] rounded-2xl p-7 sm:p-8 flex flex-col justify-between border border-white/10 hover:border-teal/60 transition-all duration-300 hover:shadow-2xl hover:shadow-teal/15 hover:-translate-y-1.5 overflow-hidden"
+                className="group relative bg-gradient-to-br from-[#0e95a4] via-[#0d8b99] to-[#09707c] rounded-2xl p-7 sm:p-8 flex flex-col justify-between border border-white/20 hover:border-white/50 transition-all duration-300 hover:shadow-2xl hover:shadow-[#0d8b99]/30 hover:-translate-y-1.5 overflow-hidden text-white"
               >
                 {/* Top accent line */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-teal transition-colors duration-300" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-white/30 group-hover:bg-white transition-colors duration-300" />
 
                 <div>
                   {/* Category Chip & Date */}
                   <div className="flex items-center justify-between gap-2 mb-5">
-                    <span
-                      className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md border ${categoryStyle.bg} ${categoryStyle.border}`}
-                    >
+                    <span className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-md bg-white/20 border border-white/30 text-white backdrop-blur-sm">
                       {categoryLabel}
                     </span>
 
-                    <div className="flex items-center gap-1.5 text-xs text-slate-400 font-medium">
-                      <Calendar className="w-3.5 h-3.5 text-teal" />
+                    <div className="flex items-center gap-1.5 text-xs text-white/85 font-medium">
+                      <Calendar className="w-3.5 h-3.5" />
                       <span>{formatDate(post.date)}</span>
                     </div>
                   </div>
 
-                  {/* Post Title in White */}
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-teal transition-colors line-clamp-2 leading-snug">
+                  {/* Post Title in Crisp White */}
+                  <h3 className="text-xl font-bold text-white mb-3 line-clamp-2 leading-snug group-hover:translate-x-0.5 transition-transform">
                     {post.title}
                   </h3>
 
                   {/* Excerpt in light text */}
-                  <p className="text-sm text-slate-300 leading-relaxed line-clamp-3 mb-6 font-normal">
+                  <p className="text-sm text-white/90 leading-relaxed line-clamp-3 mb-6 font-normal">
                     {post.description}
                   </p>
                 </div>
 
                 {/* Footer */}
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal group-hover:text-white transition-colors">
-                  <span className="flex items-center gap-1 text-slate-400 font-normal">
-                    <Clock className="w-3.5 h-3.5 text-slate-400" />
+                <div className="pt-4 border-t border-white/20 flex items-center justify-between text-xs font-semibold text-white">
+                  <span className="flex items-center gap-1 text-white/80 font-normal">
+                    <Clock className="w-3.5 h-3.5" />
                     {post.readingTime}
                   </span>
 
@@ -127,19 +106,19 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
             </span>
             <Link
               href="/blog/category/news"
-              className="text-xs font-semibold bg-surface-soft hover:bg-navy hover:text-white text-ink px-3 py-1.5 rounded-full border border-surface-line transition-all"
+              className="text-xs font-semibold bg-surface-soft hover:bg-[#0d8b99] hover:text-white text-ink px-3 py-1.5 rounded-full border border-surface-line transition-all"
             >
               Company News
             </Link>
             <Link
               href="/blog/category/announcements"
-              className="text-xs font-semibold bg-surface-soft hover:bg-navy hover:text-white text-ink px-3 py-1.5 rounded-full border border-surface-line transition-all"
+              className="text-xs font-semibold bg-surface-soft hover:bg-[#0d8b99] hover:text-white text-ink px-3 py-1.5 rounded-full border border-surface-line transition-all"
             >
               Announcements
             </Link>
             <Link
               href="/blog/category/blog"
-              className="text-xs font-semibold bg-surface-soft hover:bg-navy hover:text-white text-ink px-3 py-1.5 rounded-full border border-surface-line transition-all"
+              className="text-xs font-semibold bg-surface-soft hover:bg-[#0d8b99] hover:text-white text-ink px-3 py-1.5 rounded-full border border-surface-line transition-all"
             >
               Engineering Insights
             </Link>

@@ -1,33 +1,8 @@
-import Link from "next/link";
-import { ArrowRight, CheckCircle2, ShieldCheck, Zap, Clock, Users, Cpu, FileCheck, Award } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
+import { CountUp } from "@/components/motion/CountUp";
 import { Button } from "../ui/Button";
-
-const METRICS = [
-  {
-    value: "20+",
-    label: "Global Clients",
-    detail: "US, UK, Australia, Middle East & Pakistan",
-    icon: Users,
-  },
-  {
-    value: "45+",
-    label: "Production Systems",
-    detail: "Live automations, AI agents & bespoke platforms",
-    icon: Cpu,
-  },
-  {
-    value: "< 14 Days",
-    label: "First Deployment",
-    detail: "Rapid turnaround from diagnosis to live release",
-    icon: Clock,
-  },
-  {
-    value: "100%",
-    label: "Fixed-Scope Pricing",
-    detail: "Capped budgets with zero retainer traps",
-    icon: FileCheck,
-  },
-];
 
 const PILLARS = [
   {
@@ -52,128 +27,90 @@ const PILLARS = [
 
 export function HomeWhyUs() {
   return (
-    <section id="why-us" className="relative w-full py-20 md:py-28 bg-navy-950 border-b border-white/10 overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-teal/10 rounded-full blur-3xl pointer-events-none" />
+    <section id="why-us" className="relative w-full bg-navy py-24 md:py-32">
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <SectionHeader
+          eyebrow="Why Choose GrydIn"
+          title="Engineered for certainty, built for speed"
+          accent="certainty"
+          intro="We replace open-ended consulting retainers with forensic diagnosis, guaranteed delivery timelines, and fixed scopes. No vendor lock-in, no vague billable hours."
+        />
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
-            <Award className="w-3.5 h-3.5" />
-            <span>Why Choose GrydIn</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
-            Engineered for Certainty, Built for Speed
-          </h2>
-
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-            We replace open-ended consulting retainers with forensic diagnosis, guaranteed delivery timelines, and fixed scopes. No vendor lock-in, no vague billable hours.
-          </p>
-        </div>
-
-        {/* 4 Crisp White Performance Metric Boxes on Deep Blue Background */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 sm:mb-16">
-          {METRICS.map((metric) => {
-            const Icon = metric.icon;
-            return (
-              <div
-                key={metric.label}
-                className="group relative bg-white rounded-2xl p-7 border border-transparent hover:border-teal transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-teal/20 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight group-hover:text-teal transition-colors">
-                      {metric.value}
-                    </span>
-                    <div className="w-11 h-11 rounded-xl bg-teal/10 text-teal flex items-center justify-center group-hover:bg-teal group-hover:text-white transition-all">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
-
-                  <p className="text-base font-bold text-slate-900 mb-1.5">{metric.label}</p>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">{metric.detail}</p>
-                </div>
-
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-teal">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Verified Production Metric</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* 3 Crisp White Architecture Pillar Boxes on Deep Blue Background */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16">
-          {PILLARS.map((pillar) => (
-            <div
-              key={pillar.title}
-              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-transparent hover:border-teal transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-teal/20 flex flex-col justify-between overflow-hidden"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center font-black text-sm shadow-md">
-                    {pillar.step}
-                  </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-teal bg-teal/10 border border-teal/20 px-3 py-1 rounded-full">
-                    {pillar.tag}
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-teal transition-colors">
-                  {pillar.title}
-                </h3>
-
-                <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                  {pillar.desc}
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-500">
-                <CheckCircle2 className="w-4 h-4 text-teal" />
-                <span>GrydIn Standard Guarantee</span>
-              </div>
+        {/* Unified 4-Stat Band */}
+        <Reveal delay={0.1}>
+          <div className="mt-14 grid grid-cols-2 gap-y-10 border-y border-white/10 py-10 lg:grid-cols-4 lg:divide-x lg:divide-white/10">
+            <div className="px-6 text-center lg:text-left">
+              <p className="text-4xl sm:text-5xl font-semibold text-white">
+                <CountUp to={20} suffix="+" />
+              </p>
+              <p className="mt-2 text-sm font-semibold text-teal-glow">Global clients</p>
+              <p className="mt-1 text-sm text-slate-400">US, UK, Australia, Middle East & Pakistan</p>
             </div>
+
+            <div className="px-6 text-center lg:text-left">
+              <p className="text-4xl sm:text-5xl font-semibold text-white">
+                <CountUp to={45} suffix="+" />
+              </p>
+              <p className="mt-2 text-sm font-semibold text-teal-glow">Production systems</p>
+              <p className="mt-1 text-sm text-slate-400">Live automations, AI agents & bespoke platforms</p>
+            </div>
+
+            <div className="px-6 text-center lg:text-left">
+              <p className="text-4xl sm:text-5xl font-semibold text-white">&lt; 14 Days</p>
+              <p className="mt-2 text-sm font-semibold text-teal-glow">First deployment</p>
+              <p className="mt-1 text-sm text-slate-400">Rapid turnaround from diagnosis to live release</p>
+            </div>
+
+            <div className="px-6 text-center lg:text-left">
+              <p className="text-4xl sm:text-5xl font-semibold text-white">100%</p>
+              <p className="mt-2 text-sm font-semibold text-teal-glow">Fixed-scope pricing</p>
+              <p className="mt-1 text-sm text-slate-400">Capped budgets with zero retainer traps</p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* 3 Pillars as plain columns (no card boxes) */}
+        <div className="mt-16 grid gap-10 md:grid-cols-3">
+          {PILLARS.map((pillar, i) => (
+            <Reveal key={pillar.title} delay={i * 0.1}>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-sm font-bold text-teal-glow">{pillar.step}</span>
+                  <span className="h-px w-6 bg-teal-glow/40" />
+                  <span className="font-mono text-xs uppercase tracking-widest text-teal-glow/80">{pillar.tag}</span>
+                </div>
+                <h3 className="mt-4 text-xl sm:text-2xl font-semibold text-white">{pillar.title}</h3>
+                <p className="mt-3 text-base leading-relaxed text-slate-300">{pillar.desc}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Action Banner with prominent "Check Our Work" button linking to /projects */}
-        <div className="bg-gradient-to-r from-[#020e1d] via-navy to-[#072547] rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/15">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-teal/20 rounded-full blur-3xl pointer-events-none" />
+        {/* Action Banner */}
+        <Reveal delay={0.2}>
+          <div className="glass mt-16 rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden">
+            <div className="max-w-xl text-center lg:text-left relative z-10">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-teal-glow mb-2">
+                Proven Track Record
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-3">
+                See the systems we have deployed for our clients.
+              </h3>
+              <p className="text-base text-slate-300 leading-relaxed">
+                Review detailed case studies across logistics, legaltech, energy, and e-commerce with real architectural metrics.
+              </p>
+            </div>
 
-          <div className="max-w-xl text-center lg:text-left relative z-10">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal mb-3">
-              Proven Track Record
-            </p>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-3 leading-snug">
-              See the systems we have deployed for our clients.
-            </h3>
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-              Review detailed case studies across logistics, legaltech, energy, and e-commerce with real architectural metrics.
-            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 relative z-10 shrink-0">
+              <Button href="/projects" variant="primary" size="lg" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>
+                Check Our Work
+              </Button>
+              <Button href="/solutions" variant="outline-light" size="lg">
+                Explore Solutions
+              </Button>
+            </div>
           </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 relative z-10 shrink-0">
-            <Button
-              href="/projects"
-              variant="primary"
-              size="lg"
-              iconRight={<ArrowRight className="w-4 h-4 ml-1" />}
-            >
-              Check Our Work
-            </Button>
-
-            <Button
-              href="/solutions"
-              variant="outline-light"
-              size="lg"
-            >
-              Explore Solutions
-            </Button>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -3,11 +3,15 @@ import Link from "next/link";
 import { buildMetadata, organizationJsonLd, websiteJsonLd, professionalServiceJsonLd } from "@/lib/seo";
 import { JsonLd } from "./globalscope/ui/JsonLd";
 import { CollabsMarquee } from "./globalscope/CollabsMarquee";
+import { HomeProblem } from "./globalscope/home/HomeProblem";
 import { HomeServices } from "./globalscope/home/HomeServices";
-import { HomeWhyUs } from "./globalscope/home/HomeWhyUs";
+import { HomeSeeItWork } from "./globalscope/home/HomeSeeItWork";
+import { HomeCases } from "./globalscope/home/HomeCases";
 import { HomeProcess } from "./globalscope/home/HomeProcess";
+import { HomeWhyUs } from "./globalscope/home/HomeWhyUs";
+import { HomeStack } from "./globalscope/home/HomeStack";
 import { HomeNewsroom } from "./globalscope/home/HomeNewsroom";
-import { HomeMapSection } from "./globalscope/home/HomeMapSection";
+import { HomeFaq } from "./globalscope/home/HomeFaq";
 import { CtaBand } from "./globalscope/ui/CtaBand";
 import { getAllPosts } from "@/lib/blog";
 
@@ -114,33 +118,38 @@ export default function Home() {
         {/* 1. Approved Hero Section (100% Untouched) */}
         <HeroSection />
 
-        {/* 2. Client Collabs Marquee (Deep Navy band matching the Hero) */}
+        {/* 2. Client Collabs Marquee */}
         <CollabsMarquee background="#04172e" />
 
-        {/* 3. Core Capabilities 12-Column Bento Grid */}
+        {/* 3. Operational Bottlenecks (Problem) */}
+        <HomeProblem />
+
+        {/* 4. Core Capabilities (Bento Grid) */}
         <HomeServices />
 
-        {/* 4. Why GrydIn (Metrics, Trust, & "Check Our Work" -> /projects) */}
-        <HomeWhyUs />
+        {/* 5. Live Architecture Demo (Video/3D Slot) */}
+        <HomeSeeItWork />
 
-        {/* 5. How We Work (3-Step Delivery Framework on White) */}
+        {/* 6. Case Studies */}
+        <HomeCases />
+
+        {/* 7. Methodology (Timeline) */}
         <HomeProcess />
 
-        {/* 6. Latest News & Announcements (2-3 items + "View All" -> /blog) */}
+        {/* 8. Why GrydIn (Stat Band & Pillars) */}
+        <HomeWhyUs />
+
+        {/* 9. Technology Marquee */}
+        <HomeStack />
+
+        {/* 10. Newsroom & Insights */}
         <HomeNewsroom posts={posts} />
 
-        {/* 7. Islamabad F-11 Office & Interactive Google Maps Embed */}
-        <HomeMapSection />
+        {/* 11. Frequently Asked Questions */}
+        <HomeFaq />
 
-        {/* 8. Closing CTA Band (Navy #04172e to /contact) */}
-        <CtaBand
-          title="Ready to eliminate manual friction from your business?"
-          subtitle="Tell us what's slowing your team down. You'll receive a scoped roadmap and fixed quote within 24 hours."
-          buttonText="Book a Technical Diagnosis"
-          buttonHref="/contact"
-          secondaryText="Explore Our Products"
-          secondaryHref="/projects#our-products"
-        />
+        {/* 12. Closing CTA Band */}
+        <CtaBand />
       </main>
     </>
   );

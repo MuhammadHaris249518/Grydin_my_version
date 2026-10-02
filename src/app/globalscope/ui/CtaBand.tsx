@@ -1,6 +1,8 @@
 import React from "react";
 import { Button } from "./Button";
 import { ArrowRight } from "lucide-react";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
+import { Reveal } from "@/components/motion/Reveal";
 
 export interface CtaBandProps {
   title?: string;
@@ -13,55 +15,55 @@ export interface CtaBandProps {
 }
 
 export function CtaBand({
-  title = "Have something in mind? Let's grid it.",
-  subtitle = "Talk to our engineering team about your systems, workflows, or product roadmap.",
-  buttonText = "Start a conversation",
+  title = "Ready to eliminate manual friction from your business?",
+  subtitle = "Tell us what's slowing your team down. You'll receive a scoped roadmap and fixed quote within 48 hours.",
+  buttonText = "Book a free process diagnosis",
   buttonHref = "/contact",
-  secondaryText,
-  secondaryHref,
+  secondaryText = "See our work",
+  secondaryHref = "/projects",
   className = "",
 }: CtaBandProps) {
   return (
-    <section className={`relative bg-navy py-16 md:py-20 overflow-hidden text-white ${className}`}>
-      {/* Ambient background glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-teal/15 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
-      <div className="absolute bottom-0 left-1/3 w-80 h-80 bg-navy-600/40 rounded-full blur-2xl pointer-events-none translate-y-1/2" />
+    <section className={`relative overflow-hidden bg-navy py-24 md:py-32 text-white border-t border-white/10 ${className}`}>
+      <HeroBackdrop network={false} />
 
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-        <div className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal mb-3">
-            Ready to build
+      <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-10 text-center">
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-teal-glow mb-4">
+            Next Steps
           </p>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white tracking-tight leading-tight">
             {title}
           </h2>
+
           {subtitle && (
-            <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
+            <p className="mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
               {subtitle}
             </p>
           )}
-        </div>
 
-        <div className="flex flex-wrap items-center gap-4 shrink-0">
-          <Button
-            href={buttonHref}
-            variant="primary"
-            size="lg"
-            iconRight={<ArrowRight className="w-4 h-4 ml-1" />}
-          >
-            {buttonText}
-          </Button>
-
-          {secondaryText && secondaryHref && (
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Button
-              href={secondaryHref}
-              variant="outline-light"
+              href={buttonHref}
+              variant="primary"
               size="lg"
+              iconRight={<ArrowRight className="w-4 h-4 ml-1" />}
             >
-              {secondaryText}
+              {buttonText}
             </Button>
-          )}
-        </div>
+
+            {secondaryText && secondaryHref && (
+              <Button
+                href={secondaryHref}
+                variant="outline-light"
+                size="lg"
+              >
+                {secondaryText}
+              </Button>
+            )}
+          </div>
+        </Reveal>
       </div>
     </section>
   );

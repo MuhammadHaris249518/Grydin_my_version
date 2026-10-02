@@ -1,8 +1,9 @@
-import Link from "next/link";
-import { ArrowRight, Target, AlertTriangle, Crosshair, Workflow, ShieldCheck, Rocket, Link2, FileText, CheckCircle2, GitPullRequest } from "lucide-react";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { ProcessTimeline, type TimelineStep } from "@/components/motion/ProcessTimeline";
+import { ModelSlot } from "@/components/3d/ModelSlot";
 import { Button } from "../ui/Button";
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: TimelineStep[] = [
   {
     step: "01",
     phase: "Diagnose",
@@ -10,17 +11,14 @@ const PROCESS_STEPS = [
     desc: "We map your workflow end-to-end — every manual gap, bottleneck, and hidden handoff costing your team time. Nothing gets built until we verify what is broken.",
     points: [
       {
-        icon: Target,
         title: "Process Discovery",
         desc: "Shadowing how work really moves across your team and systems.",
       },
       {
-        icon: AlertTriangle,
         title: "Gap & Bottleneck Audit",
         desc: "Isolating latency, manual copy-pasting, and recurring failure points.",
       },
       {
-        icon: Crosshair,
         title: "System & API Verification",
         desc: "Verifying permissions, rate limits, schema models, and data purity.",
       },
@@ -33,17 +31,14 @@ const PROCESS_STEPS = [
     desc: "We scope only what moves the needle. No bloat, no needless complexity. You review and sign off on the exact architectural blueprint before code is written.",
     points: [
       {
-        icon: Target,
         title: "Modular Architecture",
         desc: "Clean, maintainable structures engineered for scale and fast iteration.",
       },
       {
-        icon: Workflow,
         title: "Workflow Blueprint",
         desc: "Every trigger, event payload, branch condition, and fallback mapped.",
       },
       {
-        icon: ShieldCheck,
         title: "Security & Observability",
         desc: "Built-in error catching, retry queues, and unified audit logs.",
       },
@@ -56,17 +51,14 @@ const PROCESS_STEPS = [
     desc: "We ship fast, integrate quietly, and hand off documentation your team can actually understand. The system runs reliably — you notice it in the output.",
     points: [
       {
-        icon: Rocket,
         title: "Seamless Production Release",
         desc: "Zero-downtime deployment verified with synthetic edge-case tests.",
       },
       {
-        icon: Link2,
         title: "Deep Tool Synchronization",
         desc: "Your daily CRM, databases, and communication channels connected.",
       },
       {
-        icon: FileText,
         title: "Full Documentation & Runbooks",
         desc: "Exhaustive handover guides so your internal engineers stay independent.",
       },
@@ -76,95 +68,21 @@ const PROCESS_STEPS = [
 
 export function HomeProcess() {
   return (
-    <section id="methodology" className="relative w-full py-20 md:py-28 bg-navy border-b border-white/10 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
-            <GitPullRequest className="w-3.5 h-3.5" />
-            <span>Methodology</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
-            How We Ship in Under Two Weeks
-          </h2>
-
-          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-            A battle-tested framework engineered to deliver production-grade software and automations without endless scoping meetings or bloated budgets.
-          </p>
+    <section id="process" className="relative bg-navy-950 py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <SectionHeader
+          eyebrow="Methodology"
+          title="How we ship in under two weeks"
+          accent="under two weeks"
+          intro="A battle-tested framework engineered to deliver production-grade software and automations without endless scoping meetings or bloated budgets."
+        />
+        <div className="relative mt-16">
+          <ModelSlot label="process-3d" className="absolute inset-x-0 -top-10 h-56 opacity-70 pointer-events-none" />
+          <ProcessTimeline steps={PROCESS_STEPS} />
         </div>
-
-        {/* 3 Crisp White Process Boxes on Deep Hero Navy (#04172e) Background */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-          {PROCESS_STEPS.map((step, idx) => (
-            <div
-              key={step.step}
-              className="group relative bg-white rounded-2xl border border-transparent hover:border-teal p-8 flex flex-col justify-between hover:shadow-2xl hover:shadow-teal/20 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
-            >
-              {/* Top highlight bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-teal transition-colors duration-300" />
-
-              <div>
-                {/* Step header */}
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-4xl sm:text-5xl font-black text-slate-200 group-hover:text-teal transition-colors">
-                    {step.step}
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 border border-teal/20 px-3 py-1 rounded-full">
-                    {step.phase}
-                  </span>
-                </div>
-
-                <h3 className="text-2xl font-bold text-slate-900 mb-1.5">{step.phase}</h3>
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-4">
-                  {step.tagline}
-                </p>
-
-                <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
-                  {step.desc}
-                </p>
-
-                {/* Sub-points inside clean gray containers */}
-                <div className="space-y-3 pt-4 border-t border-slate-100">
-                  {step.points.map((pt) => {
-                    const Icon = pt.icon;
-                    return (
-                      <div
-                        key={pt.title}
-                        className="flex items-start gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:bg-slate-100 transition-colors"
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-teal/10 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/20">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <h4 className="text-xs font-bold text-slate-900 mb-0.5">{pt.title}</h4>
-                          <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                            {pt.desc}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
-                <span>Phase {idx + 1} of 3</span>
-                <div className="flex items-center gap-1.5 text-teal">
-                  <CheckCircle2 className="w-4 h-4" />
-                  <span>Guaranteed Delivery</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-14 text-center">
-          <p className="text-sm sm:text-base text-slate-300 mb-4">
-            Want to see how this framework applies to your specific stack?
-          </p>
-          <Button href="/contact" variant="primary" size="md" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>
-            Schedule a Process Diagnosis
+        <div className="mt-16 text-center">
+          <Button href="/contact" variant="primary" size="md">
+            Schedule a process diagnosis
           </Button>
         </div>
       </div>

@@ -11,13 +11,14 @@ import {
   Plug,
   Code,
   Sparkles,
+  LucideIcon,
 } from "lucide-react";
 import { Button } from "../ui/Button";
 
 interface ServiceCardData {
   id: string;
   number: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   title: string;
   desc: string;
   tags: string[];

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Brain, Repeat, Code2, Layers, ArrowRight, Sparkles, Compass } from "lucide-react";
+import { Brain, Repeat, Code2, Layers, ArrowRight, Sparkles, Compass, LucideIcon } from "lucide-react";
 
 export type ServiceKey = "ai-agents" | "workflow" | "fullstack" | "custom-software";
 
@@ -12,7 +12,7 @@ interface ServiceCardData {
   title: string;
   tagline: string;
   description: string;
-  icon: React.ElementType;
+  icon: LucideIcon;
   position: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   badges: string[];
 }

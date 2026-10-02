@@ -20,7 +20,7 @@ type Props = { services?: HeroService[]; onSelect?: (id: string) => void };
 
 function Connectors({ services, activeId }: { services: HeroService[]; activeId: string | null }) {
   return (
-    <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
+    <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden>
       {services.map((s) => {
         const sx = s.side === "left" ? s.pos.x + CARD_W : s.pos.x;
         const sy = s.pos.y + CARD_H / 2;
@@ -29,16 +29,19 @@ function Connectors({ services, activeId }: { services: HeroService[]; activeId:
         const mx = (sx + ex) / 2;
         const on = activeId === s.id;
         return (
-          <path
-            key={s.id}
-            d={`M${sx} ${sy} C ${mx} ${sy}, ${mx} ${ey}, ${ex} ${ey}`}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth={on ? 1.8 : 1}
-            strokeDasharray={on ? "6 6" : "none"}
-            vectorEffect="non-scaling-stroke"
-            className={cn("transition-all duration-300", on ? "text-teal-glow animate-dash" : "text-teal-glow/25")}
-          />
+          <g key={s.id}>
+            <path
+              d={`M${sx} ${sy} C ${mx} ${sy}, ${mx} ${ey}, ${ex} ${ey}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={on ? 2 : 1.2}
+              strokeDasharray={on ? "4 4" : "3 3"}
+              vectorEffect="non-scaling-stroke"
+              className={cn("transition-all duration-300", on ? "text-teal-500 animate-dash" : "text-teal-400/40")}
+            />
+            <circle cx={sx} cy={sy} r="1.5" className={cn("fill-teal-500", on && "animate-pulse")} vectorEffect="non-scaling-stroke" />
+            <circle cx={ex} cy={ey} r="1.5" className={cn("fill-teal-500", on && "animate-pulse")} vectorEffect="non-scaling-stroke" />
+          </g>
         );
       })}
     </svg>
@@ -60,9 +63,9 @@ function StageCard({
 }) {
   const Icon = s.icon;
   const cls = cn(
-    "glass group flex h-full w-full animate-float items-start gap-3 rounded-2xl p-4 text-left transition-[box-shadow,border-color,background-color] duration-300",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow",
-    active && "!border-teal-glow/70 bg-teal/10 shadow-glow"
+    "group flex h-full w-full items-start gap-3.5 rounded-2xl p-4 sm:p-5 text-left transition-all duration-300 bg-white border border-slate-200/80 shadow-md shadow-slate-200/50 hover:shadow-xl hover:border-teal-500/50 hover:-translate-y-0.5",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500",
+    active && "!border-teal-500 bg-teal-50/30 shadow-lg shadow-teal-500/10 ring-2 ring-teal-500/20"
   );
   const style = { animationDelay: `${index * 0.7}s` };
   const handlers = {
@@ -73,13 +76,12 @@ function StageCard({
   };
   const body = (
     <>
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/20 text-teal-glow">
-        <Icon className="h-5 w-5" />
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600 border border-teal-100 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+        <Icon className="h-5 w-5" strokeWidth={2} />
       </span>
-      <span className="min-w-0">
-        <span className="block text-sm font-semibold text-white">{s.title}</span>
-        <span className="mt-1 block text-sm leading-snug text-slate-300">{s.blurb}</span>
-        <ArrowRight className="mt-2 h-4 w-4 text-teal-glow transition-transform group-hover:translate-x-1" />
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-bold text-slate-900 group-hover:text-teal-700 transition-colors">{s.title}</span>
+        <span className="mt-1 block text-xs leading-relaxed text-slate-600 font-normal">{s.blurb}</span>
       </span>
     </>
   );
@@ -119,12 +121,10 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
       const s = services.find((x) => x.id === id);
       lookRef.current = s ? s.look : { x: 0, y: 0 };
     } else {
-      // Return immediately to cursor tracking if available, otherwise center
       lookRef.current = lastPointer.current ?? { x: 0, y: 0 };
     }
   };
 
-  // cursor tracking on stage (returns to tracking when card is left)
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
       lastMove.current = performance.now();
@@ -145,7 +145,6 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
-  // idle demo: cycle through services when nobody is interacting (after 5s without pointer movement)
   useEffect(() => {
     if (!can3D || !visible) return;
     const id = setInterval(() => {
@@ -180,12 +179,12 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
               const Icon = s.icon;
               const content = (
                 <>
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/20 text-teal-glow">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600 border border-teal-100">
                     <Icon className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-white">{s.title}</span>
-                    <span className="mt-1 block text-sm leading-snug text-slate-300">{s.blurb}</span>
+                    <span className="block text-sm font-bold text-slate-900">{s.title}</span>
+                    <span className="mt-1 block text-xs leading-relaxed text-slate-600">{s.blurb}</span>
                   </span>
                 </>
               );
@@ -194,7 +193,7 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
                   key={s.id}
                   type="button"
                   onClick={() => onSelect(s.id)}
-                  className="glass flex items-start gap-3 rounded-2xl p-4 text-left transition-colors hover:border-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
+                  className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 flex items-start gap-3 rounded-2xl p-4 text-left transition-all hover:border-teal-500/50 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
                 >
                   {content}
                 </button>
@@ -202,7 +201,7 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
                 <Link
                   key={s.id}
                   href={`/services#${s.id}`}
-                  className="glass flex items-start gap-3 rounded-2xl p-4 text-left transition-colors hover:border-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
+                  className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 flex items-start gap-3 rounded-2xl p-4 text-left transition-all hover:border-teal-500/50 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
                 >
                   {content}
                 </Link>

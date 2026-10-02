@@ -32,6 +32,8 @@ import {
   Compass,
   FileCode2,
   HelpCircle,
+  Box,
+  Target,
   LucideIcon,
 } from "lucide-react";
 import { RobotStage } from "@/components/3d/RobotStage";
@@ -371,49 +373,48 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-surface text-ink selection:bg-accent selection:text-white">
       {/* ── 1. Hero Section with 3D RobotStage ── */}
-      <section className="relative overflow-hidden border-b border-surface-line pb-20 pt-16 md:pb-28 md:pt-24">
+      <section className="relative overflow-hidden bg-slate-50/70 border-b border-slate-200/80 pb-20 pt-12 md:pb-24 md:pt-16">
         <HeroBackdrop network={false} />
         <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-4xl text-center">
-            {/* Breadcrumb & Eyebrow */}
-            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-light text-accent border border-accent/30 tracking-wider uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-pulse" />
-                Enterprise Solutions & Capabilities
-              </span>
-              <span className="text-xs text-ink-muted font-medium">
-                Home <span className="mx-1 text-surface-line">/</span> Services
+            {/* Eyebrow Badge */}
+            <div className="flex justify-center mb-6">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200/80 tracking-wider uppercase shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+                ENTERPRISE SOLUTIONS & CAPABILITIES
               </span>
             </div>
 
             {/* Main Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold text-ink tracking-tight leading-[1.12] mb-6">
-              Engineering next-gen <br className="hidden sm:inline" />
-              <span className="text-gradient">
-                AI & enterprise software systems
-              </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-6">
+              Engineering next-gen <br />
+              <span className="text-teal-600">
+                AI & enterprise software
+              </span> <br />
+              systems
             </h1>
 
-            <p className="text-base sm:text-lg lg:text-xl text-ink-muted leading-relaxed font-normal max-w-3xl mx-auto mb-10">
-              From autonomous multi-agent operational workflows to mission-critical cloud platforms. We eliminate manual friction with custom software built around your exact business logic — with guaranteed fixed scope and first deployment in under two weeks.
+            {/* Subtitle Description */}
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto mb-8">
+              We build autonomous AI systems, custom software and cloud platforms that automate complex business operations — helping you scale faster, work smarter and stay ahead.
             </p>
 
             {/* Hero CTAs */}
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-accent hover:bg-accent-hover text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-lg shadow-accent/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md shadow-teal-600/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
-                Book a free process diagnosis
+                BOOK A FREE PROCESS DIAGNOSIS
                 <ArrowRight size={16} strokeWidth={2.2} />
               </Link>
 
               <a
                 href="#capabilities"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-surface-soft hover:bg-surface-line text-ink text-xs sm:text-sm font-bold uppercase tracking-wider border border-surface-line rounded-md transition-all hover:border-ink/30"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-bold uppercase tracking-wider border border-slate-300 rounded-lg shadow-xs transition-all hover:border-slate-400"
               >
-                Explore Capabilities
-                <ChevronRight size={16} />
+                EXPLORE CAPABILITIES
+                <ArrowRight size={16} strokeWidth={2} />
               </a>
             </div>
           </div>
@@ -422,53 +423,65 @@ export default function ServicesPage() {
             <RobotStage onSelect={handleSelect} />
           </div>
 
-          {/* Quick Metrics Strip */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-surface-line">
-            <div className="surface-card rounded-2xl p-5 hover:border-accent/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-accent mb-1 font-mono">
-                &lt; 2 Weeks
+          {/* Connected Feature Cards (4-Grid Bottom Section) */}
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-slate-200/80">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
+                <Clock className="w-5 h-5" strokeWidth={2} />
               </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-ink">
-                First Deployment
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
+                2 Weeks
               </div>
-              <p className="text-xs text-ink-muted mt-1">
-                Rapid turnaround without cutting technical corners
+              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+                RAPID DEPLOYMENT
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                Get your solution up and running in just 2 weeks.
               </p>
             </div>
 
-            <div className="surface-card rounded-2xl p-5 hover:border-accent/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-ink mb-1 font-mono">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
+                <ShieldCheck className="w-5 h-5" strokeWidth={2} />
+              </div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
                 Audit-Ready
               </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-ink">
-                Reliability SLA
+              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+                RELIABILITY & SECURITY
               </div>
-              <p className="text-xs text-ink-muted mt-1">
-                Zero-downtime architecture with live telemetry
+              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                Meet industry standards with built-in compliance.
               </p>
             </div>
 
-            <div className="surface-card rounded-2xl p-5 hover:border-accent/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-ink mb-1 font-mono">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
+                <Box className="w-5 h-5" strokeWidth={2} />
+              </div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
                 Turnkey
               </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-ink">
-                Custom Integrations
+              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+                CUSTOM INTEGRATION
               </div>
-              <p className="text-xs text-ink-muted mt-1">
-                Seamless connectors across ERP, CRM, and databases
+              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                End-to-end solutions, from design to deployment.
               </p>
             </div>
 
-            <div className="surface-card rounded-2xl p-5 hover:border-accent/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-accent mb-1 font-mono">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
+                <Target className="w-5 h-5" strokeWidth={2} />
+              </div>
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
                 Fixed Scope
               </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-ink">
-                Transparent Pricing
+              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+                TRANSPARENT PRICING
               </div>
-              <p className="text-xs text-ink-muted mt-1">
-                Zero retainer traps, no surprise invoices
+              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                No hidden costs. Clear timelines. Complete peace of mind.
               </p>
             </div>
           </div>

@@ -5,7 +5,6 @@ import { Menu, X, Search } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GrydInLogo } from "./GrydInLogo";
-
 import { SearchDialog } from "./SearchDialog";
 
 export const NAVBAR_TOP_OFFSET = 0;
@@ -50,10 +49,10 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 left-0 right-0 z-50 w-full bg-white border-b border-surface-line shadow-[0_1px_3px_rgba(0,0,0,0.06)]">
+      <header className="sticky top-0 left-0 right-0 z-50 w-full bg-navy/70 backdrop-blur-md border-b border-white/10">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-[70px] flex items-center justify-between gap-4">
           {/* Logo */}
-          <GrydInLogo variant="navbar" theme="light" />
+          <GrydInLogo variant="navbar" theme="dark" />
 
           {/* Desktop Navigation (lg:flex for 7 links) */}
           <nav
@@ -70,10 +69,10 @@ export const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`text-[12px] xl:text-[13px] font-bold uppercase tracking-wider transition-colors duration-150 ${
+                  className={`text-[12px] xl:text-[13px] font-bold uppercase tracking-wider transition-colors duration-150 relative py-1 ${
                     isActive
-                      ? "text-teal"
-                      : "text-ink hover:text-teal"
+                      ? "text-teal-glow after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-teal-glow"
+                      : "text-slate-200 hover:text-teal-glow"
                   }`}
                 >
                   {link.label}
@@ -88,12 +87,12 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-ink hover:text-teal transition-colors rounded-full flex items-center gap-1.5 cursor-pointer"
+              className="p-2 text-slate-200 hover:text-teal-glow transition-colors rounded-full flex items-center gap-1.5 cursor-pointer"
               aria-label="Search site"
               title="Search (Ctrl+K)"
             >
               <Search size={18} strokeWidth={2.2} />
-              <kbd className="hidden xl:inline-block text-[10px] text-ink-muted bg-surface-soft border border-surface-line px-1.5 py-0.5 rounded font-medium">
+              <kbd className="hidden xl:inline-block text-[10px] text-slate-300 bg-white/10 border border-white/15 px-1.5 py-0.5 rounded font-mono">
                 ⌘K
               </kbd>
             </button>
@@ -106,62 +105,58 @@ export const Navbar = () => {
               GET IN TOUCH
             </Link>
 
-          {/* Mobile Menu Button (< lg) */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Open menu"
-            className="lg:hidden p-2 text-ink hover:text-teal transition-colors"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+            {/* Mobile Menu Button (< lg) */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label="Open menu"
+              className="lg:hidden p-2 text-slate-200 hover:text-teal-glow transition-colors"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* Mobile Drawer */}
-      {menuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-[70px] bottom-0 z-50 bg-black/40 backdrop-blur-xs flex flex-col justify-start">
-          <div className="bg-white border-b border-surface-line px-6 py-6 shadow-xl flex flex-col gap-4">
-            <nav className="flex flex-col gap-2.5">
-              {NAV_LINKS.map((link) => {
-                const isActive =
-                  link.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(link.href);
-                return (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    aria-current={isActive ? "page" : undefined}
-                    onClick={() => setMenuOpen(false)}
-                    className={`py-2 text-sm font-bold uppercase tracking-wider ${
-                      isActive ? "text-teal" : "text-ink hover:text-teal"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </nav>
-            <div className="pt-3 border-t border-surface-line flex flex-col gap-3">
-              <Link
-                href="/contact"
-                onClick={() => setMenuOpen(false)}
-                className="w-full text-center bg-teal hover:bg-teal-dark text-white py-2.5 rounded-md text-xs font-bold uppercase tracking-wider"
-              >
-                GET IN TOUCH
-              </Link>
+        {/* Mobile Drawer */}
+        {menuOpen && (
+          <div className="lg:hidden fixed inset-x-0 top-[70px] bottom-0 z-50 bg-black/60 backdrop-blur-sm flex flex-col justify-start">
+            <div className="glass bg-navy/95 border-b border-white/10 px-6 py-6 shadow-xl flex flex-col gap-4">
+              <nav className="flex flex-col gap-2.5">
+                {NAV_LINKS.map((link) => {
+                  const isActive =
+                    link.href === "/"
+                      ? pathname === "/"
+                      : pathname.startsWith(link.href);
+                  return (
+                    <Link
+                      key={link.label}
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => setMenuOpen(false)}
+                      className={`py-2 text-sm font-bold uppercase tracking-wider transition-colors ${
+                        isActive ? "text-teal-glow" : "text-slate-200 hover:text-teal-glow"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+              <div className="pt-3 border-t border-white/10 flex flex-col gap-3">
+                <Link
+                  href="/contact"
+                  onClick={() => setMenuOpen(false)}
+                  className="w-full text-center bg-teal hover:bg-teal-dark text-white py-2.5 rounded-md text-xs font-bold uppercase tracking-wider"
+                >
+                  GET IN TOUCH
+                </Link>
+              </div>
             </div>
           </div>
-          <div className="flex-1" onClick={() => setMenuOpen(false)} />
-        </div>
-      )}
-    </header>
+        )}
+      </header>
 
-    <SearchDialog
-      isOpen={searchOpen}
-      onClose={() => setSearchOpen(false)}
-    />
-  </>
+      <SearchDialog isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 };
 

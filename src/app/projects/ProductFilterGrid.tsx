@@ -3,9 +3,9 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { Product } from "@/data/products";
-import { Card } from "@/app/globalscope/ui/Card";
+import { GlassCard } from "@/components/ui/GlassCard";
 import { Badge } from "@/app/globalscope/ui/Badge";
-import { CoverArt } from "@/app/globalscope/ui/CoverArt";
+import { ModelSlot } from "@/components/3d/ModelSlot";
 import { ArrowRight, Check } from "lucide-react";
 
 export interface ProductFilterGridProps {
@@ -32,10 +32,10 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
               type="button"
               onClick={() => setSelectedCategory(cat)}
               aria-pressed={isSelected}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 isSelected
-                  ? "bg-navy text-white shadow-xs"
-                  : "bg-white text-ink-muted border border-surface-line hover:border-slate-300 hover:text-ink"
+                  ? "bg-teal text-white border border-teal-glow/70 shadow-glow-sm"
+                  : "glass text-slate-300 hover:border-white/20 hover:text-white"
               }`}
             >
               {cat}
@@ -48,75 +48,64 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {products.map((prod) => {
           const matches = selectedCategory === "All" || prod.category === selectedCategory;
+          if (!matches) return null;
 
           return (
-            <div
-              key={prod.slug}
-              className={`transition-all duration-300 ${!matches ? "hidden" : "block"}`}
-            >
-              <Card
-                href={`/products/${prod.slug}`}
-                className="h-full flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-xl"
-              >
+            <Link key={prod.slug} href={`/products/${prod.slug}`} className="group block h-full">
+              <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-8 transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
                 <div>
-                  {/* CoverArt Header with Status Badge */}
-                  <div className="relative">
-                    <CoverArt
-                      seed={prod.slug}
-                      icon={prod.icon}
-                      aspect="16/9"
-                      title={prod.name}
-                      className="max-h-52 w-full"
+                  {/* 3D Product Slot */}
+                  <div className="relative mb-6">
+                    <ModelSlot
+                      label={`product-${prod.slug}`}
+                      className="h-48 w-full border border-white/10"
                     />
-                    <div className="absolute top-4 right-4 z-20">
+                    <div className="absolute top-3 right-3 z-10">
                       <Badge variant={prod.status === "Live" ? "live" : prod.status === "Beta" ? "beta" : "coming-soon"}>
                         {prod.status}
                       </Badge>
                     </div>
                   </div>
 
-                  <div className="p-6 sm:p-8">
-                    {/* Category pill */}
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-teal">
-                        {prod.category} Architecture
-                      </span>
-                    </div>
+                  {/* Category pill */}
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="font-mono text-xs uppercase tracking-wider text-teal-glow">
+                      {prod.category} Architecture
+                    </span>
+                  </div>
 
-                    {/* Name & Tagline */}
-                    <h3 className="text-2xl font-extrabold text-ink tracking-tight mb-2 group-hover:text-teal transition-colors">
-                      {prod.name}
-                    </h3>
-                    <p className="text-sm font-semibold text-slate-600 mb-4">
-                      {prod.tagline}
-                    </p>
+                  {/* Name & Tagline */}
+                  <h3 className="text-2xl font-semibold text-white tracking-tight mb-2 group-hover:text-teal-glow transition-colors">
+                    {prod.name}
+                  </h3>
+                  <p className="text-sm font-mono text-teal-glow/90 mb-4">
+                    {prod.tagline}
+                  </p>
 
-                    <p className="text-sm text-ink-muted leading-relaxed mb-6">
-                      {prod.summary}
-                    </p>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                    {prod.summary}
+                  </p>
 
-                    {/* 3 Key Feature Bullets */}
-                    <div className="space-y-2.5 pt-4 border-t border-surface-line/70 mb-6">
-                      {prod.features.slice(0, 3).map((feat, i) => (
-                        <div key={i} className="flex items-start gap-2.5 text-xs text-ink-muted">
-                          <Check className="w-4 h-4 text-teal shrink-0 mt-0.5" />
-                          <span>
-                            <strong className="text-ink font-semibold">{feat.title}:</strong> {feat.text}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                  {/* 3 Key Feature Bullets */}
+                  <div className="space-y-2.5 pt-4 border-t border-white/10 mb-6">
+                    {prod.features.slice(0, 3).map((feat, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
+                        <Check className="w-4 h-4 text-teal-glow shrink-0 mt-0.5" />
+                        <span>
+                          <strong className="text-white font-medium">{feat.title}: </strong>
+                          {feat.text}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
-                  <div className="pt-4 border-t border-surface-line flex items-center justify-between text-xs font-bold uppercase tracking-wider text-teal group-hover:text-teal-dark">
-                    <span>Learn more about {prod.name}</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal-glow">
+                  <span>Explore product architecture</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>
-              </Card>
-            </div>
+              </GlassCard>
+            </Link>
           );
         })}
       </div>

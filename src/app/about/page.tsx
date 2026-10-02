@@ -1,976 +1,213 @@
 "use client";
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
-import { useTypewriter } from "../globalscope/typewriter";
-import DotGrid from "../globalscope/DotGrid";
-import { AccentWord } from "../globalscope/AccentWord";
-// ── Tape sizing (same system as landing page) ─────────────────────────────────
-const TAPE_H_MAX = 72;
-const TAPE_H_MIN = 58;
-const VW_COEFF = 6;
-const TRACE_BOTTOM_EXTRA = 24;
+import React from "react";
+import Link from "next/link";
+import { PageHero } from "@/app/globalscope/ui/PageHero";
+import { Button } from "@/app/globalscope/ui/Button";
+import { CtaBand } from "@/app/globalscope/ui/CtaBand";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { ProcessTimeline, type TimelineStep } from "@/components/motion/ProcessTimeline";
+import { ModelSlot } from "@/components/3d/ModelSlot";
+import { Reveal } from "@/components/motion/Reveal";
+import { ArrowRight, Globe, CheckCircle2, Shield, Zap, Sparkles } from "lucide-react";
 
-
-
-
-function computeTapeH(width: number) {
-  const vw = (VW_COEFF / 100) * width;
-  return Math.min(TAPE_H_MAX, Math.max(TAPE_H_MIN, vw));
-}
-
-const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
-const useTape = () => useContext(TapeCtx);
-
-const VB_W = 1000;
-function useIsMobile(breakpoint = 768) {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
-    const update = () => setIsMobile(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, [breakpoint]);
-  return isMobile;
-}
-
-// ── Divider ───────────────────────────────────────────────────────────────────
-
-const useDividerAnimation = () => {
-  const [phase, setPhase] = useState<"waiting" | "tracing" | "holding" | "done">("waiting");
-  const [traceProgress, setTraceProgress] = useState(0);
-  const [glowOpacity, setGlowOpacity] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const rafRef = useRef<number>(0);
-  const glowRafRef = useRef<number>(0);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(() => {
-    const TRACE_DURATION = 3500;
-    const HOLD_DURATION = 5000;
-    const WAIT_DURATION = 3000;
-    const GLOW_PERIOD = 2000;
-
-    let glowStart = 0;
-    let glowActive = false;
-
-    const animateGlow = (now: number) => {
-      if (!glowActive) return;
-      if (!glowStart) glowStart = now;
-      const t = ((now - glowStart) % GLOW_PERIOD) / GLOW_PERIOD;
-      const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
-      setGlowOpacity(opacity);
-      glowRafRef.current = requestAnimationFrame(animateGlow);
-    };
-
-    const startGlow = () => {
-      glowActive = true;
-      glowStart = 0;
-      glowRafRef.current = requestAnimationFrame(animateGlow);
-    };
-
-    const stopGlow = () => {
-      glowActive = false;
-      cancelAnimationFrame(glowRafRef.current);
-      setGlowOpacity(0);
-    };
-
-    const runCycle = () => {
-      setPhase("tracing");
-      setTraceProgress(0);
-      setVisible(true);
-      startGlow();
-      const traceStart = performance.now();
-
-      const animateTrace = (now: number) => {
-        const p = Math.min((now - traceStart) / TRACE_DURATION, 1);
-        setTraceProgress(p);
-        if (p < 1) {
-          rafRef.current = requestAnimationFrame(animateTrace);
-        } else {
-          setPhase("holding");
-          timerRef.current = setTimeout(() => {
-            stopGlow();
-            setPhase("done");
-            setTraceProgress(0);
-            setVisible(false);
-            timerRef.current = setTimeout(() => {
-              setVisible(true);
-              runCycle();
-            }, WAIT_DURATION);
-          }, HOLD_DURATION);
-        }
-      };
-      rafRef.current = requestAnimationFrame(animateTrace);
-    };
-
-    runCycle();
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      cancelAnimationFrame(glowRafRef.current);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
-
-  return { phase, traceProgress, glowOpacity, visible };
-};
-
-const AnimatedDivider = () => {
-  const { phase, traceProgress, glowOpacity, visible } = useDividerAnimation();
-
-  return (
-    <div style={{ width: "100%", margin: "3rem 0", position: "relative", height: "5px", display: "flex", alignItems: "center" }}>
-      <div style={{
-        position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)",
-        height: "1px",
-        background: "rgba(255,255,255,0.38)"
-      }} />
-      {(phase === "tracing" || phase === "holding") && visible && (
-        <div style={{ position: "absolute", left: 0, right: 0, top: "50%", transform: "translateY(-50%)" }}>
-          <div style={{
-            position: "absolute", left: `${(1 - traceProgress) * 50}%`, right: `${(1 - traceProgress) * 50}%`,
-            top: "-2px", height: "1px",
-            background: `rgba(255,255,255,${glowOpacity * 0.3})`,
-          }} />
-          <div style={{
-            position: "absolute", left: `${(1 - traceProgress) * 50}%`, right: `${(1 - traceProgress) * 50}%`,
-            top: 0, height: "1px",
-            background: `rgba(255,255,255,${0.3 + glowOpacity * 0.7})`,
-            boxShadow: `0 0 ${4 + glowOpacity * 6}px rgba(255,255,255,${glowOpacity * 0.6})`,
-            //background: `rgba(255,255,255,${glowOpacity * 0.3})`,
-          }} />
-          <div style={{
-            position: "absolute", left: `${(1 - traceProgress) * 50}%`, right: `${(1 - traceProgress) * 50}%`,
-            top: "2px", height: "1px",
-            background: `rgba(255,255,255,${glowOpacity * 0.3})`,
-          }} />
-        </div>
-      )}
-    </div>
-  );
-};
-// ── Belief data ───────────────────────────────────────────────────────────────
-const BELIEFS = [
+const VALUES = [
   {
-    title: "Automation should be invisible.",
-    body: "Good automation doesn't announce itself. It runs in the background, removes the friction, and lets your team focus on work that actually needs them.",
+    num: "01",
+    title: "Surface the Invisible Work",
+    desc: "Teams spend hours moving data between systems, chasing approvals, and compiling repetitive reports. We build systems that quietly handle this in the background.",
   },
   {
-    title: "Fit before feature.",
-    body: "A system built precisely around your process is worth more than a platform with a hundred options you'll never use.",
+    num: "02",
+    title: "Zero Forced Disruption",
+    desc: "We don't force migrations onto proprietary monoliths. We integrate with your existing CRM, ERP, and databases so your operations never skip a beat.",
   },
   {
-    title: "Humans aren't the bottleneck.",
-    body: "Manual work is. We target the handoffs, the copy-paste, the waiting – not the people doing them.",
+    num: "03",
+    title: "Fixed Scopes & Definite Timelines",
+    desc: "No endless retainer billing or open-ended consulting hours. We audit upfront, contract exact milestones, and ship production systems in under two weeks.",
   },
   {
-    title: "Scope tight. Ship fast. Stay accountable.",
-    body: "We agree on exactly what gets built, deploy it quickly, and stay on after launch. No projects handed off and forgotten.",
+    num: "04",
+    title: "Full Production Independence",
+    desc: "You own 100% of the code, models, schemas, and runbooks. We empower your team so you never experience vendor lock-in.",
   },
 ];
 
-// ── Boundary tracer SVG ───────────────────────────────────────────────────────
-const BoundaryTracer = ({ progress, width, height, glowOpacity }: { progress: number; width: number; height: number; glowOpacity: number }) => {
-  if (!width || !height) return null;
-  const PAD = 0;
-  const W = width;
-  const H = height;
-  const half = W / 2;
-  const perimeter = 2 * (W + H);
-  const total = progress * perimeter;
-  const half_dist = total / 2;
+const MILESTONES: TimelineStep[] = [
+  {
+    step: "01",
+    phase: "Founded",
+    tagline: "AI-NATIVE ENGINEERING",
+    desc: "Established with a single thesis: enterprise teams don't have an execution problem; they have an operational plumbing problem.",
+    points: [
+      { title: "First 10 Deployments", desc: "Automated core client onboarding and financial triage pipelines." },
+      { title: "Deterministic Guardrails", desc: "Engineered production agent framework with strict schema validation." },
+    ],
+  },
+  {
+    step: "02",
+    phase: "Expansion",
+    tagline: "CROSS-BORDER REACH",
+    desc: "Scaled delivery across five international hubs while launching proprietary enterprise tooling.",
+    points: [
+      { title: "Global Footprint", desc: "Serving organizations across the US, UK, Australia, Middle East, and Pakistan." },
+      { title: "Proprietary Tooling", desc: "Incubated GridPilot and FlowMap internal event engines." },
+    ],
+  },
+  {
+    step: "03",
+    phase: "Scale",
+    tagline: "AUTONOMOUS ENTERPRISE",
+    desc: "Deploying multi-model, multi-agent systems with guaranteed sub-second latencies and complete auditable observability.",
+    points: [
+      { title: "45+ Production Systems", desc: "Managing millions of event payloads across disparate architectures." },
+      { title: "Two-Week SLA", desc: "Delivering fixed-scope architectures with zero operational downtime." },
+    ],
+  },
+];
 
-  // right branch: center-top → right → bottom-right → bottom-center
-  const buildBranch = (dist: number, dir: "right" | "left") => {
-    const pts: [number, number][] = [[half, PAD]];
-    if (dir === "right") {
-      const s1 = Math.min(dist, half);
-      pts.push([half + s1, PAD]);
-      if (dist > half) {
-        const s2 = Math.min(dist - half, H);
-        pts.push([W, PAD + s2]);
-        if (dist > half + H) {
-          const s3 = Math.min(dist - half - H, half);
-          pts.push([W - s3, H]);
-        }
-      }
-    } else {
-      const s1 = Math.min(dist, half);
-      pts.push([half - s1, PAD]);
-      if (dist > half) {
-        const s2 = Math.min(dist - half, H);
-        pts.push([0, PAD + s2]);
-        if (dist > half + H) {
-          const s3 = Math.min(dist - half - H, half);
-          pts.push([s3, H]);
-        }
-      }
-    }
-    return pts.map((p, i) => (i === 0 ? `M ${p[0]} ${p[1]}` : `L ${p[0]} ${p[1]}`)).join(" ");
-  };
+const GLOBAL_REGIONS = [
+  { region: "United States", role: "Fintech, Legaltech & Property Management" },
+  { region: "United Kingdom", role: "Enterprise Knowledge & Healthcare Workflows" },
+  { region: "Australia", role: "Supply Chain & Omnichannel Inventory Flow" },
+  { region: "Middle East", role: "Energy Telemetry & Automated Field Dispatch" },
+  { region: "Pakistan", role: "Core Engineering Headquarters & Innovation Hub" },
+];
 
-  const rightPath = buildBranch(half_dist, "right");
-  const leftPath = buildBranch(half_dist, "left");
+export default function AboutPage() {
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "About Us" },
+  ];
 
   return (
-    <svg
-      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 10, overflow: "visible" }}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d={rightPath}
-        fill="none"
-        stroke={`rgba(255,255,255,${0.25 + glowOpacity * 0.75})`}
-        strokeWidth="1"
-        filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 3}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d={leftPath}
-        fill="none"
-        stroke={`rgba(255,255,255,${0.25 + glowOpacity * 0.75})`}
-        strokeWidth="1"
-        filter={glowOpacity > 0 ? `drop-shadow(0 0 ${glowOpacity * 3}px rgba(255,255,255,${glowOpacity * 0.9}))` : undefined}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-};
-
-// ── Single flip card ──────────────────────────────────────────────────────────
-const BeliefCard = ({
-  item,
-  isActive,
-  onClick,
-  onTraceDone,
-  resetKey,
-}: {
-  item: typeof BELIEFS[0];
-  isActive: boolean;
-  onClick: () => void;
-  onTraceDone: () => void;
-  resetKey: number;
-}) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-  const [progress, setProgress] = useState(0);
-  const rafRef = useRef<number>(0);
-  const startRef = useRef<number>(0);
-  const TRACE_DURATION = 10000;
-  const [glowOpacity, setGlowOpacity] = useState(0);
-  const glowRafRef = useRef<number>(0);
-  const glowStartRef = useRef<number>(0);
-  //const [flashOn, setFlashOn] = useState(false);
-  //const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  // useEffect(() => {
-  //   if (!isActive) return; // only flash when this card flips to show its front
-  //   setFlashOn(true);
-  //   if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
-  //   flashTimerRef.current = setTimeout(() => setFlashOn(false), 900);
-  //   return () => {
-  //     if (flashTimerRef.current) clearTimeout(flashTimerRef.current);
-  //   };
-  // }, [isActive]); // fires every time this card flips 
-  // measure card
-  useEffect(() => {
-    if (!cardRef.current) return;
-    const ro = new ResizeObserver(() => {
-      if (cardRef.current) {
-        setDims({ w: cardRef.current.offsetWidth, h: cardRef.current.offsetHeight });
-      }
-    });
-    ro.observe(cardRef.current);
-    return () => ro.disconnect();
-  }, []);
-
-  // trace animation – restarts on resetKey change when active
-  useEffect(() => {
-    cancelAnimationFrame(rafRef.current);
-    if (!isActive) {
-      cancelAnimationFrame(glowRafRef.current);
-      setGlowOpacity(0);
-      glowStartRef.current = 0; setProgress(0); return;
-    }
-    setProgress(0);
-    startRef.current = performance.now();
-    const animate = (now: number) => {
-      const p = Math.min((now - startRef.current) / TRACE_DURATION, 1);
-      setProgress(p);
-      // pulse glow during tracing
-      const GLOW_PERIOD = 2000;
-      if (!glowStartRef.current) glowStartRef.current = now;
-      const t = ((now - glowStartRef.current) % GLOW_PERIOD) / GLOW_PERIOD;
-      const glow = t < 0.5 ? t * 2 : (1 - t) * 2;
-      setGlowOpacity(glow);
-      if (p < 1) {
-        rafRef.current = requestAnimationFrame(animate);
-      } else {
-        onTraceDone();
-      }
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      cancelAnimationFrame(glowRafRef.current);
-      setGlowOpacity(0);
-      glowStartRef.current = 0;
-    };
-  }, [isActive, resetKey]);
-
-  const flipped = !isActive;
-  const cardFill = "linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.07))";
-  return (
-    <div
-      ref={cardRef}
-      onClick={onClick}
-      style={{
-        perspective: "800px",
-        cursor: "pointer",
-        minHeight: "120px",
-        minWidth: 0,
-        width: "100%",
-        maxWidth: "100%",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          minHeight: "120px",
-          transformStyle: "preserve-3d",
-          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
-          transition: "transform 0.65s cubic-bezier(0.4, 0, 0.2, 1)",
-        }}
-      >
-        {/* FRONT */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: `calc(100% + ${TRACE_BOTTOM_EXTRA}px)`,
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            //padding: "1rem 1.2rem 9rem 1.2rem",
-            boxSizing: "border-box",
-
-          }}
-        >
-          {isActive && dims.w > 0 && (
-            <BoundaryTracer
-              progress={progress}
-              width={dims.w}
-              height={dims.h + TRACE_BOTTOM_EXTRA}
-              glowOpacity={glowOpacity}
-            />
-          )}
-          <div
-            style={{
-              minHeight: "140px", // pick a value that fits your longest body text comfortably
-              padding: "1rem 1.2rem 1.5rem 1.2rem",
-              boxSizing: "border-box",
-              background: cardFill,
-              transition: "background 0.9s ease",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-            }}
+    <div className="min-h-screen bg-navy text-white">
+      {/* 1. PageHero */}
+      <PageHero
+        eyebrow="Our Firm & Philosophy"
+        title="Engineering certainty for modern enterprises"
+        subtitle="GrydIn is an AI-native systems engineering firm. We surface the invisible work slowing your team down, then engineer it away permanently."
+        breadcrumbs={breadcrumbs}
+        actions={
+          <Button
+            href="/contact"
+            variant="primary"
+            size="md"
+            iconRight={<ArrowRight className="w-4 h-4" />}
           >
-            <h3
-              style={{
-                fontSize: "0.92rem",
-                color: "#ffffff",
-                fontWeight: 600,
-                marginBottom: "0.5rem",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {item.title}
-            </h3>
-            <p
-              style={{
-                fontSize: "0.84rem",
-                color: "rgba(255,255,255,0.42)",
-                lineHeight: 1.75,
-                margin: 0,
-                textAlign: "justify",
-              }}
-            >
-              {item.body}
-            </p>
+            Book a free process diagnosis
+          </Button>
+        }
+      />
+
+      {/* 2. Story & Values Section */}
+      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Core Values"
+            title="The principles governing how we build"
+            accent="principles"
+            intro="We reject bloated consulting retainers. Instead, we deliver battle-tested software architectures designed around your real operational bottlenecks."
+          />
+
+          <div className="mt-14 grid gap-6 md:grid-cols-2">
+            {VALUES.map((val, idx) => (
+              <Reveal key={val.num} delay={idx * 0.08}>
+                <GlassCard className="p-8 h-full flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-sm font-bold text-teal-glow">
+                      {val.num}
+                    </span>
+                    <h3 className="mt-3 text-xl font-semibold text-white">
+                      {val.title}
+                    </h3>
+                    <p className="mt-2 text-base text-slate-300 leading-relaxed">
+                      {val.desc}
+                    </p>
+                  </div>
+                </GlassCard>
+              </Reveal>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* BACK – grey border only */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: `calc(100% + ${TRACE_BOTTOM_EXTRA}px)`,
-            backfaceVisibility: "hidden",
-            WebkitBackfaceVisibility: "hidden",
-            transform: "rotateY(180deg)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            boxSizing: "border-box",
-            minHeight: "120px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: cardFill,
-            transition: "background 0.9s ease",
-          }}
-        >
-          <span
-            style={{
-              position: "relative",
-              display: "inline-block",
-              fontSize: "0.88rem",
-              fontWeight: 600,
-              letterSpacing: "-0.01em",
-              paddingLeft: "1.2rem",
-              paddingRight: "1.2rem",
-              textAlign: "center",
-              color: "rgba(255,255,255,0.12)",
-            }}
-          >
-            {item.title}
-            <span
-              aria-hidden="true"
-              style={{
-                position: "absolute",
-                inset: 0,
-                backgroundImage:
-                  "linear-gradient(90deg, transparent 0%, transparent 42%, rgba(255,255,255,0.95) 50%, transparent 58%, transparent 100%)",
-                backgroundSize: "250% 100%",
-                backgroundRepeat: "no-repeat",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                color: "transparent",
-                animation: "beliefShine 4.5s linear infinite",
-                willChange: "background-position",   // ← hints browser to isolate this layer
-                contain: "paint",                     // ← stops paint work here from being blocked by/blocking siblings
-                pointerEvents: "none",
-              }}
-            >
-              {item.title}
-            </span>
-          </span>
+      {/* 3. Company Milestones Timeline */}
+      <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Journey & Evolution"
+            title="How GrydIn evolved into a global engineering firm"
+            accent="global engineering firm"
+            intro="A timeline of technological milestones, production deployments, and cross-border expansion."
+            className="mb-16"
+          />
+
+          <ProcessTimeline steps={MILESTONES} />
         </div>
-      </div>
-    </div>
-  );
-};
+      </section>
 
-// ── BeliefCards orchestrator ──────────────────────────────────────────────────
-const BeliefCards = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [resetKey, setResetKey] = useState(0);
+      {/* 4. Global Clients & Globe Slot Block */}
+      <section className="relative bg-navy py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Column: 3D Globe Slot */}
+            <div className="lg:col-span-6">
+              <Reveal>
+                <div className="glass aspect-square max-w-[460px] mx-auto rounded-3xl p-6 border border-white/15 relative overflow-hidden flex items-center justify-center">
+                  <ModelSlot label="globe" className="h-full w-full" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-6 text-center">
+                    <span className="font-mono text-xs uppercase tracking-widest text-teal-glow">
+                      Global Client Deployments
+                    </span>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
 
-  const handleTraceDone = () => {
-    setActiveIndex(i => (i + 1) % BELIEFS.length);
-    setResetKey(k => k + 1);
-  };
-
-  const handleClick = (index: number) => {
-    if (index === activeIndex) {
-      // reset trace on active card
-      setResetKey(k => k + 1);
-    } else {
-      // jump to clicked card
-      setActiveIndex(index);
-      setResetKey(k => k + 1);
-    }
-  };
-
-  return (
-    <div className="belief-cards-grid">
-      {BELIEFS.map((item, i) => (
-        <BeliefCard
-          key={item.title}
-          item={item}
-          isActive={activeIndex === i}
-          onClick={() => handleClick(i)}
-          onTraceDone={handleTraceDone}
-          resetKey={activeIndex === i ? resetKey : 0}
-        />
-      ))}
-    </div>
-  );
-};
-
-const OriginVisual = () => {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [dims, setDims] = useState({ w: 0, h: 0 });
-  const [inView, setInView] = useState(false);
-  const [traceProgress, setTraceProgress] = useState(0);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const rafRef = useRef<number>(0);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    if (!wrapRef.current) return;
-    const ro = new ResizeObserver(() => {
-      if (wrapRef.current) setDims({ w: wrapRef.current.offsetWidth, h: wrapRef.current.offsetHeight });
-    });
-    ro.observe(wrapRef.current);
-    return () => ro.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!wrapRef.current) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect(); } },
-      { threshold: 0.3 }
-    );
-    obs.observe(wrapRef.current);
-    return () => obs.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    const DURATION = 1400;
-    const start = performance.now();
-    const animate = (now: number) => {
-      const p = Math.min((now - start) / DURATION, 1);
-      setTraceProgress(p);
-      if (p < 1) rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [inView]);
-
-  const handlePointerMove = (e: React.PointerEvent) => {
-    if (!wrapRef.current) return;
-    const rect = wrapRef.current.getBoundingClientRect();
-    const px = (e.clientX - rect.left) / rect.width - 0.5;
-    const py = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ x: py * -5, y: px * 5 });
-  };
-
-  if (isMobile) {
-    return (
-      <div
-        ref={wrapRef}
-        style={{
-          width: "100%",
-          maxWidth: "100%",
-          lineHeight: 0,
-          opacity: inView ? 1 : 0,
-          transform: inView ? "scale(1)" : "scale(0.98)",
-          transition: "opacity 1s ease, transform 1s cubic-bezier(0.4,0,0.2,1)",
-        }}
-      >
-        <img
-          src="/images/about/about-desktop.png"
-          alt="GrydIn systems visual"
-          width={1536}
-          height={1024}
-          style={{
-            width: "100%",
-            maxWidth: "100%",
-            height: "auto",
-            display: "block",
-            objectFit: "contain",
-            borderRadius: "4px",
-          }}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div
-      ref={wrapRef}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={() => setTilt({ x: 0, y: 0 })}
-      style={{
-        position: "relative",
-        width: "100%",
-        aspectRatio: "16 / 10",
-        overflow: "hidden",
-        borderRadius: "4px",
-        opacity: inView ? 1 : 0,
-        transform: inView ? "scale(1)" : "scale(0.94)",
-        transition: "opacity 1s ease, transform 1s cubic-bezier(0.4,0,0.2,1)",
-        perspective: "1000px",
-      }}
-    >
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(1.02)`,
-          transition: "transform 0.3s ease-out",
-        }}
-      >
-        <img
-          src="/images/about/about-desktop.png"
-          alt="GrydIn systems visual"
-          className="origin-visual-img"
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-        />
-        <div className="origin-visual-sheen" />
-        <div className="origin-visual-grain" />
-      </div>
-      {dims.w > 0 && (
-        <BoundaryTracer progress={traceProgress} width={dims.w} height={dims.h} glowOpacity={inView && traceProgress < 1 ? 1 : 0} />
-      )}
-      <style jsx>{`
-        .origin-visual-img { animation: originKenBurns 22s ease-in-out infinite alternate; }
-        .origin-visual-sheen {
-          position: absolute; inset: 0; pointer-events: none;
-          background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.16) 48%, rgba(255,255,255,0.32) 50%, rgba(255,255,255,0.16) 52%, transparent 65%);
-          background-size: 250% 250%; background-position: -50% -50%;
-          mix-blend-mode: screen;
-          animation: originSheen 6.5s ease-in-out infinite; animation-delay: 1.6s;
-        }
-        .origin-visual-grain {
-          position: absolute; inset: 0; pointer-events: none; opacity: 0.05;
-          mix-blend-mode: overlay;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          animation: originGrainShift 1s steps(2) infinite;
-        }
-        @keyframes originKenBurns { from { transform: scale(1); } to { transform: scale(1.06); } }
-        @keyframes originSheen { 0% { background-position: -50% -50%; } 45%,100% { background-position: 100% 100%; } }
-        @keyframes originGrainShift { 0% { transform: translate(0,0); } 100% { transform: translate(-2%, 2%); } }
-      `}</style>
-    </div>
-  );
-};
-// ── About Page ────────────────────────────────────────────────────────────────
-export default function About() {
-  const [tapeH, setTapeH] = useState(TAPE_H_MAX);
-
-  const REVEAL_DURATION = 1300;
-  const [mounted, setMounted] = useState(false);
-  const [startTyping, setStartTyping] = useState(false);
-  const [revealDuration, setRevealDuration] = useState(REVEAL_DURATION);
-  const seenRef = useRef<boolean | null>(null);
-
-  useEffect(() => {
-    const key = "grydin-revealed-about";
-
-    if (seenRef.current === null) {
-      try {
-        seenRef.current = sessionStorage.getItem(key) === "1";
-      } catch (e) {
-        seenRef.current = false;
-      }
-      if (!seenRef.current) {
-        try { sessionStorage.setItem(key, "1"); } catch (e) { }
-      }
-    }
-
-    const alreadySeen = seenRef.current;
-
-    if (alreadySeen) {
-      setRevealDuration(0);
-      setMounted(true);
-      setStartTyping(true);
-      return;
-    }
-
-    const t1 = requestAnimationFrame(() => setMounted(true));
-    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DURATION);
-    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
-  }, []);
-  useEffect(() => {
-    const styleId = "scrollbar-hide-style";
-
-    const hide = () => {
-      if (!document.getElementById(styleId)) {
-        const s = document.createElement("style");
-        s.id = styleId;
-        s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
-        document.head.appendChild(s);
-      }
-    };
-
-    const show = () => {
-      document.getElementById(styleId)?.remove();
-    };
-
-    let t: ReturnType<typeof setTimeout>;
-    hide();
-
-    const handler = () => {
-      show();
-      clearTimeout(t);
-      t = setTimeout(hide, 1000);
-    };
-
-    window.addEventListener("scroll", handler, { passive: true });
-    document.addEventListener("scroll", handler, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handler);
-      document.removeEventListener("scroll", handler);
-      clearTimeout(t);
-    };
-  }, []);
-  useEffect(() => {
-    const update = () => setTapeH(computeTapeH(window.innerWidth));
-    update();
-    window.addEventListener("resize", update, { passive: true });
-    return () => window.removeEventListener("resize", update);
-  }, []);
-
-  const arcR = tapeH / 2;
-  const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "We build the layer between" : "");
-  return (
-    <TapeCtx.Provider value={{ tapeH, arcR }}>
-      <main
-        style={{
-          background: "white",
-          overflowX: "hidden",
-          fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
-        }}
-      >
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 0,
-            pointerEvents: "none",
-          }}
-        >
-          <DotGrid contentBottom={tapeH} animate={false} />
-        </div>
-        {/* ── Single dark section – full page content ── */}
-        <section style={{ background: "#04172e", width: "100%" }}>
-
-          <div
-            style={{
-              maxWidth: "860px",
-              margin: "0 auto",
-              padding: "4rem clamp(1rem, 4vw, 2rem) 5rem",
-              overflowX: "clip",
-              boxSizing: "border-box",
-              opacity: mounted ? 1 : 0,
-              transform: mounted ? "translateY(0)" : "translateY(28px)",
-              filter: mounted ? "blur(0px)" : "blur(12px)",
-              transition: `opacity ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), transform ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), filter ${revealDuration}ms cubic-bezier(0.16,1,0.3,1)`,
-            }}
-          >
-            {/* ── Eyebrow + Intro ── */}
-            <p
-              style={{
-                fontSize: "0.72rem",
-                color: "#000000",
-                fontWeight: 700,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                marginBottom: "1.2rem",
-                background: "rgba(255,255,255,0.45)",
-                borderRadius: "2px",
-                padding: "4px 8px",
-                width: "fit-content",
-              }}
-            >
-              Who we are
-            </p>
-
-            <h1
-              ref={typeRef}
-              style={{
-                fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
-                color: "#ffffff",
-                fontWeight: 700,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.1,
-                marginBottom: "1.6rem",
-                maxWidth: "620px",
-              }}
-            >
-              <span
-                style={{
-                  display: "block",
-                  minHeight: "1.1em",
-                  position: "relative",
-                }}
-              >
-                {typed}
-                <span
-                  style={{
-                    position: "absolute",
-                    display: "inline-block",
-                    width: "2px",
-                    height: "0.85em",
-                    background: "rgba(255,255,255,0.7)",
-                    marginLeft: "2px",
-                    verticalAlign: "middle",
-                    animation: "blink 1s step-end infinite",
-                  }}
+            {/* Right Column: Global Footprint List */}
+            <div className="lg:col-span-6">
+              <Reveal delay={0.15}>
+                <SectionHeader
+                  eyebrow="Global Footprint"
+                  title="Serving forward-thinking enterprises worldwide"
+                  accent="worldwide"
+                  intro="From Silicon Valley startups to established international operations, our architectures run globally with zero maintenance overhead."
                 />
-              </span>
-              <span
-                style={{ display: "block", color: "rgba(255,255,255,0.4)" }}
-              >
-                your <AccentWord>people</AccentWord> and the repetition.
-              </span>
-            </h1>
 
-            <p
-              style={{
-                fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
-                color: "rgba(255,255,255,0.5)",
-                lineHeight: 1.8,
-                maxWidth: "560px",
-                marginBottom: 0,
-                textAlign: "justify",
-              }}
-            >
-              GrydIn is an AI-native technology company, based in Pakistan,
-              building for businesses globally. We surface the invisible work
-              slowing your team down – then eliminate it. No disruption to what
-              already works. No bloat. Just precise systems running quietly in
-              the background.
-            </p>
+                <div className="mt-8 space-y-4">
+                  {GLOBAL_REGIONS.map((item, idx) => (
+                    <div key={idx} className="glass p-4 rounded-xl flex items-center justify-between gap-4">
+                      <div className="flex items-center gap-3">
+                        <Globe className="h-5 w-5 text-teal-glow shrink-0" />
+                        <div>
+                          <p className="font-semibold text-white text-base">{item.region}</p>
+                          <p className="text-xs text-slate-400">{item.role}</p>
+                        </div>
+                      </div>
+                      <CheckCircle2 className="h-4 w-4 text-teal-glow shrink-0" />
+                    </div>
+                  ))}
+                </div>
 
-            <AnimatedDivider />
-
-            {/* ── What we believe ── */}
-            <p
-              style={{
-                fontSize: "0.72rem",
-                fontWeight: 800,
-                color: "rgba(255,255,255,0.65)",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                marginBottom: "2rem",
-                background: "rgba(255,255,255,0.45)",
-                borderRadius: "2px",
-                padding: "4px 8px",
-                width: "fit-content",
-              }}
-            >
-              The unseen rules
-            </p>
-
-            <BeliefCards />
-
-            <AnimatedDivider />
-
-            {/* ── Why we built this ── */}
-            <p
-              style={{
-                fontSize: "0.72rem",
-                fontWeight: 800,
-                color: "rgba(255,255,255,0.65)",
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                marginBottom: "1.2rem",
-                background: "rgba(255,255,255,0.45)",
-                borderRadius: "2px",
-                padding: "4px 8px",
-                width: "fit-content",
-              }}
-            >
-              Origin
-            </p>
-            <p
-              style={{
-                fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
-                color: "rgba(255,255,255,0.5)",
-                lineHeight: 1.85,
-                maxWidth: "600px",
-                margin: 0,
-                textAlign: "justify",
-              }}
-            >
-              We kept seeing the same <AccentWord>problem</AccentWord> across
-              businesses we worked with – teams spending real hours on work that
-              wasn&apos;t theirs to do. Moving data between systems. Chasing
-              approvals. Running the same report on a loop. Not because they
-              lacked capability. Because no one had ever wired the tools
-              together properly.
-              <br />
-              <br />
-              GrydIn exists to fix that. Precisely, without the overhaul.
-            </p>
-            <div className="origin-visual-wrap" style={{ marginTop: "40px" }}>
-              <OriginVisual />
-            </div>
-
-            <AnimatedDivider />
-
-            {/* ── CTA ── */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                maxWidth: "480px",
-              }}
-            >
-              <p
-                style={{
-                  fontSize: "clamp(1.2rem, 2.5vw, 1.7rem)",
-                  color: "#ffffff",
-                  fontWeight: 700,
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1.2,
-                  margin: 0,
-                }}
-              >
-                See a gap in your business?
-              </p>
-              <p
-                style={{
-                  fontSize: "0.88rem",
-                  color: "rgba(255,255,255,0.42)",
-                  lineHeight: 1.75,
-                  margin: 0,
-                  textAlign: "justify",
-                }}
-              >
-                Tell us what's slowing you down. No pitch, no sales deck – just
-                an honest response within one business day.
-              </p>
-              <a
-                href="/contact"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  padding: "10px 24px",
-                  background: "white",
-                  color: "#000000",
-                  fontWeight: 600,
-                  fontSize: "0.85rem",
-                  borderRadius: "2px",
-                  letterSpacing: "0.04em",
-                  textDecoration: "none",
-                  width: "fit-content",
-                  transition: "gap 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.gap = "1rem";
-                  e.currentTarget.style.background = "#181717";
-                  e.currentTarget.style.color = "white";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.gap = "0.5rem";
-                  e.currentTarget.style.background = "white";
-                  e.currentTarget.style.color = "#000000";
-                }}
-              >
-                Grid Your Vision <ArrowRight size={14} strokeWidth={2.2} />
-              </a>
+                <div className="mt-8">
+                  <Button href="/contact" variant="primary" size="lg">
+                    Book a free process diagnosis
+                  </Button>
+                </div>
+              </Reveal>
             </div>
           </div>
-        </section>
-      </main>
-    </TapeCtx.Provider>
+        </div>
+      </section>
+
+      {/* 5. CtaBand */}
+      <CtaBand
+        title="Ready to eliminate friction in your business?"
+        subtitle="Schedule a diagnosis with a Lead Architect. Fixed-scope roadmap within 48 hours."
+      />
+    </div>
   );
 }

@@ -4,16 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import {
-  getAllSolutions,
   getSolutionBySlug,
   SOLUTIONS,
 } from "@/data/solutions";
 import { getProjectBySlug } from "@/data/projects";
 import { SERVICE_SEO } from "@/lib/seo";
 import { PageHero } from "@/app/globalscope/ui/PageHero";
-import { Section } from "@/app/globalscope/ui/Section";
-import { Card } from "@/app/globalscope/ui/Card";
-import { Badge } from "@/app/globalscope/ui/Badge";
 import { Button } from "@/app/globalscope/ui/Button";
 import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import { JsonLd } from "@/app/globalscope/ui/JsonLd";
@@ -26,13 +22,12 @@ import {
   ArrowRight,
   AlertTriangle,
   CheckCircle2,
-  Cpu,
-  Layers,
-  Sparkles,
-  Search,
-  Rocket,
-  ChevronRight,
 } from "lucide-react";
+import { ModelSlot } from "@/components/3d/ModelSlot";
+import { ProcessTimeline, type TimelineStep } from "@/components/motion/ProcessTimeline";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
+import { GlassCard } from "@/components/ui/GlassCard";
 
 export const dynamicParams = false;
 
@@ -99,16 +94,25 @@ export default async function SolutionDetailPage({ params }: PageProps) {
     ]),
   ];
 
+  const timelineSteps: TimelineStep[] = sol.approach.map((step, idx) => ({
+    step: `0${idx + 1}`,
+    phase: idx === 0 ? "Diagnose" : idx === 1 ? "Design" : "Deploy",
+    tagline: step.title,
+    desc: step.text,
+    points: [],
+  }));
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-navy text-white">
       <JsonLd data={jsonLdData} />
 
-      {/* PageHero */}
+      {/* PageHero with 3D industry-hero slot */}
       <PageHero
         eyebrow="Industry Solution"
-        title={sol.name.toUpperCase()}
+        title={sol.name}
         subtitle={sol.headline}
         breadcrumbs={breadcrumbs}
+        slot={<ModelSlot label="industry-hero" className="aspect-[4/3] w-full border border-white/10" />}
         actions={
           <Button
             href="/contact"
@@ -116,178 +120,180 @@ export default async function SolutionDetailPage({ params }: PageProps) {
             size="md"
             iconRight={<ArrowRight className="w-4 h-4" />}
           >
-            Start your industry diagnosis
+            Book a free process diagnosis
           </Button>
         }
       />
 
       {/* 1. Challenges Section */}
-      <Section
-        tone="white"
-        eyebrow="Operational Bottlenecks"
-        title="Common Challenges We Eliminate"
-        intro={`The recurring friction points that slow down ${sol.name.toLowerCase()} operations.`}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" data-allow-copy>
-          {sol.challenges.map((ch, idx) => (
-            <div
-              key={idx}
-              className="p-6 rounded-2xl bg-surface-soft border border-surface-line flex items-start gap-4"
-            >
-              <div className="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
-                <AlertTriangle className="w-4 h-4" />
-              </div>
-              <p className="text-sm sm:text-base text-ink leading-relaxed font-medium">
-                {ch}
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
+      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Operational Bottlenecks"
+            title={`Common challenges in ${sol.name.toLowerCase()}`}
+            accent="Common challenges"
+            intro={`The recurring friction points and manual bottlenecks that slow down ${sol.name.toLowerCase()} operations.`}
+          />
 
-      {/* 2. Our Approach (3 Steps) */}
-      <Section
-        tone="soft"
-        eyebrow="GrydIn Approach"
-        title="How We Architect the Solution"
-        intro="From initial workflow mapping to production deployment in fourteen days."
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {sol.approach.map((step, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-2xl p-8 border border-surface-line shadow-xs relative"
-            >
-              <div className="text-xs font-bold uppercase tracking-wider text-teal mb-3">
-                Step 0{idx + 1}
-              </div>
-              <h3 className="text-xl font-bold text-ink tracking-tight mb-3">
-                {step.title}
-              </h3>
-              <p className="text-sm text-ink-muted leading-relaxed">
-                {step.text}
-              </p>
-            </div>
-          ))}
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-6">
+            {sol.challenges.map((ch, idx) => (
+              <Reveal key={idx} delay={idx * 0.08}>
+                <GlassCard className="p-6 flex items-start gap-4">
+                  <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/30 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <AlertTriangle className="w-4 h-4" />
+                  </div>
+                  <p className="text-base text-slate-200 leading-relaxed">
+                    {ch}
+                  </p>
+                </GlassCard>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
+
+      {/* 2. Our Approach (Process Timeline) */}
+      <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Engineering Methodology"
+            title="How we architect the solution"
+            accent="architect the solution"
+            intro="From initial workflow mapping to production deployment in fourteen days with guaranteed fixed scopes."
+          />
+
+          <div className="mt-14">
+            <ProcessTimeline steps={timelineSteps} />
+          </div>
+        </div>
+      </section>
 
       {/* 3. Services We Apply */}
-      <Section
-        tone="white"
-        eyebrow="Core Services"
-        title="Technologies Applied"
-        intro={`The foundation services leveraged in our ${sol.name.toLowerCase()} architectures.`}
-      >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {appliedServices.map((svc) => (
-            <Card
-              key={svc.slug}
-              href="/services"
-              className="p-6 sm:p-7 flex flex-col justify-between"
-            >
-              <div>
-                <Badge variant="teal" size="sm" className="mb-3">
-                  Service
-                </Badge>
-                <h4 className="text-lg font-bold text-ink tracking-tight mb-2 group-hover:text-teal transition-colors">
-                  {svc.name}
-                </h4>
-                <p className="text-xs sm:text-sm text-ink-muted leading-relaxed line-clamp-3 mb-4">
-                  {svc.summary}
-                </p>
-              </div>
+      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Core Services"
+            title="Technologies and architectures applied"
+            accent="Technologies"
+            intro={`The foundational capabilities leveraged in our ${sol.name.toLowerCase()} systems.`}
+          />
 
-              <div className="pt-4 border-t border-surface-line flex items-center justify-between text-xs font-bold uppercase text-teal group-hover:text-teal-dark">
-                <span>View service</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-              </div>
-            </Card>
-          ))}
+          <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {appliedServices.map((svc, idx) => (
+              <Reveal key={svc.slug} delay={idx * 0.1}>
+                <Link href={`/services#${svc.slug}`} className="group block h-full">
+                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                    <div>
+                      <span className="font-mono text-xs uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded-md border border-teal-glow/30">
+                        Capability
+                      </span>
+                      <h4 className="mt-4 text-xl font-semibold text-white group-hover:text-teal-glow transition-colors">
+                        {svc.name}
+                      </h4>
+                      <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                        {svc.summary}
+                      </p>
+                    </div>
+
+                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal-glow">
+                      <span>Explore capability</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </GlassCard>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* 4. Related Projects */}
       {relatedProjects.length > 0 && (
-        <Section
-          tone="soft"
-          eyebrow="Case Studies"
-          title="Related Deployments"
-          intro={`Real systems deployed for clients in ${sol.name.toLowerCase()}.`}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {relatedProjects.map((p) => (
-              <Card
-                key={p.slug}
-                href={`/projects/${p.slug}`}
-                className="p-8 flex flex-col justify-between bg-white"
-              >
-                <div>
-                  <div className="bg-surface-soft rounded-xl p-6 mb-6 flex items-center justify-center border border-surface-line h-24">
-                    {p.logo ? (
-                      <Image
-                        src={p.logo}
-                        alt={`${p.client} logo`}
-                        width={140}
-                        height={60}
-                        className="object-contain max-h-16"
-                      />
-                    ) : (
-                      <span className="font-bold text-navy text-lg">{p.client}</span>
-                    )}
-                  </div>
+        <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+          <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+            <SectionHeader
+              eyebrow="Case Studies"
+              title="Related client deployments"
+              accent="client deployments"
+              intro={`Real systems engineered and launched for clients in ${sol.name.toLowerCase()}.`}
+            />
 
-                  <div className="flex items-center gap-2 mb-2">
-                    <Badge variant="teal" size="sm">{p.industry}</Badge>
-                    <span className="text-xs text-ink-muted">{p.year}</span>
-                  </div>
+            <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-8">
+              {relatedProjects.map((p, idx) => (
+                <Reveal key={p.slug} delay={idx * 0.1}>
+                  <Link href={`/projects/${p.slug}`} className="group block h-full">
+                    <GlassCard className="p-8 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                      <div>
+                        <div className="bg-white/5 rounded-xl p-5 mb-6 flex items-center justify-center border border-white/10 h-24">
+                          {p.logo ? (
+                            <Image
+                              src={p.logo}
+                              alt={`${p.client} logo`}
+                              width={140}
+                              height={60}
+                              className="object-contain max-h-16"
+                            />
+                          ) : (
+                            <span className="font-semibold text-white text-lg">{p.client}</span>
+                          )}
+                        </div>
 
-                  <h4 className="text-xl font-bold text-ink tracking-tight mb-2 group-hover:text-teal transition-colors">
-                    {p.title}
-                  </h4>
-                  <p className="text-sm text-ink-muted leading-relaxed mb-6">
-                    {p.summary}
-                  </p>
-                </div>
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="font-mono text-xs text-teal-glow">{p.industry}</span>
+                          <span className="text-slate-500">•</span>
+                          <span className="font-mono text-xs text-slate-400">{p.year}</span>
+                        </div>
 
-                <div className="pt-4 border-t border-surface-line flex items-center justify-between text-xs font-bold uppercase text-teal">
-                  <span>Read case study</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </Card>
-            ))}
+                        <h4 className="text-xl font-semibold text-white group-hover:text-teal-glow transition-colors">
+                          {p.title}
+                        </h4>
+                        <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                          {p.summary}
+                        </p>
+                      </div>
+
+                      <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal-glow">
+                        <span>Read case study</span>
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </GlassCard>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
           </div>
-        </Section>
+        </section>
       )}
 
       {/* 5. Outcomes Strip */}
-      <Section
-        tone="white"
-        eyebrow="Target Outcomes"
-        title="Expected Business Impact"
-        intro="What your team achieves when manual friction is permanently engineered away."
-      >
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" data-allow-copy>
-          {sol.outcomes.map((out, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-xl border border-surface-line bg-surface-soft flex items-center gap-3.5"
-            >
-              <CheckCircle2 className="w-5 h-5 text-teal shrink-0" />
-              <span className="text-sm font-semibold text-ink">
-                {out}
-              </span>
-            </div>
-          ))}
+      <section className="relative bg-navy py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Target Outcomes"
+            title="Expected business impact"
+            accent="business impact"
+            intro="What your team achieves when manual operational friction is permanently engineered away."
+          />
+
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {sol.outcomes.map((out, idx) => (
+              <Reveal key={idx} delay={idx * 0.06}>
+                <div className="glass p-5 rounded-xl flex items-center gap-3.5">
+                  <CheckCircle2 className="w-5 h-5 text-teal-glow shrink-0" />
+                  <span className="text-base text-slate-200">
+                    {out}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* 6. CtaBand */}
       <CtaBand
         title={`Ready to streamline your ${sol.name.toLowerCase()} operations?`}
-        subtitle="Book a diagnosis call. We scope your project and provide a fixed quote in 24 hours."
-        buttonText="Book a diagnosis"
-        buttonHref="/contact"
+        subtitle="Book a diagnosis call. We scope your project and provide a fixed quote within 48 hours."
       />
     </div>
   );

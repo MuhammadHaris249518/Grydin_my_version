@@ -15,7 +15,6 @@ export function ProjectsTabs({ projectCount, productCount }: ProjectsTabsProps) 
       const productsSection = document.getElementById("our-products");
       if (productsSection) {
         const rect = productsSection.getBoundingClientRect();
-        // If products section top is near or past top of viewport
         if (rect.top <= 140) {
           setActiveTab("products");
           return;
@@ -39,37 +38,37 @@ export function ProjectsTabs({ projectCount, productCount }: ProjectsTabsProps) 
   };
 
   return (
-    <div className="sticky top-[70px] z-30 bg-white/95 backdrop-blur-md border-b border-surface-line shadow-xs">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between overflow-x-auto py-2.5">
+    <div className="sticky top-[70px] z-30 bg-navy/85 backdrop-blur-md border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between overflow-x-auto py-3">
         <div className="flex items-center gap-2 sm:gap-4">
           <a
             href="#our-projects"
             onClick={(e) => scrollTo("our-projects", e)}
-            className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold tracking-wide transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all cursor-pointer ${
               activeTab === "projects"
-                ? "bg-navy text-white shadow-xs"
-                : "text-ink-muted hover:text-ink hover:bg-surface-soft"
+                ? "bg-teal text-white shadow-glow-sm border border-teal-glow/50"
+                : "glass text-slate-300 hover:text-white hover:border-white/20"
             }`}
           >
-            Our Projects <span className="opacity-70 text-xs ml-1 font-normal">({projectCount})</span>
+            Client Projects <span className="opacity-70 text-xs ml-1 font-mono">({projectCount})</span>
           </a>
 
           <a
             href="#our-products"
             onClick={(e) => scrollTo("our-products", e)}
-            className={`px-4 py-2 rounded-lg text-xs sm:text-sm font-bold tracking-wide transition-all ${
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all cursor-pointer ${
               activeTab === "products"
-                ? "bg-navy text-white shadow-xs"
-                : "text-ink-muted hover:text-ink hover:bg-surface-soft"
+                ? "bg-teal text-white shadow-glow-sm border border-teal-glow/50"
+                : "glass text-slate-300 hover:text-white hover:border-white/20"
             }`}
           >
-            Our Products <span className="opacity-70 text-xs ml-1 font-normal">({productCount})</span>
+            Proprietary Tools <span className="opacity-70 text-xs ml-1 font-mono">({productCount})</span>
           </a>
         </div>
 
-        <div className="hidden sm:flex items-center text-xs text-ink-muted gap-2 font-medium">
-          <span className="w-2 h-2 rounded-full bg-teal animate-pulse" />
-          <span>Fixed-Scope Systems &amp; Proprietary Tools</span>
+        <div className="hidden sm:flex items-center text-xs text-slate-400 gap-2 font-mono">
+          <span className="w-2 h-2 rounded-full bg-teal-glow animate-pulse" />
+          <span>Fixed-Scope Deployments &amp; Internal Tooling</span>
         </div>
       </div>
     </div>

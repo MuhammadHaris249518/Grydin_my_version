@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useRouter, usePathname } from "next/navigation";
-import { Search, X, ArrowRight, CornerDownLeft, Sparkles } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Badge } from "./ui/Badge";
 
 export interface SearchItem {
@@ -131,16 +131,16 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
       role="dialog"
       aria-modal="true"
       aria-label="Site search"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-navy/60 backdrop-blur-sm transition-opacity"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-navy/80 backdrop-blur-md transition-opacity"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-surface-line overflow-hidden animate-in fade-in zoom-in-95 duration-150"
+        className="glass w-full max-w-2xl bg-navy-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/15 overflow-hidden animate-in fade-in zoom-in-95 duration-150 focus-within:ring-2 focus-within:ring-teal-glow"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Input Bar */}
-        <div className="relative flex items-center px-4 sm:px-6 py-4 border-b border-surface-line">
-          <Search className="w-5 h-5 text-teal shrink-0 mr-3" />
+        <div className="relative flex items-center px-4 sm:px-6 py-4 border-b border-white/10">
+          <Search className="w-5 h-5 text-teal-glow shrink-0 mr-3" />
           <input
             ref={inputRef}
             type="text"
@@ -150,18 +150,18 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
               setSelectedIndex(0);
             }}
             placeholder="Search services, solutions, projects, products, insights..."
-            className="w-full bg-transparent text-sm sm:text-base text-ink placeholder:text-ink-muted focus:outline-none"
+            className="w-full bg-transparent text-sm sm:text-base text-white placeholder:text-slate-400 focus:outline-none"
           />
           {query ? (
             <button
               type="button"
               onClick={() => setQuery("")}
-              className="p-1 rounded-md text-ink-muted hover:text-ink"
+              className="p-1 rounded-md text-slate-400 hover:text-white"
             >
               <X className="w-4 h-4" />
             </button>
           ) : (
-            <kbd className="hidden sm:inline-block text-[10px] font-bold uppercase tracking-wider text-ink-muted bg-surface-soft border border-surface-line px-2 py-0.5 rounded">
+            <kbd className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-white/10 border border-white/15 px-2 py-0.5 rounded">
               ESC
             </kbd>
           )}
@@ -170,23 +170,23 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
         {/* Results Area */}
         <div className="max-h-96 overflow-y-auto p-2 sm:p-3">
           {isLoading && (
-            <div className="py-8 text-center text-xs text-ink-muted">
+            <div className="py-8 text-center text-xs text-slate-400 font-mono">
               Loading searchable index...
             </div>
           )}
 
           {!isLoading && query.trim() && results.length === 0 && (
             <div className="py-8 text-center">
-              <p className="text-sm font-semibold text-ink">No matching results found</p>
-              <p className="text-xs text-ink-muted mt-1">
+              <p className="text-sm font-semibold text-white">No matching results found</p>
+              <p className="text-xs text-slate-400 mt-1">
                 Try searching for &quot;agents&quot;, &quot;workflow&quot;, &quot;legal&quot;, or &quot;GridPilot&quot;.
               </p>
             </div>
           )}
 
           {!isLoading && !query.trim() && (
-            <div className="p-4 sm:p-6 text-xs text-ink-muted space-y-3">
-              <p className="font-semibold text-ink uppercase tracking-wider text-[11px]">
+            <div className="p-4 sm:p-6 text-xs text-slate-400 space-y-3">
+              <p className="font-mono text-xs uppercase tracking-wider text-teal-glow">
                 Popular topics
               </p>
               <div className="flex flex-wrap gap-2">
@@ -196,7 +196,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
                       key={term}
                       type="button"
                       onClick={() => setQuery(term)}
-                      className="px-3 py-1 rounded-md bg-surface-soft border border-surface-line hover:border-slate-300 text-ink text-xs transition-colors cursor-pointer"
+                      className="px-3 py-1 rounded-md bg-white/5 border border-white/10 hover:border-teal-glow/50 text-slate-300 text-xs transition-colors cursor-pointer"
                     >
                       {term}
                     </button>
@@ -222,12 +222,12 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
                       onMouseEnter={() => setSelectedIndex(idx)}
                       className={`block p-3 sm:p-4 rounded-xl transition-colors ${
                         isSelected
-                          ? "bg-teal-light/60 text-ink"
-                          : "hover:bg-surface-soft text-ink-muted"
+                          ? "bg-teal/20 text-white border border-teal-glow/40"
+                          : "hover:bg-white/5 text-slate-300 border border-transparent"
                       }`}
                     >
                       <div className="flex items-center justify-between gap-2 mb-1">
-                        <span className="text-sm font-bold text-ink">
+                        <span className="text-sm font-semibold text-white">
                           {item.title}
                         </span>
                         <Badge
@@ -246,7 +246,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
                         </Badge>
                       </div>
 
-                      <p className="text-xs text-ink-muted line-clamp-1">
+                      <p className="text-xs text-slate-400 line-clamp-1">
                         {item.summary}
                       </p>
                     </a>
@@ -258,16 +258,17 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
         </div>
 
         {/* Footer Hint */}
-        <div className="px-4 py-2.5 bg-surface-soft border-t border-surface-line flex items-center justify-between text-[11px] text-ink-muted">
+        <div className="px-4 py-2.5 bg-navy-950/80 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
           <div className="flex items-center gap-3">
             <span>
-              <kbd className="font-semibold bg-white border border-surface-line px-1.5 py-0.5 rounded text-[10px]">↑</kbd> <kbd className="font-semibold bg-white border border-surface-line px-1.5 py-0.5 rounded text-[10px]">↓</kbd> to navigate
+              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-[10px]">↑</kbd>{" "}
+              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-[10px]">↓</kbd> to navigate
             </span>
             <span>
-              <kbd className="font-semibold bg-white border border-surface-line px-1.5 py-0.5 rounded text-[10px]">↵</kbd> to select
+              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-[10px]">↵</kbd> to select
             </span>
           </div>
-          <span className="font-semibold text-teal">GrydIn Search</span>
+          <span className="font-mono text-teal-glow">GrydIn Search</span>
         </div>
       </div>
     </div>

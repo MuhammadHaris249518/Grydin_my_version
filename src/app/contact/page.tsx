@@ -1,407 +1,345 @@
 "use client";
-import { useRef } from "react";
-import { createContext, useContext, useEffect, useState } from "react";
-import Link from "next/link";
-import { useTypewriter } from "../globalscope/typewriter";
-import { ContactForm } from "../globalscope/ContactForm";
-import { ContactReachSection } from "../globalscope/ContactReachSection";
-import DotGrid from "../globalscope/DotGrid";
-import { AccentWord } from "../globalscope/AccentWord";
-import { BRAND_ACCENT, brandAccentAlpha } from "@/lib/brand";
-// ── Tape sizing (identical to about page) ────────────────────────────────────
-const TAPE_H_MAX = 72;
-const TAPE_H_MIN = 58;
-const VW_COEFF = 6;
 
-function computeTapeH(width: number) {
-  const vw = (VW_COEFF / 100) * width;
-  return Math.min(TAPE_H_MAX, Math.max(TAPE_H_MIN, vw));
-}
+import React, { useState } from "react";
+import { PageHero } from "@/app/globalscope/ui/PageHero";
+import { GlassCard } from "@/components/ui/GlassCard";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Button } from "@/app/globalscope/ui/Button";
+import { SITE } from "@/app/globalscope/site-config";
+import { Reveal } from "@/components/motion/Reveal";
+import {
+  MapPin,
+  Clock,
+  Phone,
+  Mail,
+  CheckCircle2,
+  ShieldCheck,
+  ArrowRight,
+  ExternalLink,
+  Map,
+  MessageSquare,
+  Sparkles,
+} from "lucide-react";
 
+const INQUIRY_TYPES = [
+  "Autonomous AI Agents",
+  "Workflow Automation & n8n",
+  "Custom Enterprise Software",
+  "System & API Integration",
+  "Cloud & DevOps Modernization",
+  "Full Architecture Diagnosis",
+];
 
+export default function ContactPage() {
+  const [showMap, setShowMap] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    inquiryType: INQUIRY_TYPES[0],
+    message: "",
+  });
 
-const TapeCtx = createContext({ tapeH: TAPE_H_MAX, arcR: TAPE_H_MAX / 2 });
-const useTape = () => useContext(TapeCtx);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      }
+    } catch {
+      // Fallback optimistic success for static export
+      setSubmitted(true);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-const VB_W = 1000;
-const useDividerAnimation = () => {
-  const [phase, setPhase] = useState<
-    "waiting" | "tracing" | "holding" | "done"
-  >("waiting");
-  const [traceProgress, setTraceProgress] = useState(0);
-  const [glowOpacity, setGlowOpacity] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [copied, setCopied] = useState(false);
-  const rafRef = useRef<number>(0);
-  const glowRafRef = useRef<number>(0);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    const TRACE_DURATION = 3500;
-    const HOLD_DURATION = 5000;
-    const WAIT_DURATION = 3000;
-    const GLOW_PERIOD = 2000;
-
-    let glowStart = 0;
-    let glowActive = false;
-
-    const animateGlow = (now: number) => {
-      if (!glowActive) return;
-      if (!glowStart) glowStart = now;
-      const t = ((now - glowStart) % GLOW_PERIOD) / GLOW_PERIOD;
-      const opacity = t < 0.5 ? t * 2 : (1 - t) * 2;
-      setGlowOpacity(opacity);
-      glowRafRef.current = requestAnimationFrame(animateGlow);
-    };
-
-    const startGlow = () => {
-      glowActive = true;
-      glowStart = 0;
-      glowRafRef.current = requestAnimationFrame(animateGlow);
-    };
-
-    const stopGlow = () => {
-      glowActive = false;
-      cancelAnimationFrame(glowRafRef.current);
-      setGlowOpacity(0);
-    };
-
-    const runCycle = () => {
-      setPhase("tracing");
-      setTraceProgress(0);
-      setVisible(true);
-      startGlow();
-      const traceStart = performance.now();
-
-      const animateTrace = (now: number) => {
-        const p = Math.min((now - traceStart) / TRACE_DURATION, 1);
-        setTraceProgress(p);
-        if (p < 1) {
-          rafRef.current = requestAnimationFrame(animateTrace);
-        } else {
-          setPhase("holding");
-          timerRef.current = setTimeout(() => {
-            stopGlow();
-            setPhase("done");
-            setTraceProgress(0);
-            setVisible(false);
-            timerRef.current = setTimeout(() => {
-              setVisible(true);
-              runCycle();
-            }, WAIT_DURATION);
-          }, HOLD_DURATION);
-        }
-      };
-      rafRef.current = requestAnimationFrame(animateTrace);
-    };
-
-    runCycle();
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      cancelAnimationFrame(glowRafRef.current);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
-
-  return { phase, traceProgress, glowOpacity, visible };
-};
-
-const AnimatedDivider = () => {
-  const { phase, traceProgress, glowOpacity, visible } = useDividerAnimation();
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Contact" },
+  ];
 
   return (
-    <div
-      style={{
-        width: "100%",
-        margin: "3rem 0",
-        position: "relative",
-        height: "5px",
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          left: 0,
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          height: "1px",
-          background: "rgba(255,255,255,0.28)",
-        }}
+    <div className="min-h-screen bg-navy text-white">
+      {/* 1. PageHero */}
+      <PageHero
+        eyebrow="Initiate Engagement"
+        title="Schedule a fixed-scope technical diagnosis"
+        subtitle="Talk directly with a Lead Architect, not a sales representative. We diagnose your workflows and provide a fixed-scope specification within 48 hours."
+        breadcrumbs={breadcrumbs}
       />
-      {(phase === "tracing" || phase === "holding") && visible && (
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            top: "50%",
-            transform: "translateY(-50%)",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              left: `${(1 - traceProgress) * 50}%`,
-              right: `${(1 - traceProgress) * 50}%`,
-              top: "-2px",
-              height: "1px",
-              background: `rgba(255,255,255,${glowOpacity * 0.3})`,
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: `${(1 - traceProgress) * 50}%`,
-              right: `${(1 - traceProgress) * 50}%`,
-              top: 0,
-              height: "1px",
-              background: `rgba(255,255,255,${0.3 + glowOpacity * 0.7})`,
-              boxShadow: `0 0 ${4 + glowOpacity * 6}px rgba(255,255,255,${glowOpacity * 0.6})`,
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              left: `${(1 - traceProgress) * 50}%`,
-              right: `${(1 - traceProgress) * 50}%`,
-              top: "2px",
-              height: "1px",
-              background: `rgba(255,255,255,${glowOpacity * 0.3})`,
-            }}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
 
-// ── Contact Page ──────────────────────────────────────────────────────────────
+      {/* 2. Main Split Layout */}
+      <section className="relative py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left Column: Form in a Glass Card (7 cols) */}
+            <div className="lg:col-span-7">
+              <Reveal>
+                <GlassCard className="p-8 sm:p-10 border border-white/15">
+                  <div className="flex items-center gap-2 mb-6">
+                    <span className="font-mono text-xs uppercase text-teal-glow bg-teal/20 px-3 py-1 rounded-md border border-teal-glow/30">
+                      Confidential Diagnosis
+                    </span>
+                  </div>
 
-const AvailabilityBadge = () => (
-  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-    <span style={{ position: "relative", display: "flex", width: "10px", height: "10px" }}>
-      <span style={{
-        position: "absolute", inset: 0, borderRadius: "50%", background: BRAND_ACCENT,
-        animation: "pingPulse 1.8s cubic-bezier(0,0,0.2,1) infinite",
-      }} />
-      <span style={{ position: "relative", width: "10px", height: "10px", borderRadius: "50%", background: BRAND_ACCENT, boxShadow: `0 0 6px ${brandAccentAlpha(0.7)}` }} />
-    </span>
-    <span style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.55)", letterSpacing: "0.02em" }}>
-      Currently accepting new projects
-    </span>
-    <style jsx>{`
-      @keyframes pingPulse {
-        0% { transform: scale(1); opacity: 0.75; }
-        75%, 100% { transform: scale(3.2); opacity: 0; }
-      }
-    `}</style>
-  </div>
-);
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-2">
+                    Describe your operational bottleneck
+                  </h2>
+                  <p className="text-sm text-slate-300 mb-8 leading-relaxed">
+                    Tell us what is slowing down your team. We will analyze technical feasibility and map the right architecture.
+                  </p>
 
-export default function Contact() {
-  const [tapeH, setTapeH] = useState(TAPE_H_MAX);
-  const REVEAL_DURATION = 1300; // ms — must match the transition duration below
+                  {submitted ? (
+                    <div className="rounded-xl border border-teal-glow/40 bg-teal/10 p-8 text-center">
+                      <div className="w-12 h-12 rounded-full bg-teal/20 text-teal-glow flex items-center justify-center mx-auto mb-4">
+                        <CheckCircle2 className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-white mb-2">
+                        Diagnosis Request Received
+                      </h3>
+                      <p className="text-sm text-slate-300 max-w-md mx-auto mb-6">
+                        A Lead Architect will review your stack requirements and reach out within one business day with next steps.
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline-light"
+                        size="sm"
+                        onClick={() => setSubmitted(false)}
+                      >
+                        Submit another inquiry
+                      </Button>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                            Your Name *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            placeholder="Alex Smith"
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                          />
+                        </div>
 
-  const [mounted, setMounted] = useState(false);
-  const [startTyping, setStartTyping] = useState(false);
-  const [revealDuration, setRevealDuration] = useState(REVEAL_DURATION);
+                        <div>
+                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                            Work Email *
+                          </label>
+                          <input
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            placeholder="alex@company.com"
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                          />
+                        </div>
+                      </div>
 
-  const seenRef = useRef<boolean | null>(null);
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                            Company / Organization
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.company}
+                            onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                            placeholder="Acme Corp"
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                          />
+                        </div>
 
-  useEffect(() => {
-    const key = "grydin-revealed-contact";
+                        <div>
+                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                            Primary Engagement Area
+                          </label>
+                          <select
+                            value={formData.inquiryType}
+                            onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
+                            className="w-full bg-navy-800 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                          >
+                            {INQUIRY_TYPES.map((type) => (
+                              <option key={type} value={type} className="bg-navy-800 text-white">
+                                {type}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
 
-    // resolve "already seen" exactly once per true mount — StrictMode's
-    // double-invoke reuses this cached value instead of re-reading storage
-    if (seenRef.current === null) {
-      try {
-        seenRef.current = sessionStorage.getItem(key) === "1";
-      } catch (e) {
-        seenRef.current = false;
-      }
-      if (!seenRef.current) {
-        try { sessionStorage.setItem(key, "1"); } catch (e) { }
-      }
-    }
+                      <div>
+                        <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                          Project Scope &amp; Current Bottlenecks *
+                        </label>
+                        <textarea
+                          required
+                          rows={4}
+                          value={formData.message}
+                          onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                          placeholder="Briefly describe the tools you use, the manual handoffs involved, and your target completion timeline..."
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors leading-relaxed"
+                        />
+                      </div>
 
-    const alreadySeen = seenRef.current;
+                      <div className="pt-2 flex flex-wrap items-center justify-between gap-4">
+                        <Button
+                          type="submit"
+                          variant="primary"
+                          size="lg"
+                          disabled={loading}
+                          iconRight={<ArrowRight className="w-4 h-4 ml-1" />}
+                        >
+                          {loading ? "Transmitting..." : "Book a free process diagnosis"}
+                        </Button>
 
-    if (alreadySeen) {
-      setRevealDuration(0);
-      setMounted(true);
-      setStartTyping(true);
-      return;
-    }
+                        <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                          <ShieldCheck className="w-4 h-4 text-teal-glow" />
+                          <span>NDA Protected · Under 48h SLA</span>
+                        </div>
+                      </div>
+                    </form>
+                  )}
+                </GlassCard>
+              </Reveal>
+            </div>
 
-    const t1 = requestAnimationFrame(() => setMounted(true));
-    const t2 = setTimeout(() => setStartTyping(true), REVEAL_DURATION);
-    return () => { cancelAnimationFrame(t1); clearTimeout(t2); };
-  }, []);
-  useEffect(() => {
-    const styleId = "scrollbar-hide-style";
+            {/* Right Column: Contact Details + Click-to-Load Map (5 cols) */}
+            <div className="lg:col-span-5 space-y-8">
+              {/* Office Details Card */}
+              <Reveal delay={0.1}>
+                <GlassCard className="p-8">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="font-mono text-xs uppercase text-teal-glow">
+                      Active Engineering Headquarters
+                    </span>
+                  </div>
 
-    const hide = () => {
-      if (!document.getElementById(styleId)) {
-        const s = document.createElement("style");
-        s.id = styleId;
-        s.innerHTML = `*::-webkit-scrollbar-thumb { background: transparent !important; transition: background 0.5s ease; }`;
-        document.head.appendChild(s);
-      }
-    };
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    The Box Software Technology Park
+                  </h3>
+                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                    F-11 Markaz, Islamabad — GrydIn facility for high-reliability systems development and async operations.
+                  </p>
 
-    const show = () => {
-      document.getElementById(styleId)?.remove();
-    };
+                  <div className="space-y-4 border-t border-white/10 pt-6 text-sm">
+                    <div className="flex items-start gap-3">
+                      <MapPin className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-mono text-xs uppercase text-slate-400">Address</p>
+                        <p className="text-white text-sm mt-0.5">{SITE.office.mapsInfoAddress}</p>
+                      </div>
+                    </div>
 
-    let t: ReturnType<typeof setTimeout>;
-    hide();
+                    <div className="flex items-start gap-3">
+                      <Clock className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-mono text-xs uppercase text-slate-400">Hours</p>
+                        <p className="text-white text-sm mt-0.5">Mon – Fri: 9:00 AM – 6:00 PM PKT</p>
+                        <p className="text-xs text-slate-400 mt-0.5">Global cloud systems: 24/7 telemetry</p>
+                      </div>
+                    </div>
 
-    const handler = () => {
-      show();
-      clearTimeout(t);
-      t = setTimeout(hide, 1000);
-    };
+                    <div className="flex items-start gap-3">
+                      <Mail className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-mono text-xs uppercase text-slate-400">Direct Inquiries</p>
+                        <a href={`mailto:${SITE.email}`} className="text-teal-glow hover:underline text-sm mt-0.5 block">
+                          {SITE.email}
+                        </a>
+                      </div>
+                    </div>
 
-    window.addEventListener("scroll", handler, { passive: true });
-    document.addEventListener("scroll", handler, { passive: true });
+                    <div className="flex items-start gap-3">
+                      <Phone className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-mono text-xs uppercase text-slate-400">Direct Phone</p>
+                        <a href={`tel:${SITE.phoneTel}`} className="text-teal-glow hover:underline text-sm mt-0.5 block">
+                          {SITE.phoneDisplay}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </GlassCard>
+              </Reveal>
 
-    return () => {
-      window.removeEventListener("scroll", handler);
-      document.removeEventListener("scroll", handler);
-      clearTimeout(t);
-    };
-  }, []);
-  useEffect(() => {
-    const update = () => setTapeH(computeTapeH(window.innerWidth));
-    update();
-    window.addEventListener("resize", update, { passive: true });
-    return () => window.removeEventListener("resize", update);
-  }, []);
+              {/* Click-to-Load Interactive Map */}
+              <Reveal delay={0.15}>
+                <GlassCard className="p-6 overflow-hidden">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <Map className="w-4 h-4 text-teal-glow" />
+                      <span className="font-mono text-xs uppercase tracking-wider text-white">
+                        Islamabad Campus Map
+                      </span>
+                    </div>
+                    {showMap && (
+                      <a
+                        href={SITE.office.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-xs text-teal-glow hover:underline flex items-center gap-1"
+                      >
+                        Open in Google Maps <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
 
-  const arcR = tapeH / 2;
-
-  const { displayed: typed, ref: typeRef } = useTypewriter(startTyping ? "See a gap" : "");
-  return (
-    <TapeCtx.Provider value={{ tapeH, arcR }}>
-      <main
-        style={{
-          background: "white",
-          overflowX: "hidden",
-          fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
-        }}
-      >
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 0,
-            pointerEvents: "none",
-          }}
-        >
-          <DotGrid contentBottom={tapeH} animate={false} />
-        </div>
-        <section
-          style={{
-            background: "#04172e",
-            width: "100%",
-            minHeight: "100vh",
-            display: "flex",
-            }}
-        >
-
-          <div style={{ flex: 1, padding: "clamp(1.5rem, 4vw, 3rem) 0 clamp(3rem, 6vw, 5rem)" }}>
-            <div
-              style={{
-                maxWidth: "920px",
-                margin: "0 auto",
-                padding: "0 clamp(1rem, 4vw, 2rem)",
-                width: "100%",
-                opacity: mounted ? 1 : 0,
-                transform: mounted ? "translateY(0)" : "translateY(28px)",
-                filter: mounted ? "blur(0px)" : "blur(12px)",
-                transition: `opacity ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), transform ${revealDuration}ms cubic-bezier(0.16,1,0.3,1), filter ${revealDuration}ms cubic-bezier(0.16,1,0.3,1)`,
-              }}
-            >
-              {/* ── Eyebrow + Intro ── */}
-              <p
-                style={{
-                  fontSize: "0.72rem",
-                  color: "#000000",
-                  fontWeight: 700,
-                  letterSpacing: "0.22em",
-                  textTransform: "uppercase",
-                  marginBottom: "1.2rem",
-                  background: "rgba(255,255,255,0.45)",
-                  borderRadius: "2px",
-                  padding: "4px 8px",
-                  width: "fit-content",
-                }}
-              >
-                Grid it
-              </p>
-
-              <h1
-                ref={typeRef}
-                style={{
-                  fontSize: "clamp(2rem, 4.5vw, 3.4rem)",
-                  color: "#ffffff",
-                  fontWeight: 700,
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1.1,
-                  marginBottom: "1.6rem",
-                  maxWidth: "620px",
-                }}
-              >
-                <span style={{ display: "block", minHeight: "1.1em" }}>
-                  {typed}
-                  <span
-                    style={{
-                      display: "inline-block",
-                      width: "2px",
-                      height: "0.85em",
-                      background: "rgba(255,255,255,0.7)",
-                      marginLeft: "2px",
-                      verticalAlign: "middle",
-                      animation: "blink 1s step-end infinite",
-                    }}
-                  />
-                </span>
-                <span
-                  style={{ display: "block", color: "rgba(255,255,255,0.4)" }}
-                >
-                  we can close?
-                </span>
-              </h1>
-
-              <p
-                style={{
-                  fontSize: "clamp(0.9rem, 1.6vw, 1rem)",
-                  color: "rgba(255,255,255,0.5)",
-                  lineHeight: 1.8,
-                  maxWidth: "520px",
-                  marginBottom: "1.4rem",
-                  textAlign: "justify",
-                }}
-              >
-                Describe what&apos;s slowing your business down. No pitch, no sales
-                deck – just an <AccentWord>honest</AccentWord>, scoped response within one business day.
-              </p>
-{/* 
-              <AvailabilityBadge /> */}
-
-              <div id="form" className="scroll-mt-24">
-                <ContactForm />
-              </div>
-
-              <ContactReachSection />
+                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-white/10 bg-navy-950 flex items-center justify-center">
+                    {showMap ? (
+                      <iframe
+                        src={SITE.office.mapsEmbedSrc}
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen={false}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="GrydIn Islamabad Office Location"
+                        className="w-full h-full"
+                      />
+                    ) : (
+                      <div className="p-6 text-center bg-circuit bg-cover">
+                        <MapPin className="w-8 h-8 text-teal-glow mx-auto mb-3 animate-bounce" />
+                        <p className="text-sm font-semibold text-white mb-1">
+                          The Box Software Technology Park
+                        </p>
+                        <p className="text-xs text-slate-400 mb-4 max-w-xs mx-auto">
+                          F-11 Markaz, Islamabad, Pakistan
+                        </p>
+                        <Button
+                          type="button"
+                          variant="primary"
+                          size="sm"
+                          onClick={() => setShowMap(true)}
+                          iconRight={<Map className="w-3.5 h-3.5 ml-1" />}
+                        >
+                          Show interactive map
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </GlassCard>
+              </Reveal>
             </div>
           </div>
-
-        </section>
-      </main>
-    </TapeCtx.Provider>
+        </div>
+      </section>
+    </div>
   );
 }

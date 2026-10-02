@@ -38,10 +38,10 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   if (!items || items.length === 0) return null;
 
   return (
-    <nav className="space-y-3" aria-label="Table of contents">
-      <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ink pb-2 border-b border-surface-line">
-        <AlignLeft className="w-4 h-4 text-teal" />
-        <span>On this page</span>
+    <nav className="space-y-4" aria-label="Table of contents">
+      <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-teal-glow pb-2 border-b border-white/10">
+        <AlignLeft className="w-4 h-4 text-teal-glow" />
+        <span>On This Page</span>
       </div>
 
       <ul className="space-y-2 text-xs leading-relaxed max-h-[calc(100vh-220px)] overflow-y-auto pr-2">
@@ -65,8 +65,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                 }}
                 className={`block py-1 transition-colors ${
                   isActive
-                    ? "text-teal font-bold"
-                    : "text-ink-muted hover:text-ink"
+                    ? "text-teal-glow font-semibold"
+                    : "text-slate-400 hover:text-white"
                 }`}
               >
                 {item.text}

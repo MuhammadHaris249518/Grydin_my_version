@@ -33,11 +33,11 @@ function Connectors({ services, activeId }: { services: HeroService[]; activeId:
             key={s.id}
             d={`M${sx} ${sy} C ${mx} ${sy}, ${mx} ${ey}, ${ex} ${ey}`}
             fill="none"
-            stroke={on ? "#2dd4bf" : "rgba(45,212,191,0.25)"}
-            strokeWidth={on ? 1.6 : 1}
+            stroke="currentColor"
+            strokeWidth={on ? 1.8 : 1}
             strokeDasharray={on ? "6 6" : "none"}
             vectorEffect="non-scaling-stroke"
-            className={cn("transition-all duration-300", on && "animate-dash")}
+            className={cn("transition-all duration-300", on ? "text-teal-glow animate-dash" : "text-teal-glow/25")}
           />
         );
       })}
@@ -77,8 +77,8 @@ function StageCard({
         <Icon className="h-5 w-5" />
       </span>
       <span className="min-w-0">
-        <span className="block text-[15px] font-semibold text-white">{s.title}</span>
-        <span className="mt-1 block text-[13px] leading-snug text-slate-300">{s.blurb}</span>
+        <span className="block text-sm font-semibold text-white">{s.title}</span>
+        <span className="mt-1 block text-sm leading-snug text-slate-300">{s.blurb}</span>
         <ArrowRight className="mt-2 h-4 w-4 text-teal-glow transition-transform group-hover:translate-x-1" />
       </span>
     </>
@@ -102,40 +102,50 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
   const stageRef = useRef<HTMLDivElement>(null);
   const lookRef = useRef<Look>({ x: 0, y: 0 });
   const focusRef = useRef<string | null>(null);
-  const lastMove = useRef(0);
+  const lastMove = useRef(performance.now());
+  const lastPointer = useRef<Look | null>(null);
   const cycle = useRef(0);
   const [focusId, setFocusId] = useState<string | null>(null);
   const [autoId, setAutoId] = useState<string | null>(null);
   const can3D = useCanRender3D();
-  const { ref: visRef, visible } = useVisible<HTMLDivElement>();
+  const { ref: visRef, visible } = useVisible<HTMLDivElement>("0px");
   const activeId = focusId ?? autoId;
 
   const focus = (id: string | null) => {
     focusRef.current = id;
     setFocusId(id);
     setAutoId(null);
-    const s = services.find((x) => x.id === id);
-    lookRef.current = s ? s.look : { x: 0, y: 0 };
+    if (id) {
+      const s = services.find((x) => x.id === id);
+      lookRef.current = s ? s.look : { x: 0, y: 0 };
+    } else {
+      // Return immediately to cursor tracking if available, otherwise center
+      lookRef.current = lastPointer.current ?? { x: 0, y: 0 };
+    }
   };
 
-  // cursor tracking (ignored while a card is focused)
+  // cursor tracking on stage (returns to tracking when card is left)
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
       lastMove.current = performance.now();
       setAutoId(null);
       const el = stageRef.current;
-      if (!el || focusRef.current) return;
+      if (!el) return;
       const r = el.getBoundingClientRect();
-      lookRef.current = {
+      const look = {
         x: clamp((e.clientX - (r.left + r.width / 2)) / (r.width / 2)),
         y: clamp(-(e.clientY - (r.top + r.height * 0.45)) / (r.height / 2)),
       };
+      lastPointer.current = look;
+      if (!focusRef.current) {
+        lookRef.current = look;
+      }
     };
     window.addEventListener("pointermove", onMove, { passive: true });
     return () => window.removeEventListener("pointermove", onMove);
   }, []);
 
-  // idle demo: cycle through services when nobody is interacting
+  // idle demo: cycle through services when nobody is interacting (after 5s without pointer movement)
   useEffect(() => {
     if (!can3D || !visible) return;
     const id = setInterval(() => {
@@ -150,41 +160,57 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
 
   return (
     <div ref={visRef}>
-      {/* Desktop stage */}
-      <div ref={stageRef} className="relative mx-auto hidden aspect-[16/9] w-full max-w-[1280px] lg:block" role="group" aria-label="Our capabilities">
-        <Connectors services={services} activeId={activeId} />
-        <div data-model-slot="hero-robot" aria-hidden className="absolute left-1/2 top-[14%] h-[74%] w-[36%] -translate-x-1/2">
-          {can3D ? (
+      {can3D ? (
+        /* Desktop 3D stage */
+        <div ref={stageRef} className="relative mx-auto aspect-[16/9] w-full max-w-[1280px]" role="group" aria-label="Our capabilities">
+          <Connectors services={services} activeId={activeId} />
+          <div data-model-slot="hero-robot" aria-hidden className="absolute left-1/2 top-[14%] h-[74%] w-[36%] -translate-x-1/2">
             <RobotCanvas lookRef={lookRef} focused={!!activeId} active={visible} modelUrl={MODEL_URL || undefined} headNode={HEAD_NODE || undefined} />
-          ) : (
-            <RobotFallback />
-          )}
+          </div>
+          {services.map((s, i) => (
+            <StageCard key={s.id} s={s} index={i} active={activeId === s.id} onFocus={focus} onSelect={onSelect} />
+          ))}
         </div>
-        {services.map((s, i) => (
-          <StageCard key={s.id} s={s} index={i} active={activeId === s.id} onFocus={focus} onSelect={onSelect} />
-        ))}
-      </div>
-
-      {/* Mobile / tablet: static robot + card grid */}
-      <div className="lg:hidden">
-        <RobotFallback className="max-w-[240px]" />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {services.map((s) => {
-            const Icon = s.icon;
-            return (
-              <Link key={s.id} href={`/services#${s.id}`} className="glass flex items-start gap-3 rounded-2xl p-4">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/20 text-teal-glow">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <span>
-                  <span className="block text-[15px] font-semibold text-white">{s.title}</span>
-                  <span className="mt-1 block text-[13px] leading-snug text-slate-300">{s.blurb}</span>
-                </span>
-              </Link>
-            );
-          })}
+      ) : (
+        /* Below 1024px or with reduced motion: static robot + normal card grid */
+        <div className="mx-auto max-w-5xl">
+          <RobotFallback className="max-w-[240px]" />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s) => {
+              const Icon = s.icon;
+              const content = (
+                <>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal/20 text-teal-glow">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-white">{s.title}</span>
+                    <span className="mt-1 block text-sm leading-snug text-slate-300">{s.blurb}</span>
+                  </span>
+                </>
+              );
+              return onSelect ? (
+                <button
+                  key={s.id}
+                  type="button"
+                  onClick={() => onSelect(s.id)}
+                  className="glass flex items-start gap-3 rounded-2xl p-4 text-left transition-colors hover:border-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
+                >
+                  {content}
+                </button>
+              ) : (
+                <Link
+                  key={s.id}
+                  href={`/services#${s.id}`}
+                  className="glass flex items-start gap-3 rounded-2xl p-4 text-left transition-colors hover:border-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
+                >
+                  {content}
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

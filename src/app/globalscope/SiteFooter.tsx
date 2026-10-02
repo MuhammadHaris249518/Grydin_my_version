@@ -110,7 +110,7 @@ export const SiteFooter = () => {
         </div>
 
         {/* Copyright Row */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
           <div>
             © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
           </div>

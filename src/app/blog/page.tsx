@@ -42,7 +42,7 @@ export default function BlogHubPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-navy text-white">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Newsroom"
@@ -246,6 +246,6 @@ export default function BlogHubPage() {
         title="Have an engineering problem worth writing about?"
         subtitle="Let's diagnose your workflows and architect an automated solution."
       />
-    </div>
+    </main>
   );
 }

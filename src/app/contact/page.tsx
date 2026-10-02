@@ -68,7 +68,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-navy text-white">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Initiate Engagement"
@@ -165,10 +165,12 @@ export default function ContactPage() {
                         </div>
 
                         <div>
-                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                          <label htmlFor="inquiry-type" className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
                             Primary Engagement Area
                           </label>
                           <select
+                            id="inquiry-type"
+                            aria-label="Primary Engagement Area"
                             value={formData.inquiryType}
                             onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
                             className="w-full bg-navy-800 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
@@ -340,6 +342,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

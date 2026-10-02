@@ -29,7 +29,7 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-navy text-white">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Our Work"
@@ -101,6 +101,6 @@ export default function ProjectsPage() {
         title="Have an operational bottleneck in mind? Let's grid it."
         subtitle="Tell us what is slowing your team down. You'll receive a scoped roadmap and fixed quote within 48 hours."
       />
-    </div>
+    </main>
   );
 }

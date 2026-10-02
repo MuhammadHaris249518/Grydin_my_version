@@ -369,7 +369,7 @@ export default function ServicesPage() {
     CORE_SERVICES.find((s) => s.id === activeServiceId) || CORE_SERVICES[0];
 
   return (
-    <div className="min-h-screen bg-navy text-slate-100 selection:bg-teal selection:text-white">
+    <main className="min-h-screen bg-navy text-slate-100 selection:bg-teal selection:text-white">
       {/* ── 1. Hero Section with 3D RobotStage ── */}
       <section className="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
         <HeroBackdrop network={false} />
@@ -719,9 +719,9 @@ export default function ServicesPage() {
                         {step.timeframe}
                       </span>
                     </div>
-                    <h4 className="text-sm font-semibold text-white mb-1">
+                    <h3 className="text-sm font-semibold text-white mb-1">
                       {step.phase}
-                    </h4>
+                    </h3>
                     <p className="text-xs font-semibold text-teal-glow mb-3">
                       {step.title}
                     </p>
@@ -758,10 +758,10 @@ export default function ServicesPage() {
             {TECH_STACK_DOMAINS.map((domain, index) => (
               <Reveal key={index} delay={index * 0.06}>
                 <div className="glass rounded-xl p-6 h-full">
-                  <h4 className="text-sm font-semibold text-white tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
+                  <h3 className="text-sm font-semibold text-white tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
                     <Terminal size={16} className="text-teal-glow" />
                     {domain.title}
-                  </h4>
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {domain.skills.map((skill) => (
                       <span
@@ -1060,6 +1060,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }

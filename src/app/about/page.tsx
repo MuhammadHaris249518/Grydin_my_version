@@ -83,7 +83,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-navy text-white">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Our Firm & Philosophy"
@@ -208,6 +208,6 @@ export default function AboutPage() {
         title="Ready to eliminate friction in your business?"
         subtitle="Schedule a diagnosis with a Lead Architect. Fixed-scope roadmap within 48 hours."
       />
-    </div>
+    </main>
   );
 }

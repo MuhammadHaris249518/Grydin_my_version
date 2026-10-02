@@ -22,7 +22,7 @@ export default function SolutionsHubPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-navy">
+    <main className="min-h-screen bg-navy">
       <PageHero
         eyebrow="Industry Expertise"
         title="Solutions engineered for your industry"
@@ -46,6 +46,6 @@ export default function SolutionsHubPage() {
         title="Ready to eliminate friction in your industry workflows?"
         subtitle="Talk directly with an engineer to audit your operational bottlenecks."
       />
-    </div>
+    </main>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Zap,
@@ -34,7 +34,11 @@ import {
   HelpCircle,
   LucideIcon,
 } from "lucide-react";
-import { ServicesRobotHero, ServiceKey } from "../globalscope/services/ServicesRobotHero";
+import { RobotStage } from "@/components/3d/RobotStage";
+import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Reveal } from "@/components/motion/Reveal";
+import { GlassCard } from "@/components/ui/GlassCard";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type ServiceCategory =
@@ -335,6 +339,27 @@ export default function ServicesPage() {
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory>("all");
   const [activeServiceId, setActiveServiceId] = useState<string>("ai-agents");
 
+  const handleSelect = useCallback((id: string) => {
+    setSelectedCategory("all");
+    setActiveServiceId(id);
+    history.replaceState(null, "", `#${id}`);
+    document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  useEffect(() => {
+    const apply = () => {
+      const id = window.location.hash.slice(1);
+      if (CORE_SERVICES.some((s) => s.id === id)) {
+        setSelectedCategory("all");
+        setActiveServiceId(id);
+        requestAnimationFrame(() => document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth" }));
+      }
+    };
+    apply();
+    window.addEventListener("hashchange", apply);
+    return () => window.removeEventListener("hashchange", apply);
+  }, []);
+
   const filteredServices =
     selectedCategory === "all"
       ? CORE_SERVICES
@@ -345,92 +370,122 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-navy text-slate-100 selection:bg-teal selection:text-white">
-
-
-      {/* ── 1. Interactive 3D Robot Navigator Hero Section ── */}
-      <ServicesRobotHero
-        onSelectService={(key, category) => {
-          setSelectedCategory(category as ServiceCategory);
-          const mappedId =
-            key === "ai-agents"
-              ? "ai-agents"
-              : key === "workflow"
-              ? "ai-agents"
-              : key === "fullstack"
-              ? "custom-software"
-              : "custom-software";
-          setActiveServiceId(mappedId);
-        }}
-      />
-
-      {/* Quick Metrics Strip */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 -mt-4 mb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-8 border-t border-white/10">
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
-            <div className="text-2xl sm:text-3xl font-extrabold text-teal-glow mb-1 font-mono">
-              &lt; 2 Weeks
+      {/* ── 1. Hero Section with 3D RobotStage ── */}
+      <section className="relative overflow-hidden border-b border-white/10 pb-20 pt-16 md:pb-28 md:pt-24">
+        <HeroBackdrop network={false} />
+        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <div className="mx-auto max-w-4xl text-center">
+            {/* Breadcrumb & Eyebrow */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal/20 text-teal-glow border border-teal/40 tracking-wider uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-pulse" />
+                Enterprise Solutions & Capabilities
+              </span>
+              <span className="text-xs text-slate-400 font-medium">
+                Home <span className="mx-1 text-slate-600">/</span> Services
+              </span>
             </div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-              First Deployment
-            </div>
-            <p className="text-[11px] text-slate-400 mt-1">
-              Rapid turnaround without cutting technical corners
+
+            {/* Main Title */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-tight leading-[1.12] mb-6">
+              Engineering Next-Gen <br className="hidden sm:inline" />
+              <span className="text-gradient">
+                AI & Enterprise Software Systems
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed font-normal max-w-3xl mx-auto mb-10">
+              From autonomous multi-agent operational workflows to mission-critical cloud platforms. We eliminate manual friction with custom software built around your exact business logic — with guaranteed fixed scope and first deployment in under two weeks.
             </p>
+
+            {/* Hero CTAs */}
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-teal hover:bg-teal-dark text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-lg shadow-teal/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              >
+                Schedule Solution Diagnosis
+                <ArrowRight size={16} strokeWidth={2.2} />
+              </Link>
+
+              <a
+                href="#capabilities"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-bold uppercase tracking-wider border border-white/20 rounded-md transition-all hover:border-white/40"
+              >
+                Explore Capabilities
+                <ChevronRight size={16} />
+              </a>
+            </div>
           </div>
 
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
-            <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
-              99.9%
-            </div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-              Reliability SLA
-            </div>
-            <p className="text-[11px] text-slate-400 mt-1">
-              Zero-downtime architecture with live telemetry
-            </p>
+          <div className="mt-10 md:mt-14">
+            <RobotStage onSelect={handleSelect} />
           </div>
 
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
-            <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
-              100+
+          {/* Quick Metrics Strip */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-white/10">
+            <div className="glass rounded-2xl p-5 hover:border-teal/40 transition-colors">
+              <div className="text-2xl sm:text-3xl font-extrabold text-teal-glow mb-1 font-mono">
+                &lt; 2 Weeks
+              </div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                First Deployment
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Rapid turnaround without cutting technical corners
+              </p>
             </div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-              Custom Integrations
-            </div>
-            <p className="text-[11px] text-slate-400 mt-1">
-              Seamless connectors across ERP, CRM, and databases
-            </p>
-          </div>
 
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
-            <div className="text-2xl sm:text-3xl font-extrabold text-teal-glow mb-1 font-mono">
-              Fixed Scope
+            <div className="glass rounded-2xl p-5 hover:border-teal/40 transition-colors">
+              <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
+                99.9%
+              </div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                Reliability SLA
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Zero-downtime architecture with live telemetry
+              </p>
             </div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-              Transparent Pricing
+
+            <div className="glass rounded-2xl p-5 hover:border-teal/40 transition-colors">
+              <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
+                100+
+              </div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                Custom Integrations
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Seamless connectors across ERP, CRM, and databases
+              </p>
             </div>
-            <p className="text-[11px] text-slate-400 mt-1">
-              Zero retainer traps, no surprise invoices
-            </p>
+
+            <div className="glass rounded-2xl p-5 hover:border-teal/40 transition-colors">
+              <div className="text-2xl sm:text-3xl font-extrabold text-teal-glow mb-1 font-mono">
+                Fixed Scope
+              </div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                Transparent Pricing
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Zero retainer traps, no surprise invoices
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ── 2. Core Capabilities Explorer ── */}
-      <section id="capabilities" className="py-20 md:py-28 relative">
+      <section id="capabilities" className="py-24 md:py-32 relative bg-navy">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {/* Section Heading */}
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
-              Our Core Pillars
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-              Comprehensive Technology Capabilities
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              We specialize in deep, end-to-end engineering across the modern technology stack. Explore our capabilities below to see how each service drives measurable operational gains.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Our Core Pillars"
+            title="Comprehensive Technology Capabilities"
+            accent="Technology Capabilities"
+            intro="We specialize in deep, end-to-end engineering across the modern technology stack. Explore our capabilities below to see how each service drives measurable operational gains."
+            className="mb-12"
+          />
 
           {/* Category Filter Tabs */}
           <div className="flex flex-wrap gap-2 sm:gap-3 mb-10 pb-2 border-b border-white/10">
@@ -458,300 +513,284 @@ export default function ServicesPage() {
 
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service) => {
+            {filteredServices.map((service, idx) => {
               const IconComp = service.icon;
               return (
-                <div
-                  key={service.id}
-                  className="bg-[#051d38]/90 border border-white/10 hover:border-teal/60 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-teal/10 group relative"
-                >
-                  <div>
-                    {/* Top Row: Icon + Badge */}
-                    <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-teal/15 border border-teal/30 flex items-center justify-center text-teal-glow group-hover:scale-105 group-hover:bg-teal group-hover:text-white transition-all">
-                        <IconComp size={24} strokeWidth={1.8} />
-                      </div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
-                        {service.badge}
-                      </span>
-                    </div>
-
-                    {/* Title & Tagline */}
-                    <h3 className="text-xl font-bold text-white group-hover:text-teal-glow transition-colors mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs font-semibold text-slate-400 mb-4 line-clamp-1 italic">
-                      "{service.tagline}"
-                    </p>
-
-                    {/* Description */}
-                    <p className="text-sm text-slate-300 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-
-                    {/* Deliverables List */}
-                    <div className="mb-6 space-y-2.5">
-                      <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                        Key Deliverables:
-                      </span>
-                      {service.deliverables.map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                          <CheckCircle2
-                            size={14}
-                            className="text-teal-glow shrink-0 mt-0.5"
-                          />
-                          <span>{item}</span>
+                <Reveal key={service.id} delay={idx * 0.05}>
+                  <div
+                    id={service.id}
+                    className="scroll-mt-28 glass rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-glow group relative h-full"
+                  >
+                    <div>
+                      {/* Top Row: Icon + Badge */}
+                      <div className="flex items-center justify-between gap-3 mb-5">
+                        <div className="w-12 h-12 rounded-xl bg-teal/15 border border-teal/30 flex items-center justify-center text-teal-glow group-hover:scale-105 group-hover:bg-teal group-hover:text-white transition-all">
+                          <IconComp size={24} strokeWidth={1.8} />
                         </div>
-                      ))}
-                    </div>
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                          {service.badge}
+                        </span>
+                      </div>
 
-                    {/* Tech Badges */}
-                    <div className="mb-6">
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                        Technologies:
-                      </span>
-                      <div className="flex flex-wrap gap-1.5">
-                        {service.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-[11px] font-mono text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded"
-                          >
-                            {tech}
-                          </span>
+                      {/* Title & Tagline */}
+                      <h3 className="text-xl font-bold text-white group-hover:text-teal-glow transition-colors mb-2">
+                        {service.title}
+                      </h3>
+                      <p className="text-xs font-semibold text-slate-400 mb-4 line-clamp-1 italic">
+                        "{service.tagline}"
+                      </p>
+
+                      {/* Description */}
+                      <p className="text-base text-slate-300 leading-relaxed mb-6">
+                        {service.description}
+                      </p>
+
+                      {/* Deliverables List */}
+                      <div className="mb-6 space-y-2.5">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                          Key Deliverables:
+                        </span>
+                        {service.deliverables.map((item, dIdx) => (
+                          <div key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                            <CheckCircle2
+                              size={14}
+                              className="text-teal-glow shrink-0 mt-0.5"
+                            />
+                            <span>{item}</span>
+                          </div>
                         ))}
                       </div>
-                    </div>
-                  </div>
 
-                  {/* Bottom Metric & CTA */}
-                  <div className="pt-5 border-t border-white/10 mt-auto">
-                    <div className="flex items-center justify-between mb-4">
-                      <div>
-                        <div className="text-lg font-extrabold text-teal-glow font-mono">
-                          {service.metric}
-                        </div>
-                        <div className="text-[10px] uppercase tracking-wider text-slate-400">
-                          {service.metricLabel}
+                      {/* Tech Badges */}
+                      <div className="mb-6">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                          Technologies:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {service.techStack.map((tech) => (
+                            <span
+                              key={tech}
+                              className="text-[11px] font-mono text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded"
+                            >
+                              {tech}
+                            </span>
+                          ))}
                         </div>
                       </div>
-
-                      <Link
-                        href="/contact"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white group-hover:text-teal-glow transition-colors"
-                      >
-                        Scope Solution
-                        <ArrowRight size={13} />
-                      </Link>
                     </div>
 
-                    <div className="text-[11px] text-slate-400 bg-[#031529] p-2.5 rounded-lg border border-white/5">
-                      <span className="font-semibold text-slate-300">Ideal for: </span>
-                      {service.idealFor}
+                    {/* Bottom Metric & CTA */}
+                    <div className="pt-5 border-t border-white/10 mt-auto">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <div className="text-lg font-extrabold text-teal-glow font-mono">
+                            {service.metric}
+                          </div>
+                          <div className="text-[10px] uppercase tracking-wider text-slate-400">
+                            {service.metricLabel}
+                          </div>
+                        </div>
+
+                        <Link
+                          href="/contact"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-white group-hover:text-teal-glow transition-colors"
+                        >
+                          Scope Solution
+                          <ArrowRight size={13} />
+                        </Link>
+                      </div>
+
+                      <div className="text-[11px] text-slate-400 bg-navy-950 p-2.5 rounded-lg border border-white/5">
+                        <span className="font-semibold text-slate-300">Ideal for: </span>
+                        {service.idealFor}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* ── 3. Industry Solutions Matrix (Like Systems Ltd & NetSol) ── */}
-      <section className="py-20 md:py-28 bg-navy-950 border-y border-white/10 relative">
+      {/* ── 3. Industry Solutions Matrix ── */}
+      <section className="py-24 md:py-32 bg-navy-950 border-y border-white/10 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-3xl mb-14 text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
-              Domain Expertise
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-              Tailored Industry Solutions
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              We apply our engineering capabilities directly to industry-specific regulatory, data, and operational constraints. Here is how our solutions accelerate performance across key verticals.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Domain Expertise"
+            title="Tailored Industry Solutions"
+            accent="Industry Solutions"
+            intro="We apply our engineering capabilities directly to industry-specific regulatory, data, and operational constraints. Here is how our solutions accelerate performance across key verticals."
+            className="mb-14 text-left"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {INDUSTRY_SOLUTIONS.map((industry, index) => {
               const IndIcon = industry.icon;
               return (
-                <div
-                  key={index}
-                  className="bg-[#051c36] border border-white/10 rounded-2xl p-6 sm:p-7 hover:border-teal/50 transition-all flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="w-11 h-11 rounded-lg bg-teal/20 border border-teal/30 text-teal-glow flex items-center justify-center mb-5">
-                      <IndIcon size={22} strokeWidth={1.8} />
+                <Reveal key={index} delay={index * 0.05}>
+                  <div className="glass rounded-2xl p-6 sm:p-7 hover:border-teal/50 transition-all flex flex-col justify-between h-full">
+                    <div>
+                      <div className="w-11 h-11 rounded-lg bg-teal/20 border border-teal/30 text-teal-glow flex items-center justify-center mb-5">
+                        <IndIcon size={22} strokeWidth={1.8} />
+                      </div>
+
+                      <h3 className="text-lg font-bold text-white mb-1.5">
+                        {industry.title}
+                      </h3>
+                      <p className="text-xs text-slate-400 mb-5 font-normal">
+                        {industry.subtitle}
+                      </p>
+
+                      <div className="space-y-2 mb-6">
+                        {industry.useCases.map((uc, uidx) => (
+                          <div key={uidx} className="flex items-start gap-2 text-xs text-slate-300">
+                            <Check size={13} className="text-teal-glow shrink-0 mt-0.5" />
+                            <span>{uc}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-white mb-1.5">
-                      {industry.title}
-                    </h3>
-                    <p className="text-xs text-slate-400 mb-5 font-normal">
-                      {industry.subtitle}
-                    </p>
-
-                    <div className="space-y-2 mb-6">
-                      {industry.useCases.map((uc, uidx) => (
-                        <div key={uidx} className="flex items-start gap-2 text-xs text-slate-300">
-                          <Check size={13} className="text-teal-glow shrink-0 mt-0.5" />
-                          <span>{uc}</span>
-                        </div>
-                      ))}
+                    <div className="pt-4 border-t border-white/10 mt-auto flex items-center justify-between">
+                      <span className="text-xs font-semibold text-teal-glow">
+                        Impact: {industry.impactStat}
+                      </span>
+                      <Link
+                        href="/contact"
+                        className="text-xs font-bold text-slate-300 hover:text-white inline-flex items-center gap-1"
+                      >
+                        Inquire <ChevronRight size={13} />
+                      </Link>
                     </div>
                   </div>
-
-                  <div className="pt-4 border-t border-white/10 mt-auto flex items-center justify-between">
-                    <span className="text-xs font-semibold text-teal-glow">
-                      Impact: {industry.impactStat}
-                    </span>
-                    <Link
-                      href="/contact"
-                      className="text-xs font-bold text-slate-300 hover:text-white inline-flex items-center gap-1"
-                    >
-                      Inquire <ChevronRight size={13} />
-                    </Link>
-                  </div>
-                </div>
+                </Reveal>
               );
             })}
 
             {/* Custom Industry Callout Card */}
-            <div className="bg-gradient-to-br from-[#051e3b] to-teal/30 border border-teal/40 rounded-2xl p-7 flex flex-col justify-between text-left">
-              <div>
-                <div className="w-11 h-11 rounded-lg bg-white/10 text-white flex items-center justify-center mb-5">
-                  <Compass size={22} strokeWidth={1.8} />
+            <Reveal delay={0.3}>
+              <div className="bg-gradient-to-br from-[#051e3b] to-teal/30 border border-teal/40 rounded-2xl p-7 flex flex-col justify-between text-left h-full">
+                <div>
+                  <div className="w-11 h-11 rounded-lg bg-white/10 text-white flex items-center justify-center mb-5">
+                    <Compass size={22} strokeWidth={1.8} />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    Have a Specialized Proprietary Domain?
+                  </h3>
+                  <p className="text-base text-slate-200 leading-relaxed mb-6">
+                    Every unique business problem has an architecture to solve it. Tell us about your operational constraints, regulatory environment, and target timelines.
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-2">
-                  Have a Specialized Proprietary Domain?
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed mb-6">
-                  Every unique business problem has an architecture to solve it. Tell us about your operational constraints, regulatory environment, and target timelines.
-                </p>
-              </div>
 
-              <Link
-                href="/contact"
-                className="w-full text-center py-3 bg-white text-navy hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md"
-              >
-                Discuss Custom Architecture
-              </Link>
-            </div>
+                <Link
+                  href="/contact"
+                  className="w-full text-center py-3 bg-white text-navy hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md"
+                >
+                  Discuss Custom Architecture
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* ── 4. The 5-Stage Engineering Lifecycle ── */}
-      <section className="py-20 md:py-28 relative">
+      <section className="py-24 md:py-32 relative bg-navy">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-3xl mb-16 text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
-              Execution Methodology
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-              Our 5-Stage Engineering Lifecycle
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              We replace endless agile meetings and speculative billing with a transparent, disciplined 5-stage deployment framework.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Execution Methodology"
+            title="Our 5-Stage Engineering Lifecycle"
+            accent="Engineering Lifecycle"
+            intro="We replace endless agile meetings and speculative billing with a transparent, disciplined 5-stage deployment framework."
+            className="mb-16 text-left"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
             {ENGINEERING_LIFECYCLE.map((step, index) => (
-              <div
-                key={index}
-                className="bg-[#051c36]/90 border border-white/10 hover:border-teal/50 rounded-xl p-5 flex flex-col justify-between relative group transition-all"
-              >
-                {/* Step indicator header */}
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-2xl font-black font-mono text-teal group-hover:text-teal-glow transition-colors">
-                      {step.step}
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-0.5 rounded text-slate-400">
-                      {step.timeframe}
-                    </span>
+              <Reveal key={index} delay={index * 0.08}>
+                <div className="glass rounded-xl p-5 flex flex-col justify-between relative group transition-all h-full">
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-2xl font-black font-mono text-teal group-hover:text-teal-glow transition-colors">
+                        {step.step}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-0.5 rounded text-slate-400">
+                        {step.timeframe}
+                      </span>
+                    </div>
+                    <h4 className="text-sm font-bold text-white mb-1">
+                      {step.phase}
+                    </h4>
+                    <p className="text-xs font-semibold text-teal-glow mb-3">
+                      {step.title}
+                    </p>
+                    <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                      {step.description}
+                    </p>
                   </div>
-                  <h4 className="text-sm font-bold text-white mb-1">
-                    {step.phase}
-                  </h4>
-                  <p className="text-xs font-semibold text-teal-glow mb-3">
-                    {step.title}
-                  </p>
-                  <p className="text-xs text-slate-300 leading-relaxed mb-4">
-                    {step.description}
-                  </p>
-                </div>
 
-                <div className="pt-3 border-t border-white/10 mt-auto text-[11px] text-slate-400">
-                  <span className="font-semibold text-slate-200 block mb-0.5">
-                    Deliverable:
-                  </span>
-                  {step.deliverable}
+                  <div className="pt-3 border-t border-white/10 mt-auto text-[11px] text-slate-400">
+                    <span className="font-semibold text-slate-200 block mb-0.5">
+                      Deliverable:
+                    </span>
+                    {step.deliverable}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── 5. Enterprise Tech Stack Grid ── */}
-      <section className="py-20 bg-navy-950 border-y border-white/10">
+      <section className="py-24 bg-navy-950 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-3xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
-              Technology Standards
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
-              Modern Enterprise Technology Stack
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              We leverage production-grade, battle-tested modern frameworks that guarantee horizontal scalability, high developer velocity, and zero vendor lock-in.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Technology Standards"
+            title="Modern Enterprise Technology Stack"
+            accent="Technology Stack"
+            intro="We leverage production-grade, battle-tested modern frameworks that guarantee horizontal scalability, high developer velocity, and zero vendor lock-in."
+            className="mb-12"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {TECH_STACK_DOMAINS.map((domain, index) => (
-              <div
-                key={index}
-                className="bg-[#051c36] border border-white/10 rounded-xl p-6"
-              >
-                <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
-                  <Terminal size={16} className="text-teal-glow" />
-                  {domain.title}
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {domain.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md hover:border-teal/50 transition-colors"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+              <Reveal key={index} delay={index * 0.06}>
+                <div className="glass rounded-xl p-6 h-full">
+                  <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
+                    <Terminal size={16} className="text-teal-glow" />
+                    {domain.title}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {domain.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md hover:border-teal/50 transition-colors"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* ── 6. GrydIn vs Traditional Outsourcing Comparison ── */}
-      <section className="py-20 md:py-28 relative">
+      <section className="py-24 md:py-32 relative bg-navy">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-3xl mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
-              The GrydIn Difference
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-              Why Forward-Thinking Companies Choose Us
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              How our diagnosis-first, fixed-scope engineering contrasts with traditional bloated IT outsourcing and rigid off-the-shelf software.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="The GrydIn Difference"
+            title="Why Forward-Thinking Companies Choose Us"
+            accent="Choose Us"
+            intro="How our diagnosis-first, fixed-scope engineering contrasts with traditional bloated IT outsourcing and rigid off-the-shelf software."
+            className="mb-14"
+          />
 
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto glass rounded-2xl p-6">
             <table className="w-full text-left border-collapse min-w-[640px]">
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wider text-slate-400">
@@ -821,23 +860,19 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 7. Transparent Engagement Models ── */}
-      <section className="py-20 bg-navy-950 border-y border-white/10">
+      <section className="py-24 bg-navy-950 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-3xl mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
-              Flexible Collaboration
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-              Engagement Models Designed for Certainty
-            </h2>
-            <p className="text-base text-slate-300 leading-relaxed">
-              We align our engagement model with your technical stage and strategic goals.
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow="Flexible Collaboration"
+            title="Engagement Models Designed for Certainty"
+            accent="Certainty"
+            intro="We align our engagement model with your technical stage and strategic goals."
+            className="mb-14"
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Model 1: Fixed-Scope Sprint */}
-            <div className="bg-[#051c36] border border-white/10 hover:border-teal/60 rounded-2xl p-7 flex flex-col justify-between transition-all">
+            <div className="glass rounded-2xl p-7 flex flex-col justify-between transition-all hover:border-teal/60">
               <div>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   High Certainty
@@ -845,7 +880,7 @@ export default function ServicesPage() {
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Fixed-Scope Sprint
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+                <p className="text-base text-slate-300 mb-6 leading-relaxed">
                   Best for defined projects: building a new AI agent, developing a custom portal, or integrating core enterprise databases.
                 </p>
 
@@ -866,14 +901,14 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all"
+                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
               >
                 Scope a Sprint
               </Link>
             </div>
 
             {/* Model 2: Dedicated Engineering Pod */}
-            <div className="bg-gradient-to-b from-[#062447] to-navy border-2 border-teal rounded-2xl p-7 flex flex-col justify-between relative shadow-xl shadow-teal/15">
+            <div className="glass border-2 border-teal rounded-2xl p-7 flex flex-col justify-between relative shadow-xl shadow-teal/15">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                 Most Popular
               </div>
@@ -885,7 +920,7 @@ export default function ServicesPage() {
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Dedicated Pod
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+                <p className="text-base text-slate-300 mb-6 leading-relaxed">
                   A high-velocity, senior engineering team tailored to accelerate your product roadmap without management friction.
                 </p>
 
@@ -913,7 +948,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Model 3: Architecture Modernization */}
-            <div className="bg-[#051c36] border border-white/10 hover:border-teal/60 rounded-2xl p-7 flex flex-col justify-between transition-all">
+            <div className="glass rounded-2xl p-7 flex flex-col justify-between transition-all hover:border-teal/60">
               <div>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Enterprise Advisory
@@ -921,7 +956,7 @@ export default function ServicesPage() {
                 <h3 className="text-2xl font-bold text-white mb-2">
                   Modernization Retainer
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+                <p className="text-base text-slate-300 mb-6 leading-relaxed">
                   Continuous architecture evolution, legacy system refactoring, SLA reliability monitoring, and AI capability additions.
                 </p>
 
@@ -942,7 +977,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all"
+                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
               >
                 Inquire Retainer
               </Link>
@@ -976,19 +1011,16 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 8. Solution Scoping & Consultation CTA ── */}
-      <section className="py-20 md:py-28 relative overflow-hidden">
-        {/* Glow backdrop */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020c18] via-navy to-navy" />
-        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-teal/20 blur-[130px] rounded-full pointer-events-none" />
-
+      <section className="py-24 md:py-32 relative overflow-hidden bg-navy">
+        <HeroBackdrop network={false} />
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal/20 text-teal-glow border border-teal/40 uppercase tracking-wider mb-6">
             <Sparkles size={14} /> Ready to Eliminate Friction?
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight mb-6">
             Describe What&apos;s Slowing Your Business Down. <br />
-            <span className="text-teal-glow">We&apos;ll Map It to the Right System.</span>
+            <span className="text-gradient">We&apos;ll Map It to the Right System.</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">

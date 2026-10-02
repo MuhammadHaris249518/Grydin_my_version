@@ -103,7 +103,7 @@ export function HomeWhyUs() {
 
             <div className="flex flex-wrap items-center justify-center gap-4 relative z-10 shrink-0">
               <Button href="/projects" variant="primary" size="lg" iconRight={<ArrowRight className="w-4 h-4 ml-1" />}>
-                Check Our Work
+                See our work
               </Button>
               <Button href="/solutions" variant="outline-light" size="lg">
                 Explore Solutions

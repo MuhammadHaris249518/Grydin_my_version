@@ -169,7 +169,7 @@ export function SolutionsClient() {
                   </Link>
 
                   <Button href="/contact" variant="primary" size="md">
-                    Schedule Industry Diagnosis
+                    Book a free process diagnosis
                   </Button>
                 </div>
               </Reveal>

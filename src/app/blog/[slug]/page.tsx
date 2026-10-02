@@ -352,7 +352,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 Book a call with a Lead Architect. Scoped specification delivered in 48 hours.
               </p>
               <Button href="/contact" variant="primary" size="sm" className="w-full">
-                Book a diagnosis call
+                Book a free process diagnosis
               </Button>
             </GlassCard>
           </aside>

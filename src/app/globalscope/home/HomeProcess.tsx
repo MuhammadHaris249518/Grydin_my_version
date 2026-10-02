@@ -82,7 +82,7 @@ export function HomeProcess() {
         </div>
         <div className="mt-16 text-center">
           <Button href="/contact" variant="primary" size="md">
-            Schedule a process diagnosis
+            Book a free process diagnosis
           </Button>
         </div>
       </div>

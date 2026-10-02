@@ -136,7 +136,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   The Bottleneck
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-2 mb-4">
-                  Operational Challenge
+                  Operational challenge
                 </h2>
                 <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
                   {project.challenge}
@@ -151,7 +151,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   Engineered Solution
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-2 mb-4">
-                  What GrydIn Built
+                  What GrydIn built
                 </h2>
                 <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
                   {project.solution}

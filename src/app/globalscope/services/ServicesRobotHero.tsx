@@ -188,10 +188,10 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-white tracking-tight uppercase leading-[1.12] mb-4">
-          WE BUILD{" "}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-semibold text-white tracking-tight leading-[1.12] mb-4">
+          We build{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-glow via-teal-glow to-teal">
-            INTELLIGENT DIGITAL SYSTEMS
+            intelligent digital systems
           </span>
         </h1>
 
@@ -509,7 +509,7 @@ function ServiceGlassCard({
 
       {/* Title */}
       <h3
-        className={`text-xl sm:text-2xl font-black tracking-tight mb-2 uppercase transition-colors ${
+        className={`text-xl sm:text-2xl font-semibold tracking-tight mb-2 transition-colors ${
           isActive ? "text-white" : "text-slate-100 group-hover:text-white"
         }`}
       >

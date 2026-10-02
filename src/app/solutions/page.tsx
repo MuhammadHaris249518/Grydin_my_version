@@ -35,7 +35,7 @@ export default function SolutionsHubPage() {
             size="md"
             iconRight={<ArrowRight className="w-4 h-4" />}
           >
-            Request an industry diagnosis
+            Book a free process diagnosis
           </Button>
         }
       />

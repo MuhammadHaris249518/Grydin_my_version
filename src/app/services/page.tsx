@@ -388,9 +388,9 @@ export default function ServicesPage() {
 
             {/* Main Title */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-tight leading-[1.12] mb-6">
-              Engineering Next-Gen <br className="hidden sm:inline" />
+              Engineering next-gen <br className="hidden sm:inline" />
               <span className="text-gradient">
-                AI & Enterprise Software Systems
+                AI & enterprise software systems
               </span>
             </h1>
 
@@ -404,7 +404,7 @@ export default function ServicesPage() {
                 href="/contact"
                 className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-teal hover:bg-teal-dark text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-lg shadow-teal/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
-                Schedule Solution Diagnosis
+                Book a free process diagnosis
                 <ArrowRight size={16} strokeWidth={2.2} />
               </Link>
 
@@ -481,8 +481,8 @@ export default function ServicesPage() {
           {/* Section Heading */}
           <SectionHeader
             eyebrow="Our Core Pillars"
-            title="Comprehensive Technology Capabilities"
-            accent="Technology Capabilities"
+            title="Comprehensive technology capabilities"
+            accent="technology capabilities"
             intro="We specialize in deep, end-to-end engineering across the modern technology stack. Explore our capabilities below to see how each service drives measurable operational gains."
             className="mb-12"
           />
@@ -533,7 +533,7 @@ export default function ServicesPage() {
                       </div>
 
                       {/* Title & Tagline */}
-                      <h3 className="text-xl font-bold text-white group-hover:text-teal-glow transition-colors mb-2">
+                      <h3 className="text-xl font-semibold text-white group-hover:text-teal-glow transition-colors mb-2">
                         {service.title}
                       </h3>
                       <p className="text-xs font-semibold text-slate-400 mb-4 line-clamp-1 italic">
@@ -618,8 +618,8 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <SectionHeader
             eyebrow="Domain Expertise"
-            title="Tailored Industry Solutions"
-            accent="Industry Solutions"
+            title="Tailored industry solutions"
+            accent="industry solutions"
             intro="We apply our engineering capabilities directly to industry-specific regulatory, data, and operational constraints. Here is how our solutions accelerate performance across key verticals."
             className="mb-14 text-left"
           />
@@ -635,7 +635,7 @@ export default function ServicesPage() {
                         <IndIcon size={22} strokeWidth={1.8} />
                       </div>
 
-                      <h3 className="text-lg font-bold text-white mb-1.5">
+                      <h3 className="text-lg font-semibold text-white mb-1.5">
                         {industry.title}
                       </h3>
                       <p className="text-xs text-slate-400 mb-5 font-normal">
@@ -675,8 +675,8 @@ export default function ServicesPage() {
                   <div className="w-11 h-11 rounded-lg bg-white/10 text-white flex items-center justify-center mb-5">
                     <Compass size={22} strokeWidth={1.8} />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    Have a Specialized Proprietary Domain?
+                  <h3 className="text-xl font-semibold text-white mb-2">
+                    Have a specialized proprietary domain?
                   </h3>
                   <p className="text-base text-slate-200 leading-relaxed mb-6">
                     Every unique business problem has an architecture to solve it. Tell us about your operational constraints, regulatory environment, and target timelines.
@@ -700,8 +700,8 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <SectionHeader
             eyebrow="Execution Methodology"
-            title="Our 5-Stage Engineering Lifecycle"
-            accent="Engineering Lifecycle"
+            title="Our 5-stage engineering lifecycle"
+            accent="engineering lifecycle"
             intro="We replace endless agile meetings and speculative billing with a transparent, disciplined 5-stage deployment framework."
             className="mb-16 text-left"
           />
@@ -719,7 +719,7 @@ export default function ServicesPage() {
                         {step.timeframe}
                       </span>
                     </div>
-                    <h4 className="text-sm font-bold text-white mb-1">
+                    <h4 className="text-sm font-semibold text-white mb-1">
                       {step.phase}
                     </h4>
                     <p className="text-xs font-semibold text-teal-glow mb-3">
@@ -748,8 +748,8 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <SectionHeader
             eyebrow="Technology Standards"
-            title="Modern Enterprise Technology Stack"
-            accent="Technology Stack"
+            title="Modern enterprise technology stack"
+            accent="technology stack"
             intro="We leverage production-grade, battle-tested modern frameworks that guarantee horizontal scalability, high developer velocity, and zero vendor lock-in."
             className="mb-12"
           />
@@ -758,7 +758,7 @@ export default function ServicesPage() {
             {TECH_STACK_DOMAINS.map((domain, index) => (
               <Reveal key={index} delay={index * 0.06}>
                 <div className="glass rounded-xl p-6 h-full">
-                  <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
+                  <h4 className="text-sm font-semibold text-white tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
                     <Terminal size={16} className="text-teal-glow" />
                     {domain.title}
                   </h4>
@@ -784,8 +784,8 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <SectionHeader
             eyebrow="The GrydIn Difference"
-            title="Why Forward-Thinking Companies Choose Us"
-            accent="Choose Us"
+            title="Why forward-thinking companies choose us"
+            accent="choose us"
             intro="How our diagnosis-first, fixed-scope engineering contrasts with traditional bloated IT outsourcing and rigid off-the-shelf software."
             className="mb-14"
           />
@@ -864,8 +864,8 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <SectionHeader
             eyebrow="Flexible Collaboration"
-            title="Engagement Models Designed for Certainty"
-            accent="Certainty"
+            title="Engagement models designed for certainty"
+            accent="certainty"
             intro="We align our engagement model with your technical stage and strategic goals."
             className="mb-14"
           />
@@ -877,7 +877,7 @@ export default function ServicesPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   High Certainty
                 </span>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-semibold text-white mb-2">
                   Fixed-Scope Sprint
                 </h3>
                 <p className="text-base text-slate-300 mb-6 leading-relaxed">
@@ -917,7 +917,7 @@ export default function ServicesPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Autonomous Team
                 </span>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-semibold text-white mb-2">
                   Dedicated Pod
                 </h3>
                 <p className="text-base text-slate-300 mb-6 leading-relaxed">
@@ -953,7 +953,7 @@ export default function ServicesPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Enterprise Advisory
                 </span>
-                <h3 className="text-2xl font-bold text-white mb-2">
+                <h3 className="text-2xl font-semibold text-white mb-2">
                   Modernization Retainer
                 </h3>
                 <p className="text-base text-slate-300 mb-6 leading-relaxed">
@@ -993,7 +993,7 @@ export default function ServicesPage() {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal block mb-1">
               Sector Specialization
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-ink tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight">
               Looking for solutions tailored to your specific industry?
             </h3>
             <p className="text-sm text-ink-muted mt-1">
@@ -1015,12 +1015,12 @@ export default function ServicesPage() {
         <HeroBackdrop network={false} />
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal/20 text-teal-glow border border-teal/40 uppercase tracking-wider mb-6">
-            <Sparkles size={14} /> Ready to Eliminate Friction?
+            <Sparkles size={14} /> Ready to eliminate friction?
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight mb-6">
-            Describe What&apos;s Slowing Your Business Down. <br />
-            <span className="text-gradient">We&apos;ll Map It to the Right System.</span>
+            Describe what&apos;s slowing your business down. <br />
+            <span className="text-gradient">We&apos;ll map it to the right system.</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
@@ -1032,7 +1032,7 @@ export default function ServicesPage() {
               href="/contact"
               className="inline-flex items-center gap-2.5 px-8 py-4 bg-teal hover:bg-teal-dark text-white text-sm font-bold uppercase tracking-wider rounded-md shadow-xl shadow-teal/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
-              Book a Technical Diagnosis Call
+              Book a free process diagnosis
               <ArrowRight size={16} strokeWidth={2.2} />
             </Link>
 

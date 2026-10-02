@@ -337,6 +337,169 @@ const TECH_STACK_DOMAINS = [
   },
 ];
 
+const CAPABILITIES_CARDS_DATA = [
+  {
+    id: "ai-agents",
+    category: "ai",
+    badge: "AI & AUTOMATION",
+    badgeStyle: "bg-teal-100/90 text-teal-800 border border-teal-200/80",
+    cardStyle: "bg-[#F2FAF7] border-teal-200/80 hover:border-teal-500/50 shadow-xs hover:shadow-md",
+    titleHover: "group-hover:text-teal-700",
+    checkColor: "text-teal-600",
+    linkColor: "text-teal-600",
+    title: "AI Agents & Workflow Automation",
+    description: "Automate repetitive work with intelligent AI agents.",
+    bullets: ["Intelligent AI agents", "Workflow automation", "Tool integrations"],
+    graphic: (
+      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
+        <circle cx="50" cy="40" r="35" fill="#2DD4BF" fillOpacity="0.18" />
+        <rect x="30" y="22" width="40" height="32" rx="10" fill="#0D8B99" />
+        <rect x="34" y="26" width="32" height="20" rx="6" fill="#063945" />
+        <circle cx="44" cy="36" r="3.5" fill="#38BDF8" />
+        <circle cx="56" cy="36" r="3.5" fill="#38BDF8" />
+        <line x1="50" y1="22" x2="50" y2="14" stroke="#0D8B99" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="50" cy="12" r="3" fill="#38BDF8" />
+        <g>
+          <circle cx="16" cy="20" r="8" fill="#38BDF8" />
+          <path d="M13 20h6M16 17v6" stroke="#fff" strokeWidth="1.5" />
+          <circle cx="84" cy="25" r="9" fill="#0D8B99" />
+          <path d="M80 25l3 3 5-5" stroke="#fff" strokeWidth="1.5" />
+          <circle cx="80" cy="60" r="8" fill="#063945" />
+          <circle cx="80" cy="60" r="4" fill="#38BDF8" />
+        </g>
+      </svg>
+    ),
+  },
+  {
+    id: "custom-software",
+    category: "software",
+    badge: "CUSTOM SOFTWARE",
+    badgeStyle: "bg-purple-100/90 text-purple-800 border border-purple-200/80",
+    cardStyle: "bg-[#F7F5FE] border-purple-200/80 hover:border-purple-500/50 shadow-xs hover:shadow-md",
+    titleHover: "group-hover:text-purple-700",
+    checkColor: "text-purple-600",
+    linkColor: "text-purple-600",
+    title: "Web & Enterprise Applications",
+    description: "Scalable, secure and modern applications built for your business.",
+    bullets: ["Web applications", "APIs & backend systems", "Enterprise solutions"],
+    graphic: (
+      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
+        <circle cx="50" cy="40" r="35" fill="#A855F7" fillOpacity="0.18" />
+        <rect x="25" y="18" width="54" height="42" rx="6" fill="#6B21A8" />
+        <rect x="25" y="18" width="54" height="10" rx="6" fill="#581C87" />
+        <circle cx="31" cy="23" r="1.8" fill="#EF4444" />
+        <circle cx="36" cy="23" r="1.8" fill="#F59E0B" />
+        <circle cx="41" cy="23" r="1.8" fill="#10B981" />
+        <path d="M38 38l-4 4 4 4M46 38l4 4-4 4" stroke="#C084FC" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+        <line x1="43" y1="36" x2="41" y2="48" stroke="#C084FC" strokeWidth="2" strokeLinecap="round" />
+        <rect x="15" y="32" width="30" height="28" rx="5" fill="#9333EA" fillOpacity="0.9" />
+        <line x1="20" y1="42" x2="38" y2="42" stroke="#E9D5FF" strokeWidth="2" strokeLinecap="round" />
+        <line x1="20" y1="48" x2="32" y2="48" stroke="#E9D5FF" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    id: "cloud-devops",
+    category: "cloud",
+    badge: "CLOUD & DEVOPS",
+    badgeStyle: "bg-blue-100/90 text-blue-800 border border-blue-200/80",
+    cardStyle: "bg-[#F0F7FF] border-blue-200/80 hover:border-blue-500/50 shadow-xs hover:shadow-md",
+    titleHover: "group-hover:text-blue-700",
+    checkColor: "text-blue-600",
+    linkColor: "text-blue-600",
+    title: "Cloud Infrastructure & Platform Engineering",
+    description: "Build, deploy and scale with reliable cloud infrastructure.",
+    bullets: ["Cloud migration", "CI/CD & DevOps automation", "Scalable infrastructure"],
+    graphic: (
+      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
+        <circle cx="50" cy="40" r="35" fill="#3B82F6" fillOpacity="0.18" />
+        <path d="M32 38a10 10 0 0118-5 12 12 0 0121 7 8 8 0 01-1 16H32a10 10 0 010-18z" fill="#60A5FA" />
+        <path d="M50 44V28M44 34l6-6 6 6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="65" y="32" width="24" height="32" rx="4" fill="#1E40AF" />
+        <line x1="69" y1="40" x2="85" y2="40" stroke="#93C5FD" strokeWidth="2" />
+        <line x1="69" y1="48" x2="85" y2="48" stroke="#93C5FD" strokeWidth="2" />
+        <circle cx="83" cy="56" r="1.5" fill="#60A5FA" />
+        <circle cx="78" cy="56" r="1.5" fill="#60A5FA" />
+      </svg>
+    ),
+  },
+  {
+    id: "system-integration",
+    category: "integration",
+    badge: "SYSTEM INTEGRATION",
+    badgeStyle: "bg-amber-100/90 text-amber-800 border border-amber-200/80",
+    cardStyle: "bg-[#FFFBF2] border-amber-200/80 hover:border-amber-500/50 shadow-xs hover:shadow-md",
+    titleHover: "group-hover:text-amber-700",
+    checkColor: "text-amber-600",
+    linkColor: "text-amber-600",
+    title: "System Integration & Middleware Architecture",
+    description: "Connect your tools, data and systems for seamless operations.",
+    bullets: ["API integrations", "Enterprise middleware", "Third-party connectors"],
+    graphic: (
+      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
+        <circle cx="50" cy="40" r="35" fill="#F59E0B" fillOpacity="0.18" />
+        <path d="M25 25h16v6a4 4 0 008 0v-6h16v16h-6a4 4 0 000 8h6v16H49v-6a4 4 0 00-8 0v6H25V49h6a4 4 0 000-8h-6V25z" fill="#F59E0B" opacity="0.85" />
+        <path d="M49 25h16v16h-6a4 4 0 000 8h6v16H49V49h6a4 4 0 000-8h-6V25z" fill="#D97706" />
+        <circle cx="75" cy="55" r="8" fill="#B45309" />
+        <path d="M75 51v8M71 55h8" stroke="#FEF3C7" strokeWidth="2" />
+      </svg>
+    ),
+  },
+  {
+    id: "data-analytics",
+    category: "data",
+    badge: "DATA ENGINEERING",
+    badgeStyle: "bg-emerald-100/90 text-emerald-800 border border-emerald-200/80",
+    cardStyle: "bg-[#F0FDF9] border-emerald-200/80 hover:border-emerald-500/50 shadow-xs hover:shadow-md",
+    titleHover: "group-hover:text-emerald-700",
+    checkColor: "text-emerald-600",
+    linkColor: "text-emerald-600",
+    title: "Data Engineering & Real-Time Pipelines",
+    description: "Turn your data into reliable, real-time insights and intelligence.",
+    bullets: ["ETL/ELT pipelines", "Data lakes & warehouses", "Real-time data processing"],
+    graphic: (
+      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
+        <circle cx="50" cy="40" r="35" fill="#10B981" fillOpacity="0.18" />
+        <ellipse cx="40" cy="26" rx="16" ry="6" fill="#34D399" />
+        <path d="M24 26v12c0 3.3 7.2 6 16 6s16-2.7 16-6V26" fill="#059669" />
+        <ellipse cx="40" cy="38" rx="16" ry="6" fill="#10B981" />
+        <path d="M24 38v12c0 3.3 7.2 6 16 6s16-2.7 16-6V38" fill="#047857" />
+        <ellipse cx="40" cy="50" rx="16" ry="6" fill="#059669" />
+        <rect x="62" y="30" width="26" height="26" rx="6" fill="#065F46" />
+        <rect x="67" y="44" width="4" height="8" rx="1" fill="#34D399" />
+        <rect x="73" y="38" width="4" height="14" rx="1" fill="#34D399" />
+        <rect x="79" y="34" width="4" height="18" rx="1" fill="#6EE7B7" />
+      </svg>
+    ),
+  },
+  {
+    id: "ai-integration",
+    category: "ai",
+    badge: "AI & AUTOMATION",
+    badgeStyle: "bg-indigo-100/90 text-indigo-800 border border-indigo-200/80",
+    cardStyle: "bg-[#F5F3FF] border-indigo-200/80 hover:border-indigo-500/50 shadow-xs hover:shadow-md",
+    titleHover: "group-hover:text-indigo-700",
+    checkColor: "text-indigo-600",
+    linkColor: "text-indigo-600",
+    title: "Document AI & Vision Extraction",
+    description: "Extract, classify and structure data from your documents and images.",
+    bullets: ["OCR & data extraction", "Document classification", "Structured output (JSON, DB)"],
+    graphic: (
+      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
+        <circle cx="50" cy="40" r="35" fill="#6366F1" fillOpacity="0.18" />
+        <rect x="25" y="16" width="34" height="46" rx="4" fill="#818CF8" />
+        <line x1="31" y1="26" x2="48" y2="26" stroke="#EEF2FF" strokeWidth="2" strokeLinecap="round" />
+        <line x1="31" y1="34" x2="53" y2="34" stroke="#EEF2FF" strokeWidth="2" strokeLinecap="round" />
+        <line x1="31" y1="42" x2="44" y2="42" stroke="#EEF2FF" strokeWidth="2" strokeLinecap="round" />
+        <rect x="52" y="20" width="22" height="22" rx="6" fill="#4338CA" />
+        <text x="63" y="35" fill="#EEF2FF" fontSize="11" fontWeight="bold" textAnchor="middle">Ai</text>
+        <rect x="62" y="48" width="20" height="20" rx="5" fill="#4F46E5" />
+        <circle cx="72" cy="58" r="4" fill="#C7D2FE" />
+      </svg>
+    ),
+  },
+];
+
 export default function ServicesPage() {
   const [selectedCategory, setSelectedCategory] = useState<ServiceCategory>("all");
   const [activeServiceId, setActiveServiceId] = useState<string>("ai-agents");
@@ -489,139 +652,127 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 2. Core Capabilities Explorer ── */}
-      <section id="capabilities" className="py-24 md:py-32 relative bg-surface">
+      <section id="capabilities" className="py-16 sm:py-24 relative bg-slate-50/50 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          {/* Section Heading */}
-          <SectionHeader
-            eyebrow="Our Core Pillars"
-            title="Comprehensive technology capabilities"
-            accent="technology capabilities"
-            intro="We specialize in deep, end-to-end engineering across the modern technology stack. Explore our capabilities below to see how each service drives measurable operational gains."
-            className="mb-12"
-          />
+          {/* Section Header */}
+          <div className="max-w-3xl mb-10">
+            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-teal-600 mb-3">
+              <span className="w-4 h-0.5 bg-teal-600" />
+              OUR CAPABILITIES
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+              Technology that solves{" "}
+              <span className="text-teal-600 block sm:inline">real business problems.</span>
+            </h2>
+            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
+              From AI automation to cloud infrastructure, we build modern solutions that make complex operations simpler, faster and more efficient.
+            </p>
+          </div>
 
           {/* Category Filter Tabs */}
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-10 pb-2 border-b border-surface-line">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-10 pb-2">
             {[
-              { id: "all", label: "All Capabilities" },
-              { id: "ai", label: "AI & Autonomous Agents" },
-              { id: "software", label: "Custom Software" },
-              { id: "cloud", label: "Cloud & DevSecOps" },
-              { id: "integration", label: "System Integration" },
-              { id: "data", label: "Data Engineering" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setSelectedCategory(tab.id as ServiceCategory)}
-                className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold tracking-wider uppercase transition-all ${
-                  selectedCategory === tab.id
-                    ? "bg-teal text-white shadow-md shadow-teal/30"
-                    : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-surface-line"
-                }`}
-              >
-                {tab.label}
-              </button>
+              { id: "all", label: "All Capabilities", icon: Sparkles },
+              { id: "ai", label: "AI & Autonomous Agents", icon: Brain },
+              { id: "software", label: "Custom Software", icon: FileCode2 },
+              { id: "cloud", label: "Cloud & DevOps", icon: Cloud },
+              { id: "integration", label: "System Integration", icon: Plug },
+              { id: "data", label: "Data Engineering", icon: Database },
+            ].map((tab) => {
+              const TabIcon = tab.icon;
+              const isActive = selectedCategory === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedCategory(tab.id as ServiceCategory)}
+                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
+                    isActive
+                      ? "bg-teal-600 text-white shadow-md shadow-teal-600/20"
+                      : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/80 shadow-2xs"
+                  }`}
+                >
+                  <TabIcon className={`w-4 h-4 ${isActive ? "text-white" : "text-slate-500"}`} />
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 6 Capabilities Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {CAPABILITIES_CARDS_DATA.filter(
+              (item) => selectedCategory === "all" || item.category === selectedCategory
+            ).map((item, idx) => (
+              <Reveal key={item.id} delay={idx * 0.05}>
+                <div
+                  id={item.id}
+                  className={`group relative rounded-3xl p-6 sm:p-7 transition-all duration-300 border flex flex-col justify-between h-full shadow-xs hover:shadow-xl hover:-translate-y-1 ${item.cardStyle}`}
+                >
+                  <div>
+                    {/* Top Row: Badge Pill & Decorative Vector Graphic */}
+                    <div className="flex items-start justify-between gap-4 mb-6">
+                      <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-md ${item.badgeStyle}`}>
+                        {item.badge}
+                      </span>
+                      <div className="w-24 h-20 shrink-0 pointer-events-none transform group-hover:scale-105 transition-transform duration-300">
+                        {item.graphic}
+                      </div>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className={`text-xl sm:text-2xl font-bold text-slate-900 mb-2.5 leading-snug transition-colors ${item.titleHover}`}>
+                      {item.title}
+                    </h3>
+
+                    {/* Subtitle / Description */}
+                    <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-6">
+                      {item.description}
+                    </p>
+
+                    {/* 3 Checkmark Bullet Points */}
+                    <div className="space-y-3 mb-8">
+                      {item.bullets.map((bullet, bIdx) => (
+                        <div key={bIdx} className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700">
+                          <CheckCircle2 className={`w-4 h-4 shrink-0 ${item.checkColor}`} strokeWidth={2.2} />
+                          <span>{bullet}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Bottom Link */}
+                  <div className="pt-4 border-t border-slate-200/50 mt-auto flex items-center justify-between">
+                    <Link
+                      href="/contact"
+                      className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold tracking-wide transition-all group-hover:translate-x-1 ${item.linkColor}`}
+                    >
+                      Explore service
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
             ))}
           </div>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredServices.map((service, idx) => {
-              const IconComp = service.icon;
-              return (
-                <Reveal key={service.id} delay={idx * 0.05}>
-                  <div
-                    id={service.id}
-                    className="scroll-mt-28 glass rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-glow group relative h-full"
-                  >
-                    <div>
-                      {/* Top Row: Icon + Badge */}
-                      <div className="flex items-center justify-between gap-3 mb-5">
-                        <div className="w-12 h-12 rounded-xl bg-accent-light border border-accent/25 flex items-center justify-center text-accent group-hover:scale-105 group-hover:bg-accent group-hover:text-white transition-all">
-                          <IconComp size={24} strokeWidth={1.8} />
-                        </div>
-                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 bg-white/5 px-2.5 py-1 rounded-md border border-surface-line">
-                          {service.badge}
-                        </span>
-                      </div>
-
-                      {/* Title & Tagline */}
-                      <h3 className="text-xl font-semibold text-ink group-hover:text-accent transition-colors mb-2">
-                        {service.title}
-                      </h3>
-                      <p className="text-xs font-semibold text-slate-400 mb-4 line-clamp-1 italic">
-                        "{service.tagline}"
-                      </p>
-
-                      {/* Description */}
-                      <p className="text-base text-ink-muted leading-relaxed mb-6">
-                        {service.description}
-                      </p>
-
-                      {/* Deliverables List */}
-                      <div className="mb-6 space-y-2.5">
-                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">
-                          Key Deliverables:
-                        </span>
-                        {service.deliverables.map((item, dIdx) => (
-                          <div key={dIdx} className="flex items-start gap-2.5 text-sm text-slate-300">
-                            <CheckCircle2
-                              size={14}
-                              className="text-accent shrink-0 mt-0.5"
-                            />
-                            <span>{item}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Tech Badges */}
-                      <div className="mb-6">
-                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
-                          Technologies:
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {service.techStack.map((tech) => (
-                            <span
-                              key={tech}
-                              className="text-xs font-mono text-slate-300 bg-white/5 border border-surface-line px-2 py-0.5 rounded"
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Metric & CTA */}
-                    <div className="pt-5 border-t border-surface-line mt-auto">
-                      <div className="flex items-center justify-between mb-4">
-                        <div>
-                          <div className="text-lg font-extrabold text-accent font-mono">
-                            {service.metric}
-                          </div>
-                          <div className="text-xs uppercase tracking-wider text-slate-400">
-                            {service.metricLabel}
-                          </div>
-                        </div>
-
-                        <Link
-                          href="/contact"
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-ink-muted group-hover:text-accent transition-colors"
-                        >
-                          Scope Solution
-                          <ArrowRight size={13} />
-                        </Link>
-                      </div>
-
-                      <div className="text-sm text-ink-muted bg-surface-soft p-2.5 rounded-lg border border-surface-line">
-                        <span className="font-semibold text-white">Ideal for: </span>
-                        {service.idealFor}
-                      </div>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
+          {/* Bottom Unique Use Case Callout Banner */}
+          <div className="mt-12 bg-white border border-slate-200/80 shadow-sm rounded-2xl sm:rounded-full px-6 py-4.5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-100">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-sm font-bold text-slate-900">Have a unique use case?</h4>
+                <p className="text-xs text-slate-500">We also build custom solutions tailored to your specific needs.</p>
+              </div>
+            </div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold rounded-full shadow-xs transition-all shrink-0"
+            >
+              Let's talk
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       </section>

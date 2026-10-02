@@ -28,18 +28,18 @@ export function AnnouncementRow({ post }: AnnouncementRowProps) {
             <span className="text-lg font-mono font-bold text-teal-glow leading-none">
               {day}
             </span>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mt-1">
+            <span className="text-xs font-mono uppercase tracking-wider text-slate-400 mt-0.5">
               {monthYear}
             </span>
           </div>
 
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="font-mono text-[10px] uppercase text-teal-glow bg-teal/20 px-2 py-0.5 rounded border border-teal-glow/30">
+              <span className="font-mono text-xs uppercase text-teal-glow bg-teal/20 px-2 py-0.5 rounded border border-teal-glow/30">
                 Announcement
               </span>
               {post.featured && (
-                <span className="font-mono text-[10px] uppercase text-slate-300 bg-white/10 px-2 py-0.5 rounded">
+                <span className="font-mono text-xs uppercase text-slate-300 bg-white/10 px-2 py-0.5 rounded">
                   Notice
                 </span>
               )}

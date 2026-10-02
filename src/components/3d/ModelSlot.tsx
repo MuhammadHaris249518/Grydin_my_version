@@ -15,7 +15,7 @@ function SlotPlaceholder({ label }: { label: string }) {
         dev ? "border border-dashed border-teal-glow/50 bg-teal/5" : "bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,191,.12),transparent_65%)]"
       )}
     >
-      {dev && <span className="font-mono text-[11px] uppercase tracking-widest text-teal-glow/80">3D slot · {label}</span>}
+      {dev && <span className="font-mono text-xs uppercase tracking-wider text-teal-glow/80">3D slot · {label}</span>}
     </div>
   );
 }

@@ -182,7 +182,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
       {/* ── Top Header Section ── */}
       <div className="relative z-20 max-w-5xl mx-auto px-6 text-center pt-2 sm:pt-4">
         {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal/15 border border-teal/40 text-teal-glow font-mono text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm shadow-teal/20 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal/15 border border-teal/40 text-teal-glow font-mono text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm shadow-teal/20 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-pulse" />
           <span>SMART SOLUTIONS. REAL IMPACT.</span>
         </div>
@@ -365,7 +365,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
               </div>
 
               {/* High-tech target reticle / directional beacon indicator */}
-              <div className="absolute -bottom-2 px-3 py-1 rounded-full bg-navy-950/90 border border-teal-glow/40 backdrop-blur-md flex items-center gap-1.5 text-[10px] font-mono font-bold text-teal-glow shadow-md shadow-teal-glow/20 pointer-events-none">
+              <div className="absolute -bottom-2 px-3 py-1 rounded-full bg-navy-950/90 border border-teal-glow/40 backdrop-blur-md flex items-center gap-1.5 text-xs font-mono font-bold text-teal-glow shadow-md shadow-teal-glow/20 pointer-events-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-ping" />
                 <span className="uppercase tracking-wider">
                   NAVIGATING: {SERVICES_DATA.find((s) => s.key === activeKey)?.title}
@@ -401,14 +401,14 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
       <div className="relative z-20 max-w-5xl mx-auto px-6 w-full pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
         {/* Left: Interactive Quick Selector Pills */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider mr-1">
+          <span className="text-xs font-mono text-slate-400 uppercase tracking-wider mr-1">
             Focus:
           </span>
           {SERVICES_DATA.map((s) => (
             <button
               key={s.key}
               onClick={() => handleCardClick(s)}
-              className={`px-3 py-1 rounded-md text-[11px] font-mono font-medium transition-all ${
+              className={`px-3 py-1 rounded-md text-xs font-mono font-medium transition-all ${
                 activeKey === s.key
                   ? "bg-teal text-white border border-teal-glow/60 shadow-sm shadow-teal-glow/30"
                   : "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
@@ -496,7 +496,7 @@ function ServiceGlassCard({
 
         {/* Status Pill */}
         {isActive ? (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-glow/20 border border-teal-glow/50 text-teal-glow font-mono text-[10px] font-bold uppercase tracking-wider animate-pulse">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-glow/20 border border-teal-glow/50 text-teal-glow font-mono text-xs font-bold uppercase tracking-wider animate-pulse">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-glow" />
             ACTIVE
           </span>
@@ -526,7 +526,7 @@ function ServiceGlassCard({
         {service.badges.map((badge) => (
           <span
             key={badge}
-            className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded border transition-colors ${
+            className={`text-xs font-mono font-medium px-2 py-0.5 rounded border transition-colors ${
               isActive
                 ? "bg-teal-glow/15 border-teal-glow/40 text-teal-200"
                 : "bg-white/5 border-white/10 text-slate-400 group-hover:text-slate-300"

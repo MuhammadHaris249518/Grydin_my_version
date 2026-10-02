@@ -159,7 +159,7 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
                   {/* Stack Tags */}
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {proj.stack.slice(0, 3).map((st) => (
-                      <span key={st} className="text-[11px] font-mono text-slate-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
+                      <span key={st} className="text-xs font-mono text-slate-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
                         {st}
                       </span>
                     ))}

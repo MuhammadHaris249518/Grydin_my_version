@@ -92,7 +92,7 @@ export const Navbar = () => {
               title="Search (Ctrl+K)"
             >
               <Search size={18} strokeWidth={2.2} />
-              <kbd className="hidden xl:inline-block text-[10px] text-slate-300 bg-white/10 border border-white/15 px-1.5 py-0.5 rounded font-mono">
+              <kbd className="hidden xl:inline-block text-xs text-slate-300 bg-white/10 border border-white/15 px-1.5 py-0.5 rounded font-mono">
                 ⌘K
               </kbd>
             </button>

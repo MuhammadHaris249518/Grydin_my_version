@@ -431,7 +431,7 @@ export default function ServicesPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 First Deployment
               </div>
-              <p className="text-[11px] text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-1">
                 Rapid turnaround without cutting technical corners
               </p>
             </div>
@@ -443,7 +443,7 @@ export default function ServicesPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Reliability SLA
               </div>
-              <p className="text-[11px] text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-1">
                 Zero-downtime architecture with live telemetry
               </p>
             </div>
@@ -455,7 +455,7 @@ export default function ServicesPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Custom Integrations
               </div>
-              <p className="text-[11px] text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-1">
                 Seamless connectors across ERP, CRM, and databases
               </p>
             </div>
@@ -467,7 +467,7 @@ export default function ServicesPage() {
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Transparent Pricing
               </div>
-              <p className="text-[11px] text-slate-400 mt-1">
+              <p className="text-xs text-slate-400 mt-1">
                 Zero retainer traps, no surprise invoices
               </p>
             </div>
@@ -527,7 +527,7 @@ export default function ServicesPage() {
                         <div className="w-12 h-12 rounded-xl bg-teal/15 border border-teal/30 flex items-center justify-center text-teal-glow group-hover:scale-105 group-hover:bg-teal group-hover:text-white transition-all">
                           <IconComp size={24} strokeWidth={1.8} />
                         </div>
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
                           {service.badge}
                         </span>
                       </div>
@@ -551,7 +551,7 @@ export default function ServicesPage() {
                           Key Deliverables:
                         </span>
                         {service.deliverables.map((item, dIdx) => (
-                          <div key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                          <div key={dIdx} className="flex items-start gap-2.5 text-sm text-slate-300">
                             <CheckCircle2
                               size={14}
                               className="text-teal-glow shrink-0 mt-0.5"
@@ -563,14 +563,14 @@ export default function ServicesPage() {
 
                       {/* Tech Badges */}
                       <div className="mb-6">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
                           Technologies:
                         </span>
                         <div className="flex flex-wrap gap-1.5">
                           {service.techStack.map((tech) => (
                             <span
                               key={tech}
-                              className="text-[11px] font-mono text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded"
+                              className="text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded"
                             >
                               {tech}
                             </span>
@@ -586,7 +586,7 @@ export default function ServicesPage() {
                           <div className="text-lg font-extrabold text-teal-glow font-mono">
                             {service.metric}
                           </div>
-                          <div className="text-[10px] uppercase tracking-wider text-slate-400">
+                          <div className="text-xs uppercase tracking-wider text-slate-400">
                             {service.metricLabel}
                           </div>
                         </div>
@@ -600,8 +600,8 @@ export default function ServicesPage() {
                         </Link>
                       </div>
 
-                      <div className="text-[11px] text-slate-400 bg-navy-950 p-2.5 rounded-lg border border-white/5">
-                        <span className="font-semibold text-slate-300">Ideal for: </span>
+                      <div className="text-sm text-slate-300 bg-navy-950 p-2.5 rounded-lg border border-white/5">
+                        <span className="font-semibold text-white">Ideal for: </span>
                         {service.idealFor}
                       </div>
                     </div>
@@ -715,7 +715,7 @@ export default function ServicesPage() {
                       <span className="text-2xl font-black font-mono text-teal group-hover:text-teal-glow transition-colors">
                         {step.step}
                       </span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-0.5 rounded text-slate-400">
+                      <span className="text-xs font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-0.5 rounded text-slate-400">
                         {step.timeframe}
                       </span>
                     </div>
@@ -725,12 +725,12 @@ export default function ServicesPage() {
                     <p className="text-xs font-semibold text-teal-glow mb-3">
                       {step.title}
                     </p>
-                    <p className="text-xs text-slate-300 leading-relaxed mb-4">
+                    <p className="text-sm text-slate-300 leading-relaxed mb-4">
                       {step.description}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-white/10 mt-auto text-[11px] text-slate-400">
+                  <div className="pt-3 border-t border-white/10 mt-auto text-xs text-slate-300">
                     <span className="font-semibold text-slate-200 block mb-0.5">
                       Deliverable:
                     </span>
@@ -874,7 +874,7 @@ export default function ServicesPage() {
             {/* Model 1: Fixed-Scope Sprint */}
             <div className="glass rounded-2xl p-7 flex flex-col justify-between transition-all hover:border-teal/60">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   High Certainty
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -891,7 +891,7 @@ export default function ServicesPage() {
                     "Fixed pricing with zero scope creep",
                     "Complete source code and documentation handover",
                   ].map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                    <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
                       <CheckCircle2 size={15} className="text-teal-glow shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
@@ -909,12 +909,12 @@ export default function ServicesPage() {
 
             {/* Model 2: Dedicated Engineering Pod */}
             <div className="glass border-2 border-teal rounded-2xl p-7 flex flex-col justify-between relative shadow-xl shadow-teal/15">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-teal text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
                 Most Popular
               </div>
 
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Autonomous Team
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -931,7 +931,7 @@ export default function ServicesPage() {
                     "Bi-weekly sprint demos and prioritized backlogs",
                     "Seamless elastic scaling based on roadmap needs",
                   ].map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-200">
+                    <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-200">
                       <CheckCircle2 size={15} className="text-teal-glow shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
@@ -950,7 +950,7 @@ export default function ServicesPage() {
             {/* Model 3: Architecture Modernization */}
             <div className="glass rounded-2xl p-7 flex flex-col justify-between transition-all hover:border-teal/60">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Enterprise Advisory
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -967,7 +967,7 @@ export default function ServicesPage() {
                     "Proactive performance and cost optimization",
                     "On-demand AI and feature enhancements",
                   ].map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
+                    <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
                       <CheckCircle2 size={15} className="text-teal-glow shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>

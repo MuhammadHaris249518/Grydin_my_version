@@ -137,13 +137,13 @@ export default function BlogHubPage() {
                           />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <span className="font-mono text-[10px] uppercase text-teal-glow mb-1 inline-block">
+                          <span className="font-mono text-xs uppercase text-teal-glow mb-1 inline-block">
                             {CATEGORY_NAMES[post.category]}
                           </span>
                           <h4 className="text-sm font-semibold text-white group-hover:text-teal-glow transition-colors line-clamp-2 leading-snug">
                             {post.title}
                           </h4>
-                          <div className="flex items-center gap-2 mt-2 text-[11px] font-mono text-slate-400">
+                          <div className="flex items-center gap-2 mt-2 text-xs font-mono text-slate-400">
                             <span>{post.date}</span>
                             <span>·</span>
                             <span>{post.readingTime}</span>

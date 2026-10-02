@@ -161,7 +161,7 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
               <X className="w-4 h-4" />
             </button>
           ) : (
-            <kbd className="hidden sm:inline-block text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-white/10 border border-white/15 px-2 py-0.5 rounded">
+            <kbd className="hidden sm:inline-block text-xs font-mono uppercase tracking-wider text-slate-400 bg-white/10 border border-white/15 px-2 py-0.5 rounded">
               ESC
             </kbd>
           )}
@@ -258,14 +258,14 @@ export function SearchDialog({ isOpen, onClose }: SearchDialogProps) {
         </div>
 
         {/* Footer Hint */}
-        <div className="px-4 py-2.5 bg-navy-950/80 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400">
+        <div className="px-4 py-2.5 bg-navy-950/80 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
           <div className="flex items-center gap-3">
             <span>
-              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-[10px]">↑</kbd>{" "}
-              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-[10px]">↓</kbd> to navigate
+              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-xs">↑</kbd>{" "}
+              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-xs">↓</kbd> to navigate
             </span>
             <span>
-              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-[10px]">↵</kbd> to select
+              <kbd className="font-mono bg-white/10 border border-white/15 px-1.5 py-0.5 rounded text-xs">↵</kbd> to select
             </span>
           </div>
           <span className="font-mono text-teal-glow">GrydIn Search</span>

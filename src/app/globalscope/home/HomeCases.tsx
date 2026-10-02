@@ -47,7 +47,7 @@ export function HomeCases() {
                       <p className="font-mono text-base font-semibold text-teal-glow">
                         {c.results[0].metric}
                       </p>
-                      <p className="mt-1 text-xs text-slate-300">
+                      <p className="mt-1 text-sm text-slate-300">
                         {c.results[0].label}
                       </p>
                     </div>

@@ -39,8 +39,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
 
   return (
     <nav className="space-y-4" aria-label="Table of contents">
-      <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-teal-glow pb-2 border-b border-white/10">
-        <AlignLeft className="w-4 h-4 text-teal-glow" />
+      <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-accent pb-2 border-b border-surface-line">
+        <AlignLeft className="w-4 h-4 text-accent" />
         <span>On This Page</span>
       </div>
 
@@ -65,8 +65,8 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                 }}
                 className={`block py-1 transition-colors ${
                   isActive
-                    ? "text-teal-glow font-semibold"
-                    : "text-slate-400 hover:text-white"
+                    ? "text-accent font-semibold"
+                    : "text-ink-muted hover:text-ink"
                 }`}
               >
                 {item.text}

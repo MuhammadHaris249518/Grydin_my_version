@@ -18,13 +18,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-teal hover:bg-teal-dark text-white rounded-md font-bold uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2",
+    "bg-accent hover:bg-accent-hover text-white rounded-md font-bold uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2",
   "outline-light":
-    "border-2 border-white text-white hover:bg-white/10 rounded-md font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy",
+    "border-2 border-white text-white hover:bg-white/10 rounded-md font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink",
   "outline-dark":
-    "border-2 border-navy text-navy hover:bg-navy/5 rounded-md font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2",
+    "border-2 border-ink text-ink hover:bg-ink/5 rounded-md font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2",
   link:
-    "text-teal hover:text-teal-dark font-semibold inline-flex items-center gap-1.5 transition-colors p-0 focus-visible:outline-none focus-visible:underline",
+    "text-accent hover:text-accent-hover font-semibold inline-flex items-center gap-1.5 transition-colors p-0 focus-visible:outline-none focus-visible:underline",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {

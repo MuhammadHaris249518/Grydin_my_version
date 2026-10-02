@@ -42,7 +42,7 @@ export default function BlogHubPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-surface text-ink">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Newsroom"
@@ -56,9 +56,9 @@ export default function BlogHubPage() {
 
       {/* 3. Featured Editorial Block */}
       {featured && (
-        <section className="bg-navy py-16 md:py-24 border-b border-white/10">
+        <section className="bg-surface py-16 md:py-24 border-b border-surface-line">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-            <div className="font-mono text-xs uppercase tracking-[0.2em] text-teal-glow mb-6">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-6">
               Featured Editorial
             </div>
 
@@ -66,7 +66,7 @@ export default function BlogHubPage() {
               {/* Large Featured Card (7 cols on lg) */}
               <div className="lg:col-span-7">
                 <Link href={`/blog/${featured.slug}`} className="group block h-full">
-                  <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-0 transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                  <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-0 transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
                     <div className="relative aspect-[16/9] w-full overflow-hidden">
                       {featured.cover ? (
                         <Image
@@ -85,7 +85,7 @@ export default function BlogHubPage() {
                         />
                       )}
                       <div className="absolute top-4 left-4 z-20">
-                        <span className="font-mono text-xs uppercase text-teal-glow bg-navy/80 backdrop-blur-md px-3 py-1 rounded-md border border-teal-glow/40">
+                        <span className="font-mono text-xs uppercase text-accent bg-surface/80 backdrop-blur-md px-3 py-1 rounded-md border border-accent/30">
                           {CATEGORY_NAMES[featured.category]}
                         </span>
                       </div>
@@ -93,20 +93,20 @@ export default function BlogHubPage() {
 
                     <div className="p-8 flex-1 flex flex-col justify-between">
                       <div>
-                        <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-3 group-hover:text-teal-glow transition-colors">
+                        <h2 className="text-2xl sm:text-3xl font-semibold text-ink tracking-tight mb-3 group-hover:text-accent transition-colors">
                           {featured.title}
                         </h2>
-                        <p className="text-base text-slate-300 leading-relaxed line-clamp-3 mb-6">
+                        <p className="text-base text-ink-muted leading-relaxed line-clamp-3 mb-6">
                           {featured.description}
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-white/10 text-xs text-slate-400">
+                      <div className="flex items-center justify-between pt-4 border-t border-surface-line text-xs text-ink-muted">
                         <span className="flex items-center gap-1.5 font-mono">
-                          <Calendar className="w-3.5 h-3.5 text-teal-glow" />
+                          <Calendar className="w-3.5 h-3.5 text-accent" />
                           {featured.date}
                         </span>
-                        <span className="font-semibold text-teal-glow flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span className="font-semibold text-accent flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                           Read full story <ArrowRight className="w-4 h-4" />
                         </span>
                       </div>
@@ -117,7 +117,7 @@ export default function BlogHubPage() {
 
               {/* Right Column: 3 Compact Latest Items (5 cols on lg) */}
               <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
-                <div className="font-mono text-xs uppercase tracking-wider text-teal-glow pb-2 border-b border-white/10">
+                <div className="font-mono text-xs uppercase tracking-wider text-accent pb-2 border-b border-surface-line">
                   Latest Updates
                 </div>
 
@@ -128,8 +128,8 @@ export default function BlogHubPage() {
                       href={`/blog/${post.slug}`}
                       className="group block flex-1"
                     >
-                      <GlassCard className="p-5 h-full flex items-center gap-4 transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
-                        <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white/5 relative border border-white/10">
+                      <GlassCard className="p-5 h-full flex items-center gap-4 transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
+                        <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-white/5 relative border border-surface-line">
                           <CoverArt
                             seed={post.slug}
                             aspect="square"
@@ -137,13 +137,13 @@ export default function BlogHubPage() {
                           />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <span className="font-mono text-xs uppercase text-teal-glow mb-1 inline-block">
+                          <span className="font-mono text-xs uppercase text-accent mb-1 inline-block">
                             {CATEGORY_NAMES[post.category]}
                           </span>
-                          <h4 className="text-sm font-semibold text-white group-hover:text-teal-glow transition-colors line-clamp-2 leading-snug">
+                          <h4 className="text-sm font-semibold text-ink group-hover:text-accent transition-colors line-clamp-2 leading-snug">
                             {post.title}
                           </h4>
-                          <div className="flex items-center gap-2 mt-2 text-xs font-mono text-slate-400">
+                          <div className="flex items-center gap-2 mt-2 text-xs font-mono text-ink-muted">
                             <span>{post.date}</span>
                             <span>·</span>
                             <span>{post.readingTime}</span>
@@ -161,9 +161,9 @@ export default function BlogHubPage() {
 
       {/* 4. Three Category Rails */}
       {/* Rail 1: Insights */}
-      <section className="bg-navy-950 py-20 border-b border-white/10">
+      <section className="bg-surface-soft py-20 border-b border-surface-line">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-white/10">
+          <div className="flex items-center justify-between mb-8 pb-3 border-b border-surface-line">
             <SectionHeader
               eyebrow="Technical Perspectives"
               title="Engineering insights"
@@ -172,7 +172,7 @@ export default function BlogHubPage() {
             />
             <Link
               href="/blog/category/blog"
-              className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-teal-glow hover:text-white group shrink-0"
+              className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-accent hover:text-ink group shrink-0"
             >
               <span>View all insights</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -188,9 +188,9 @@ export default function BlogHubPage() {
       </section>
 
       {/* Rail 2: News */}
-      <section className="bg-navy py-20 border-b border-white/10">
+      <section className="bg-surface py-20 border-b border-surface-line">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="flex items-center justify-between mb-8 pb-3 border-b border-white/10">
+          <div className="flex items-center justify-between mb-8 pb-3 border-b border-surface-line">
             <SectionHeader
               eyebrow="Media & Releases"
               title="Company & industry news"
@@ -199,7 +199,7 @@ export default function BlogHubPage() {
             />
             <Link
               href="/blog/category/news"
-              className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-teal-glow hover:text-white group shrink-0"
+              className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-accent hover:text-ink group shrink-0"
             >
               <span>View all news</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -215,9 +215,9 @@ export default function BlogHubPage() {
       </section>
 
       {/* Rail 3: Announcements */}
-      <section className="bg-navy-950 py-20">
+      <section className="bg-surface-soft py-20">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          <div className="flex items-center justify-between mb-6 pb-3 border-b border-white/10">
+          <div className="flex items-center justify-between mb-6 pb-3 border-b border-surface-line">
             <SectionHeader
               eyebrow="Notices & Releases"
               title="Official announcements"
@@ -226,14 +226,14 @@ export default function BlogHubPage() {
             />
             <Link
               href="/blog/category/announcements"
-              className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-teal-glow hover:text-white group shrink-0"
+              className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-accent hover:text-ink group shrink-0"
             >
               <span>View all notices</span>
               <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
-          <div className="glass rounded-2xl border border-white/10 divide-y divide-white/10 overflow-hidden">
+          <div className="surface-card rounded-2xl border border-surface-line divide-y divide-white/10 overflow-hidden">
             {announcementPosts.map((post) => (
               <AnnouncementRow key={post.slug} post={post} />
             ))}

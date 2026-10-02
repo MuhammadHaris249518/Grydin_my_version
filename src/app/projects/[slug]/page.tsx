@@ -85,7 +85,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
       {/* PageHero */}
@@ -114,13 +114,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             {/* Results Block as a Stat Band */}
             {project.results.length > 0 && (
               <Reveal>
-                <div className="rounded-2xl border-y border-white/10 py-8 my-4 grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div className="rounded-2xl border-y border-surface-line py-8 my-4 grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {project.results.map((res, idx) => (
                     <div key={idx} className="text-center sm:text-left">
-                      <div className="text-2xl sm:text-3xl font-mono font-semibold text-teal-glow">
+                      <div className="text-2xl sm:text-3xl font-mono font-semibold text-accent">
                         {res.metric}
                       </div>
-                      <div className="text-xs sm:text-sm text-slate-300 mt-1">
+                      <div className="text-xs sm:text-sm text-ink-muted mt-1">
                         {res.label}
                       </div>
                     </div>
@@ -132,13 +132,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             {/* The Operational Challenge */}
             <Reveal delay={0.1}>
               <GlassCard className="p-8 sm:p-10">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-teal-glow">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
                   The Bottleneck
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-2 mb-4">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-ink tracking-tight mt-2 mb-4">
                   Operational challenge
                 </h2>
-                <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+                <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
                   {project.challenge}
                 </p>
               </GlassCard>
@@ -146,14 +146,14 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
             {/* The Solution */}
             <Reveal delay={0.15}>
-              <GlassCard className="p-8 sm:p-10 !border-teal-glow/40 bg-teal/10">
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-teal-glow">
+              <GlassCard className="p-8 sm:p-10 !border-accent/40 bg-accent-light">
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
                   Engineered Solution
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mt-2 mb-4">
+                <h2 className="text-2xl sm:text-3xl font-semibold text-ink tracking-tight mt-2 mb-4">
                   What GrydIn built
                 </h2>
-                <p className="text-base sm:text-lg text-slate-200 leading-relaxed">
+                <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
                   {project.solution}
                 </p>
               </GlassCard>
@@ -164,7 +164,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <aside className="lg:col-span-4 sticky top-28 space-y-6">
             <GlassCard className="p-7">
               {project.logo && (
-                <div className="bg-white/5 rounded-xl p-5 mb-6 flex items-center justify-center border border-white/10">
+                <div className="bg-white/5 rounded-xl p-5 mb-6 flex items-center justify-center border border-surface-line">
                   <Image
                     src={project.logo}
                     alt={`${project.client} logo`}
@@ -175,34 +175,34 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 </div>
               )}
 
-              <h3 className="font-mono text-xs uppercase tracking-wider text-teal-glow mb-6 pb-3 border-b border-white/10">
+              <h3 className="font-mono text-xs uppercase tracking-wider text-accent mb-6 pb-3 border-b border-surface-line">
                 Project Summary
               </h3>
 
               <div className="space-y-4 text-xs sm:text-sm">
                 <div>
-                  <span className="text-slate-400 block text-xs uppercase font-mono">Client</span>
-                  <span className="font-semibold text-white">{project.client}</span>
+                  <span className="text-ink-muted block text-xs uppercase font-mono">Client</span>
+                  <span className="font-semibold text-ink">{project.client}</span>
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-xs uppercase font-mono">Industry</span>
-                  <span className="font-semibold text-white">{project.industry}</span>
+                  <span className="text-ink-muted block text-xs uppercase font-mono">Industry</span>
+                  <span className="font-semibold text-ink">{project.industry}</span>
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-xs uppercase font-mono">Delivery Year</span>
-                  <span className="font-semibold text-white font-mono">{project.year}</span>
+                  <span className="text-ink-muted block text-xs uppercase font-mono">Delivery Year</span>
+                  <span className="font-semibold text-ink font-mono">{project.year}</span>
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-xs uppercase font-mono mb-2">Services Applied</span>
+                  <span className="text-ink-muted block text-xs uppercase font-mono mb-2">Services Applied</span>
                   <div className="flex flex-wrap gap-1.5">
                     {project.services.map((svc) => (
                       <Link
                         key={svc}
                         href="/services"
-                        className="glass px-2.5 py-1 rounded-md text-xs font-mono text-teal-glow hover:text-white"
+                        className="surface-card px-2.5 py-1 rounded-md text-xs font-mono text-accent hover:text-ink"
                       >
                         {svc.replace(/-/g, " ")}
                       </Link>
@@ -211,10 +211,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-xs uppercase font-mono mb-2">Technology Stack</span>
+                  <span className="text-ink-muted block text-xs uppercase font-mono mb-2">Technology Stack</span>
                   <div className="flex flex-wrap gap-1.5">
                     {project.stack.map((st) => (
-                      <span key={st} className="bg-white/5 border border-white/10 px-2 py-0.5 rounded text-xs font-mono text-slate-300">
+                      <span key={st} className="bg-white/5 border border-surface-line px-2 py-0.5 rounded text-xs font-mono text-ink-muted">
                         {st}
                       </span>
                     ))}
@@ -222,7 +222,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10">
+              <div className="mt-8 pt-6 border-t border-surface-line">
                 <Button href="/contact" variant="primary" size="md" className="w-full">
                   Book a free process diagnosis
                 </Button>
@@ -234,7 +234,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
       {/* Other Projects */}
       {otherProjects.length > 0 && (
-        <section className="relative bg-navy-950 py-20 border-t border-white/10">
+        <section className="relative bg-surface-soft py-20 border-t border-surface-line">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
             <SectionHeader
               eyebrow="More Case Studies"
@@ -245,13 +245,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {otherProjects.map((p) => (
                 <Link key={p.slug} href={`/projects/${p.slug}`} className="group block">
-                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-accent/50 group-hover:shadow-glow">
                     <div>
-                      <div className="font-mono text-xs uppercase text-teal-glow mb-2">{p.client}</div>
-                      <h4 className="text-lg font-semibold text-white group-hover:text-teal-glow transition-colors">{p.title}</h4>
-                      <p className="mt-2 text-xs text-slate-300 line-clamp-2">{p.summary}</p>
+                      <div className="font-mono text-xs uppercase text-accent mb-2">{p.client}</div>
+                      <h4 className="text-lg font-semibold text-ink group-hover:text-accent transition-colors">{p.title}</h4>
+                      <p className="mt-2 text-xs text-ink-muted line-clamp-2">{p.summary}</p>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-teal-glow font-semibold">
+                    <div className="mt-6 pt-4 border-t border-surface-line flex items-center justify-between text-xs text-accent font-semibold">
                       <span>Read case study</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>

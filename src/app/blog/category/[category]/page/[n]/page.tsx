@@ -106,7 +106,7 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
       {/* PageHero */}
@@ -121,7 +121,7 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
       <CategoryBar />
 
       {/* Content Section */}
-      <section className="bg-navy py-20 md:py-28 border-b border-white/10">
+      <section className="bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow={name}
@@ -132,7 +132,7 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
 
           {items.length > 0 ? (
             cat === "announcements" ? (
-              <div className="glass rounded-2xl border border-white/10 divide-y divide-white/10 overflow-hidden">
+              <div className="surface-card rounded-2xl border border-surface-line divide-y divide-white/10 overflow-hidden">
                 {items.map((post) => (
                   <AnnouncementRow key={post.slug} post={post} />
                 ))}
@@ -145,26 +145,26 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
               </div>
             )
           ) : (
-            <div className="glass p-12 text-center rounded-2xl max-w-xl mx-auto">
-              <h3 className="text-lg font-semibold text-white mb-2">End of {name} Archive</h3>
-              <p className="text-sm text-slate-300 mb-6">
+            <div className="surface-card p-12 text-center rounded-2xl max-w-xl mx-auto">
+              <h3 className="text-lg font-semibold text-ink mb-2">End of {name} Archive</h3>
+              <p className="text-sm text-ink-muted mb-6">
                 You have browsed through all published {name.toLowerCase()} updates.
               </p>
               <Link
                 href={`/blog/category/${category}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-teal text-white font-semibold text-xs uppercase tracking-wider hover:bg-teal-dark transition-colors"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-md bg-accent text-ink font-semibold text-xs uppercase tracking-wider hover:bg-teal-dark transition-colors"
               >
                 Return to {name}
               </Link>
             </div>
           )}
 
-          <div className="mt-12 pt-6 border-t border-white/10 flex items-center justify-between">
+          <div className="mt-12 pt-6 border-t border-surface-line flex items-center justify-between">
             <div>
               {pagination.hasPrevPage && (
                 <Link
                   href={pageNum === 2 ? `/blog/category/${category}` : `/blog/category/${category}/page/${pageNum - 1}`}
-                  className="glass px-4 py-2 rounded-xl text-xs font-mono text-teal-glow hover:text-white transition-colors flex items-center gap-1.5"
+                  className="surface-card px-4 py-2 rounded-xl text-xs font-mono text-accent hover:text-ink transition-colors flex items-center gap-1.5"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Previous Page</span>
@@ -172,7 +172,7 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
               )}
             </div>
 
-            <span className="text-xs font-mono text-slate-400">
+            <span className="text-xs font-mono text-ink-muted">
               Page {pagination.currentPage} of {pagination.totalPages}
             </span>
 
@@ -180,7 +180,7 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
               {pagination.hasNextPage && (
                 <Link
                   href={`/blog/category/${category}/page/${pageNum + 1}`}
-                  className="glass px-4 py-2 rounded-xl text-xs font-mono text-teal-glow hover:text-white transition-colors flex items-center gap-1.5"
+                  className="surface-card px-4 py-2 rounded-xl text-xs font-mono text-accent hover:text-ink transition-colors flex items-center gap-1.5"
                 >
                   <span>Next Page</span>
                   <ArrowRight className="w-3.5 h-3.5" />

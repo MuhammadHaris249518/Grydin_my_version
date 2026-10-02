@@ -43,7 +43,7 @@ export function HomeSeeItWork({ src, poster }: Props) {
   };
 
   return (
-    <section className="relative bg-navy-950 py-24 md:py-32">
+    <section className="relative bg-surface-soft py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           {/* Left Text Column */}
@@ -59,10 +59,10 @@ export function HomeSeeItWork({ src, poster }: Props) {
               <ul className="mt-8 space-y-4">
                 {CHECKLIST.map((item, idx) => (
                   <li key={idx} className="flex items-start gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal/20 text-teal-glow mt-0.5">
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-light text-accent mt-0.5">
                       <CheckCircle2 className="h-4 w-4" />
                     </span>
-                    <span className="text-base text-slate-300 leading-relaxed">
+                    <span className="text-base text-ink-muted leading-relaxed">
                       {item}
                     </span>
                   </li>
@@ -73,7 +73,7 @@ export function HomeSeeItWork({ src, poster }: Props) {
                 <Button href="/services" variant="primary" size="md" iconRight={<ArrowRight className="h-4 w-4" />}>
                   Explore Engineering Specs
                 </Button>
-                <Button href="/contact" variant="outline-light" size="md">
+                <Button href="/contact" variant="outline-dark" size="md">
                   Request Live Sandbox Demo
                 </Button>
               </div>
@@ -83,7 +83,7 @@ export function HomeSeeItWork({ src, poster }: Props) {
           {/* Right Video / 3D Slot Column */}
           <div className="lg:col-span-6" ref={containerRef}>
             <Reveal delay={0.15}>
-              <div className="glass relative aspect-[16/10] overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+              <div className="surface-card relative aspect-[16/10] overflow-hidden rounded-2xl border border-surface-line shadow-2xl">
                 {/* 3D demo slot in the background or placeholder */}
                 <ModelSlot label="demo" className="absolute inset-0" />
 
@@ -107,7 +107,7 @@ export function HomeSeeItWork({ src, poster }: Props) {
                       type="button"
                       onClick={togglePlay}
                       aria-label={isPlaying ? "Pause workflow demo" : "Play workflow demo"}
-                      className="absolute bottom-5 right-5 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-teal/90 text-white shadow-glow transition-transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
+                      className="absolute bottom-5 right-5 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-accent/90 text-ink shadow-glow transition-transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
                     >
                       {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5 translate-x-0.5" />}
                     </button>
@@ -115,7 +115,7 @@ export function HomeSeeItWork({ src, poster }: Props) {
                 )}
 
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-5">
-                  <p className="font-mono text-xs uppercase tracking-widest text-teal-glow">
+                  <p className="font-mono text-xs uppercase tracking-widest text-accent">
                     Workflow Stream · Live Event Bus
                   </p>
                 </div>

@@ -30,22 +30,22 @@ function TileCard({ t, featured }: { t: Tile; featured: boolean }) {
   return (
     <Link
       href={t.href}
-      className="glass group relative flex h-full flex-col rounded-2xl p-7 transition-[box-shadow,border-color] duration-300 hover:border-teal-glow/50 hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
+      className="surface-card group relative flex h-full flex-col rounded-2xl p-7 transition-[box-shadow,border-color] duration-300 hover:border-accent/30 hover:shadow-glow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-glow"
     >
       {t.slot && <ModelSlot label={t.slot} className="mb-6 min-h-[11rem] flex-1" />}
-      <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-teal/20 text-teal-glow">
+      <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-accent-light text-accent">
         <Icon className="h-5 w-5" />
       </span>
-      <h3 className={cn("font-semibold text-white", featured ? "text-2xl" : "text-xl")}>{t.title}</h3>
-      <p className="mt-2 text-base leading-relaxed text-slate-300">{t.short}</p>
+      <h3 className={cn("font-semibold text-ink", featured ? "text-2xl" : "text-xl")}>{t.title}</h3>
+      <p className="mt-2 text-base leading-relaxed text-ink-muted">{t.short}</p>
       <ul className="mt-5 flex flex-wrap gap-2">
         {t.tags.map((tag) => (
-          <li key={tag} className="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-xs text-slate-300">
+          <li key={tag} className="rounded-md border border-surface-line bg-white/5 px-2.5 py-1 font-mono text-xs text-ink-muted">
             {tag}
           </li>
         ))}
       </ul>
-      <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-teal-glow">
+      <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent">
         Explore capability <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
     </Link>
@@ -54,7 +54,7 @@ function TileCard({ t, featured }: { t: Tile; featured: boolean }) {
 
 export function HomeServices() {
   return (
-    <section id="services" className="relative overflow-hidden bg-navy py-24 md:py-32">
+    <section id="services" className="relative overflow-hidden bg-surface py-24 md:py-32">
       <div aria-hidden className="absolute inset-0 bg-circuit opacity-40" />
       <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <SectionHeader
@@ -83,7 +83,7 @@ export function HomeServices() {
           <Button href="/services" variant="primary" size="lg" iconRight={<ArrowRight className="ml-1 h-4 w-4" />}>
             Explore all engineering services
           </Button>
-          <Button href="/solutions" variant="outline-light" size="lg">
+          <Button href="/solutions" variant="outline-dark" size="lg">
             See industry-specific solutions
           </Button>
         </div>

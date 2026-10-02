@@ -68,7 +68,7 @@ const PROCESS_STEPS: TimelineStep[] = [
 
 export function HomeProcess() {
   return (
-    <section id="process" className="relative bg-navy-950 py-24 md:py-32">
+    <section id="process" className="relative bg-surface-soft py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <SectionHeader
           eyebrow="Methodology"

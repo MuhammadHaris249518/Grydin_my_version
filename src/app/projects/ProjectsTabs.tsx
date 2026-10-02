@@ -38,7 +38,7 @@ export function ProjectsTabs({ projectCount, productCount }: ProjectsTabsProps) 
   };
 
   return (
-    <div className="sticky top-[70px] z-30 bg-navy/85 backdrop-blur-md border-b border-white/10">
+    <div className="sticky top-[70px] z-30 bg-white/90 backdrop-blur-md border-b border-surface-line">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between overflow-x-auto py-3">
         <div className="flex items-center gap-2 sm:gap-4">
           <a
@@ -46,8 +46,8 @@ export function ProjectsTabs({ projectCount, productCount }: ProjectsTabsProps) 
             onClick={(e) => scrollTo("our-projects", e)}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all cursor-pointer ${
               activeTab === "projects"
-                ? "bg-teal text-white shadow-glow-sm border border-teal-glow/50"
-                : "glass text-slate-300 hover:text-white hover:border-white/20"
+                ? "bg-accent text-white shadow-accent-glow border border-accent/50"
+                : "bg-surface-soft border border-surface-line text-ink-muted hover:text-ink hover:border-accent/30"
             }`}
           >
             Client Projects <span className="opacity-70 text-xs ml-1 font-mono">({projectCount})</span>
@@ -58,16 +58,16 @@ export function ProjectsTabs({ projectCount, productCount }: ProjectsTabsProps) 
             onClick={(e) => scrollTo("our-products", e)}
             className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all cursor-pointer ${
               activeTab === "products"
-                ? "bg-teal text-white shadow-glow-sm border border-teal-glow/50"
-                : "glass text-slate-300 hover:text-white hover:border-white/20"
+                ? "bg-accent text-white shadow-accent-glow border border-accent/50"
+                : "bg-surface-soft border border-surface-line text-ink-muted hover:text-ink hover:border-accent/30"
             }`}
           >
             Proprietary Tools <span className="opacity-70 text-xs ml-1 font-mono">({productCount})</span>
           </a>
         </div>
 
-        <div className="hidden sm:flex items-center text-xs text-slate-400 gap-2 font-mono">
-          <span className="w-2 h-2 rounded-full bg-teal-glow animate-pulse" />
+        <div className="hidden sm:flex items-center text-xs text-ink-muted gap-2 font-mono">
+          <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           <span>Fixed-Scope Deployments &amp; Internal Tooling</span>
         </div>
       </div>

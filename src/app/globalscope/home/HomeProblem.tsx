@@ -21,7 +21,7 @@ const PROBLEMS = [
 
 export function HomeProblem() {
   return (
-    <section className="relative bg-navy-950 py-24 md:py-32">
+    <section className="relative bg-surface-soft py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <SectionHeader
           eyebrow="Operational Bottlenecks"
@@ -34,13 +34,13 @@ export function HomeProblem() {
           {PROBLEMS.map((p, i) => (
             <Reveal key={p.num} delay={i * 0.1}>
               <div className="flex flex-col">
-                <span className="font-mono text-4xl sm:text-5xl font-bold text-teal-glow/30">
+                <span className="font-mono text-4xl sm:text-5xl font-bold text-accent/30">
                   {p.num}
                 </span>
-                <h3 className="mt-4 text-xl sm:text-2xl font-semibold text-white">
+                <h3 className="mt-4 text-xl sm:text-2xl font-semibold text-ink">
                   {p.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-slate-300">
+                <p className="mt-3 text-base leading-relaxed text-ink-muted">
                   {p.desc}
                 </p>
               </div>

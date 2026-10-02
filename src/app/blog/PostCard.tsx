@@ -17,7 +17,7 @@ export function PostCard({ post, aspect = "16/9" }: PostCardProps) {
 
   return (
     <Link href={`/blog/${post.slug}`} className="group block h-full">
-      <GlassCard className="h-full flex flex-col justify-between overflow-hidden transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+      <GlassCard className="h-full flex flex-col justify-between overflow-hidden transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
         <div>
           {/* Cover or Algorithmic Art */}
           <div className="relative">
@@ -41,7 +41,7 @@ export function PostCard({ post, aspect = "16/9" }: PostCardProps) {
             )}
 
             <div className="absolute top-3 left-3 z-20">
-              <span className="font-mono text-xs uppercase text-teal-glow bg-teal/20 px-2.5 py-0.5 rounded-md border border-teal-glow/30">
+              <span className="font-mono text-xs uppercase text-accent bg-accent-light px-2.5 py-0.5 rounded-md border border-accent/30">
                 {categoryLabel}
               </span>
             </div>
@@ -50,28 +50,28 @@ export function PostCard({ post, aspect = "16/9" }: PostCardProps) {
           <div className="p-6">
             {/* Source / Meta line */}
             {post.source && (
-              <div className="text-xs font-mono text-teal-glow mb-2 flex items-center gap-1">
+              <div className="text-xs font-mono text-accent mb-2 flex items-center gap-1">
                 <span>{post.source}</span>
                 {post.externalUrl && <ExternalLink className="w-3 h-3" />}
               </div>
             )}
 
             {/* Title */}
-            <h3 className="text-lg font-semibold text-white tracking-tight line-clamp-2 mb-2 group-hover:text-teal-glow transition-colors">
+            <h3 className="text-lg font-semibold text-ink tracking-tight line-clamp-2 mb-2 group-hover:text-accent transition-colors">
               {post.title}
             </h3>
 
             {/* Excerpt */}
-            <p className="text-sm text-slate-300 leading-relaxed line-clamp-2 mb-4">
+            <p className="text-sm text-ink-muted leading-relaxed line-clamp-2 mb-4">
               {post.description}
             </p>
           </div>
         </div>
 
         <div className="px-6 pb-6 pt-0">
-          <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-slate-400">
+          <div className="pt-3 border-t border-surface-line flex items-center justify-between text-xs text-ink-muted">
             <span className="flex items-center gap-1 font-mono">
-              <Calendar className="w-3.5 h-3.5 text-teal-glow" />
+              <Calendar className="w-3.5 h-3.5 text-accent" />
               {post.date}
             </span>
             <span className="flex items-center gap-1 font-mono">

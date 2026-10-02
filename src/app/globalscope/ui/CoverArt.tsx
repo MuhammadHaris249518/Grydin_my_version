@@ -61,7 +61,7 @@ export function CoverArt({
 
   return (
     <div
-      className={`relative overflow-hidden bg-navy select-none flex items-center justify-center ${
+      className={`relative overflow-hidden bg-surface select-none flex items-center justify-center ${
         aspectStyles[aspect]
       } ${className}`}
       style={{
@@ -111,11 +111,11 @@ export function CoverArt({
 
       {/* Center Icon and optional title */}
       <div className="relative z-10 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-teal/10 border border-teal/30 flex items-center justify-center text-teal shadow-inner group-hover:scale-105 transition-transform duration-300">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-accent-light border border-accent/30 flex items-center justify-center text-accent shadow-inner group-hover:scale-105 transition-transform duration-300">
           <IconComponent className="w-7 h-7 sm:w-8 sm:h-8" />
         </div>
         {title && (
-          <p className="mt-3 text-xs sm:text-sm font-semibold text-slate-300 tracking-wide max-w-[200px] line-clamp-1">
+          <p className="mt-3 text-xs sm:text-sm font-semibold text-ink-muted tracking-wide max-w-[200px] line-clamp-1">
             {title}
           </p>
         )}

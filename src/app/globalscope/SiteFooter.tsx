@@ -7,11 +7,11 @@ import { GrydInLogo } from "./GrydInLogo";
 
 export const SiteFooter = () => {
   return (
-    <footer className="w-full bg-navy-950 border-t border-white/10 text-white">
+    <footer className="w-full bg-ink text-white border-t border-white/10">
       {/* Final CTA Strip Above */}
-      <div className="border-b border-white/10 bg-navy/60">
+      <div className="border-b border-white/10 bg-ink/80">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-slate-300">
+          <div className="flex items-center gap-2 text-sm text-white/70">
             <span className="w-2 h-2 rounded-full bg-teal-glow animate-pulse" />
             <span>Ready to eliminate manual friction from your workflows?</span>
           </div>
@@ -31,7 +31,7 @@ export const SiteFooter = () => {
           {/* Column 1: Brand Info (4 cols) */}
           <div className="lg:col-span-4">
             <GrydInLogo variant="footer" theme="dark" />
-            <p className="mt-4 text-sm leading-relaxed text-slate-400 max-w-sm">
+            <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-sm">
               {SITE.tagline}. High-reliability custom software, autonomous AI agents, and workflow automations shipped in under two weeks.
             </p>
             <div className="mt-6 flex items-center gap-3">
@@ -40,14 +40,14 @@ export const SiteFooter = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GrydIn on LinkedIn"
-                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-teal-glow hover:border-teal-glow/40 transition-colors"
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-teal-glow hover:border-teal-glow/40 transition-colors"
               >
                 <Linkedin size={16} />
               </a>
               <Link
                 href="/contact"
                 aria-label="Contact GrydIn"
-                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-teal-glow hover:border-teal-glow/40 transition-colors"
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-teal-glow hover:border-teal-glow/40 transition-colors"
               >
                 <MessageSquare size={16} />
               </Link>
@@ -64,7 +64,7 @@ export const SiteFooter = () => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-sm text-slate-400 hover:text-white transition-colors"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -82,7 +82,7 @@ export const SiteFooter = () => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-sm text-slate-400 hover:text-white transition-colors"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -100,7 +100,7 @@ export const SiteFooter = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-slate-400 hover:text-white transition-colors"
+                  className="text-sm text-white/60 hover:text-white transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -110,7 +110,7 @@ export const SiteFooter = () => {
         </div>
 
         {/* Copyright Row */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
           <div>
             © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
           </div>

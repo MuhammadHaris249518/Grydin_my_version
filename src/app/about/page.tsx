@@ -83,7 +83,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-surface text-ink">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Our Firm & Philosophy"
@@ -103,7 +103,7 @@ export default function AboutPage() {
       />
 
       {/* 2. Story & Values Section */}
-      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Core Values"
@@ -117,13 +117,13 @@ export default function AboutPage() {
               <Reveal key={val.num} delay={idx * 0.08}>
                 <GlassCard className="p-8 h-full flex flex-col justify-between">
                   <div>
-                    <span className="font-mono text-sm font-bold text-teal-glow">
+                    <span className="font-mono text-sm font-bold text-accent">
                       {val.num}
                     </span>
-                    <h3 className="mt-3 text-xl font-semibold text-white">
+                    <h3 className="mt-3 text-xl font-semibold text-ink">
                       {val.title}
                     </h3>
-                    <p className="mt-2 text-base text-slate-300 leading-relaxed">
+                    <p className="mt-2 text-base text-ink-muted leading-relaxed">
                       {val.desc}
                     </p>
                   </div>
@@ -135,7 +135,7 @@ export default function AboutPage() {
       </section>
 
       {/* 3. Company Milestones Timeline */}
-      <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface-soft py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Journey & Evolution"
@@ -150,16 +150,16 @@ export default function AboutPage() {
       </section>
 
       {/* 4. Global Clients & Globe Slot Block */}
-      <section className="relative bg-navy py-20 md:py-28">
+      <section className="relative bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: 3D Globe Slot */}
             <div className="lg:col-span-6">
               <Reveal>
-                <div className="glass aspect-square max-w-[460px] mx-auto rounded-3xl p-6 border border-white/15 relative overflow-hidden flex items-center justify-center">
+                <div className="surface-card aspect-square max-w-[460px] mx-auto rounded-3xl p-6 border border-surface-line relative overflow-hidden flex items-center justify-center">
                   <ModelSlot label="globe" className="h-full w-full" />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/90 to-transparent p-6 text-center">
-                    <span className="font-mono text-xs uppercase tracking-widest text-teal-glow">
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-surface-soft/90 to-transparent p-6 text-center">
+                    <span className="font-mono text-xs uppercase tracking-widest text-accent">
                       Global Client Deployments
                     </span>
                   </div>
@@ -179,15 +179,15 @@ export default function AboutPage() {
 
                 <div className="mt-8 space-y-4">
                   {GLOBAL_REGIONS.map((item, idx) => (
-                    <div key={idx} className="glass p-4 rounded-xl flex items-center justify-between gap-4">
+                    <div key={idx} className="surface-card p-4 rounded-xl flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
-                        <Globe className="h-5 w-5 text-teal-glow shrink-0" />
+                        <Globe className="h-5 w-5 text-accent shrink-0" />
                         <div>
-                          <p className="font-semibold text-white text-base">{item.region}</p>
-                          <p className="text-xs text-slate-400">{item.role}</p>
+                          <p className="font-semibold text-ink text-base">{item.region}</p>
+                          <p className="text-xs text-ink-muted">{item.role}</p>
                         </div>
                       </div>
-                      <CheckCircle2 className="h-4 w-4 text-teal-glow shrink-0" />
+                      <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
                     </div>
                   ))}
                 </div>

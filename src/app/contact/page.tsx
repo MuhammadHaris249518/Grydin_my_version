@@ -68,7 +68,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-surface text-ink">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Initiate Engagement"
@@ -86,32 +86,32 @@ export default function ContactPage() {
               <Reveal>
                 <GlassCard className="p-8 sm:p-10 border border-white/15">
                   <div className="flex items-center gap-2 mb-6">
-                    <span className="font-mono text-xs uppercase text-teal-glow bg-teal/20 px-3 py-1 rounded-md border border-teal-glow/30">
+                    <span className="font-mono text-xs uppercase text-accent bg-accent-light px-3 py-1 rounded-md border border-accent/25">
                       Confidential Diagnosis
                     </span>
                   </div>
 
-                  <h2 className="text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-2">
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-ink tracking-tight mb-2">
                     Describe your operational bottleneck
                   </h2>
-                  <p className="text-sm text-slate-300 mb-8 leading-relaxed">
+                  <p className="text-sm text-ink-muted mb-8 leading-relaxed">
                     Tell us what is slowing down your team. We will analyze technical feasibility and map the right architecture.
                   </p>
 
                   {submitted ? (
-                    <div className="rounded-xl border border-teal-glow/40 bg-teal/10 p-8 text-center">
-                      <div className="w-12 h-12 rounded-full bg-teal/20 text-teal-glow flex items-center justify-center mx-auto mb-4">
+                    <div className="rounded-xl border border-accent/30 bg-accent-light p-8 text-center">
+                      <div className="w-12 h-12 rounded-full bg-accent/10 text-accent flex items-center justify-center mx-auto mb-4">
                         <CheckCircle2 className="w-6 h-6" />
                       </div>
-                      <h3 className="text-xl font-semibold text-white mb-2">
+                      <h3 className="text-xl font-semibold text-ink mb-2">
                         Diagnosis Request Received
                       </h3>
-                      <p className="text-sm text-slate-300 max-w-md mx-auto mb-6">
+                      <p className="text-sm text-ink-muted max-w-md mx-auto mb-6">
                         A Lead Architect will review your stack requirements and reach out within one business day with next steps.
                       </p>
                       <Button
                         type="button"
-                        variant="outline-light"
+                        variant="outline-dark"
                         size="sm"
                         onClick={() => setSubmitted(false)}
                       >
@@ -122,7 +122,7 @@ export default function ContactPage() {
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                          <label className="block font-mono text-xs uppercase tracking-wider text-ink-muted mb-2">
                             Your Name *
                           </label>
                           <input
@@ -131,12 +131,12 @@ export default function ContactPage() {
                             value={formData.name}
                             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="Alex Smith"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                            className="w-full bg-surface-soft border border-surface-line rounded-xl px-4 py-3 text-ink text-sm focus:outline-none focus:border-accent transition-colors"
                           />
                         </div>
 
                         <div>
-                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                          <label className="block font-mono text-xs uppercase tracking-wider text-ink-muted mb-2">
                             Work Email *
                           </label>
                           <input
@@ -145,14 +145,14 @@ export default function ContactPage() {
                             value={formData.email}
                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="alex@company.com"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                            className="w-full bg-surface-soft border border-surface-line rounded-xl px-4 py-3 text-ink text-sm focus:outline-none focus:border-accent transition-colors"
                           />
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div>
-                          <label className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                          <label className="block font-mono text-xs uppercase tracking-wider text-ink-muted mb-2">
                             Company / Organization
                           </label>
                           <input
@@ -160,12 +160,12 @@ export default function ContactPage() {
                             value={formData.company}
                             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                             placeholder="Acme Corp"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                            className="w-full bg-surface-soft border border-surface-line rounded-xl px-4 py-3 text-ink text-sm focus:outline-none focus:border-accent transition-colors"
                           />
                         </div>
 
                         <div>
-                          <label htmlFor="inquiry-type" className="block font-mono text-xs uppercase tracking-wider text-slate-300 mb-2">
+                          <label htmlFor="inquiry-type" className="block font-mono text-xs uppercase tracking-wider text-ink-muted mb-2">
                             Primary Engagement Area
                           </label>
                           <select
@@ -173,10 +173,10 @@ export default function ContactPage() {
                             aria-label="Primary Engagement Area"
                             value={formData.inquiryType}
                             onChange={(e) => setFormData({ ...formData, inquiryType: e.target.value })}
-                            className="w-full bg-navy-800 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors"
+                            className="w-full bg-surface-soft border border-surface-line rounded-xl px-4 py-3 text-ink text-sm focus:outline-none focus:border-accent transition-colors"
                           >
                             {INQUIRY_TYPES.map((type) => (
-                              <option key={type} value={type} className="bg-navy-800 text-white">
+                              <option key={type} value={type} className="bg-white text-ink">
                                 {type}
                               </option>
                             ))}
@@ -194,7 +194,7 @@ export default function ContactPage() {
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder="Briefly describe the tools you use, the manual handoffs involved, and your target completion timeline..."
-                          className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-teal-glow transition-colors leading-relaxed"
+                          className="w-full bg-surface-soft border border-surface-line rounded-xl px-4 py-3 text-ink text-sm focus:outline-none focus:border-accent transition-colors leading-relaxed"
                         />
                       </div>
 
@@ -209,8 +209,8 @@ export default function ContactPage() {
                           {loading ? "Transmitting..." : "Book a free process diagnosis"}
                         </Button>
 
-                        <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
-                          <ShieldCheck className="w-4 h-4 text-teal-glow" />
+                        <div className="flex items-center gap-2 text-xs font-mono text-ink-muted">
+                          <ShieldCheck className="w-4 h-4 text-accent" />
                           <span>NDA Protected · Under 48h SLA</span>
                         </div>
                       </div>
@@ -227,51 +227,51 @@ export default function ContactPage() {
                 <GlassCard className="p-8">
                   <div className="flex items-center gap-2 mb-4">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="font-mono text-xs uppercase text-teal-glow">
+                    <span className="font-mono text-xs uppercase text-accent">
                       Active Engineering Headquarters
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                  <h3 className="text-xl font-semibold text-ink mb-2">
                     The Box Software Technology Park
                   </h3>
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-sm text-ink-muted leading-relaxed mb-6">
                     F-11 Markaz, Islamabad — GrydIn facility for high-reliability systems development and async operations.
                   </p>
 
-                  <div className="space-y-4 border-t border-white/10 pt-6 text-sm">
+                  <div className="space-y-4 border-t border-surface-line pt-6 text-sm">
                     <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <MapPin className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-mono text-xs uppercase text-slate-400">Address</p>
-                        <p className="text-white text-sm mt-0.5">{SITE.office.mapsInfoAddress}</p>
+                        <p className="font-mono text-xs uppercase text-ink-muted">Address</p>
+                        <p className="text-ink text-sm mt-0.5">{SITE.office.mapsInfoAddress}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <Clock className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <Clock className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-mono text-xs uppercase text-slate-400">Hours</p>
-                        <p className="text-white text-sm mt-0.5">Mon – Fri: 9:00 AM – 6:00 PM PKT</p>
-                        <p className="text-xs text-slate-400 mt-0.5">Global cloud systems: 24/7 telemetry</p>
+                        <p className="font-mono text-xs uppercase text-ink-muted">Hours</p>
+                        <p className="text-ink text-sm mt-0.5">Mon – Fri: 9:00 AM – 6:00 PM PKT</p>
+                        <p className="text-xs text-ink-muted mt-0.5">Global cloud systems: 24/7 telemetry</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <Mail className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <Mail className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-mono text-xs uppercase text-slate-400">Direct Inquiries</p>
-                        <a href={`mailto:${SITE.email}`} className="text-teal-glow hover:underline text-sm mt-0.5 block">
+                        <p className="font-mono text-xs uppercase text-ink-muted">Direct Inquiries</p>
+                        <a href={`mailto:${SITE.email}`} className="text-accent hover:underline text-sm mt-0.5 block">
                           {SITE.email}
                         </a>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
-                      <Phone className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                      <Phone className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-mono text-xs uppercase text-slate-400">Direct Phone</p>
-                        <a href={`tel:${SITE.phoneTel}`} className="text-teal-glow hover:underline text-sm mt-0.5 block">
+                        <p className="font-mono text-xs uppercase text-ink-muted">Direct Phone</p>
+                        <a href={`tel:${SITE.phoneTel}`} className="text-accent hover:underline text-sm mt-0.5 block">
                           {SITE.phoneDisplay}
                         </a>
                       </div>
@@ -285,8 +285,8 @@ export default function ContactPage() {
                 <GlassCard className="p-6 overflow-hidden">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <Map className="w-4 h-4 text-teal-glow" />
-                      <span className="font-mono text-xs uppercase tracking-wider text-white">
+                      <Map className="w-4 h-4 text-accent" />
+                      <span className="font-mono text-xs uppercase tracking-wider text-ink">
                         Islamabad Campus Map
                       </span>
                     </div>
@@ -295,14 +295,14 @@ export default function ContactPage() {
                         href={SITE.office.mapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-xs text-teal-glow hover:underline flex items-center gap-1"
+                        className="font-mono text-xs text-accent hover:underline flex items-center gap-1"
                       >
                         Open in Google Maps <ExternalLink className="w-3 h-3" />
                       </a>
                     )}
                   </div>
 
-                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-white/10 bg-navy-950 flex items-center justify-center">
+                  <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-surface-line bg-surface-soft flex items-center justify-center">
                     {showMap ? (
                       <iframe
                         src={SITE.office.mapsEmbedSrc}
@@ -316,12 +316,12 @@ export default function ContactPage() {
                         className="w-full h-full"
                       />
                     ) : (
-                      <div className="p-6 text-center bg-circuit bg-cover">
-                        <MapPin className="w-8 h-8 text-teal-glow mx-auto mb-3 animate-bounce" />
-                        <p className="text-sm font-semibold text-white mb-1">
+                      <div className="p-6 text-center">
+                        <MapPin className="w-8 h-8 text-accent mx-auto mb-3 animate-bounce" />
+                        <p className="text-sm font-semibold text-ink mb-1">
                           The Box Software Technology Park
                         </p>
-                        <p className="text-xs text-slate-400 mb-4 max-w-xs mx-auto">
+                        <p className="text-xs text-ink-muted mb-4 max-w-xs mx-auto">
                           F-11 Markaz, Islamabad, Pakistan
                         </p>
                         <Button

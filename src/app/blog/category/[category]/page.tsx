@@ -101,7 +101,7 @@ export default async function CategoryPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
       {/* PageHero */}
@@ -116,7 +116,7 @@ export default async function CategoryPage({ params }: PageProps) {
       <CategoryBar />
 
       {/* Content Section */}
-      <section className="bg-navy py-20 md:py-28 border-b border-white/10">
+      <section className="bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow={name}
@@ -126,7 +126,7 @@ export default async function CategoryPage({ params }: PageProps) {
           />
 
           {cat === "announcements" ? (
-            <div className="glass rounded-2xl border border-white/10 divide-y divide-white/10 overflow-hidden">
+            <div className="surface-card rounded-2xl border border-surface-line divide-y divide-white/10 overflow-hidden">
               {items.map((post) => (
                 <AnnouncementRow key={post.slug} post={post} />
               ))}
@@ -141,8 +141,8 @@ export default async function CategoryPage({ params }: PageProps) {
 
           {/* Pagination Bar */}
           {pagination.totalPages > 1 && (
-            <div className="mt-12 pt-6 border-t border-white/10 flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">
+            <div className="mt-12 pt-6 border-t border-surface-line flex items-center justify-between">
+              <span className="text-xs font-mono text-ink-muted">
                 Page {pagination.currentPage} of {pagination.totalPages}
               </span>
 
@@ -150,7 +150,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 {pagination.hasNextPage && (
                   <Link
                     href={`/blog/category/${category}/page/2`}
-                    className="glass px-4 py-2 rounded-xl text-xs font-mono text-teal-glow hover:text-white transition-colors flex items-center gap-1.5"
+                    className="surface-card px-4 py-2 rounded-xl text-xs font-mono text-accent hover:text-ink transition-colors flex items-center gap-1.5"
                   >
                     <span>Next Page</span>
                     <ArrowRight className="w-3.5 h-3.5" />

@@ -24,8 +24,8 @@ export function CtaBand({
   className = "",
 }: CtaBandProps) {
   return (
-    <section className={`relative overflow-hidden bg-navy py-24 md:py-32 text-white border-t border-white/10 ${className}`}>
-      <HeroBackdrop network={false} />
+    <section className={`relative overflow-hidden bg-ink py-24 md:py-32 text-white border-t border-white/10 ${className}`}>
+      <HeroBackdrop network={false} dark={true} />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-10 text-center">
         <Reveal>
@@ -38,7 +38,7 @@ export function CtaBand({
           </h2>
 
           {subtitle && (
-            <p className="mt-5 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            <p className="mt-5 text-base sm:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
               {subtitle}
             </p>
           )}

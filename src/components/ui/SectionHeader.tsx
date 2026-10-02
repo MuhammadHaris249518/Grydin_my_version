@@ -6,6 +6,7 @@ export function SectionHeader({
   accent,
   intro,
   align = "left",
+  dark = false,
   className,
 }: {
   eyebrow?: string;
@@ -13,6 +14,8 @@ export function SectionHeader({
   accent?: string;
   intro?: string;
   align?: "left" | "center";
+  /** Use true when the section background is dark (ink/navy). Defaults to light mode. */
+  dark?: boolean;
   className?: string;
 }) {
   const parts = accent && title.includes(accent) ? title.split(accent) : null;
@@ -21,15 +24,21 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={cn(
-            "mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-teal-glow",
+            "mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em]",
+            dark ? "text-teal-glow" : "text-accent",
             align === "center" && "justify-center"
           )}
         >
-          <span className="h-px w-8 bg-teal-glow/60" />
+          <span className={cn("h-px w-8", dark ? "bg-teal-glow/60" : "bg-accent/60")} />
           {eyebrow}
         </p>
       )}
-      <h2 className="text-3xl font-semibold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[3.25rem]">
+      <h2
+        className={cn(
+          "text-3xl font-semibold leading-[1.1] tracking-tight sm:text-4xl lg:text-[3.25rem]",
+          dark ? "text-white" : "text-ink"
+        )}
+      >
         {parts ? (
           <>
             {parts[0]}
@@ -40,7 +49,16 @@ export function SectionHeader({
           title
         )}
       </h2>
-      {intro && <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">{intro}</p>}
+      {intro && (
+        <p
+          className={cn(
+            "mt-5 text-base leading-relaxed sm:text-lg",
+            dark ? "text-white/70" : "text-ink-muted"
+          )}
+        >
+          {intro}
+        </p>
+      )}
     </header>
   );
 }

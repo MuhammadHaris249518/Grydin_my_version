@@ -94,7 +94,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
       {/* PageHero with 3D product-demo slot */}
@@ -103,7 +103,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
         title={product.name}
         subtitle={product.tagline}
         breadcrumbs={breadcrumbs}
-        slot={<ModelSlot label="product-demo" className="aspect-[4/3] w-full border border-white/10" />}
+        slot={<ModelSlot label="product-demo" className="aspect-[4/3] w-full border border-surface-line" />}
         actions={
           <div className="flex flex-wrap items-center gap-4">
             <Button
@@ -131,7 +131,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       />
 
       {/* Overview & Perspective Mockup Section */}
-      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
@@ -140,14 +140,14 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 title="Built for high-reliability systems and enterprise workflows"
                 accent="high-reliability"
               />
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+              <p className="text-base sm:text-lg text-ink-muted leading-relaxed">
                 {product.description}
               </p>
-              <div className="glass p-5 rounded-xl flex items-center gap-4">
-                <span className="font-mono text-xs uppercase tracking-wider text-teal-glow">
+              <div className="surface-card p-5 rounded-xl flex items-center gap-4">
+                <span className="font-mono text-xs uppercase tracking-wider text-accent">
                   Pricing model
                 </span>
-                <span className="text-base text-white font-medium">
+                <span className="text-base text-ink font-medium">
                   {product.pricing || "Custom quote based on workload"}
                 </span>
               </div>
@@ -156,29 +156,29 @@ export default async function ProductDetailPage({ params }: PageProps) {
             {/* Perspective Mockup */}
             <div className="lg:col-span-5">
               <div
-                className="glass rounded-2xl p-6 border border-white/15 shadow-2xl transition-transform duration-500 hover:rotate-0"
+                className="surface-card rounded-2xl p-6 border border-surface-line shadow-2xl transition-transform duration-500 hover:rotate-0"
                 style={{ transform: "perspective(1200px) rotateY(-8deg)" }}
               >
-                <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <div className="flex items-center justify-between border-b border-surface-line pb-4 mb-4">
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full bg-red-400/80" />
                     <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
                     <span className="h-3 w-3 rounded-full bg-green-400/80" />
                   </div>
-                  <span className="font-mono text-xs text-teal-glow">{product.name} OS v2.4</span>
+                  <span className="font-mono text-xs text-accent">{product.name} OS v2.4</span>
                 </div>
-                <div className="space-y-3 font-mono text-xs text-slate-300">
-                  <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
-                    <span className="flex items-center gap-2"><Activity className="h-4 w-4 text-teal-glow" /> System Status</span>
-                    <span className="text-teal-glow">{product.status}</span>
+                <div className="space-y-3 font-mono text-xs text-ink-muted">
+                  <div className="p-3 bg-white/5 rounded-lg border border-surface-line flex items-center justify-between">
+                    <span className="flex items-center gap-2"><Activity className="h-4 w-4 text-accent" /> System Status</span>
+                    <span className="text-accent">{product.status}</span>
                   </div>
-                  <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
-                    <span className="flex items-center gap-2"><Terminal className="h-4 w-4 text-teal-glow" /> Architecture</span>
-                    <span className="text-teal-glow">Cloud Native</span>
+                  <div className="p-3 bg-white/5 rounded-lg border border-surface-line flex items-center justify-between">
+                    <span className="flex items-center gap-2"><Terminal className="h-4 w-4 text-accent" /> Architecture</span>
+                    <span className="text-accent">Cloud Native</span>
                   </div>
-                  <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
-                    <span className="flex items-center gap-2"><Layers className="h-4 w-4 text-teal-glow" /> Integration Model</span>
-                    <span className="text-teal-glow">API & Webhooks</span>
+                  <div className="p-3 bg-white/5 rounded-lg border border-surface-line flex items-center justify-between">
+                    <span className="flex items-center gap-2"><Layers className="h-4 w-4 text-accent" /> Integration Model</span>
+                    <span className="text-accent">API & Webhooks</span>
                   </div>
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
       </section>
 
       {/* Features Grid */}
-      <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface-soft py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Capabilities"
@@ -203,13 +203,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
               <Reveal key={idx} delay={idx * 0.08}>
                 <GlassCard className="p-7 h-full flex flex-col justify-between">
                   <div>
-                    <span className="font-mono text-sm font-bold text-teal-glow">
+                    <span className="font-mono text-sm font-bold text-accent">
                       0{idx + 1}
                     </span>
-                    <h3 className="mt-3 text-lg font-semibold text-white tracking-tight">
+                    <h3 className="mt-3 text-lg font-semibold text-ink tracking-tight">
                       {feat.title}
                     </h3>
-                    <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                    <p className="mt-2 text-sm text-ink-muted leading-relaxed">
                       {feat.text}
                     </p>
                   </div>
@@ -221,19 +221,19 @@ export default async function ProductDetailPage({ params }: PageProps) {
       </section>
 
       {/* Use Cases & Stack */}
-      <section className="relative bg-navy py-20 md:py-28">
+      <section className="relative bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {/* Use Cases */}
             <GlassCard className="p-8">
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2.5">
-                <Sparkles className="w-5 h-5 text-teal-glow" />
+              <h3 className="text-xl font-semibold text-ink mb-6 flex items-center gap-2.5">
+                <Sparkles className="w-5 h-5 text-accent" />
                 <span>Target Use Cases</span>
               </h3>
               <div className="space-y-4">
                 {product.useCases.map((uc, i) => (
-                  <div key={i} className="flex items-start gap-3 text-base text-slate-200">
-                    <Check className="w-5 h-5 text-teal-glow shrink-0 mt-0.5" />
+                  <div key={i} className="flex items-start gap-3 text-base text-ink-muted">
+                    <Check className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                     <span>{uc}</span>
                   </div>
                 ))}
@@ -243,20 +243,20 @@ export default async function ProductDetailPage({ params }: PageProps) {
             {/* Tech Stack */}
             <GlassCard className="p-8 flex flex-col justify-between">
               <div>
-                <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2.5">
-                  <Cpu className="w-5 h-5 text-teal-glow" />
+                <h3 className="text-xl font-semibold text-ink mb-6 flex items-center gap-2.5">
+                  <Cpu className="w-5 h-5 text-accent" />
                   <span>Underlying Technologies</span>
                 </h3>
                 <div className="flex flex-wrap gap-2 mb-6">
                   {product.stack.map((item) => (
-                    <span key={item} className="glass px-3 py-1 text-xs font-mono text-slate-300 rounded-md">
+                    <span key={item} className="surface-card px-3 py-1 text-xs font-mono text-ink-muted rounded-md">
                       {item}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-6 border-t border-surface-line">
                 <Button href="/contact" variant="primary" size="md">
                   Book a free process diagnosis
                 </Button>
@@ -268,7 +268,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
       {/* Other Products */}
       {otherProducts.length > 0 && (
-        <section className="relative bg-navy-950 py-20 border-t border-white/10">
+        <section className="relative bg-surface-soft py-20 border-t border-surface-line">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
             <SectionHeader
               eyebrow="Proprietary Tools"
@@ -279,13 +279,13 @@ export default async function ProductDetailPage({ params }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {otherProducts.map((p) => (
                 <Link key={p.slug} href={`/products/${p.slug}`} className="group block">
-                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-accent/50 group-hover:shadow-glow">
                     <div>
-                      <span className="font-mono text-xs uppercase text-teal-glow">{p.category}</span>
-                      <h4 className="mt-2 text-xl font-semibold text-white group-hover:text-teal-glow transition-colors">{p.name}</h4>
-                      <p className="mt-2 text-xs text-slate-300 line-clamp-2">{p.summary}</p>
+                      <span className="font-mono text-xs uppercase text-accent">{p.category}</span>
+                      <h4 className="mt-2 text-xl font-semibold text-ink group-hover:text-accent transition-colors">{p.name}</h4>
+                      <p className="mt-2 text-xs text-ink-muted line-clamp-2">{p.summary}</p>
                     </div>
-                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-teal-glow font-semibold">
+                    <div className="mt-6 pt-4 border-t border-surface-line flex items-center justify-between text-xs text-accent font-semibold">
                       <span>Explore tool</span>
                       <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                     </div>

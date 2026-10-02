@@ -2,20 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Accent */
+  --brand-accent: #0d8b99;
+  --accent: #0d8b99;
+  --accent-hover: #0b7884;
+  --accent-light: #e6f4f6;
+
+  /* Surface palette */
+  --surface: #ffffff;
+  --surface-soft: #f4f7fa;
+  --surface-line: #e2e8f0;
+
+  /* Ink (text) palette */
+  --ink: #0f172a;
+  --ink-muted: #475569;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px 0 rgba(15,23,42,0.06), 0 4px 12px -2px rgba(15,23,42,0.05);
+  --shadow-card-hover: 0 4px 20px -4px rgba(15,23,42,0.12), 0 2px 8px -2px rgba(15,23,42,0.08);
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  --brand-accent: #0d8b99;
+  overflow: overlay;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: white;
+  background: var(--surface);
+  color: var(--ink);
   overflow-x: hidden;
 }
 
@@ -32,7 +55,7 @@ a {
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #4D4D4D transparent;
+  scrollbar-color: #cbd5e1 transparent;
 }
 
 html.hide-scrollbar * {
@@ -50,13 +73,13 @@ html.hide-scrollbar * {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #4D4D4D;
+  background: #cbd5e1;
   border-radius: 999px;
   transition: background 0.5s ease;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #ffffff;
+  background: #94a3b8;
 }
 
 html.hide-scrollbar *::-webkit-scrollbar-thumb,
@@ -184,7 +207,16 @@ html {
 }
 
 @layer components {
+  /* Light glassmorphism — used on white/soft sections */
   .glass {
+    background: rgba(255, 255, 255, 0.80);
+    border: 1px solid rgba(226, 232, 240, 0.90);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-card);
+  }
+  /* Dark glassmorphism — preserved for navy hero areas */
+  .glass-dark {
     background: linear-gradient(160deg, rgba(18, 62, 112, 0.38), rgba(8, 37, 69, 0.58));
     border: 1px solid rgba(255, 255, 255, 0.14);
     backdrop-filter: blur(14px);
@@ -200,6 +232,32 @@ html {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+  }
+  /* Surface card — white box with subtle border + shadow */
+  .surface-card {
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .surface-card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+  /* Accent chip — small pill label */
+  .accent-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-light);
+    border: 1px solid rgba(13,139,153,0.25);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
   }
 }
 

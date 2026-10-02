@@ -40,7 +40,7 @@ export function HomeFaq() {
   };
 
   return (
-    <section id="faq" className="relative bg-navy-950 py-24 md:py-32">
+    <section id="faq" className="relative bg-surface-soft py-24 md:py-32">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -57,14 +57,14 @@ export function HomeFaq() {
         <div className="mt-14 space-y-4">
           {FAQS.map((faq, idx) => (
             <Reveal key={idx} delay={idx * 0.05}>
-              <details className="glass group rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold text-white focus:outline-none">
+              <details className="surface-card group rounded-2xl p-6 transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 text-left text-lg font-semibold text-ink focus:outline-none">
                   <span>{faq.q}</span>
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-teal-glow transition-transform duration-300 group-open:rotate-180">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/5 text-accent transition-transform duration-300 group-open:rotate-180">
                     <ChevronDown className="h-4 w-4" />
                   </span>
                 </summary>
-                <div className="mt-4 pt-4 border-t border-white/10 text-base leading-relaxed text-slate-300">
+                <div className="mt-4 pt-4 border-t border-surface-line text-base leading-relaxed text-ink-muted">
                   {faq.a}
                 </div>
               </details>

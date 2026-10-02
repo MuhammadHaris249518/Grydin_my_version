@@ -182,7 +182,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
       {/* ── Top Header Section ── */}
       <div className="relative z-20 max-w-5xl mx-auto px-6 text-center pt-2 sm:pt-4">
         {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal/15 border border-teal/40 text-teal-glow font-mono text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm shadow-teal/20 backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal/20 border border-teal-glow/40 text-teal-glow font-mono text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm shadow-teal/20 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-pulse" />
           <span>SMART SOLUTIONS. REAL IMPACT.</span>
         </div>
@@ -317,9 +317,9 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
             {/* Glowing Holographic Pedestal / Base Rings */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-64 sm:w-72 md:w-80 flex flex-col items-center pointer-events-none z-10">
               {/* Outer pulsing neon ring */}
-              <div className="w-56 sm:w-64 md:w-72 h-14 sm:h-16 rounded-[100%] border-2 border-teal-glow/70 shadow-[0_0_30px_rgba(45,212,191,0.6)] flex items-center justify-center bg-navy-800/40 backdrop-blur-sm animate-pulse">
+              <div className="w-56 sm:w-64 md:w-72 h-14 sm:h-16 rounded-[100%] border-2 border-teal-glow/30 shadow-[0_0_30px_rgba(45,212,191,0.6)] flex items-center justify-center bg-navy-950/40 backdrop-blur-sm animate-pulse">
                 {/* Middle concentric ring */}
-                <div className="w-44 sm:w-52 h-10 sm:h-12 rounded-[100%] border border-teal/90 shadow-[inset_0_0_15px_rgba(45,212,191,0.4)] flex items-center justify-center">
+                <div className="w-44 sm:w-52 h-10 sm:h-12 rounded-[100%] border border-teal-glow/90 shadow-[inset_0_0_15px_rgba(45,212,191,0.4)] flex items-center justify-center">
                   {/* Inner glowing platform disc */}
                   <div className="w-32 sm:w-36 h-6 sm:h-8 rounded-[100%] bg-gradient-to-b from-teal-glow/60 to-teal/20 shadow-[0_0_20px_#2dd4bf]" />
                 </div>
@@ -365,7 +365,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
               </div>
 
               {/* High-tech target reticle / directional beacon indicator */}
-              <div className="absolute -bottom-2 px-3 py-1 rounded-full bg-navy-950/90 border border-teal-glow/40 backdrop-blur-md flex items-center gap-1.5 text-xs font-mono font-bold text-teal-glow shadow-md shadow-teal-glow/20 pointer-events-none">
+              <div className="absolute -bottom-2 px-3 py-1 rounded-full bg-navy-950/90 border border-teal-glow/30 backdrop-blur-md flex items-center gap-1.5 text-xs font-mono font-bold text-teal-glow shadow-md shadow-teal-glow/20 pointer-events-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-ping" />
                 <span className="uppercase tracking-wider">
                   NAVIGATING: {SERVICES_DATA.find((s) => s.key === activeKey)?.title}
@@ -401,7 +401,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
       <div className="relative z-20 max-w-5xl mx-auto px-6 w-full pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
         {/* Left: Interactive Quick Selector Pills */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-mono text-slate-400 uppercase tracking-wider mr-1">
+          <span className="text-xs font-mono text-slate-300 uppercase tracking-wider mr-1">
             Focus:
           </span>
           {SERVICES_DATA.map((s) => (
@@ -410,7 +410,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
               onClick={() => handleCardClick(s)}
               className={`px-3 py-1 rounded-md text-xs font-mono font-medium transition-all ${
                 activeKey === s.key
-                  ? "bg-teal text-white border border-teal-glow/60 shadow-sm shadow-teal-glow/30"
+                  ? "bg-teal text-white border border-teal-glow/30 shadow-sm shadow-teal-glow/30"
                   : "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
               }`}
             >
@@ -422,7 +422,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
         {/* Center/Right: Scroll to detailed capabilities */}
         <a
           href="#capabilities"
-          className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-950/80 hover:bg-navy-700 border border-white/15 hover:border-teal-glow/50 text-slate-300 hover:text-white transition-all text-xs font-mono"
+          className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-950/80 hover:bg-navy-700 border border-white/10 hover:border-teal-glow/30 text-slate-300 hover:text-white transition-all text-xs font-mono"
         >
           {/* Animated scroll pill icon */}
           <span className="w-3.5 h-5 rounded-full border border-slate-400 group-hover:border-teal-glow flex items-start justify-center p-0.5">
@@ -461,8 +461,8 @@ function ServiceGlassCard({
       onMouseLeave={onMouseLeave}
       className={`group relative rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-xl ${
         isActive
-          ? "bg-navy-800/85 border-2 border-teal-glow shadow-[0_0_35px_rgba(45,212,191,0.32)] -translate-y-1.5 scale-[1.02]"
-          : "bg-navy-950/65 border border-white/12 hover:border-teal/80 hover:bg-navy-800/75 hover:shadow-[0_12px_28px_rgba(13,139,153,0.22)] hover:-translate-y-1"
+          ? "bg-navy-950/85 border-2 border-teal-glow shadow-[0_0_35px_rgba(45,212,191,0.32)] -translate-y-1.5 scale-[1.02]"
+          : "bg-navy-950/65 border border-white/12 hover:border-teal-glow/80 hover:bg-navy-950/75 hover:shadow-[0_12px_28px_rgba(13,139,153,0.22)] hover:-translate-y-1"
       }`}
     >
       {/* Blueprint Corner Crosshair Accents */}
@@ -488,7 +488,7 @@ function ServiceGlassCard({
           className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
             isActive
               ? "bg-teal text-white shadow-md shadow-teal-glow/40 scale-105"
-              : "bg-teal/15 border border-teal/30 text-teal-glow group-hover:bg-teal/30"
+              : "bg-teal/20 border border-teal-glow/30 text-teal-glow group-hover:bg-teal/30"
           }`}
         >
           <IconComp className="w-6 h-6" strokeWidth={2} />
@@ -496,12 +496,12 @@ function ServiceGlassCard({
 
         {/* Status Pill */}
         {isActive ? (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-glow/20 border border-teal-glow/50 text-teal-glow font-mono text-xs font-bold uppercase tracking-wider animate-pulse">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-glow/20 border border-teal-glow/30 text-teal-glow font-mono text-xs font-bold uppercase tracking-wider animate-pulse">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-glow" />
             ACTIVE
           </span>
         ) : (
-          <span className="text-slate-400 group-hover:text-slate-200 text-xs font-mono font-medium">
+          <span className="text-slate-300 group-hover:text-slate-300 text-xs font-mono font-medium">
             {service.tagline}
           </span>
         )}
@@ -528,8 +528,8 @@ function ServiceGlassCard({
             key={badge}
             className={`text-xs font-mono font-medium px-2 py-0.5 rounded border transition-colors ${
               isActive
-                ? "bg-teal-glow/15 border-teal-glow/40 text-teal-200"
-                : "bg-white/5 border-white/10 text-slate-400 group-hover:text-slate-300"
+                ? "bg-teal-glow/15 border-teal-glow/30 text-teal-200"
+                : "bg-white/5 border-white/10 text-slate-300 group-hover:text-slate-300"
             }`}
           >
             {badge}
@@ -541,7 +541,7 @@ function ServiceGlassCard({
       <div className="pt-3 border-t border-white/10 flex items-center justify-between">
         <span
           className={`text-xs font-bold transition-colors ${
-            isActive ? "text-teal-glow" : "text-slate-400 group-hover:text-slate-200"
+            isActive ? "text-teal-glow" : "text-slate-300 group-hover:text-slate-300"
           }`}
         >
           Explore capability
@@ -600,7 +600,7 @@ function HolographicRobotVisual({ activeKey }: { activeKey: ServiceKey }) {
           <div className="absolute top-4 left-7 w-16 h-8 rounded-full bg-white/40 blur-[5px] rotate-[-25deg] pointer-events-none" />
 
           {/* Black Glass Visor Face Screen */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-navy-950 border-2 border-teal/50 shadow-[inset_0_4px_16px_rgba(0,0,0,0.9),0_0_20px_rgba(13,139,153,0.3)] flex items-center justify-center overflow-hidden">
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-navy-950 border-2 border-teal-glow/50 shadow-[inset_0_4px_16px_rgba(0,0,0,0.9),0_0_20px_rgba(13,139,153,0.3)] flex items-center justify-center overflow-hidden">
             {/* Visor internal reflections */}
             <div className="absolute top-2 left-4 w-12 h-5 rounded-full bg-white/10 blur-[2px] rotate-[-20deg]" />
 

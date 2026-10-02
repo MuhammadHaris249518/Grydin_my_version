@@ -34,8 +34,8 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
               aria-pressed={isSelected}
               className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 isSelected
-                  ? "bg-teal text-white border border-teal-glow/70 shadow-glow-sm"
-                  : "glass text-slate-300 hover:border-white/20 hover:text-white"
+                  ? "bg-accent text-ink border border-accent/30 shadow-glow-sm"
+                  : "surface-card text-ink-muted hover:border-white/20 hover:text-ink"
               }`}
             >
               {cat}
@@ -52,13 +52,13 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
 
           return (
             <Link key={prod.slug} href={`/products/${prod.slug}`} className="group block h-full">
-              <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-8 transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+              <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-8 transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
                 <div>
                   {/* 3D Product Slot */}
                   <div className="relative mb-6">
                     <ModelSlot
                       label={`product-${prod.slug}`}
-                      className="h-48 w-full border border-white/10"
+                      className="h-48 w-full border border-surface-line"
                     />
                     <div className="absolute top-3 right-3 z-10">
                       <Badge variant={prod.status === "Live" ? "live" : prod.status === "Beta" ? "beta" : "coming-soon"}>
@@ -69,30 +69,30 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
 
                   {/* Category pill */}
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="font-mono text-xs uppercase tracking-wider text-teal-glow">
+                    <span className="font-mono text-xs uppercase tracking-wider text-accent">
                       {prod.category} Architecture
                     </span>
                   </div>
 
                   {/* Name & Tagline */}
-                  <h3 className="text-2xl font-semibold text-white tracking-tight mb-2 group-hover:text-teal-glow transition-colors">
+                  <h3 className="text-2xl font-semibold text-ink tracking-tight mb-2 group-hover:text-accent transition-colors">
                     {prod.name}
                   </h3>
-                  <p className="text-sm font-mono text-teal-glow/90 mb-4">
+                  <p className="text-sm font-mono text-accent/90 mb-4">
                     {prod.tagline}
                   </p>
 
-                  <p className="text-sm text-slate-300 leading-relaxed mb-6">
+                  <p className="text-sm text-ink-muted leading-relaxed mb-6">
                     {prod.summary}
                   </p>
 
                   {/* 3 Key Feature Bullets */}
-                  <div className="space-y-2.5 pt-4 border-t border-white/10 mb-6">
+                  <div className="space-y-2.5 pt-4 border-t border-surface-line mb-6">
                     {prod.features.slice(0, 3).map((feat, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
-                        <Check className="w-4 h-4 text-teal-glow shrink-0 mt-0.5" />
+                      <div key={i} className="flex items-start gap-2.5 text-xs text-ink-muted">
+                        <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
                         <span>
-                          <strong className="text-white font-medium">{feat.title}: </strong>
+                          <strong className="text-ink font-medium">{feat.title}: </strong>
                           {feat.text}
                         </span>
                       </div>
@@ -100,7 +100,7 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal-glow">
+                <div className="pt-4 border-t border-surface-line flex items-center justify-between text-xs font-semibold text-accent">
                   <span>Explore product architecture</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>

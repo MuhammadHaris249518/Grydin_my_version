@@ -29,7 +29,7 @@ export default function ProjectsPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-navy text-white">
+    <main className="min-h-screen bg-surface text-ink">
       {/* 1. PageHero */}
       <PageHero
         eyebrow="Our Work"
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
             </Button>
             <Button
               href="#our-products"
-              variant="outline-light"
+              variant="outline-dark"
               size="md"
             >
               Explore products
@@ -64,7 +64,7 @@ export default function ProjectsPage() {
       />
 
       {/* 3. Our Projects Section */}
-      <section id="our-projects" className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+      <section id="our-projects" className="relative bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Client Case Studies"
@@ -81,7 +81,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* 4. Our Products Section */}
-      <section id="our-products" className="relative bg-navy-950 py-20 md:py-28">
+      <section id="our-products" className="relative bg-surface-soft py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Proprietary Tools"

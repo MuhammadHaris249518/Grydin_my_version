@@ -19,7 +19,7 @@ const TECH_ITEMS = [
 
 export function HomeStack() {
   return (
-    <section className="relative overflow-hidden bg-navy-950 py-20 md:py-28 border-y border-white/10">
+    <section className="relative overflow-hidden bg-surface-soft py-20 md:py-28 border-y border-surface-line">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 mb-12">
         <SectionHeader
           eyebrow="Engineered On Modern Foundations"
@@ -35,13 +35,13 @@ export function HomeStack() {
           {[...TECH_ITEMS, ...TECH_ITEMS].map((item, idx) => (
             <div
               key={`${item.name}-${idx}`}
-              className="glass flex items-center gap-3 rounded-xl px-6 py-3.5 transition-colors hover:border-teal-glow/50"
+              className="surface-card flex items-center gap-3 rounded-xl px-6 py-3.5 transition-colors hover:border-accent/30"
             >
-              <span className="font-semibold text-white text-base">
+              <span className="font-semibold text-ink text-base">
                 {item.name}
               </span>
               <span className="h-1 w-1 rounded-full bg-teal-glow/60" />
-              <span className="font-mono text-xs uppercase tracking-wider text-slate-400">
+              <span className="font-mono text-xs uppercase tracking-wider text-ink-muted">
                 {item.category}
               </span>
             </div>

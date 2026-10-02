@@ -19,8 +19,8 @@ export interface BadgeProps {
 
 const variantStyles: Record<BadgeVariant, string> = {
   default: "bg-surface-soft text-ink-muted border border-surface-line",
-  teal: "bg-teal-light text-teal-dark font-semibold border border-teal/20",
-  navy: "bg-navy text-white font-medium",
+  teal: "bg-teal-light text-teal-dark font-semibold border border-accent/20",
+  navy: "bg-surface text-ink font-medium",
   surface: "bg-white text-ink-muted border border-surface-line shadow-xs",
   live: "bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold",
   beta: "bg-amber-50 text-amber-800 border border-amber-200 font-semibold",

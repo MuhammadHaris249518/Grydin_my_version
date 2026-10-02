@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, Poppins, JetBrains_Mono } from "next/font/google";
 import { RouteChangeHandler } from "./globalscope/RouteChangeHandler";
 import { ContentProtection } from "./globalscope/ContentProtection";
 import { SiteFooter } from "./globalscope/SiteFooter";
@@ -16,6 +16,13 @@ import {
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });
 
@@ -52,7 +59,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${poppins.variable} ${jetbrainsMono.variable} font-sans`} suppressHydrationWarning>
         <ContentProtection />
         <RouteChangeHandler />
         <Navbar />

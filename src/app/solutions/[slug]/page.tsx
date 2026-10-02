@@ -103,7 +103,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
   }));
 
   return (
-    <div className="min-h-screen bg-navy text-white">
+    <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
       {/* PageHero with 3D industry-hero slot */}
@@ -112,7 +112,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
         title={sol.name}
         subtitle={sol.headline}
         breadcrumbs={breadcrumbs}
-        slot={<ModelSlot label="industry-hero" className="aspect-[4/3] w-full border border-white/10" />}
+        slot={<ModelSlot label="industry-hero" className="aspect-[4/3] w-full border border-surface-line" />}
         actions={
           <Button
             href="/contact"
@@ -126,7 +126,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
       />
 
       {/* 1. Challenges Section */}
-      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Operational Bottlenecks"
@@ -142,7 +142,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
                   <div className="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-400/30 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
                     <AlertTriangle className="w-4 h-4" />
                   </div>
-                  <p className="text-base text-slate-200 leading-relaxed">
+                  <p className="text-base text-ink-muted leading-relaxed">
                     {ch}
                   </p>
                 </GlassCard>
@@ -153,7 +153,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
       </section>
 
       {/* 2. Our Approach (Process Timeline) */}
-      <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface-soft py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Engineering Methodology"
@@ -169,7 +169,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
       </section>
 
       {/* 3. Services We Apply */}
-      <section className="relative bg-navy py-20 md:py-28 border-b border-white/10">
+      <section className="relative bg-surface py-20 md:py-28 border-b border-surface-line">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Core Services"
@@ -182,20 +182,20 @@ export default async function SolutionDetailPage({ params }: PageProps) {
             {appliedServices.map((svc, idx) => (
               <Reveal key={svc.slug} delay={idx * 0.1}>
                 <Link href={`/services#${svc.slug}`} className="group block h-full">
-                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                  <GlassCard className="p-7 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-accent/50 group-hover:shadow-glow">
                     <div>
-                      <span className="font-mono text-xs uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded-md border border-teal-glow/30">
+                      <span className="font-mono text-xs uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded-md border border-accent/30">
                         Capability
                       </span>
-                      <h4 className="mt-4 text-xl font-semibold text-white group-hover:text-teal-glow transition-colors">
+                      <h4 className="mt-4 text-xl font-semibold text-ink group-hover:text-accent transition-colors">
                         {svc.name}
                       </h4>
-                      <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                      <p className="mt-2 text-sm text-ink-muted leading-relaxed">
                         {svc.summary}
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal-glow">
+                    <div className="mt-6 pt-4 border-t border-surface-line flex items-center justify-between text-xs font-semibold text-accent">
                       <span>Explore capability</span>
                       <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
@@ -209,7 +209,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
 
       {/* 4. Related Projects */}
       {relatedProjects.length > 0 && (
-        <section className="relative bg-navy-950 py-20 md:py-28 border-b border-white/10">
+        <section className="relative bg-surface-soft py-20 md:py-28 border-b border-surface-line">
           <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
             <SectionHeader
               eyebrow="Case Studies"
@@ -222,9 +222,9 @@ export default async function SolutionDetailPage({ params }: PageProps) {
               {relatedProjects.map((p, idx) => (
                 <Reveal key={p.slug} delay={idx * 0.1}>
                   <Link href={`/projects/${p.slug}`} className="group block h-full">
-                    <GlassCard className="p-8 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-teal-glow/50 group-hover:shadow-glow">
+                    <GlassCard className="p-8 h-full flex flex-col justify-between transition-[box-shadow,border-color] duration-300 group-hover:border-accent/50 group-hover:shadow-glow">
                       <div>
-                        <div className="bg-white/5 rounded-xl p-5 mb-6 flex items-center justify-center border border-white/10 h-24">
+                        <div className="bg-white/5 rounded-xl p-5 mb-6 flex items-center justify-center border border-surface-line h-24">
                           {p.logo ? (
                             <Image
                               src={p.logo}
@@ -234,25 +234,25 @@ export default async function SolutionDetailPage({ params }: PageProps) {
                               className="object-contain max-h-16"
                             />
                           ) : (
-                            <span className="font-semibold text-white text-lg">{p.client}</span>
+                            <span className="font-semibold text-ink text-lg">{p.client}</span>
                           )}
                         </div>
 
                         <div className="flex items-center gap-2 mb-3">
-                          <span className="font-mono text-xs text-teal-glow">{p.industry}</span>
+                          <span className="font-mono text-xs text-accent">{p.industry}</span>
                           <span className="text-slate-500">•</span>
-                          <span className="font-mono text-xs text-slate-400">{p.year}</span>
+                          <span className="font-mono text-xs text-ink-muted">{p.year}</span>
                         </div>
 
-                        <h4 className="text-xl font-semibold text-white group-hover:text-teal-glow transition-colors">
+                        <h4 className="text-xl font-semibold text-ink group-hover:text-accent transition-colors">
                           {p.title}
                         </h4>
-                        <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+                        <p className="mt-2 text-sm text-ink-muted leading-relaxed">
                           {p.summary}
                         </p>
                       </div>
 
-                      <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-teal-glow">
+                      <div className="mt-6 pt-4 border-t border-surface-line flex items-center justify-between text-xs font-semibold text-accent">
                         <span>Read case study</span>
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </div>
@@ -266,7 +266,7 @@ export default async function SolutionDetailPage({ params }: PageProps) {
       )}
 
       {/* 5. Outcomes Strip */}
-      <section className="relative bg-navy py-20 md:py-28">
+      <section className="relative bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Target Outcomes"
@@ -278,9 +278,9 @@ export default async function SolutionDetailPage({ params }: PageProps) {
           <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 gap-4">
             {sol.outcomes.map((out, idx) => (
               <Reveal key={idx} delay={idx * 0.06}>
-                <div className="glass p-5 rounded-xl flex items-center gap-3.5">
-                  <CheckCircle2 className="w-5 h-5 text-teal-glow shrink-0" />
-                  <span className="text-base text-slate-200">
+                <div className="surface-card p-5 rounded-xl flex items-center gap-3.5">
+                  <CheckCircle2 className="w-5 h-5 text-accent shrink-0" />
+                  <span className="text-base text-ink-muted">
                     {out}
                   </span>
                 </div>

@@ -16,7 +16,7 @@ export function CategoryBar() {
   ];
 
   return (
-    <div className="sticky top-[70px] z-30 bg-navy/85 backdrop-blur-md border-b border-white/10">
+    <div className="sticky top-[70px] z-30 bg-navy/85 backdrop-blur-md border-b border-surface-line">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between overflow-x-auto py-3">
         <div className="flex items-center gap-2">
           {links.map((link) => {
@@ -31,8 +31,8 @@ export function CategoryBar() {
                 href={link.href}
                 className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-semibold tracking-wide transition-all ${
                   isActive
-                    ? "bg-teal text-white shadow-glow-sm border border-teal-glow/50"
-                    : "glass text-slate-300 hover:text-white hover:border-white/20"
+                    ? "bg-accent text-ink shadow-glow-sm border border-accent/30"
+                    : "surface-card text-ink-muted hover:text-ink hover:border-white/20"
                 }`}
               >
                 {link.label}
@@ -45,10 +45,10 @@ export function CategoryBar() {
           href="/blog/feed.xml"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-xs font-mono text-slate-400 hover:text-teal-glow transition-colors px-2 py-1"
+          className="flex items-center gap-1.5 text-xs font-mono text-ink-muted hover:text-accent transition-colors px-2 py-1"
           title="Subscribe to RSS Feed"
         >
-          <Rss className="w-3.5 h-3.5 text-teal-glow" />
+          <Rss className="w-3.5 h-3.5 text-accent" />
           <span className="hidden sm:inline">RSS Feed</span>
         </a>
       </div>

@@ -22,7 +22,7 @@ export default function SolutionsHubPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-navy">
+    <main className="min-h-screen bg-surface">
       <PageHero
         eyebrow="Industry Expertise"
         title="Solutions engineered for your industry"

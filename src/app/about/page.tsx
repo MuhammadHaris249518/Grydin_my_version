@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { useTypewriter } from "../globalscope/typewriter";
 import DotGrid from "../globalscope/DotGrid";
 import { AccentWord } from "../globalscope/AccentWord";
-import { DARK_PAGE_BG } from "@/lib/theme";
 // ── Tape sizing (same system as landing page) ─────────────────────────────────
 const TAPE_H_MAX = 72;
 const TAPE_H_MIN = 58;
@@ -748,7 +747,7 @@ export default function About() {
           <DotGrid contentBottom={tapeH} animate={false} />
         </div>
         {/* ── Single dark section – full page content ── */}
-        <section style={{ background: DARK_PAGE_BG, width: "100%" }}>
+        <section style={{ background: "#04172e", width: "100%" }}>
 
           <div
             style={{

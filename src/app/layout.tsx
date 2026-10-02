@@ -1,5 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { RouteChangeHandler } from "./globalscope/RouteChangeHandler";
 import { ContentProtection } from "./globalscope/ContentProtection";
 import { SiteFooter } from "./globalscope/SiteFooter";
@@ -17,6 +17,13 @@ const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -46,7 +53,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: jsonLdScript(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} font-sans`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans`} suppressHydrationWarning>
         <ContentProtection />
         <RouteChangeHandler />
         <Navbar />

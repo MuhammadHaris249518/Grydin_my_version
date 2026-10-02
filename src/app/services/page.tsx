@@ -34,6 +34,7 @@ import {
   HelpCircle,
   LucideIcon,
 } from "lucide-react";
+import { ServicesRobotHero, ServiceKey } from "../globalscope/services/ServicesRobotHero";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 type ServiceCategory =
@@ -346,121 +347,74 @@ export default function ServicesPage() {
     <div className="min-h-screen bg-[#04172e] text-slate-100 selection:bg-[#0d8b99] selection:text-white">
 
 
-      {/* ── 1. Hero Section ── */}
-      <section className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden border-b border-white/10">
-        {/* Subtle grid backdrop */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-40 z-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(13, 139, 153, 0.12) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(13, 139, 153, 0.12) 1px, transparent 1px)
-            `,
-            backgroundSize: "44px 44px",
-          }}
-        />
+      {/* ── 1. Interactive 3D Robot Navigator Hero Section ── */}
+      <ServicesRobotHero
+        onSelectService={(key, category) => {
+          setSelectedCategory(category as ServiceCategory);
+          const mappedId =
+            key === "ai-agents"
+              ? "ai-agents"
+              : key === "workflow"
+              ? "ai-agents"
+              : key === "fullstack"
+              ? "custom-software"
+              : "custom-software";
+          setActiveServiceId(mappedId);
+        }}
+      />
 
-        {/* Ambient Teal Gradient Glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-[#0d8b99]/15 blur-[120px] rounded-full pointer-events-none z-0" />
-        <div className="absolute top-10 right-10 w-[300px] h-[300px] bg-blue-600/10 blur-[100px] rounded-full pointer-events-none z-0" />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          {/* Breadcrumb & Eyebrow */}
-          <div className="flex flex-wrap items-center gap-3 mb-6">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#0d8b99]/20 text-[#2dd4bf] border border-[#0d8b99]/40 tracking-wider uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-pulse" />
-              Enterprise Solutions & Capabilities
-            </span>
-            <span className="text-xs text-slate-400 font-medium">
-              Home <span className="mx-1 text-slate-600">/</span> Services
-            </span>
-          </div>
-
-          {/* Main Title */}
-          <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.12] mb-6">
-              Engineering Next-Gen <br className="hidden sm:inline" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-[#2dd4bf]">
-                AI & Enterprise Software Systems
-              </span>
-            </h1>
-
-            <p className="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed font-normal max-w-3xl mb-10">
-              From autonomous multi-agent operational workflows to mission-critical cloud platforms. We eliminate manual friction with custom software built around your exact business logic — with guaranteed fixed scope and first deployment in under two weeks.
+      {/* Quick Metrics Strip */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 -mt-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-8 border-t border-white/10">
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
+            <div className="text-2xl sm:text-3xl font-extrabold text-[#2dd4bf] mb-1 font-mono">
+              &lt; 2 Weeks
+            </div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+              First Deployment
+            </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              Rapid turnaround without cutting technical corners
             </p>
-
-            {/* Hero CTAs */}
-            <div className="flex flex-wrap items-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-lg shadow-[#0d8b99]/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-              >
-                Schedule Solution Diagnosis
-                <ArrowRight size={16} strokeWidth={2.2} />
-              </Link>
-
-              <a
-                href="#capabilities"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white text-xs sm:text-sm font-bold uppercase tracking-wider border border-white/20 rounded-md transition-all hover:border-white/40"
-              >
-                Explore Capabilities
-                <ChevronRight size={16} />
-              </a>
-            </div>
           </div>
 
-          {/* Quick Metrics Strip */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-white/10">
-            <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#2dd4bf] mb-1 font-mono">
-                &lt; 2 Weeks
-              </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                First Deployment
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Rapid turnaround without cutting technical corners
-              </p>
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
+              99.9%
             </div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+              Reliability SLA
+            </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              Zero-downtime architecture with live telemetry
+            </p>
+          </div>
 
-            <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
-                99.9%
-              </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Reliability SLA
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Zero-downtime architecture with live telemetry
-              </p>
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
+              100+
             </div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+              Custom Integrations
+            </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              Seamless connectors across ERP, CRM, and databases
+            </p>
+          </div>
 
-            <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
-                100+
-              </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Custom Integrations
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Seamless connectors across ERP, CRM, and databases
-              </p>
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
+            <div className="text-2xl sm:text-3xl font-extrabold text-[#2dd4bf] mb-1 font-mono">
+              Fixed Scope
             </div>
-
-            <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
-              <div className="text-2xl sm:text-3xl font-extrabold text-[#2dd4bf] mb-1 font-mono">
-                Fixed Scope
-              </div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                Transparent Pricing
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Zero retainer traps, no surprise invoices
-              </p>
+            <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
+              Transparent Pricing
             </div>
+            <p className="text-[11px] text-slate-400 mt-1">
+              Zero retainer traps, no surprise invoices
+            </p>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* ── 2. Core Capabilities Explorer ── */}
       <section id="capabilities" className="py-20 md:py-28 relative">

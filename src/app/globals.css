@@ -17,18 +17,6 @@ body {
   padding: 0;
   background: white;
   overflow-x: hidden;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-}
-
-input,
-textarea,
-select,
-[data-allow-copy] {
-  -webkit-user-select: text;
-  user-select: text;
-  -webkit-touch-callout: default;
 }
 
 img {
@@ -165,5 +153,32 @@ html {
   /* 2s pause */
   100% {
     background-position: 0% 0;
+  }
+}
+
+@keyframes dashPulse {
+  0% {
+    stroke-dashoffset: 24;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes floatBob {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes eyeBlink {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
   }
 }

@@ -117,7 +117,7 @@ export default function Home() {
         {/* 2. Client Collabs Marquee (Deep Navy band matching the Hero) */}
         <CollabsMarquee background="#04172e" />
 
-        {/* 3. Core Capabilities Grid (6 Services on White) */}
+        {/* 3. Core Capabilities 12-Column Bento Grid */}
         <HomeServices />
 
         {/* 4. Why GrydIn (Metrics, Trust, & "Check Our Work" -> /projects) */}

@@ -8,7 +8,6 @@ import { ContactReachSection } from "../globalscope/ContactReachSection";
 import DotGrid from "../globalscope/DotGrid";
 import { AccentWord } from "../globalscope/AccentWord";
 import { BRAND_ACCENT, brandAccentAlpha } from "@/lib/brand";
-import { DARK_PAGE_BG } from "@/lib/theme";
 // ── Tape sizing (identical to about page) ────────────────────────────────────
 const TAPE_H_MAX = 72;
 const TAPE_H_MIN = 58;
@@ -306,7 +305,7 @@ export default function Contact() {
         </div>
         <section
           style={{
-            background: DARK_PAGE_BG,
+            background: "#04172e",
             width: "100%",
             minHeight: "100vh",
             display: "flex",

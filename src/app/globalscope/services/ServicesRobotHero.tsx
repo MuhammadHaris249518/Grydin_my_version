@@ -111,7 +111,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
       {/* ── Background Cyber Grid & Ambient Glows ── */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Deep navy vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy to-[#020e1e]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy to-navy-950" />
 
         {/* Ambient teal central radial glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[550px] bg-teal/18 rounded-full blur-[140px]" />
@@ -190,7 +190,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
         {/* Main Heading */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-white tracking-tight uppercase leading-[1.12] mb-4">
           WE BUILD{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-glow via-[#38bdf8] to-teal">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-glow via-teal-glow to-teal">
             INTELLIGENT DIGITAL SYSTEMS
           </span>
         </h1>
@@ -317,7 +317,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
             {/* Glowing Holographic Pedestal / Base Rings */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-64 sm:w-72 md:w-80 flex flex-col items-center pointer-events-none z-10">
               {/* Outer pulsing neon ring */}
-              <div className="w-56 sm:w-64 md:w-72 h-14 sm:h-16 rounded-[100%] border-2 border-teal-glow/70 shadow-[0_0_30px_rgba(45,212,191,0.6)] flex items-center justify-center bg-[#072445]/40 backdrop-blur-sm animate-pulse">
+              <div className="w-56 sm:w-64 md:w-72 h-14 sm:h-16 rounded-[100%] border-2 border-teal-glow/70 shadow-[0_0_30px_rgba(45,212,191,0.6)] flex items-center justify-center bg-navy-800/40 backdrop-blur-sm animate-pulse">
                 {/* Middle concentric ring */}
                 <div className="w-44 sm:w-52 h-10 sm:h-12 rounded-[100%] border border-teal/90 shadow-[inset_0_0_15px_rgba(45,212,191,0.4)] flex items-center justify-center">
                   {/* Inner glowing platform disc */}
@@ -422,7 +422,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
         {/* Center/Right: Scroll to detailed capabilities */}
         <a
           href="#capabilities"
-          className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#051c36]/80 hover:bg-[#082a4d] border border-white/15 hover:border-teal-glow/50 text-slate-300 hover:text-white transition-all text-xs font-mono"
+          className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-950/80 hover:bg-navy-700 border border-white/15 hover:border-teal-glow/50 text-slate-300 hover:text-white transition-all text-xs font-mono"
         >
           {/* Animated scroll pill icon */}
           <span className="w-3.5 h-5 rounded-full border border-slate-400 group-hover:border-teal-glow flex items-start justify-center p-0.5">
@@ -461,8 +461,8 @@ function ServiceGlassCard({
       onMouseLeave={onMouseLeave}
       className={`group relative rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-xl ${
         isActive
-          ? "bg-[#072445]/85 border-2 border-teal-glow shadow-[0_0_35px_rgba(45,212,191,0.32)] -translate-y-1.5 scale-[1.02]"
-          : "bg-[#061833]/65 border border-white/12 hover:border-teal/80 hover:bg-[#07223f]/75 hover:shadow-[0_12px_28px_rgba(13,139,153,0.22)] hover:-translate-y-1"
+          ? "bg-navy-800/85 border-2 border-teal-glow shadow-[0_0_35px_rgba(45,212,191,0.32)] -translate-y-1.5 scale-[1.02]"
+          : "bg-navy-950/65 border border-white/12 hover:border-teal/80 hover:bg-navy-800/75 hover:shadow-[0_12px_28px_rgba(13,139,153,0.22)] hover:-translate-y-1"
       }`}
     >
       {/* Blueprint Corner Crosshair Accents */}
@@ -600,7 +600,7 @@ function HolographicRobotVisual({ activeKey }: { activeKey: ServiceKey }) {
           <div className="absolute top-4 left-7 w-16 h-8 rounded-full bg-white/40 blur-[5px] rotate-[-25deg] pointer-events-none" />
 
           {/* Black Glass Visor Face Screen */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#030914] border-2 border-teal/50 shadow-[inset_0_4px_16px_rgba(0,0,0,0.9),0_0_20px_rgba(13,139,153,0.3)] flex items-center justify-center overflow-hidden">
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-navy-950 border-2 border-teal/50 shadow-[inset_0_4px_16px_rgba(0,0,0,0.9),0_0_20px_rgba(13,139,153,0.3)] flex items-center justify-center overflow-hidden">
             {/* Visor internal reflections */}
             <div className="absolute top-2 left-4 w-12 h-5 rounded-full bg-white/10 blur-[2px] rotate-[-20deg]" />
 

@@ -670,7 +670,7 @@ export default function ServicesPage() {
 
             {/* Custom Industry Callout Card */}
             <Reveal delay={0.3}>
-              <div className="bg-gradient-to-br from-[#051e3b] to-teal/30 border border-teal/40 rounded-2xl p-7 flex flex-col justify-between text-left h-full">
+              <div className="bg-gradient-to-br from-navy-800 to-teal/30 border border-teal/40 rounded-2xl p-7 flex flex-col justify-between text-left h-full">
                 <div>
                   <div className="w-11 h-11 rounded-lg bg-white/10 text-white flex items-center justify-center mb-5">
                     <Compass size={22} strokeWidth={1.8} />
@@ -993,10 +993,10 @@ export default function ServicesPage() {
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal block mb-1">
               Sector Specialization
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#0f172a] tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-ink tracking-tight">
               Looking for solutions tailored to your specific industry?
             </h3>
-            <p className="text-sm text-[#475569] mt-1">
+            <p className="text-sm text-ink-muted mt-1">
               Explore specialized workflows for Legal, Real Estate, Retail, Healthcare, Energy, and Logistics.
             </p>
           </div>

@@ -170,15 +170,15 @@ export default async function ProductDetailPage({ params }: PageProps) {
                 <div className="space-y-3 font-mono text-xs text-slate-300">
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
                     <span className="flex items-center gap-2"><Activity className="h-4 w-4 text-teal-glow" /> System Status</span>
-                    <span className="text-teal-glow">Active · 99.9% Uptime</span>
+                    <span className="text-teal-glow">{product.status}</span>
                   </div>
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
-                    <span className="flex items-center gap-2"><Terminal className="h-4 w-4 text-teal-glow" /> Event Bus Latency</span>
-                    <span className="text-teal-glow">&lt; 14ms</span>
+                    <span className="flex items-center gap-2"><Terminal className="h-4 w-4 text-teal-glow" /> Architecture</span>
+                    <span className="text-teal-glow">Cloud Native</span>
                   </div>
                   <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center justify-between">
-                    <span className="flex items-center gap-2"><Layers className="h-4 w-4 text-teal-glow" /> Active Connectors</span>
-                    <span className="text-teal-glow">12 Handled</span>
+                    <span className="flex items-center gap-2"><Layers className="h-4 w-4 text-teal-glow" /> Integration Model</span>
+                    <span className="text-teal-glow">API & Webhooks</span>
                   </div>
                 </div>
               </div>

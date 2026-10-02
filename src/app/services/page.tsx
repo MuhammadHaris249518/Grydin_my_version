@@ -60,8 +60,8 @@ interface ServiceItem {
   deliverables: string[];
   techStack: string[];
   idealFor: string;
-  metric: string;
-  metricLabel: string;
+  metric?: string;
+  metricLabel?: string;
 }
 
 interface IndustrySolution {
@@ -92,8 +92,8 @@ const CORE_SERVICES: ServiceItem[] = [
     techStack: ["Python", "FastAPI", "OpenAI / Claude 3.5", "LangGraph", "LlamaIndex", "Qdrant"],
     idealFor:
       "Enterprise teams drowning in repetitive approval loops, multi-tool triage, or high-volume operational workflows.",
-    metric: "< 2.5s",
-    metricLabel: "Average decision cycle latency",
+    metric: "Sub-second",
+    metricLabel: "Autonomous decision cycle execution",
   },
   {
     id: "custom-software",
@@ -113,8 +113,8 @@ const CORE_SERVICES: ServiceItem[] = [
     techStack: ["Next.js", "TypeScript", "Node.js", "Go", "PostgreSQL", "Tailwind CSS"],
     idealFor:
       "Organizations that have outgrown off-the-shelf software and require bespoke architecture engineered for proprietary workflows.",
-    metric: "99.99%",
-    metricLabel: "Production uptime SLA guarantee",
+    metric: "Audit-Ready",
+    metricLabel: "Enterprise isolation & compliance SLA",
   },
   {
     id: "cloud-devops",
@@ -134,8 +134,8 @@ const CORE_SERVICES: ServiceItem[] = [
     techStack: ["AWS", "Google Cloud", "Kubernetes", "Docker", "Terraform", "GitHub Actions"],
     idealFor:
       "Companies experiencing scalability bottlenecks, high infrastructure costs, or slow manual release cycles.",
-    metric: "3x",
-    metricLabel: "Faster release velocity post-pipeline",
+    metric: "Continuous",
+    metricLabel: "Automated zero-downtime releases",
   },
   {
     id: "system-integration",
@@ -155,8 +155,8 @@ const CORE_SERVICES: ServiceItem[] = [
     techStack: ["Apache Kafka", "RabbitMQ", "Redis", "GraphQL", "Apache Airflow", "REST"],
     idealFor:
       "Teams managing duplicate data entry, manual CSV exports, or siloed communications across disconnected software.",
-    metric: "0%",
-    metricLabel: "Data loss during synchronization",
+    metric: "Zero-Loss",
+    metricLabel: "Guaranteed transactional integrity",
   },
   {
     id: "data-analytics",
@@ -176,8 +176,8 @@ const CORE_SERVICES: ServiceItem[] = [
     techStack: ["Python", "Snowflake", "ClickHouse", "dbt", "Apache Spark", "Apache Airflow"],
     idealFor:
       "Leadership demanding single-source-of-truth operational metrics without waiting days for manual spreadsheets.",
-    metric: "10x",
-    metricLabel: "Faster analytical query response",
+    metric: "Real-Time",
+    metricLabel: "Single-source operational intelligence",
   },
   {
     id: "ai-integration",
@@ -187,7 +187,7 @@ const CORE_SERVICES: ServiceItem[] = [
     title: "Document AI & Vision Extraction Engines",
     tagline: "Converting unstructured invoices, contracts, and receipts into verified data",
     description:
-      "Deploy custom computer vision and large language models straight into your document processing pipeline. Extract complex tables, handwritten notes, and legal clauses with over 99% verified accuracy.",
+      "Deploy custom computer vision and large language models straight into your document processing pipeline. Extract complex tables, handwritten notes, and legal clauses with deterministic verification.",
     deliverables: [
       "Custom OCR and multimodal vision pipelines for multi-page complex forms",
       "Automated cross-check validation against internal ERP records",
@@ -197,8 +197,8 @@ const CORE_SERVICES: ServiceItem[] = [
     techStack: ["Vision LLMs", "OpenCV", "Tesseract", "Vector Databases", "Python", "FastAPI"],
     idealFor:
       "Logistics, financial, real estate, and healthcare companies handling thousands of weekly documents manually.",
-    metric: "> 99.2%",
-    metricLabel: "Extraction accuracy rate",
+    metric: "Verified",
+    metricLabel: "Deterministic human-in-the-loop accuracy",
   },
 ];
 
@@ -214,7 +214,7 @@ const INDUSTRY_SOLUTIONS: IndustrySolution[] = [
       "End-of-day bank ledger & payment gateway reconciliation",
       "Regulatory KYC & AML verification pipelines",
     ],
-    impactStat: "75% reduction in loan approval turnaround",
+    impactStat: "Accelerated underwriting turnaround",
   },
   {
     title: "Supply Chain & Logistics",
@@ -226,7 +226,7 @@ const INDUSTRY_SOLUTIONS: IndustrySolution[] = [
       "Multi-carrier inventory synchronization across regional warehouses",
       "Automated exception alerts and carrier performance scoring",
     ],
-    impactStat: "80% faster shipping documentation clearance",
+    impactStat: "Rapid shipping documentation clearance",
   },
   {
     title: "Real Estate & PropTech",
@@ -238,7 +238,7 @@ const INDUSTRY_SOLUTIONS: IndustrySolution[] = [
       "AI-driven maintenance dispatch and vendor work-order routing",
       "Real-time portfolio occupancy and yield performance dashboards",
     ],
-    impactStat: "4x increase in property units managed per operator",
+    impactStat: "Streamlined portfolio operations per operator",
   },
   {
     title: "E-Commerce & Omnichannel Retail",
@@ -262,7 +262,7 @@ const INDUSTRY_SOLUTIONS: IndustrySolution[] = [
       "Lab sample workflow tracking and automated report dissemination",
       "AI clinical summarization tools for healthcare practitioners",
     ],
-    impactStat: "60% less time spent by staff on administrative paperwork",
+    impactStat: "Significant reduction in administrative paperwork",
   },
 ];
 
@@ -438,7 +438,7 @@ export default function ServicesPage() {
 
             <div className="glass rounded-2xl p-5 hover:border-teal/40 transition-colors">
               <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
-                99.9%
+                Audit-Ready
               </div>
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Reliability SLA
@@ -450,7 +450,7 @@ export default function ServicesPage() {
 
             <div className="glass rounded-2xl p-5 hover:border-teal/40 transition-colors">
               <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
-                100+
+                Turnkey
               </div>
               <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
                 Custom Integrations

@@ -129,7 +129,7 @@ function OrbitCard({
       <div>
         {/* Header: Icon + Mono Number */}
         <div className="flex items-center justify-between mb-4">
-          <div className="w-10 h-10 rounded-xl bg-[#0d8b99]/15 border border-[#0d8b99]/30 text-cyan-300 flex items-center justify-center group-hover:bg-[#0d8b99]/30 group-hover:border-cyan-400 transition-colors">
+          <div className="w-10 h-10 rounded-xl bg-teal/15 border border-teal/30 text-cyan-300 flex items-center justify-center group-hover:bg-teal/30 group-hover:border-cyan-400 transition-colors">
             <Icon className="w-5 h-5 text-cyan-400" />
           </div>
           <span className="font-mono text-xs font-semibold text-cyan-400/80 px-2 py-0.5 rounded bg-cyan-950/40 border border-cyan-500/20">
@@ -178,7 +178,7 @@ export function HomeServices() {
   return (
     <section
       id="services"
-      className="relative w-full py-20 md:py-28 bg-[#04172e] border-b border-white/10 overflow-hidden"
+      className="relative w-full py-20 md:py-28 bg-navy border-b border-white/10 overflow-hidden"
     >
       {/* Circuit Board Pattern Background */}
       <div
@@ -194,20 +194,20 @@ export function HomeServices() {
       />
 
       {/* Ambient Radial Teal & Cyan Lighting */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-[#0d8b99]/15 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-teal/15 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[350px] bg-cyan-400/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative max-w-[1320px] mx-auto px-5 sm:px-8 lg:px-6">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-18">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0d8b99]/20 border border-cyan-400/30 text-cyan-300 font-mono text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal/20 border border-cyan-400/30 text-cyan-300 font-mono text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             <span>SMART SOLUTIONS. REAL IMPACT.</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white tracking-tight leading-tight mb-4">
             WE BUILD{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-[#0d8b99]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-teal">
               INTELLIGENT DIGITAL SYSTEMS
             </span>
           </h2>

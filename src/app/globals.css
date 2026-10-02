@@ -182,3 +182,32 @@ html {
     transform: scaleY(0.1);
   }
 }
+
+@layer components {
+  .glass {
+    background: linear-gradient(160deg, rgba(18, 62, 112, 0.38), rgba(8, 37, 69, 0.58));
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 20px 50px -24px rgba(0, 0, 0, 0.6);
+  }
+  .bg-circuit {
+    background-image: url("/images/patterns/circuit.svg");
+    background-size: 360px 360px;
+  }
+  .text-gradient {
+    background: linear-gradient(90deg, #0d8b99, #2dd4bf);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

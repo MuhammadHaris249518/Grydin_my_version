@@ -4,11 +4,11 @@ import { SITE } from "../site-config";
 
 export function HomeMapSection() {
   return (
-    <section id="location" className="relative w-full py-20 md:py-28 bg-[#04172e] border-b border-white/10 overflow-hidden">
+    <section id="location" className="relative w-full py-20 md:py-28 bg-navy border-b border-white/10 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
             <Building className="w-3.5 h-3.5" />
             <span>Physical Presence & Engineering Hub</span>
           </div>
@@ -43,11 +43,11 @@ export function HomeMapSection() {
               <div className="space-y-4 mb-8">
                 {/* Address */}
                 <div className="flex items-start gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center shrink-0 mt-0.5 border border-[#0d8b99]/20">
+                  <div className="w-9 h-9 rounded-lg bg-teal/10 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/20">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#0d8b99] mb-0.5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal mb-0.5">
                       Office Address
                     </p>
                     <p className="text-sm font-semibold text-slate-900 leading-snug">
@@ -58,11 +58,11 @@ export function HomeMapSection() {
 
                 {/* Operating Hours */}
                 <div className="flex items-start gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center shrink-0 mt-0.5 border border-[#0d8b99]/20">
+                  <div className="w-9 h-9 rounded-lg bg-teal/10 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/20">
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#0d8b99] mb-0.5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal mb-0.5">
                       Office & Visiting Hours
                     </p>
                     <p className="text-sm font-semibold text-slate-900">
@@ -76,20 +76,20 @@ export function HomeMapSection() {
 
                 {/* Direct Contacts */}
                 <div className="flex items-start gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3.5">
-                  <div className="w-9 h-9 rounded-lg bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center shrink-0 mt-0.5 border border-[#0d8b99]/20">
+                  <div className="w-9 h-9 rounded-lg bg-teal/10 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/20">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-[#0d8b99] mb-0.5">
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal mb-0.5">
                       Direct Contact
                     </p>
                     <p className="text-sm font-semibold text-slate-900">
-                      <a href={`tel:${SITE.phoneTel}`} className="hover:text-[#0d8b99] transition-colors">
+                      <a href={`tel:${SITE.phoneTel}`} className="hover:text-teal transition-colors">
                         {SITE.phoneDisplay}
                       </a>
                     </p>
                     <p className="text-xs text-slate-500">
-                      <a href={`mailto:${SITE.email}`} className="hover:text-[#0d8b99] transition-colors">
+                      <a href={`mailto:${SITE.email}`} className="hover:text-teal transition-colors">
                         {SITE.email}
                       </a>
                     </p>
@@ -100,10 +100,10 @@ export function HomeMapSection() {
               {/* Facility Badges */}
               <div className="flex flex-wrap gap-2 pt-4 border-t border-slate-100 mb-8">
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200">
-                  <Shield className="w-3.5 h-3.5 text-[#0d8b99]" /> NDA Protected Facility
+                  <Shield className="w-3.5 h-3.5 text-teal" /> NDA Protected Facility
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs font-semibold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200">
-                  <Wifi className="w-3.5 h-3.5 text-[#0d8b99]" /> Redundant Fiber
+                  <Wifi className="w-3.5 h-3.5 text-teal" /> Redundant Fiber
                 </span>
               </div>
             </div>
@@ -114,7 +114,7 @@ export function HomeMapSection() {
                 href={SITE.office.directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all text-center"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-teal hover:bg-teal-dark text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all text-center"
               >
                 <Navigation className="w-4 h-4" />
                 Get Directions
@@ -137,7 +137,7 @@ export function HomeMapSection() {
             <div className="relative w-full h-full min-h-[420px] sm:min-h-[480px] rounded-2xl border-4 border-white overflow-hidden shadow-2xl bg-white">
               {/* Top Map Header Badge */}
               <div className="absolute top-4 left-4 z-10 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-200 shadow-md flex items-center gap-2.5">
-                <MapPin className="w-4 h-4 text-[#0d8b99]" />
+                <MapPin className="w-4 h-4 text-teal" />
                 <div>
                   <p className="text-xs font-bold text-slate-900 leading-tight">GrydIn HQ Location</p>
                   <p className="text-[10px] text-slate-500 leading-tight">F-11 Markaz, Islamabad</p>
@@ -150,7 +150,7 @@ export function HomeMapSection() {
                   href={SITE.office.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/95 hover:bg-white text-slate-900 px-3.5 py-2 rounded-xl border border-slate-200 shadow-md hover:text-[#0d8b99] transition-colors backdrop-blur-md"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold bg-white/95 hover:bg-white text-slate-900 px-3.5 py-2 rounded-xl border border-slate-200 shadow-md hover:text-teal transition-colors backdrop-blur-md"
                 >
                   <span>Open in Google Maps</span>
                   <ExternalLink className="w-3.5 h-3.5" />

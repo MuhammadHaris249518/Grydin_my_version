@@ -76,11 +76,11 @@ const PROCESS_STEPS = [
 
 export function HomeProcess() {
   return (
-    <section id="methodology" className="relative w-full py-20 md:py-28 bg-[#04172e] border-b border-white/10 overflow-hidden">
+    <section id="methodology" className="relative w-full py-20 md:py-28 bg-navy border-b border-white/10 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
             <GitPullRequest className="w-3.5 h-3.5" />
             <span>Methodology</span>
           </div>
@@ -99,18 +99,18 @@ export function HomeProcess() {
           {PROCESS_STEPS.map((step, idx) => (
             <div
               key={step.step}
-              className="group relative bg-white rounded-2xl border border-transparent hover:border-[#0d8b99] p-8 flex flex-col justify-between hover:shadow-2xl hover:shadow-[#0d8b99]/20 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+              className="group relative bg-white rounded-2xl border border-transparent hover:border-teal p-8 flex flex-col justify-between hover:shadow-2xl hover:shadow-teal/20 hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
             >
               {/* Top highlight bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-[#0d8b99] transition-colors duration-300" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-transparent group-hover:bg-teal transition-colors duration-300" />
 
               <div>
                 {/* Step header */}
                 <div className="flex items-center justify-between mb-6">
-                  <span className="text-4xl sm:text-5xl font-black text-slate-200 group-hover:text-[#0d8b99] transition-colors">
+                  <span className="text-4xl sm:text-5xl font-black text-slate-200 group-hover:text-teal transition-colors">
                     {step.step}
                   </span>
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#0d8b99] bg-[#0d8b99]/10 border border-[#0d8b99]/20 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-widest text-teal bg-teal/10 border border-teal/20 px-3 py-1 rounded-full">
                     {step.phase}
                   </span>
                 </div>
@@ -133,7 +133,7 @@ export function HomeProcess() {
                         key={pt.title}
                         className="flex items-start gap-3 bg-slate-50 border border-slate-200/80 rounded-xl p-3 hover:bg-slate-100 transition-colors"
                       >
-                        <div className="w-7 h-7 rounded-lg bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center shrink-0 mt-0.5 border border-[#0d8b99]/20">
+                        <div className="w-7 h-7 rounded-lg bg-teal/10 text-teal flex items-center justify-center shrink-0 mt-0.5 border border-teal/20">
                           <Icon className="w-4 h-4" />
                         </div>
                         <div>
@@ -150,7 +150,7 @@ export function HomeProcess() {
 
               <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
                 <span>Phase {idx + 1} of 3</span>
-                <div className="flex items-center gap-1.5 text-[#0d8b99]">
+                <div className="flex items-center gap-1.5 text-teal">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Guaranteed Delivery</span>
                 </div>

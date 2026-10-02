@@ -344,7 +344,7 @@ export default function ServicesPage() {
     CORE_SERVICES.find((s) => s.id === activeServiceId) || CORE_SERVICES[0];
 
   return (
-    <div className="min-h-screen bg-[#04172e] text-slate-100 selection:bg-[#0d8b99] selection:text-white">
+    <div className="min-h-screen bg-navy text-slate-100 selection:bg-teal selection:text-white">
 
 
       {/* ── 1. Interactive 3D Robot Navigator Hero Section ── */}
@@ -366,8 +366,8 @@ export default function ServicesPage() {
       {/* Quick Metrics Strip */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 -mt-4 mb-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-8 border-t border-white/10">
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#2dd4bf] mb-1 font-mono">
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
+            <div className="text-2xl sm:text-3xl font-extrabold text-teal-glow mb-1 font-mono">
               &lt; 2 Weeks
             </div>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
@@ -378,7 +378,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
             <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
               99.9%
             </div>
@@ -390,7 +390,7 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
             <div className="text-2xl sm:text-3xl font-extrabold text-white mb-1 font-mono">
               100+
             </div>
@@ -402,8 +402,8 @@ export default function ServicesPage() {
             </p>
           </div>
 
-          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-[#0d8b99]/40 transition-colors">
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#2dd4bf] mb-1 font-mono">
+          <div className="bg-[#051e3b]/80 border border-white/10 rounded-xl p-5 hover:border-teal/40 transition-colors">
+            <div className="text-2xl sm:text-3xl font-extrabold text-teal-glow mb-1 font-mono">
               Fixed Scope
             </div>
             <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
@@ -421,7 +421,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {/* Section Heading */}
           <div className="max-w-3xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2dd4bf] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
               Our Core Pillars
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
@@ -447,7 +447,7 @@ export default function ServicesPage() {
                 onClick={() => setSelectedCategory(tab.id as ServiceCategory)}
                 className={`px-4 py-2.5 rounded-lg text-xs sm:text-sm font-bold tracking-wider uppercase transition-all ${
                   selectedCategory === tab.id
-                    ? "bg-[#0d8b99] text-white shadow-md shadow-[#0d8b99]/30"
+                    ? "bg-teal text-white shadow-md shadow-teal/30"
                     : "bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border border-white/10"
                 }`}
               >
@@ -463,12 +463,12 @@ export default function ServicesPage() {
               return (
                 <div
                   key={service.id}
-                  className="bg-[#051d38]/90 border border-white/10 hover:border-[#0d8b99]/60 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-[#0d8b99]/10 group relative"
+                  className="bg-[#051d38]/90 border border-white/10 hover:border-teal/60 rounded-2xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:shadow-teal/10 group relative"
                 >
                   <div>
                     {/* Top Row: Icon + Badge */}
                     <div className="flex items-center justify-between gap-3 mb-5">
-                      <div className="w-12 h-12 rounded-xl bg-[#0d8b99]/15 border border-[#0d8b99]/30 flex items-center justify-center text-[#2dd4bf] group-hover:scale-105 group-hover:bg-[#0d8b99] group-hover:text-white transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-teal/15 border border-teal/30 flex items-center justify-center text-teal-glow group-hover:scale-105 group-hover:bg-teal group-hover:text-white transition-all">
                         <IconComp size={24} strokeWidth={1.8} />
                       </div>
                       <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
@@ -477,7 +477,7 @@ export default function ServicesPage() {
                     </div>
 
                     {/* Title & Tagline */}
-                    <h3 className="text-xl font-bold text-white group-hover:text-[#2dd4bf] transition-colors mb-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-teal-glow transition-colors mb-2">
                       {service.title}
                     </h3>
                     <p className="text-xs font-semibold text-slate-400 mb-4 line-clamp-1 italic">
@@ -498,7 +498,7 @@ export default function ServicesPage() {
                         <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
                           <CheckCircle2
                             size={14}
-                            className="text-[#2dd4bf] shrink-0 mt-0.5"
+                            className="text-teal-glow shrink-0 mt-0.5"
                           />
                           <span>{item}</span>
                         </div>
@@ -527,7 +527,7 @@ export default function ServicesPage() {
                   <div className="pt-5 border-t border-white/10 mt-auto">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <div className="text-lg font-extrabold text-[#2dd4bf] font-mono">
+                        <div className="text-lg font-extrabold text-teal-glow font-mono">
                           {service.metric}
                         </div>
                         <div className="text-[10px] uppercase tracking-wider text-slate-400">
@@ -537,7 +537,7 @@ export default function ServicesPage() {
 
                       <Link
                         href="/contact"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white group-hover:text-[#2dd4bf] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white group-hover:text-teal-glow transition-colors"
                       >
                         Scope Solution
                         <ArrowRight size={13} />
@@ -557,10 +557,10 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 3. Industry Solutions Matrix (Like Systems Ltd & NetSol) ── */}
-      <section className="py-20 md:py-28 bg-[#031326] border-y border-white/10 relative">
+      <section className="py-20 md:py-28 bg-navy-950 border-y border-white/10 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mb-14 text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2dd4bf] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
               Domain Expertise
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
@@ -577,10 +577,10 @@ export default function ServicesPage() {
               return (
                 <div
                   key={index}
-                  className="bg-[#051c36] border border-white/10 rounded-2xl p-6 sm:p-7 hover:border-[#0d8b99]/50 transition-all flex flex-col justify-between"
+                  className="bg-[#051c36] border border-white/10 rounded-2xl p-6 sm:p-7 hover:border-teal/50 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-11 h-11 rounded-lg bg-[#0d8b99]/20 border border-[#0d8b99]/30 text-[#2dd4bf] flex items-center justify-center mb-5">
+                    <div className="w-11 h-11 rounded-lg bg-teal/20 border border-teal/30 text-teal-glow flex items-center justify-center mb-5">
                       <IndIcon size={22} strokeWidth={1.8} />
                     </div>
 
@@ -594,7 +594,7 @@ export default function ServicesPage() {
                     <div className="space-y-2 mb-6">
                       {industry.useCases.map((uc, uidx) => (
                         <div key={uidx} className="flex items-start gap-2 text-xs text-slate-300">
-                          <Check size={13} className="text-[#2dd4bf] shrink-0 mt-0.5" />
+                          <Check size={13} className="text-teal-glow shrink-0 mt-0.5" />
                           <span>{uc}</span>
                         </div>
                       ))}
@@ -602,7 +602,7 @@ export default function ServicesPage() {
                   </div>
 
                   <div className="pt-4 border-t border-white/10 mt-auto flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#2dd4bf]">
+                    <span className="text-xs font-semibold text-teal-glow">
                       Impact: {industry.impactStat}
                     </span>
                     <Link
@@ -617,7 +617,7 @@ export default function ServicesPage() {
             })}
 
             {/* Custom Industry Callout Card */}
-            <div className="bg-gradient-to-br from-[#051e3b] to-[#0d8b99]/30 border border-[#0d8b99]/40 rounded-2xl p-7 flex flex-col justify-between text-left">
+            <div className="bg-gradient-to-br from-[#051e3b] to-teal/30 border border-teal/40 rounded-2xl p-7 flex flex-col justify-between text-left">
               <div>
                 <div className="w-11 h-11 rounded-lg bg-white/10 text-white flex items-center justify-center mb-5">
                   <Compass size={22} strokeWidth={1.8} />
@@ -632,7 +632,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full text-center py-3 bg-white text-[#04172e] hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md"
+                className="w-full text-center py-3 bg-white text-navy hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md"
               >
                 Discuss Custom Architecture
               </Link>
@@ -645,7 +645,7 @@ export default function ServicesPage() {
       <section className="py-20 md:py-28 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mb-16 text-left">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2dd4bf] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
               Execution Methodology
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
@@ -660,12 +660,12 @@ export default function ServicesPage() {
             {ENGINEERING_LIFECYCLE.map((step, index) => (
               <div
                 key={index}
-                className="bg-[#051c36]/90 border border-white/10 hover:border-[#0d8b99]/50 rounded-xl p-5 flex flex-col justify-between relative group transition-all"
+                className="bg-[#051c36]/90 border border-white/10 hover:border-teal/50 rounded-xl p-5 flex flex-col justify-between relative group transition-all"
               >
                 {/* Step indicator header */}
                 <div className="mb-4">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-2xl font-black font-mono text-[#0d8b99] group-hover:text-[#2dd4bf] transition-colors">
+                    <span className="text-2xl font-black font-mono text-teal group-hover:text-teal-glow transition-colors">
                       {step.step}
                     </span>
                     <span className="text-[10px] font-bold uppercase tracking-wider bg-white/5 border border-white/10 px-2 py-0.5 rounded text-slate-400">
@@ -675,7 +675,7 @@ export default function ServicesPage() {
                   <h4 className="text-sm font-bold text-white mb-1">
                     {step.phase}
                   </h4>
-                  <p className="text-xs font-semibold text-[#2dd4bf] mb-3">
+                  <p className="text-xs font-semibold text-teal-glow mb-3">
                     {step.title}
                   </p>
                   <p className="text-xs text-slate-300 leading-relaxed mb-4">
@@ -696,10 +696,10 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 5. Enterprise Tech Stack Grid ── */}
-      <section className="py-20 bg-[#031326] border-y border-white/10">
+      <section className="py-20 bg-navy-950 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2dd4bf] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
               Technology Standards
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
@@ -717,14 +717,14 @@ export default function ServicesPage() {
                 className="bg-[#051c36] border border-white/10 rounded-xl p-6"
               >
                 <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4 pb-2 border-b border-white/10 flex items-center gap-2">
-                  <Terminal size={16} className="text-[#2dd4bf]" />
+                  <Terminal size={16} className="text-teal-glow" />
                   {domain.title}
                 </h4>
                 <div className="flex flex-wrap gap-2">
                   {domain.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md hover:border-[#0d8b99]/50 transition-colors"
+                      className="text-xs font-mono text-slate-300 bg-white/5 border border-white/10 px-2.5 py-1 rounded-md hover:border-teal/50 transition-colors"
                     >
                       {skill}
                     </span>
@@ -740,7 +740,7 @@ export default function ServicesPage() {
       <section className="py-20 md:py-28 relative">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2dd4bf] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
               The GrydIn Difference
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
@@ -756,7 +756,7 @@ export default function ServicesPage() {
               <thead>
                 <tr className="border-b border-white/10 text-xs font-bold uppercase tracking-wider text-slate-400">
                   <th className="py-4 px-6">Criteria</th>
-                  <th className="py-4 px-6 text-[#2dd4bf] bg-[#0d8b99]/15 rounded-t-lg">
+                  <th className="py-4 px-6 text-teal-glow bg-teal/15 rounded-t-lg">
                     GrydIn Technologies
                   </th>
                   <th className="py-4 px-6">Traditional IT Agencies</th>
@@ -768,7 +768,7 @@ export default function ServicesPage() {
                   <td className="py-4 px-6 font-semibold text-white">
                     First Production Deployment
                   </td>
-                  <td className="py-4 px-6 text-[#2dd4bf] font-bold bg-[#0d8b99]/10">
+                  <td className="py-4 px-6 text-teal-glow font-bold bg-teal/10">
                     &lt; 2 Weeks guaranteed
                   </td>
                   <td className="py-4 px-6 text-slate-400">3 – 6 Months</td>
@@ -778,7 +778,7 @@ export default function ServicesPage() {
                   <td className="py-4 px-6 font-semibold text-white">
                     Pricing & Scope Model
                   </td>
-                  <td className="py-4 px-6 text-[#2dd4bf] font-bold bg-[#0d8b99]/10">
+                  <td className="py-4 px-6 text-teal-glow font-bold bg-teal/10">
                     Guaranteed Fixed Scope
                   </td>
                   <td className="py-4 px-6 text-slate-400">Billable hours & scope creep</td>
@@ -788,7 +788,7 @@ export default function ServicesPage() {
                   <td className="py-4 px-6 font-semibold text-white">
                     Codebase Ownership
                   </td>
-                  <td className="py-4 px-6 text-[#2dd4bf] font-bold bg-[#0d8b99]/10">
+                  <td className="py-4 px-6 text-teal-glow font-bold bg-teal/10">
                     100% Client IP Ownership
                   </td>
                   <td className="py-4 px-6 text-slate-400">Vendor dependency</td>
@@ -798,7 +798,7 @@ export default function ServicesPage() {
                   <td className="py-4 px-6 font-semibold text-white">
                     AI Integration Depth
                   </td>
-                  <td className="py-4 px-6 text-[#2dd4bf] font-bold bg-[#0d8b99]/10">
+                  <td className="py-4 px-6 text-teal-glow font-bold bg-teal/10">
                     Native multi-agent systems
                   </td>
                   <td className="py-4 px-6 text-slate-400">Surface-level wrapper APIs</td>
@@ -808,7 +808,7 @@ export default function ServicesPage() {
                   <td className="py-4 px-6 font-semibold text-white">
                     Post-Launch Enablement
                   </td>
-                  <td className="py-4 px-6 text-[#2dd4bf] font-bold bg-[#0d8b99]/10">
+                  <td className="py-4 px-6 text-teal-glow font-bold bg-teal/10">
                     Complete internal docs & training
                   </td>
                   <td className="py-4 px-6 text-slate-400">Costly maintenance lock-in</td>
@@ -821,10 +821,10 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 7. Transparent Engagement Models ── */}
-      <section className="py-20 bg-[#031326] border-y border-white/10">
+      <section className="py-20 bg-navy-950 border-y border-white/10">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           <div className="max-w-3xl mb-14">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#2dd4bf] block mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-teal-glow block mb-2">
               Flexible Collaboration
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
@@ -837,9 +837,9 @@ export default function ServicesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Model 1: Fixed-Scope Sprint */}
-            <div className="bg-[#051c36] border border-white/10 hover:border-[#0d8b99]/60 rounded-2xl p-7 flex flex-col justify-between transition-all">
+            <div className="bg-[#051c36] border border-white/10 hover:border-teal/60 rounded-2xl p-7 flex flex-col justify-between transition-all">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#2dd4bf] bg-[#0d8b99]/20 px-2.5 py-1 rounded inline-block mb-4">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   High Certainty
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -857,7 +857,7 @@ export default function ServicesPage() {
                     "Complete source code and documentation handover",
                   ].map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                      <CheckCircle2 size={15} className="text-[#2dd4bf] shrink-0 mt-0.5" />
+                      <CheckCircle2 size={15} className="text-teal-glow shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -866,20 +866,20 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full text-center py-3 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all"
+                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all"
               >
                 Scope a Sprint
               </Link>
             </div>
 
             {/* Model 2: Dedicated Engineering Pod */}
-            <div className="bg-gradient-to-b from-[#062447] to-[#04172e] border-2 border-[#0d8b99] rounded-2xl p-7 flex flex-col justify-between relative shadow-xl shadow-[#0d8b99]/15">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#0d8b99] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+            <div className="bg-gradient-to-b from-[#062447] to-navy border-2 border-teal rounded-2xl p-7 flex flex-col justify-between relative shadow-xl shadow-teal/15">
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-teal text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                 Most Popular
               </div>
 
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#2dd4bf] bg-[#0d8b99]/20 px-2.5 py-1 rounded inline-block mb-4">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Autonomous Team
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -897,7 +897,7 @@ export default function ServicesPage() {
                     "Seamless elastic scaling based on roadmap needs",
                   ].map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-200">
-                      <CheckCircle2 size={15} className="text-[#2dd4bf] shrink-0 mt-0.5" />
+                      <CheckCircle2 size={15} className="text-teal-glow shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -906,16 +906,16 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full text-center py-3 bg-white hover:bg-slate-100 text-[#04172e] text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
+                className="w-full text-center py-3 bg-white hover:bg-slate-100 text-navy text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
               >
                 Deploy an Engineering Pod
               </Link>
             </div>
 
             {/* Model 3: Architecture Modernization */}
-            <div className="bg-[#051c36] border border-white/10 hover:border-[#0d8b99]/60 rounded-2xl p-7 flex flex-col justify-between transition-all">
+            <div className="bg-[#051c36] border border-white/10 hover:border-teal/60 rounded-2xl p-7 flex flex-col justify-between transition-all">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#2dd4bf] bg-[#0d8b99]/20 px-2.5 py-1 rounded inline-block mb-4">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-teal-glow bg-teal/20 px-2.5 py-1 rounded inline-block mb-4">
                   Enterprise Advisory
                 </span>
                 <h3 className="text-2xl font-bold text-white mb-2">
@@ -933,7 +933,7 @@ export default function ServicesPage() {
                     "On-demand AI and feature enhancements",
                   ].map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                      <CheckCircle2 size={15} className="text-[#2dd4bf] shrink-0 mt-0.5" />
+                      <CheckCircle2 size={15} className="text-teal-glow shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -942,7 +942,7 @@ export default function ServicesPage() {
 
               <Link
                 href="/contact"
-                className="w-full text-center py-3 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all"
+                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all"
               >
                 Inquire Retainer
               </Link>
@@ -955,7 +955,7 @@ export default function ServicesPage() {
       <section className="py-12 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d8b99] block mb-1">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal block mb-1">
               Sector Specialization
             </span>
             <h3 className="text-xl sm:text-2xl font-extrabold text-[#0f172a] tracking-tight">
@@ -967,10 +967,10 @@ export default function ServicesPage() {
           </div>
           <Link
             href="/solutions"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-[#04172e] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#082545] transition-colors shrink-0"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-md bg-navy text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors shrink-0"
           >
             <span>Explore Industry Solutions</span>
-            <ArrowRight size={15} className="text-[#2dd4bf]" />
+            <ArrowRight size={15} className="text-teal-glow" />
           </Link>
         </div>
       </section>
@@ -978,17 +978,17 @@ export default function ServicesPage() {
       {/* ── 8. Solution Scoping & Consultation CTA ── */}
       <section className="py-20 md:py-28 relative overflow-hidden">
         {/* Glow backdrop */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#020c18] via-[#04172e] to-[#04172e]" />
-        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[#0d8b99]/20 blur-[130px] rounded-full pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020c18] via-navy to-navy" />
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-teal/20 blur-[130px] rounded-full pointer-events-none" />
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-[#0d8b99]/20 text-[#2dd4bf] border border-[#0d8b99]/40 uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal/20 text-teal-glow border border-teal/40 uppercase tracking-wider mb-6">
             <Sparkles size={14} /> Ready to Eliminate Friction?
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight mb-6">
             Describe What&apos;s Slowing Your Business Down. <br />
-            <span className="text-[#2dd4bf]">We&apos;ll Map It to the Right System.</span>
+            <span className="text-teal-glow">We&apos;ll Map It to the Right System.</span>
           </h2>
 
           <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
@@ -998,7 +998,7 @@ export default function ServicesPage() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-sm font-bold uppercase tracking-wider rounded-md shadow-xl shadow-[#0d8b99]/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center gap-2.5 px-8 py-4 bg-teal hover:bg-teal-dark text-white text-sm font-bold uppercase tracking-wider rounded-md shadow-xl shadow-teal/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
               Book a Technical Diagnosis Call
               <ArrowRight size={16} strokeWidth={2.2} />
@@ -1014,15 +1014,15 @@ export default function ServicesPage() {
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs text-slate-400">
             <span className="flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-[#2dd4bf]" />
+              <CheckCircle2 size={14} className="text-teal-glow" />
               NDA Protected
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-[#2dd4bf]" />
+              <CheckCircle2 size={14} className="text-teal-glow" />
               Proposal in &lt; 48 Hours
             </span>
             <span className="flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-[#2dd4bf]" />
+              <CheckCircle2 size={14} className="text-teal-glow" />
               Zero Retainer Lock-In
             </span>
           </div>

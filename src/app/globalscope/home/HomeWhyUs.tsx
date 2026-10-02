@@ -52,14 +52,14 @@ const PILLARS = [
 
 export function HomeWhyUs() {
   return (
-    <section id="why-us" className="relative w-full py-20 md:py-28 bg-[#031326] border-b border-white/10 overflow-hidden">
+    <section id="why-us" className="relative w-full py-20 md:py-28 bg-navy-950 border-b border-white/10 overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-[#0d8b99]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-teal/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0d8b99] text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal text-white text-xs font-bold uppercase tracking-[0.2em] mb-4 shadow-md">
             <Award className="w-3.5 h-3.5" />
             <span>Why Choose GrydIn</span>
           </div>
@@ -80,14 +80,14 @@ export function HomeWhyUs() {
             return (
               <div
                 key={metric.label}
-                className="group relative bg-white rounded-2xl p-7 border border-transparent hover:border-[#0d8b99] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#0d8b99]/20 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
+                className="group relative bg-white rounded-2xl p-7 border border-transparent hover:border-teal transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-teal/20 hover:-translate-y-1 overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight group-hover:text-[#0d8b99] transition-colors">
+                    <span className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight group-hover:text-teal transition-colors">
                       {metric.value}
                     </span>
-                    <div className="w-11 h-11 rounded-xl bg-[#0d8b99]/10 text-[#0d8b99] flex items-center justify-center group-hover:bg-[#0d8b99] group-hover:text-white transition-all">
+                    <div className="w-11 h-11 rounded-xl bg-teal/10 text-teal flex items-center justify-center group-hover:bg-teal group-hover:text-white transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
@@ -96,7 +96,7 @@ export function HomeWhyUs() {
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">{metric.detail}</p>
                 </div>
 
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-[#0d8b99]">
+                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-semibold text-teal">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span>Verified Production Metric</span>
                 </div>
@@ -110,19 +110,19 @@ export function HomeWhyUs() {
           {PILLARS.map((pillar) => (
             <div
               key={pillar.title}
-              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-transparent hover:border-[#0d8b99] transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-[#0d8b99]/20 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-transparent hover:border-teal transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-teal/20 flex flex-col justify-between overflow-hidden"
             >
               <div>
                 <div className="flex items-center justify-between mb-5">
-                  <div className="w-10 h-10 rounded-xl bg-[#0d8b99] text-white flex items-center justify-center font-black text-sm shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-teal text-white flex items-center justify-center font-black text-sm shadow-md">
                     {pillar.step}
                   </div>
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#0d8b99] bg-[#0d8b99]/10 border border-[#0d8b99]/20 px-3 py-1 rounded-full">
+                  <span className="text-xs font-bold uppercase tracking-wider text-teal bg-teal/10 border border-teal/20 px-3 py-1 rounded-full">
                     {pillar.tag}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0d8b99] transition-colors">
+                <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-teal transition-colors">
                   {pillar.title}
                 </h3>
 
@@ -132,7 +132,7 @@ export function HomeWhyUs() {
               </div>
 
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs font-semibold text-slate-500">
-                <CheckCircle2 className="w-4 h-4 text-[#0d8b99]" />
+                <CheckCircle2 className="w-4 h-4 text-teal" />
                 <span>GrydIn Standard Guarantee</span>
               </div>
             </div>
@@ -140,11 +140,11 @@ export function HomeWhyUs() {
         </div>
 
         {/* Action Banner with prominent "Check Our Work" button linking to /projects */}
-        <div className="bg-gradient-to-r from-[#020e1d] via-[#04172e] to-[#072547] rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/15">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#0d8b99]/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="bg-gradient-to-r from-[#020e1d] via-navy to-[#072547] rounded-2xl p-8 sm:p-12 text-white flex flex-col lg:flex-row items-center justify-between gap-8 relative overflow-hidden shadow-2xl border border-white/15">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-teal/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="max-w-xl text-center lg:text-left relative z-10">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#0d8b99] mb-3">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-teal mb-3">
               Proven Track Record
             </p>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white mb-3 leading-snug">

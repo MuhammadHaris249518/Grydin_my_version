@@ -32,7 +32,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-[#04172e] min-h-[500px] md:min-h-[560px] lg:min-h-[600px] flex items-center"
+      className="relative w-full overflow-hidden bg-navy min-h-[500px] md:min-h-[560px] lg:min-h-[600px] flex items-center"
     >
       {/* Background Image of the Corporate Meeting Room */}
       <div
@@ -83,7 +83,7 @@ const HeroSection = () => {
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 bg-[#0d8b99] hover:bg-[#0b7884] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center justify-center px-6 py-3 bg-teal hover:bg-teal-dark text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
               GET STARTED
             </Link>
@@ -110,7 +110,7 @@ export default function Home() {
       <JsonLd data={websiteJsonLd()} />
       <JsonLd data={professionalServiceJsonLd()} />
 
-      <main className="w-full overflow-x-hidden bg-[#04172e]">
+      <main className="w-full overflow-x-hidden bg-navy">
         {/* 1. Approved Hero Section (100% Untouched) */}
         <HeroSection />
 

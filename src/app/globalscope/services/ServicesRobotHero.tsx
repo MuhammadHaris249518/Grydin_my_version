@@ -107,15 +107,15 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
   };
 
   return (
-    <section className="relative w-full min-h-[780px] lg:min-h-[880px] bg-[#04172e] overflow-hidden flex flex-col justify-between pt-8 pb-12 select-none border-b border-white/10">
+    <section className="relative w-full min-h-[780px] lg:min-h-[880px] bg-navy overflow-hidden flex flex-col justify-between pt-8 pb-12 select-none border-b border-white/10">
       {/* ── Background Cyber Grid & Ambient Glows ── */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Deep navy vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#031326] via-[#04172e] to-[#020e1e]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-navy-950 via-navy to-[#020e1e]" />
 
         {/* Ambient teal central radial glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[550px] bg-[#0d8b99]/18 rounded-full blur-[140px]" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-[#2dd4bf]/12 rounded-full blur-[90px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[550px] bg-teal/18 rounded-full blur-[140px]" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[300px] bg-teal-glow/12 rounded-full blur-[90px]" />
 
         {/* Cyber Circuit Grid Traces */}
         <svg
@@ -182,15 +182,15 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
       {/* ── Top Header Section ── */}
       <div className="relative z-20 max-w-5xl mx-auto px-6 text-center pt-2 sm:pt-4">
         {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#0d8b99]/15 border border-[#0d8b99]/40 text-[#2dd4bf] font-mono text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm shadow-[#0d8b99]/20 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-pulse" />
+        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-teal/15 border border-teal/40 text-teal-glow font-mono text-[11px] sm:text-xs font-bold tracking-[0.25em] uppercase mb-4 shadow-sm shadow-teal/20 backdrop-blur-md">
+          <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-pulse" />
           <span>SMART SOLUTIONS. REAL IMPACT.</span>
         </div>
 
         {/* Main Heading */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black text-white tracking-tight uppercase leading-[1.12] mb-4">
           WE BUILD{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2dd4bf] via-[#38bdf8] to-[#0d8b99]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-glow via-[#38bdf8] to-teal">
             INTELLIGENT DIGITAL SYSTEMS
           </span>
         </h1>
@@ -317,15 +317,15 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
             {/* Glowing Holographic Pedestal / Base Rings */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-64 sm:w-72 md:w-80 flex flex-col items-center pointer-events-none z-10">
               {/* Outer pulsing neon ring */}
-              <div className="w-56 sm:w-64 md:w-72 h-14 sm:h-16 rounded-[100%] border-2 border-[#2dd4bf]/70 shadow-[0_0_30px_rgba(45,212,191,0.6)] flex items-center justify-center bg-[#072445]/40 backdrop-blur-sm animate-pulse">
+              <div className="w-56 sm:w-64 md:w-72 h-14 sm:h-16 rounded-[100%] border-2 border-teal-glow/70 shadow-[0_0_30px_rgba(45,212,191,0.6)] flex items-center justify-center bg-[#072445]/40 backdrop-blur-sm animate-pulse">
                 {/* Middle concentric ring */}
-                <div className="w-44 sm:w-52 h-10 sm:h-12 rounded-[100%] border border-[#0d8b99]/90 shadow-[inset_0_0_15px_rgba(45,212,191,0.4)] flex items-center justify-center">
+                <div className="w-44 sm:w-52 h-10 sm:h-12 rounded-[100%] border border-teal/90 shadow-[inset_0_0_15px_rgba(45,212,191,0.4)] flex items-center justify-center">
                   {/* Inner glowing platform disc */}
-                  <div className="w-32 sm:w-36 h-6 sm:h-8 rounded-[100%] bg-gradient-to-b from-[#2dd4bf]/60 to-[#0d8b99]/20 shadow-[0_0_20px_#2dd4bf]" />
+                  <div className="w-32 sm:w-36 h-6 sm:h-8 rounded-[100%] bg-gradient-to-b from-teal-glow/60 to-teal/20 shadow-[0_0_20px_#2dd4bf]" />
                 </div>
               </div>
               {/* Radial ground reflection */}
-              <div className="w-72 h-10 bg-[#0d8b99]/30 rounded-[100%] blur-xl -mt-6" />
+              <div className="w-72 h-10 bg-teal/30 rounded-[100%] blur-xl -mt-6" />
             </div>
 
             {/* ── THE 3D ROBOT CONTAINER WITH DYNAMIC NAVIGATION MOVEMENT ── */}
@@ -365,8 +365,8 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
               </div>
 
               {/* High-tech target reticle / directional beacon indicator */}
-              <div className="absolute -bottom-2 px-3 py-1 rounded-full bg-[#031326]/90 border border-[#2dd4bf]/40 backdrop-blur-md flex items-center gap-1.5 text-[10px] font-mono font-bold text-[#2dd4bf] shadow-md shadow-[#2dd4bf]/20 pointer-events-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf] animate-ping" />
+              <div className="absolute -bottom-2 px-3 py-1 rounded-full bg-navy-950/90 border border-teal-glow/40 backdrop-blur-md flex items-center gap-1.5 text-[10px] font-mono font-bold text-teal-glow shadow-md shadow-teal-glow/20 pointer-events-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-glow animate-ping" />
                 <span className="uppercase tracking-wider">
                   NAVIGATING: {SERVICES_DATA.find((s) => s.key === activeKey)?.title}
                 </span>
@@ -410,7 +410,7 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
               onClick={() => handleCardClick(s)}
               className={`px-3 py-1 rounded-md text-[11px] font-mono font-medium transition-all ${
                 activeKey === s.key
-                  ? "bg-[#0d8b99] text-white border border-[#2dd4bf]/60 shadow-sm shadow-[#2dd4bf]/30"
+                  ? "bg-teal text-white border border-teal-glow/60 shadow-sm shadow-teal-glow/30"
                   : "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
               }`}
             >
@@ -422,14 +422,14 @@ export function ServicesRobotHero({ modelSlot, onSelectService }: ServicesRobotH
         {/* Center/Right: Scroll to detailed capabilities */}
         <a
           href="#capabilities"
-          className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#051c36]/80 hover:bg-[#082a4d] border border-white/15 hover:border-[#2dd4bf]/50 text-slate-300 hover:text-white transition-all text-xs font-mono"
+          className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#051c36]/80 hover:bg-[#082a4d] border border-white/15 hover:border-teal-glow/50 text-slate-300 hover:text-white transition-all text-xs font-mono"
         >
           {/* Animated scroll pill icon */}
-          <span className="w-3.5 h-5 rounded-full border border-slate-400 group-hover:border-[#2dd4bf] flex items-start justify-center p-0.5">
-            <span className="w-1 h-1.5 bg-[#2dd4bf] rounded-full animate-bounce" />
+          <span className="w-3.5 h-5 rounded-full border border-slate-400 group-hover:border-teal-glow flex items-start justify-center p-0.5">
+            <span className="w-1 h-1.5 bg-teal-glow rounded-full animate-bounce" />
           </span>
           <span className="tracking-wider uppercase">SMART SOLUTIONS</span>
-          <ArrowRight className="w-3.5 h-3.5 text-[#2dd4bf] transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="w-3.5 h-3.5 text-teal-glow transition-transform group-hover:translate-x-1" />
         </a>
       </div>
     </section>
@@ -461,15 +461,15 @@ function ServiceGlassCard({
       onMouseLeave={onMouseLeave}
       className={`group relative rounded-2xl p-6 sm:p-7 transition-all duration-300 cursor-pointer overflow-hidden backdrop-blur-xl ${
         isActive
-          ? "bg-[#072445]/85 border-2 border-[#2dd4bf] shadow-[0_0_35px_rgba(45,212,191,0.32)] -translate-y-1.5 scale-[1.02]"
-          : "bg-[#061833]/65 border border-white/12 hover:border-[#0d8b99]/80 hover:bg-[#07223f]/75 hover:shadow-[0_12px_28px_rgba(13,139,153,0.22)] hover:-translate-y-1"
+          ? "bg-[#072445]/85 border-2 border-teal-glow shadow-[0_0_35px_rgba(45,212,191,0.32)] -translate-y-1.5 scale-[1.02]"
+          : "bg-[#061833]/65 border border-white/12 hover:border-teal/80 hover:bg-[#07223f]/75 hover:shadow-[0_12px_28px_rgba(13,139,153,0.22)] hover:-translate-y-1"
       }`}
     >
       {/* Blueprint Corner Crosshair Accents */}
-      <div className={`pointer-events-none absolute top-2 left-2 w-2 h-2 border-t border-l ${isActive ? "border-[#2dd4bf]" : "border-white/20"}`} />
-      <div className={`pointer-events-none absolute top-2 right-2 w-2 h-2 border-t border-r ${isActive ? "border-[#2dd4bf]" : "border-white/20"}`} />
-      <div className={`pointer-events-none absolute bottom-2 left-2 w-2 h-2 border-b border-l ${isActive ? "border-[#2dd4bf]" : "border-white/20"}`} />
-      <div className={`pointer-events-none absolute bottom-2 right-2 w-2 h-2 border-b border-r ${isActive ? "border-[#2dd4bf]" : "border-white/20"}`} />
+      <div className={`pointer-events-none absolute top-2 left-2 w-2 h-2 border-t border-l ${isActive ? "border-teal-glow" : "border-white/20"}`} />
+      <div className={`pointer-events-none absolute top-2 right-2 w-2 h-2 border-t border-r ${isActive ? "border-teal-glow" : "border-white/20"}`} />
+      <div className={`pointer-events-none absolute bottom-2 left-2 w-2 h-2 border-b border-l ${isActive ? "border-teal-glow" : "border-white/20"}`} />
+      <div className={`pointer-events-none absolute bottom-2 right-2 w-2 h-2 border-b border-r ${isActive ? "border-teal-glow" : "border-white/20"}`} />
 
       {/* Radial highlight sheen on active/hover */}
       <div
@@ -487,8 +487,8 @@ function ServiceGlassCard({
         <div
           className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
             isActive
-              ? "bg-[#0d8b99] text-white shadow-md shadow-[#2dd4bf]/40 scale-105"
-              : "bg-[#0d8b99]/15 border border-[#0d8b99]/30 text-[#2dd4bf] group-hover:bg-[#0d8b99]/30"
+              ? "bg-teal text-white shadow-md shadow-teal-glow/40 scale-105"
+              : "bg-teal/15 border border-teal/30 text-teal-glow group-hover:bg-teal/30"
           }`}
         >
           <IconComp className="w-6 h-6" strokeWidth={2} />
@@ -496,8 +496,8 @@ function ServiceGlassCard({
 
         {/* Status Pill */}
         {isActive ? (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#2dd4bf]/20 border border-[#2dd4bf]/50 text-[#2dd4bf] font-mono text-[10px] font-bold uppercase tracking-wider animate-pulse">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#2dd4bf]" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-glow/20 border border-teal-glow/50 text-teal-glow font-mono text-[10px] font-bold uppercase tracking-wider animate-pulse">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-glow" />
             ACTIVE
           </span>
         ) : (
@@ -528,7 +528,7 @@ function ServiceGlassCard({
             key={badge}
             className={`text-[10px] font-mono font-medium px-2 py-0.5 rounded border transition-colors ${
               isActive
-                ? "bg-[#2dd4bf]/15 border-[#2dd4bf]/40 text-teal-200"
+                ? "bg-teal-glow/15 border-teal-glow/40 text-teal-200"
                 : "bg-white/5 border-white/10 text-slate-400 group-hover:text-slate-300"
             }`}
           >
@@ -541,7 +541,7 @@ function ServiceGlassCard({
       <div className="pt-3 border-t border-white/10 flex items-center justify-between">
         <span
           className={`text-xs font-bold transition-colors ${
-            isActive ? "text-[#2dd4bf]" : "text-slate-400 group-hover:text-slate-200"
+            isActive ? "text-teal-glow" : "text-slate-400 group-hover:text-slate-200"
           }`}
         >
           Explore capability
@@ -549,8 +549,8 @@ function ServiceGlassCard({
         <div
           className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
             isActive
-              ? "bg-[#2dd4bf] text-[#04172e] translate-x-1"
-              : "bg-white/5 text-slate-300 group-hover:bg-[#0d8b99] group-hover:text-white group-hover:translate-x-1"
+              ? "bg-teal-glow text-navy translate-x-1"
+              : "bg-white/5 text-slate-300 group-hover:bg-teal group-hover:text-white group-hover:translate-x-1"
           }`}
         >
           <ArrowRight className="w-3.5 h-3.5" />
@@ -584,8 +584,8 @@ function HolographicRobotVisual({ activeKey }: { activeKey: ServiceKey }) {
       {/* Subtle floating bobbing animation */}
       <div className="relative w-full h-full flex items-center justify-center animate-[floatBob_4s_easeInOut_infinite]">
         {/* Antenna on the left */}
-        <div className="absolute top-12 left-10 w-2.5 h-8 bg-gradient-to-t from-[#0d8b99] to-[#2dd4bf] rounded-full -rotate-12 shadow-[0_0_12px_#2dd4bf]">
-          <div className="w-3.5 h-3.5 rounded-full bg-[#2dd4bf] -top-1 -left-0.5 absolute animate-pulse shadow-[0_0_10px_#2dd4bf]" />
+        <div className="absolute top-12 left-10 w-2.5 h-8 bg-gradient-to-t from-teal to-teal-glow rounded-full -rotate-12 shadow-[0_0_12px_#2dd4bf]">
+          <div className="w-3.5 h-3.5 rounded-full bg-teal-glow -top-1 -left-0.5 absolute animate-pulse shadow-[0_0_10px_#2dd4bf]" />
         </div>
 
         {/* Spherical Teal Body */}
@@ -600,7 +600,7 @@ function HolographicRobotVisual({ activeKey }: { activeKey: ServiceKey }) {
           <div className="absolute top-4 left-7 w-16 h-8 rounded-full bg-white/40 blur-[5px] rotate-[-25deg] pointer-events-none" />
 
           {/* Black Glass Visor Face Screen */}
-          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#030914] border-2 border-[#0d8b99]/50 shadow-[inset_0_4px_16px_rgba(0,0,0,0.9),0_0_20px_rgba(13,139,153,0.3)] flex items-center justify-center overflow-hidden">
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-[#030914] border-2 border-teal/50 shadow-[inset_0_4px_16px_rgba(0,0,0,0.9),0_0_20px_rgba(13,139,153,0.3)] flex items-center justify-center overflow-hidden">
             {/* Visor internal reflections */}
             <div className="absolute top-2 left-4 w-12 h-5 rounded-full bg-white/10 blur-[2px] rotate-[-20deg]" />
 
@@ -619,8 +619,8 @@ function HolographicRobotVisual({ activeKey }: { activeKey: ServiceKey }) {
 
         {/* Small Metallic Hover Feet */}
         <div className="absolute -bottom-1 flex items-center gap-7">
-          <div className="w-8 h-4 rounded-full bg-gradient-to-b from-[#2dd4bf] to-[#0d8b99] shadow-[0_0_12px_rgba(45,212,191,0.5)]" />
-          <div className="w-8 h-4 rounded-full bg-gradient-to-b from-[#2dd4bf] to-[#0d8b99] shadow-[0_0_12px_rgba(45,212,191,0.5)]" />
+          <div className="w-8 h-4 rounded-full bg-gradient-to-b from-teal-glow to-teal shadow-[0_0_12px_rgba(45,212,191,0.5)]" />
+          <div className="w-8 h-4 rounded-full bg-gradient-to-b from-teal-glow to-teal shadow-[0_0_12px_rgba(45,212,191,0.5)]" />
         </div>
       </div>
     </div>

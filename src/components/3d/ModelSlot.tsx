@@ -7,16 +7,11 @@ import { useCanRender3D, useVisible } from "./hooks";
 const GlbViewer = dynamic(() => import("./GlbViewer"), { ssr: false });
 
 function SlotPlaceholder({ label }: { label: string }) {
-  const dev = process.env.NODE_ENV !== "production";
   return (
     <div
-      className={cn(
-        "absolute inset-0 flex items-center justify-center",
-        dev ? "border border-dashed border-teal-glow/50 bg-teal/5" : "bg-[radial-gradient(circle_at_50%_50%,rgba(45,212,191,.12),transparent_65%)]"
-      )}
-    >
-      {dev && <span className="font-mono text-xs uppercase tracking-wider text-teal-glow/80">3D slot · {label}</span>}
-    </div>
+      className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-teal-500/10 via-surface-soft to-teal-500/5 rounded-xl border border-teal-500/20"
+      aria-label={label}
+    />
   );
 }
 

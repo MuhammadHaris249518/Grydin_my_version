@@ -7,7 +7,6 @@ import { HomeProblem } from "./globalscope/home/HomeProblem";
 import { HomeServices } from "./globalscope/home/HomeServices";
 import { HomeSeeItWork } from "./globalscope/home/HomeSeeItWork";
 import { HomeCases } from "./globalscope/home/HomeCases";
-import { HomeProcess } from "./globalscope/home/HomeProcess";
 import { HomeWhyUs } from "./globalscope/home/HomeWhyUs";
 import { HomeStack } from "./globalscope/home/HomeStack";
 import { HomeNewsroom } from "./globalscope/home/HomeNewsroom";
@@ -133,10 +132,7 @@ export default function Home() {
         {/* 6. Case Studies */}
         <HomeCases />
 
-        {/* 7. Methodology (Timeline) */}
-        <HomeProcess />
-
-        {/* 8. Why GrydIn (Stat Band & Pillars) */}
+        {/* 7. Why GrydIn (Stat Band & Pillars) */}
         <HomeWhyUs />
 
         {/* 9. Technology Marquee */}

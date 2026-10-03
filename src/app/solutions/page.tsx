@@ -1,9 +1,7 @@
 import React from "react";
-import { PageHero } from "@/app/globalscope/ui/PageHero";
-import { Button } from "@/app/globalscope/ui/Button";
-import { CtaBand } from "@/app/globalscope/ui/CtaBand";
+import { SolutionsHero } from "./SolutionsHero";
 import { SolutionsClient } from "./SolutionsClient";
-import { ArrowRight } from "lucide-react";
+import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import type { Metadata } from "next";
 import { buildMetadata } from "@/lib/seo";
 
@@ -16,29 +14,9 @@ export const metadata: Metadata = buildMetadata({
 });
 
 export default function SolutionsHubPage() {
-  const breadcrumbs = [
-    { label: "Home", href: "/" },
-    { label: "Solutions" },
-  ];
-
   return (
     <main className="min-h-screen bg-surface">
-      <PageHero
-        eyebrow="Industry Expertise"
-        title="Solutions engineered for your industry"
-        subtitle="Domain-specific automation systems, AI agents, and custom software architected to eliminate operational bottlenecks."
-        breadcrumbs={breadcrumbs}
-        actions={
-          <Button
-            href="/contact"
-            variant="primary"
-            size="md"
-            iconRight={<ArrowRight className="w-4 h-4" />}
-          >
-            Book a free process diagnosis
-          </Button>
-        }
-      />
+      <SolutionsHero />
 
       <SolutionsClient />
 

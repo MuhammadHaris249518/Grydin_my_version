@@ -19,6 +19,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import { InteractiveRobotFeature } from "@/components/3d/InteractiveRobotFeature";
 
 type ServiceCard = {
   id: string;
@@ -111,29 +112,29 @@ export function HomeServices() {
   return (
     <section id="services" className="relative overflow-hidden bg-slate-50/60 py-20 md:py-28 border-y border-slate-200/80">
       <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        {/* ── PART 1: Top Feature Hero Area ── */}
-        <div className="bg-gradient-to-br from-white via-slate-50/70 to-teal-50/40 rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-md mb-16 relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        {/* ── PART 1: Top Feature Hero Area with Interactive 3D Robot ── */}
+        <div className="bg-white rounded-3xl lg:rounded-[2.5rem] p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-xl shadow-slate-200/50 mb-16 relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column */}
-            <div className="lg:col-span-6">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200/80 tracking-wider uppercase mb-5">
-                <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-                BUILD • AUTOMATE • SCALE
+            <div className="lg:col-span-6 z-10">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200/80 tracking-wider uppercase mb-5">
+                <span className="w-2 h-2 rounded-full bg-[#0D8B99] animate-pulse" />
+                AI &amp; SOFTWARE ENGINEERING
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-                Six ways we <span className="text-teal-600">eliminate</span> <br />
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-4">
+                Six ways we <span className="text-[#0D8B99]">eliminate</span> <br className="hidden sm:inline" />
                 operational friction
               </h2>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8 max-w-xl">
-                We build intelligent, high-reliability systems tailored to your specific bottlenecks, with no bloat and no disruption.
+                We build intelligent, high-reliability systems tailored to your specific bottlenecks, with no black-boxes, false promises.
               </p>
 
               <div className="flex flex-wrap items-center gap-4 mb-8">
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-full shadow-md shadow-teal-600/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#0D8B99] hover:bg-[#0b7480] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-full shadow-md shadow-[#0D8B99]/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   Explore Our Services
                   <ArrowRight className="w-4 h-4" />
@@ -141,98 +142,34 @@ export function HomeServices() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-bold uppercase tracking-wider border border-slate-300 rounded-full shadow-2xs transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-bold uppercase tracking-wider border border-slate-300 rounded-full shadow-2xs transition-all transform hover:-translate-y-0.5 active:translate-y-0"
                 >
                   Talk to Our Team
                 </Link>
               </div>
 
               {/* 3 Feature Pills */}
-              <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200/80 text-xs font-bold text-slate-700">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-slate-200 text-xs sm:text-sm font-semibold text-slate-700">
                 <span className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-teal-600" />
-                  Custom Solutions
+                  <Sparkles className="w-4 h-4 text-[#0D8B99]" />
+                  Custom AI Solutions
                 </span>
+                <span className="hidden sm:inline-block w-px h-4 bg-slate-300" />
                 <span className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-teal-600" />
-                  Reliable & Scalable
+                  <Layers className="w-4 h-4 text-[#0D8B99]" />
+                  Modern Architecture
                 </span>
+                <span className="hidden sm:inline-block w-px h-4 bg-slate-300" />
                 <span className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-teal-600" />
+                  <Users className="w-4 h-4 text-[#0D8B99]" />
                   Expert Team
                 </span>
               </div>
             </div>
 
-            {/* Right Desktop Dashboard Illustration Graphic */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Floating Badge: Top Right */}
-                <div className="absolute -top-4 -right-2 z-20 bg-slate-900 text-white p-3.5 rounded-2xl shadow-xl border border-slate-800 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold">
-                    <TrendingUp className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <span className="block text-xs font-bold text-white">Better workflows.</span>
-                    <span className="block text-[10px] text-teal-400 font-mono">Higher productivity. 📈</span>
-                  </div>
-                </div>
-
-                {/* Floating Badge: Top Left */}
-                <div className="absolute top-6 -left-4 z-20 bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-slate-200 text-xs font-mono font-bold text-slate-700 flex flex-col gap-1.5 hidden sm:flex">
-                  <span className="flex items-center gap-1.5 text-teal-600">
-                    <Zap className="w-3.5 h-3.5" /> Automate
-                  </span>
-                  <span className="flex items-center gap-1.5 text-blue-600">
-                    <Plug className="w-3.5 h-3.5" /> Integrate
-                  </span>
-                  <span className="flex items-center gap-1.5 text-emerald-600">
-                    <TrendingUp className="w-3.5 h-3.5" /> Scale
-                  </span>
-                </div>
-
-                {/* Main Dashboard Screen Card */}
-                <div className="bg-slate-900 rounded-3xl p-6 text-white border border-slate-800 shadow-2xl pt-10">
-                  <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-800">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse" />
-                      <span className="font-mono text-xs text-teal-400 font-bold uppercase">System Operations Dashboard</span>
-                    </div>
-                    <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded font-bold">LIVE METRICS</span>
-                  </div>
-
-                  {/* Chart Graphic */}
-                  <div className="h-32 w-full mb-4 relative flex items-end">
-                    <svg viewBox="0 0 300 100" fill="none" className="w-full h-full">
-                      <defs>
-                        <linearGradient id="dashboardChartGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#2DD4BF" stopOpacity="0.4" />
-                          <stop offset="100%" stopColor="#2DD4BF" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <path d="M 0 80 Q 50 60, 100 70 T 200 30 T 300 20 L 300 100 L 0 100 Z" fill="url(#dashboardChartGrad)" />
-                      <path d="M 0 80 Q 50 60, 100 70 T 200 30 T 300 20" stroke="#2DD4BF" strokeWidth="3" fill="none" />
-                      <circle cx="300" cy="20" r="4" fill="#2DD4BF" className="animate-ping" />
-                    </svg>
-                  </div>
-
-                  {/* 3 Metric Cards */}
-                  <div className="grid grid-cols-3 gap-2 text-center font-mono">
-                    <div className="p-2.5 bg-slate-800/90 rounded-xl border border-slate-700">
-                      <span className="block text-[10px] text-slate-400 uppercase">Automated Processes</span>
-                      <span className="text-white font-extrabold text-sm">12+</span>
-                    </div>
-                    <div className="p-2.5 bg-teal-950/80 rounded-xl border border-teal-500/40">
-                      <span className="block text-teal-300 text-[10px] uppercase">Uptime</span>
-                      <span className="text-teal-300 font-extrabold text-sm">99.9%</span>
-                    </div>
-                    <div className="p-2.5 bg-slate-800/90 rounded-xl border border-slate-700">
-                      <span className="block text-slate-400 text-[10px] uppercase">Time Saved</span>
-                      <span className="text-emerald-400 font-extrabold text-sm">40+ hrs/wk</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            {/* Right Column: Interactive 3D Robot Figure */}
+            <div className="lg:col-span-6 relative flex items-center justify-center">
+              <InteractiveRobotFeature />
             </div>
           </div>
         </div>
@@ -264,8 +201,8 @@ export function HomeServices() {
                   <div>
                     {/* Top Row: Icon + Badge */}
                     <div className="flex items-center justify-between gap-3 mb-6">
-                      <div className={`w-12 h-12 rounded-2xl ${s.iconBg} ${s.iconColor} flex items-center justify-center font-bold`}>
-                        <IconComp className="w-6 h-6" strokeWidth={2} />
+                      <div className={`${s.iconColor} flex items-center justify-center font-bold`}>
+                        <IconComp className="w-7 h-7" strokeWidth={2.2} />
                       </div>
                       <span className={`text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md border ${s.badgeBg}`}>
                         {s.badge}

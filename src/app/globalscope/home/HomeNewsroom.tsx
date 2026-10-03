@@ -1,155 +1,275 @@
-import Link from "next/link";
-import { ArrowRight, Calendar, Clock, Newspaper } from "lucide-react";
-import { Reveal } from "@/components/motion/Reveal";
-import { Button } from "../ui/Button";
-import { BlogPost } from "@/lib/content-schema";
-import { CATEGORY_NAMES } from "@/lib/blog";
+"use client";
 
-function formatDate(dateStr: string) {
-  try {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  } catch {
-    return dateStr;
-  }
-}
+import React, { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Calendar,
+  Clock,
+  LayoutGrid,
+  Sparkles,
+  Cloud,
+  Box,
+  Code2,
+  Users,
+} from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
+import { BlogPost } from "@/lib/content-schema";
+
+const CATEGORIES = [
+  { id: "all", label: "All", icon: LayoutGrid },
+  { id: "ai-llms", label: "AI & LLMs", icon: Sparkles },
+  { id: "devops-cloud", label: "DevOps & Cloud", icon: Cloud },
+  { id: "product", label: "Product", icon: Box },
+  { id: "engineering", label: "Engineering", icon: Code2 },
+  { id: "company", label: "Company", icon: Users },
+];
 
 export interface HomeNewsroomProps {
-  posts: BlogPost[];
+  posts?: BlogPost[];
 }
 
 export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
-  const featured = posts[0];
-  const sidePosts = posts.slice(1, 3);
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  // Default fallback data matching exact user design image
+  const featuredPost = {
+    title: "Grydin Expands Its AI Automation Practice",
+    category: "AI & LLMs",
+    date: "May 12, 2025",
+    readingTime: "6 min read",
+    description:
+      "We're excited to announce the expansion of our AI automation practice, helping businesses build intelligent systems, streamline operations, and unlock new possibilities with generative AI.",
+    slug: posts[0]?.slug || "grydin-expands-ai-automation-practice",
+    image: "/images/blog/ai-automation-practice.jpg",
+  };
+
+  const sidePosts = [
+    {
+      title: "Introducing GridPilot (Beta)",
+      category: "Engineering",
+      date: "Sep 18, 2026",
+      readingTime: "4 min read",
+      description:
+        "GridPilot announces the private beta of GridPilot, an enterprise console for observing and governing autonomous AI agent workflows.",
+      slug: posts[1]?.slug || "introducing-gridpilot-beta",
+      image: "/images/blog/gridpilot-beta.jpg",
+    },
+    {
+      title: "Why Businesses Have a Visibility Problem, Not an Execution Problem",
+      category: "Company",
+      date: "Apr 28, 2025",
+      readingTime: "3 min read",
+      description:
+        "Most operational leaders aren't caused by slow workers. They stem from invisible handoffs, missing alerts, and fragmented SaaS tools.",
+      slug: posts[2]?.slug || "visibility-problem-not-execution",
+      image: "/images/blog/visibility-problem.jpg",
+    },
+  ];
 
   return (
-    <section id="newsroom" className="relative w-full bg-slate-50/60 py-20 md:py-28 border-b border-slate-200/80">
+    <section id="newsroom" className="relative w-full bg-[#EDF8F7] py-16 md:py-24 border-b border-teal-100/70 overflow-hidden">
+      {/* Top Left Background Accent Grid Dots */}
+      <div className="absolute top-6 left-6 opacity-20 pointer-events-none hidden sm:block">
+        <div className="grid grid-cols-4 gap-2">
+          {Array.from({ length: 16 }).map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-teal-600" />
+          ))}
+        </div>
+      </div>
+
       <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="max-w-3xl mb-12">
-          <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-teal-600 mb-3">
-            <span className="w-4 h-0.5 bg-teal-600" />
-            NEWSROOM & INSIGHTS
+        {/* Header Block with Top-Right Handwritten Annotation */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+          <div>
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
+              <span className="text-teal-500">──→</span>
+              LATEST INSIGHTS
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+              Engineering perspectives &{" "}
+              <span className="text-teal-600">company updates</span>
+            </h2>
+            <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed font-normal">
+              Thoughts, tutorials, and updates from our team on AI, cloud, and modern engineering — straight from the trenches.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-            Engineering perspectives & <span className="text-teal-600">company updates</span>
-          </h2>
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Deep dives into multi-agent orchestration, resilient event pipelines, and the operational architecture of high-reliability systems.
-          </p>
+
+          {/* Top-Right Handwritten Annotation */}
+          <div className="hidden lg:flex items-center gap-2 text-teal-600 font-serif italic text-xl font-medium tracking-wide border-b border-teal-400/40 pb-1 shrink-0 -rotate-2">
+            <span>Ideas</span>
+            <span className="text-teal-400 font-sans">→</span>
+            <span>Code</span>
+            <span className="text-teal-400 font-sans">→</span>
+            <span>Impact</span>
+          </div>
         </div>
 
-        {/* Editorial Layout: 7 cols featured + 5 cols compact rows */}
-        <div className="grid gap-6 lg:grid-cols-12">
-          {/* Main Featured Post (7 cols) */}
-          {featured && (
-            <Reveal className="lg:col-span-7">
-              <Link href={`/blog/${featured.slug}`} className="group block h-full">
-                <div className="flex h-full flex-col justify-between rounded-3xl p-8 sm:p-10 bg-white border border-slate-200/80 shadow-md hover:shadow-xl hover:border-teal-500/50 hover:-translate-y-1 transition-all">
-                  <div>
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="rounded-md border border-teal-200 bg-teal-50 px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider text-teal-700">
-                        {CATEGORY_NAMES[featured.category] || featured.category}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                        <Calendar className="h-3.5 w-3.5 text-teal-600" />
-                        {formatDate(featured.date)}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                        <Clock className="h-3.5 w-3.5 text-slate-400" />
-                        {featured.readingTime}
-                      </span>
-                    </div>
+        {/* Filter Tabs Bar */}
+        <div className="flex flex-wrap items-center gap-2 mb-8 border-b border-teal-200/60 pb-6">
+          {CATEGORIES.map((cat) => {
+            const Icon = cat.icon;
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
+                  isActive
+                    ? "bg-[#0D8B99] text-white shadow-sm"
+                    : "bg-white/80 text-slate-700 hover:bg-white border border-slate-200/80 hover:border-teal-300"
+                }`}
+              >
+                <Icon className={`w-3.5 h-3.5 ${isActive ? "text-white" : "text-slate-500"}`} />
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-                    <h3 className="mt-6 text-2xl sm:text-3xl font-extrabold text-slate-900 group-hover:text-teal-600 transition-colors leading-tight">
-                      {featured.title}
-                    </h3>
-
-                    <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600 font-normal">
-                      {featured.description}
-                    </p>
-                  </div>
-
-                  <div className="mt-8 flex items-center gap-2 pt-6 border-t border-slate-100 text-xs sm:text-sm font-bold text-teal-600 group-hover:translate-x-1 transition-transform">
-                    <span>Read featured story</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
-          )}
-
-          {/* Side Compact Posts (5 cols) */}
-          <div className="flex flex-col gap-6 lg:col-span-5">
-            {sidePosts.map((post, idx) => (
-              <Reveal key={post.slug} delay={0.1 * (idx + 1)} className="flex-1">
-                <Link href={`/blog/${post.slug}`} className="group block h-full">
-                  <div className="flex h-full flex-col justify-between rounded-3xl p-7 bg-white border border-slate-200/80 shadow-md hover:shadow-xl hover:border-teal-500/50 hover:-translate-y-1 transition-all">
+        {/* Main Grid Section */}
+        <div className="grid gap-6 lg:grid-cols-12 mb-10">
+          {/* Left Big Featured Card (7 cols) */}
+          <Reveal className="lg:col-span-7">
+            <div className="group block h-full">
+              <div className="flex h-full flex-col justify-between rounded-3xl p-6 sm:p-8 bg-[#E3F5F2] border border-teal-200/90 shadow-sm hover:shadow-md transition-all">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                  {/* Left Text Info (7 cols) */}
+                  <div className="md:col-span-7 flex flex-col justify-between h-full">
                     <div>
-                      <div className="flex items-center gap-3">
-                        <span className="rounded-md border border-slate-200 bg-slate-50 px-2.5 py-0.5 font-mono text-xs font-bold text-teal-700">
-                          {CATEGORY_NAMES[post.category] || post.category}
+                      <div className="flex items-center gap-3 flex-wrap mb-4">
+                        <span className="rounded-md bg-[#0D8B99] text-white px-3 py-1 font-bold text-xs">
+                          {featuredPost.category}
                         </span>
-                        <span className="text-xs text-slate-500 font-medium">
-                          {formatDate(post.date)}
+                        <span className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                          <Calendar className="h-3.5 w-3.5 text-teal-600" />
+                          {featuredPost.date}
+                        </span>
+                        <span className="flex items-center gap-1.5 text-xs text-slate-600 font-medium">
+                          <Clock className="h-3.5 w-3.5 text-slate-400" />
+                          {featuredPost.readingTime}
                         </span>
                       </div>
 
-                      <h4 className="mt-4 text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors line-clamp-2">
-                        {post.title}
-                      </h4>
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 leading-tight mb-3 group-hover:text-teal-700 transition-colors">
+                        {featuredPost.title}
+                      </h3>
 
-                      <p className="mt-2 text-xs text-slate-600 leading-relaxed font-normal line-clamp-2">
-                        {post.description}
+                      <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mb-6">
+                        {featuredPost.description}
                       </p>
                     </div>
 
-                    <div className="mt-6 flex items-center justify-between pt-4 border-t border-slate-100 text-xs">
-                      <span className="text-slate-500 font-medium">{post.readingTime}</span>
-                      <span className="flex items-center gap-1 font-bold text-teal-600 group-hover:translate-x-1 transition-transform">
-                        Read story
+                    <div>
+                      <Link
+                        href={`/blog/${featuredPost.slug}`}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0B5B65] hover:bg-[#084850] text-white text-xs font-bold transition-all shadow-xs"
+                      >
+                        <span>Read full article</span>
                         <ArrowRight className="h-3.5 w-3.5" />
-                      </span>
+                      </Link>
                     </div>
                   </div>
-                </Link>
+
+                  {/* Right Image Graphic (5 cols) */}
+                  <div className="md:col-span-5 relative h-52 md:h-64 rounded-2xl overflow-hidden shadow-inner border border-teal-200/60">
+                    <Image
+                      src={featuredPost.image}
+                      alt={featuredPost.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Right Column: 2 Stacked Compact Post Cards (5 cols) */}
+          <div className="flex flex-col gap-6 lg:col-span-5">
+            {sidePosts.map((post, idx) => (
+              <Reveal key={post.title} delay={0.1 * (idx + 1)}>
+                <div className="group block h-full">
+                  <div className="flex flex-col sm:flex-row h-full justify-between rounded-2xl p-5 bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all gap-4">
+                    <div className="flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-2.5 flex-wrap mb-2">
+                          <span className="rounded-md bg-sky-100 text-sky-800 border border-sky-200 px-2.5 py-0.5 font-bold text-[11px]">
+                            {post.category}
+                          </span>
+                          <span className="flex items-center gap-1 text-[11px] text-slate-500 font-medium">
+                            <Calendar className="h-3 w-3 text-teal-600" />
+                            {post.date}
+                          </span>
+                          <span className="flex items-center gap-1 text-[11px] text-slate-500 font-medium">
+                            <Clock className="h-3 w-3 text-slate-400" />
+                            {post.readingTime}
+                          </span>
+                        </div>
+
+                        <h4 className="text-sm sm:text-base font-extrabold text-slate-900 group-hover:text-teal-600 transition-colors leading-snug mb-1.5">
+                          {post.title}
+                        </h4>
+
+                        <p className="text-xs text-slate-500 leading-relaxed font-normal line-clamp-2 mb-3">
+                          {post.description}
+                        </p>
+                      </div>
+
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-teal-600 hover:text-teal-800 transition-colors"
+                      >
+                        <span>Read more</span>
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </div>
+
+                    {/* Compact Right Image Thumbnail */}
+                    <div className="relative w-full sm:w-36 h-28 rounded-xl overflow-hidden shrink-0 border border-slate-200/70 shadow-xs">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
 
-        {/* Footer Link */}
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-slate-200/80 pt-8">
+        {/* Bottom Footer Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 border-t border-teal-200/60">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-500 mr-2">
-              Browse by topic:
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-2">
+              EXPLORE TOPICS ──
             </span>
-            <Link
-              href="/blog/category/news"
-              className="rounded-full bg-white border border-slate-200 px-3.5 py-1 text-xs font-semibold text-slate-600 hover:text-teal-700 hover:border-teal-300 transition-colors shadow-2xs"
-            >
-              Company News
-            </Link>
-            <Link
-              href="/blog/category/announcements"
-              className="rounded-full bg-white border border-slate-200 px-3.5 py-1 text-xs font-semibold text-slate-600 hover:text-teal-700 hover:border-teal-300 transition-colors shadow-2xs"
-            >
-              Announcements
-            </Link>
-            <Link
-              href="/blog/category/blog"
-              className="rounded-full bg-white border border-slate-200 px-3.5 py-1 text-xs font-semibold text-slate-600 hover:text-teal-700 hover:border-teal-300 transition-colors shadow-2xs"
-            >
-              Engineering Insights
-            </Link>
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`rounded-full px-3.5 py-1 text-xs font-semibold transition-colors ${
+                  activeCategory === cat.id
+                    ? "bg-[#0D8B99] text-white"
+                    : "bg-white border border-slate-200 text-slate-600 hover:text-teal-700 hover:border-teal-300"
+                }`}
+              >
+                {cat.label}
+              </button>
+            ))}
           </div>
 
-          <Button href="/blog" variant="primary" size="md" iconRight={<ArrowRight className="h-4 w-4 ml-1" />}>
-            VIEW ALL NEWS & INSIGHTS
-          </Button>
+          <Link
+            href="/blog"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#0D8B99] hover:bg-[#096B76] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm shrink-0"
+          >
+            <span>VIEW ALL NEWS & INSIGHTS</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
     </section>

@@ -7,7 +7,6 @@ import { HomeProblem } from "./globalscope/home/HomeProblem";
 import { HomeServices } from "./globalscope/home/HomeServices";
 import { HomeSeeItWork } from "./globalscope/home/HomeSeeItWork";
 import { HomeCases } from "./globalscope/home/HomeCases";
-import { HomeWhyUs } from "./globalscope/home/HomeWhyUs";
 import { HomeStack } from "./globalscope/home/HomeStack";
 import { HomeNewsroom } from "./globalscope/home/HomeNewsroom";
 import { HomeFaq } from "./globalscope/home/HomeFaq";
@@ -35,7 +34,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative w-full overflow-hidden bg-navy min-h-[500px] md:min-h-[560px] lg:min-h-[600px] flex items-center"
+      className="relative w-full flex-1 flex items-center overflow-hidden bg-navy min-h-[440px]"
     >
       {/* Background Image of the Corporate Meeting Room */}
       <div
@@ -66,10 +65,10 @@ const HeroSection = () => {
       />
 
       {/* Hero Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-24">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-14 md:py-16">
         <div className="max-w-xl lg:max-w-2xl text-left">
           <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-black uppercase text-white tracking-tight leading-[1.12]"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black uppercase text-white tracking-tight leading-[1.12]"
             style={{
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             }}
@@ -83,7 +82,7 @@ const HeroSection = () => {
             Custom Software, Cloud, and AI.
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-7 md:mt-8 flex flex-wrap items-center gap-4">
             <Link
               href="/contact"
               className="inline-flex items-center justify-center px-6 py-3 bg-teal hover:bg-teal-dark text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
@@ -114,13 +113,13 @@ export default function Home() {
       <JsonLd data={professionalServiceJsonLd()} />
 
       <main className="w-full overflow-x-hidden bg-surface">
-        {/* 1. Approved Hero Section (100% Untouched) */}
-        <HeroSection />
+        {/* 1. Hero & Brands First-Fold Landing Unit (Exactly 100% Viewport Height) */}
+        <div className="relative w-full min-h-[calc(100vh-70px)] min-h-[calc(100dvh-70px)] flex flex-col justify-between bg-[#04172e] overflow-hidden">
+          <HeroSection />
+          <CollabsMarquee background="#04172e" />
+        </div>
 
-        {/* 2. Client Collabs Marquee */}
-        <CollabsMarquee background="#04172e" />
-
-        {/* 3. Operational Bottlenecks (Problem) */}
+        {/* 2. Operational Bottlenecks (Problem) */}
         <HomeProblem />
 
         {/* 4. Core Capabilities (Bento Grid) */}
@@ -131,9 +130,6 @@ export default function Home() {
 
         {/* 6. Case Studies */}
         <HomeCases />
-
-        {/* 7. Why GrydIn (Stat Band & Pillars) */}
-        <HomeWhyUs />
 
         {/* 9. Technology Marquee */}
         <HomeStack />

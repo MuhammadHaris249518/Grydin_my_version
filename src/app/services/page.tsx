@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Zap,
   Brain,
@@ -15,8 +16,10 @@ import {
   Sparkles,
   Cpu,
   Workflow,
+  Bot,
+  Code2,
+  Target,
   TrendingUp,
-  Terminal,
   Activity,
   ChevronRight,
   Server,
@@ -33,7 +36,12 @@ import {
   FileCode2,
   HelpCircle,
   Box,
-  Target,
+  Search,
+  User,
+  Wrench,
+  Eye,
+  Sprout,
+  Cog,
   LucideIcon,
 } from "lucide-react";
 import { RobotStage } from "@/components/3d/RobotStage";
@@ -269,244 +277,285 @@ const INDUSTRY_SOLUTIONS: IndustrySolution[] = [
 ];
 
 // ── 5-Stage Engineering Lifecycle ─────────────────────────────────────────────
-const ENGINEERING_LIFECYCLE = [
+interface LifecycleStage {
+  step: string;
+  name: string;
+  description: string;
+  actionTag: string;
+  icon: LucideIcon;
+  colorScheme: {
+    iconBg: string;
+    iconText: string;
+    iconBorder: string;
+    tagBg: string;
+    tagText: string;
+    tagHoverBg: string;
+  };
+}
+
+const ENGINEERING_LIFECYCLE: LifecycleStage[] = [
   {
     step: "01",
-    phase: "Diagnose & Audit",
-    timeframe: "Days 1 – 3",
-    title: "Understand Before Building",
-    description:
-      "We map your end-to-end workflow, uncover hidden operational bottlenecks, inspect existing API architecture, and identify the highest ROI leverage points.",
-    deliverable: "Architecture Audit & Bottleneck Blueprint",
+    name: "Understand",
+    description: "We analyze your needs, users and goals.",
+    actionTag: "Discovery & Analysis",
+    icon: Search,
+    colorScheme: {
+      iconBg: "bg-sky-50",
+      iconText: "text-sky-600",
+      iconBorder: "border-sky-100",
+      tagBg: "bg-[#EAF5FE]",
+      tagText: "text-[#0284C7]",
+      tagHoverBg: "hover:bg-[#D9EDFE]",
+    },
   },
   {
     step: "02",
-    phase: "Architect & Scope",
-    timeframe: "Days 4 – 6",
-    title: "Fixed-Scope Solution Blueprint",
-    description:
-      "We design the complete system specification, data schemas, security boundaries, and API contracts. We guarantee exact pricing and deliverables before building.",
-    deliverable: "Fixed-Scope Specification & Milestone Contract",
+    name: "Design",
+    description: "We plan the right architecture and tech for your project.",
+    actionTag: "System Design",
+    icon: Layers,
+    colorScheme: {
+      iconBg: "bg-purple-50",
+      iconText: "text-purple-600",
+      iconBorder: "border-purple-100",
+      tagBg: "bg-[#F4EFFE]",
+      tagText: "text-[#8B5CF6]",
+      tagHoverBg: "hover:bg-[#EADBFE]",
+    },
   },
   {
     step: "03",
-    phase: "Agile Engineering",
-    timeframe: "Week 2",
-    title: "Test-Driven Production Build",
-    description:
-      "Modular, test-driven engineering with bi-weekly milestone demonstrations. Zero black boxes: you have continuous visibility into code progress and test coverage.",
-    deliverable: "Functional Production Build in Staging Environment",
+    name: "Build",
+    description: "We develop with clean, scalable and efficient code.",
+    actionTag: "Development",
+    icon: Code2,
+    colorScheme: {
+      iconBg: "bg-emerald-50",
+      iconText: "text-emerald-600",
+      iconBorder: "border-emerald-100",
+      tagBg: "bg-[#E8FAF4]",
+      tagText: "text-[#0D9488]",
+      tagHoverBg: "hover:bg-[#D1F5E9]",
+    },
   },
   {
     step: "04",
-    phase: "Quiet Deployment",
-    timeframe: "Under 2 Weeks",
-    title: "Zero-Disruption Integration",
-    description:
-      "We deploy directly into your ecosystem with zero downtime. Automated failover, live telemetry, and canary releases ensure completely seamless adoption.",
-    deliverable: "Live Production Release with Active Telemetry",
+    name: "Test",
+    description: "We ensure quality, performance and security.",
+    actionTag: "QA & Optimization",
+    icon: ShieldCheck,
+    colorScheme: {
+      iconBg: "bg-amber-50",
+      iconText: "text-amber-600",
+      iconBorder: "border-amber-100",
+      tagBg: "bg-[#FEF7EC]",
+      tagText: "text-[#D97706]",
+      tagHoverBg: "hover:bg-[#FEEBC8]",
+    },
   },
   {
     step: "05",
-    phase: "Handover & Scale",
-    timeframe: "Post-Launch",
-    title: "Autonomous Team Enablement",
+    name: "Deploy",
+    description: "We launch, monitor and support your product.",
+    actionTag: "Live & Support",
+    icon: Cloud,
+    colorScheme: {
+      iconBg: "bg-indigo-50",
+      iconText: "text-indigo-600",
+      iconBorder: "border-indigo-100",
+      tagBg: "bg-[#EEF2FF]",
+      tagText: "text-[#4F46E5]",
+      tagHoverBg: "hover:bg-[#E0E7FF]",
+    },
+  },
+];
+
+
+// ── 6 Interactive Services Tab Data ──────────────────────────────────────────
+interface ServiceTabData {
+  num: string;
+  badge: string;
+  title: string;
+  shortTitle: string;
+  icon: LucideIcon;
+  description: string;
+  bullets: string[];
+  suitedFor: string;
+  graphic: React.ReactNode;
+}
+
+const SERVICES_TAB_DATA: ServiceTabData[] = [
+  {
+    num: "01",
+    badge: "AI AGENTS",
+    title: "AI Agents",
+    shortTitle: "AI Agents",
+    icon: Zap,
     description:
-      "We supply clean documentation, automated maintenance guides, and comprehensive staff enablement so your team remains entirely independent and empowered.",
-    deliverable: "Full Documentation Suite & Dedicated SLA Support",
-  },
-];
-
-// ── Tech Stack Categories ─────────────────────────────────────────────────────
-const TECH_STACK_DOMAINS = [
-  {
-    title: "Artificial Intelligence & Models",
-    skills: ["OpenAI GPT-4o", "Anthropic Claude 3.5", "DeepSeek", "LangChain", "LangGraph", "LlamaIndex", "HuggingFace", "Qdrant / Pinecone"],
-  },
-  {
-    title: "Backend & Systems Architecture",
-    skills: ["Python", "FastAPI", "Node.js", "TypeScript", "Go", "PostgreSQL", "Redis", "Apache Kafka", "RabbitMQ"],
-  },
-  {
-    title: "Cloud Infrastructure & DevOps",
-    skills: ["Amazon Web Services (AWS)", "Microsoft Azure", "Google Cloud", "Docker", "Kubernetes", "Terraform", "GitHub Actions", "Prometheus"],
-  },
-  {
-    title: "Frontend & High-Performance Web",
-    skills: ["Next.js (App Router)", "React 19", "TypeScript", "Tailwind CSS", "REST & GraphQL", "State Machines", "Micro-frontends"],
-  },
-];
-
-const CAPABILITIES_CARDS_DATA = [
-  {
-    id: "ai-agents",
-    category: "ai",
-    badge: "AI & AUTOMATION",
-    badgeStyle: "bg-teal-100/90 text-teal-800 border border-teal-200/80",
-    cardStyle: "bg-[#F2FAF7] border-teal-200/80 hover:border-teal-500/50 shadow-xs hover:shadow-md",
-    titleHover: "group-hover:text-teal-700",
-    checkColor: "text-teal-600",
-    linkColor: "text-teal-600",
-    title: "AI Agents & Workflow Automation",
-    description: "Automate repetitive work with intelligent AI agents.",
-    bullets: ["Intelligent AI agents", "Workflow automation", "Tool integrations"],
+      "Autonomous agents that think, decide, and act — handling complex, multi-step tasks end-to-end without human intervention.",
+    bullets: [
+      "Custom agent design scoped to your specific workflow",
+      "Multi-step task execution with decision-making logic",
+      "Integration with your existing tools, APIs, and data sources",
+      "Monitoring, logging, and fallback handling built in",
+    ],
+    suitedFor:
+      "Teams drowning in repetitive decision-making, approvals, or multi-tool coordination that eats hours daily.",
     graphic: (
-      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
-        <circle cx="50" cy="40" r="35" fill="#2DD4BF" fillOpacity="0.18" />
-        <rect x="30" y="22" width="40" height="32" rx="10" fill="#0D8B99" />
-        <rect x="34" y="26" width="32" height="20" rx="6" fill="#063945" />
-        <circle cx="44" cy="36" r="3.5" fill="#38BDF8" />
-        <circle cx="56" cy="36" r="3.5" fill="#38BDF8" />
-        <line x1="50" y1="22" x2="50" y2="14" stroke="#0D8B99" strokeWidth="3" strokeLinecap="round" />
-        <circle cx="50" cy="12" r="3" fill="#38BDF8" />
-        <g>
-          <circle cx="16" cy="20" r="8" fill="#38BDF8" />
-          <path d="M13 20h6M16 17v6" stroke="#fff" strokeWidth="1.5" />
-          <circle cx="84" cy="25" r="9" fill="#0D8B99" />
-          <path d="M80 25l3 3 5-5" stroke="#fff" strokeWidth="1.5" />
-          <circle cx="80" cy="60" r="8" fill="#063945" />
-          <circle cx="80" cy="60" r="4" fill="#38BDF8" />
-        </g>
-      </svg>
+      <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#2DD4BF]/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-[#0D8B99] flex items-center justify-center text-white shadow-md">
+          <Bot className="w-8 h-8 text-white" strokeWidth={2} />
+        </div>
+      </div>
     ),
   },
   {
-    id: "custom-software",
-    category: "software",
+    num: "02",
+    badge: "WORKFLOW AUTOMATION",
+    title: "Workflow Automation & Pipelines",
+    shortTitle: "Workflow Automation",
+    icon: Workflow,
+    description:
+      "Streamline your business processes with automated workflows, event triggers, and reliable data pipelines across your enterprise software.",
+    bullets: [
+      "Event-driven workflow triggers and webhooks",
+      "Cross-platform data synchronization (CRMs, ERPs, DBs)",
+      "Error retry mechanics and automated failure alerts",
+      "Zero-maintenance serverless background workers",
+    ],
+    suitedFor:
+      "Organizations spending hundreds of operational hours manually transferring data across disconnected tools.",
+    graphic: (
+      <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#38BDF8]/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-[#0284C7] flex items-center justify-center text-white shadow-md">
+          <Workflow className="w-7 h-7 text-white" strokeWidth={2} />
+        </div>
+      </div>
+    ),
+  },
+  {
+    num: "03",
+    badge: "AI INTEGRATION",
+    title: "AI Integration & RAG Engines",
+    shortTitle: "AI Integration",
+    icon: Cpu,
+    description:
+      "Connect your enterprise data with LLMs and vector retrieval systems for accurate, grounded, context-aware intelligence.",
+    bullets: [
+      "Custom RAG pipelines over vector databases (Qdrant, Pinecone)",
+      "Semantic search and exact citation source linking",
+      "Fine-tuned LLM prompts and model orchestration",
+      "Enterprise security with strict data privacy compliance",
+    ],
+    suitedFor:
+      "Companies needing instant, reliable answers from internal technical documentation, contracts, and knowledge bases.",
+    graphic: (
+      <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#C084FC]/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-[#7E22CE] flex items-center justify-center text-white shadow-md">
+          <Cpu className="w-7 h-7 text-white" strokeWidth={2} />
+        </div>
+      </div>
+    ),
+  },
+  {
+    num: "04",
     badge: "CUSTOM SOFTWARE",
-    badgeStyle: "bg-purple-100/90 text-purple-800 border border-purple-200/80",
-    cardStyle: "bg-[#F7F5FE] border-purple-200/80 hover:border-purple-500/50 shadow-xs hover:shadow-md",
-    titleHover: "group-hover:text-purple-700",
-    checkColor: "text-purple-600",
-    linkColor: "text-purple-600",
-    title: "Web & Enterprise Applications",
-    description: "Scalable, secure and modern applications built for your business.",
-    bullets: ["Web applications", "APIs & backend systems", "Enterprise solutions"],
+    title: "Custom Software Engineering",
+    shortTitle: "Custom Software",
+    icon: Layers,
+    description:
+      "Modern, scalable and maintainable web applications, APIs, and microservices engineered specifically for your proprietary workflows.",
+    bullets: [
+      "High-performance Next.js & React user interfaces",
+      "Robust Python & Node.js backend microservices",
+      "Optimized SQL/NoSQL database architecture",
+      "Complete source code IP ownership & zero vendor lock-in",
+    ],
+    suitedFor:
+      "Businesses that have outgrown rigid off-the-shelf software and require custom portals or enterprise web platforms.",
     graphic: (
-      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
-        <circle cx="50" cy="40" r="35" fill="#A855F7" fillOpacity="0.18" />
-        <rect x="25" y="18" width="54" height="42" rx="6" fill="#6B21A8" />
-        <rect x="25" y="18" width="54" height="10" rx="6" fill="#581C87" />
-        <circle cx="31" cy="23" r="1.8" fill="#EF4444" />
-        <circle cx="36" cy="23" r="1.8" fill="#F59E0B" />
-        <circle cx="41" cy="23" r="1.8" fill="#10B981" />
-        <path d="M38 38l-4 4 4 4M46 38l4 4-4 4" stroke="#C084FC" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-        <line x1="43" y1="36" x2="41" y2="48" stroke="#C084FC" strokeWidth="2" strokeLinecap="round" />
-        <rect x="15" y="32" width="30" height="28" rx="5" fill="#9333EA" fillOpacity="0.9" />
-        <line x1="20" y1="42" x2="38" y2="42" stroke="#E9D5FF" strokeWidth="2" strokeLinecap="round" />
-        <line x1="20" y1="48" x2="32" y2="48" stroke="#E9D5FF" strokeWidth="2" strokeLinecap="round" />
-      </svg>
+      <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#818CF8]/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-[#4338CA] flex items-center justify-center text-white shadow-md">
+          <Layers className="w-7 h-7 text-white" strokeWidth={2} />
+        </div>
+      </div>
     ),
   },
   {
-    id: "cloud-devops",
-    category: "cloud",
-    badge: "CLOUD & DEVOPS",
-    badgeStyle: "bg-blue-100/90 text-blue-800 border border-blue-200/80",
-    cardStyle: "bg-[#F0F7FF] border-blue-200/80 hover:border-blue-500/50 shadow-xs hover:shadow-md",
-    titleHover: "group-hover:text-blue-700",
-    checkColor: "text-blue-600",
-    linkColor: "text-blue-600",
-    title: "Cloud Infrastructure & Platform Engineering",
-    description: "Build, deploy and scale with reliable cloud infrastructure.",
-    bullets: ["Cloud migration", "CI/CD & DevOps automation", "Scalable infrastructure"],
-    graphic: (
-      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
-        <circle cx="50" cy="40" r="35" fill="#3B82F6" fillOpacity="0.18" />
-        <path d="M32 38a10 10 0 0118-5 12 12 0 0121 7 8 8 0 01-1 16H32a10 10 0 010-18z" fill="#60A5FA" />
-        <path d="M50 44V28M44 34l6-6 6 6" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <rect x="65" y="32" width="24" height="32" rx="4" fill="#1E40AF" />
-        <line x1="69" y1="40" x2="85" y2="40" stroke="#93C5FD" strokeWidth="2" />
-        <line x1="69" y1="48" x2="85" y2="48" stroke="#93C5FD" strokeWidth="2" />
-        <circle cx="83" cy="56" r="1.5" fill="#60A5FA" />
-        <circle cx="78" cy="56" r="1.5" fill="#60A5FA" />
-      </svg>
-    ),
-  },
-  {
-    id: "system-integration",
-    category: "integration",
+    num: "05",
     badge: "SYSTEM INTEGRATION",
-    badgeStyle: "bg-amber-100/90 text-amber-800 border border-amber-200/80",
-    cardStyle: "bg-[#FFFBF2] border-amber-200/80 hover:border-amber-500/50 shadow-xs hover:shadow-md",
-    titleHover: "group-hover:text-amber-700",
-    checkColor: "text-amber-600",
-    linkColor: "text-amber-600",
-    title: "System Integration & Middleware Architecture",
-    description: "Connect your tools, data and systems for seamless operations.",
-    bullets: ["API integrations", "Enterprise middleware", "Third-party connectors"],
+    title: "System Integration & Middleware",
+    shortTitle: "System Integration",
+    icon: Plug,
+    description:
+      "Unify your legacy databases, third-party SaaS tools, and internal services with secure, high-throughput middleware architecture.",
+    bullets: [
+      "Bespoke REST & GraphQL API gateway engineering",
+      "Real-time database sync and legacy platform connectors",
+      "High-availability message queues (Redis & Kafka)",
+      "Comprehensive API logging, security, and telemetry",
+    ],
+    suitedFor:
+      "Enterprises managing fragmented tools and databases that require unified, real-time data sync without data loss.",
     graphic: (
-      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
-        <circle cx="50" cy="40" r="35" fill="#F59E0B" fillOpacity="0.18" />
-        <path d="M25 25h16v6a4 4 0 008 0v-6h16v16h-6a4 4 0 000 8h6v16H49v-6a4 4 0 00-8 0v6H25V49h6a4 4 0 000-8h-6V25z" fill="#F59E0B" opacity="0.85" />
-        <path d="M49 25h16v16h-6a4 4 0 000 8h6v16H49V49h6a4 4 0 000-8h-6V25z" fill="#D97706" />
-        <circle cx="75" cy="55" r="8" fill="#B45309" />
-        <path d="M75 51v8M71 55h8" stroke="#FEF3C7" strokeWidth="2" />
-      </svg>
+      <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#FBBF24]/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-[#D97706] flex items-center justify-center text-white shadow-md">
+          <Plug className="w-7 h-7 text-white" strokeWidth={2} />
+        </div>
+      </div>
     ),
   },
   {
-    id: "data-analytics",
-    category: "data",
-    badge: "DATA ENGINEERING",
-    badgeStyle: "bg-emerald-100/90 text-emerald-800 border border-emerald-200/80",
-    cardStyle: "bg-[#F0FDF9] border-emerald-200/80 hover:border-emerald-500/50 shadow-xs hover:shadow-md",
-    titleHover: "group-hover:text-emerald-700",
-    checkColor: "text-emerald-600",
-    linkColor: "text-emerald-600",
-    title: "Data Engineering & Real-Time Pipelines",
-    description: "Turn your data into reliable, real-time insights and intelligence.",
-    bullets: ["ETL/ELT pipelines", "Data lakes & warehouses", "Real-time data processing"],
+    num: "06",
+    badge: "FULL-STACK DEVELOPMENT",
+    title: "Full-Stack Development",
+    shortTitle: "Full-Stack Development",
+    icon: Code2,
+    description:
+      "From frontend UX design to cloud deployment, we build complete digital products using modern frameworks and engineering standards.",
+    bullets: [
+      "End-to-end full-stack product architecture and shipping",
+      "Responsive, accessible UI with smooth micro-interactions",
+      "CI/CD deployment pipelines and automated test coverage",
+      "Post-launch telemetry, SLA support, and documentation",
+    ],
+    suitedFor:
+      "Founders and enterprise tech leaders looking for a senior full-stack pod to ship production-ready features rapidly.",
     graphic: (
-      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
-        <circle cx="50" cy="40" r="35" fill="#10B981" fillOpacity="0.18" />
-        <ellipse cx="40" cy="26" rx="16" ry="6" fill="#34D399" />
-        <path d="M24 26v12c0 3.3 7.2 6 16 6s16-2.7 16-6V26" fill="#059669" />
-        <ellipse cx="40" cy="38" rx="16" ry="6" fill="#10B981" />
-        <path d="M24 38v12c0 3.3 7.2 6 16 6s16-2.7 16-6V38" fill="#047857" />
-        <ellipse cx="40" cy="50" rx="16" ry="6" fill="#059669" />
-        <rect x="62" y="30" width="26" height="26" rx="6" fill="#065F46" />
-        <rect x="67" y="44" width="4" height="8" rx="1" fill="#34D399" />
-        <rect x="73" y="38" width="4" height="14" rx="1" fill="#34D399" />
-        <rect x="79" y="34" width="4" height="18" rx="1" fill="#6EE7B7" />
-      </svg>
-    ),
-  },
-  {
-    id: "ai-integration",
-    category: "ai",
-    badge: "AI & AUTOMATION",
-    badgeStyle: "bg-indigo-100/90 text-indigo-800 border border-indigo-200/80",
-    cardStyle: "bg-[#F5F3FF] border-indigo-200/80 hover:border-indigo-500/50 shadow-xs hover:shadow-md",
-    titleHover: "group-hover:text-indigo-700",
-    checkColor: "text-indigo-600",
-    linkColor: "text-indigo-600",
-    title: "Document AI & Vision Extraction",
-    description: "Extract, classify and structure data from your documents and images.",
-    bullets: ["OCR & data extraction", "Document classification", "Structured output (JSON, DB)"],
-    graphic: (
-      <svg viewBox="0 0 100 80" fill="none" className="w-full h-full">
-        <circle cx="50" cy="40" r="35" fill="#6366F1" fillOpacity="0.18" />
-        <rect x="25" y="16" width="34" height="46" rx="4" fill="#818CF8" />
-        <line x1="31" y1="26" x2="48" y2="26" stroke="#EEF2FF" strokeWidth="2" strokeLinecap="round" />
-        <line x1="31" y1="34" x2="53" y2="34" stroke="#EEF2FF" strokeWidth="2" strokeLinecap="round" />
-        <line x1="31" y1="42" x2="44" y2="42" stroke="#EEF2FF" strokeWidth="2" strokeLinecap="round" />
-        <rect x="52" y="20" width="22" height="22" rx="6" fill="#4338CA" />
-        <text x="63" y="35" fill="#EEF2FF" fontSize="11" fontWeight="bold" textAnchor="middle">Ai</text>
-        <rect x="62" y="48" width="20" height="20" rx="5" fill="#4F46E5" />
-        <circle cx="72" cy="58" r="4" fill="#C7D2FE" />
-      </svg>
+      <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
+        <div className="absolute inset-0 bg-[#34D399]/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-[#059669] flex items-center justify-center text-white shadow-md">
+          <Code2 className="w-7 h-7 text-white" strokeWidth={2} />
+        </div>
+      </div>
     ),
   },
 ];
+
 
 export default function ServicesPage() {
-  const [selectedCategory, setSelectedCategory] = useState<ServiceCategory>("all");
-  const [activeServiceId, setActiveServiceId] = useState<string>("ai-agents");
+  const [activeServiceTab, setActiveServiceTab] = useState<number>(0);
 
   const handleSelect = useCallback((id: string) => {
-    setSelectedCategory("all");
-    setActiveServiceId(id);
+    const tabMap: Record<string, number> = {
+      "ai-agents": 0,
+      "workflow": 1,
+      "workflow-automation": 1,
+      "ai-integration": 2,
+      "ai-rag": 2,
+      "custom-software": 3,
+      "system-integration": 4,
+      "fullstack": 5,
+    };
+    if (id in tabMap) {
+      setActiveServiceTab(tabMap[id]);
+    }
     history.replaceState(null, "", `#${id}`);
     document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
@@ -514,9 +563,18 @@ export default function ServicesPage() {
   useEffect(() => {
     const apply = () => {
       const id = window.location.hash.slice(1);
-      if (CORE_SERVICES.some((s) => s.id === id)) {
-        setSelectedCategory("all");
-        setActiveServiceId(id);
+      const tabMap: Record<string, number> = {
+        "ai-agents": 0,
+        "workflow": 1,
+        "workflow-automation": 1,
+        "ai-integration": 2,
+        "ai-rag": 2,
+        "custom-software": 3,
+        "system-integration": 4,
+        "fullstack": 5,
+      };
+      if (id in tabMap) {
+        setActiveServiceTab(tabMap[id]);
         requestAnimationFrame(() => document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth" }));
       }
     };
@@ -524,14 +582,6 @@ export default function ServicesPage() {
     window.addEventListener("hashchange", apply);
     return () => window.removeEventListener("hashchange", apply);
   }, []);
-
-  const filteredServices =
-    selectedCategory === "all"
-      ? CORE_SERVICES
-      : CORE_SERVICES.filter((s) => s.category === selectedCategory);
-
-  const activeService =
-    CORE_SERVICES.find((s) => s.id === activeServiceId) || CORE_SERVICES[0];
 
   return (
     <main className="min-h-screen bg-surface text-ink selection:bg-accent selection:text-white">
@@ -651,108 +701,162 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── 2. Core Capabilities Explorer ── */}
+      {/* ── 2. Core Capabilities / Services Explorer ── */}
       <section id="capabilities" className="py-16 sm:py-24 relative bg-slate-50/50 border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
           {/* Section Header */}
-          <div className="max-w-3xl mb-10">
-            <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-teal-600 mb-3">
-              <span className="w-4 h-0.5 bg-teal-600" />
-              OUR CAPABILITIES
+          <div className="max-w-3xl mb-12">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
+              <span className="text-teal-500 font-bold">──</span>
+              WHAT WE BUILD
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-              Technology that solves{" "}
-              <span className="text-teal-600 block sm:inline">real business problems.</span>
+              Our <span className="text-teal-600">Services</span>
             </h2>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-              From AI automation to cloud infrastructure, we build modern solutions that make complex operations simpler, faster and more efficient.
+              We build intelligent, scalable solutions that help businesses work smarter, move faster, and grow bigger.
             </p>
           </div>
 
-          {/* Category Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-10 pb-2">
-            {[
-              { id: "all", label: "All Capabilities", icon: Sparkles },
-              { id: "ai", label: "AI & Autonomous Agents", icon: Brain },
-              { id: "software", label: "Custom Software", icon: FileCode2 },
-              { id: "cloud", label: "Cloud & DevOps", icon: Cloud },
-              { id: "integration", label: "System Integration", icon: Plug },
-              { id: "data", label: "Data Engineering", icon: Database },
-            ].map((tab) => {
-              const TabIcon = tab.icon;
-              const isActive = selectedCategory === tab.id;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setSelectedCategory(tab.id as ServiceCategory)}
-                  className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all whitespace-nowrap ${
-                    isActive
-                      ? "bg-teal-600 text-white shadow-md shadow-teal-600/20"
-                      : "bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-200/80 shadow-2xs"
-                  }`}
-                >
-                  <TabIcon className={`w-4 h-4 ${isActive ? "text-white" : "text-slate-500"}`} />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
+          {/* 2-Column Split Interactive Component */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Left Column: 6 Vertical Tabs + Redesigned GrydIn Guarantee Card (lg:col-span-5) */}
+            <div className="lg:col-span-5 flex flex-col gap-3.5">
+              <div className="flex flex-col gap-3">
+                {SERVICES_TAB_DATA.map((srv, idx) => {
+                  const IconComponent = srv.icon;
+                  const isActive = activeServiceTab === idx;
 
-          {/* 6 Capabilities Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {CAPABILITIES_CARDS_DATA.filter(
-              (item) => selectedCategory === "all" || item.category === selectedCategory
-            ).map((item, idx) => (
-              <Reveal key={item.id} delay={idx * 0.05}>
-                <div
-                  id={item.id}
-                  className={`group relative rounded-3xl p-6 sm:p-7 transition-all duration-300 border flex flex-col justify-between h-full shadow-xs hover:shadow-xl hover:-translate-y-1 ${item.cardStyle}`}
-                >
+                  return (
+                    <button
+                      key={srv.num}
+                      onClick={() => setActiveServiceTab(idx)}
+                      className={`w-full group text-left px-5 py-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-4 ${
+                        isActive
+                          ? "bg-[#E5F7F4] border-2 border-[#2DD4BF] shadow-sm text-slate-900"
+                          : "bg-white/90 border-slate-200/90 hover:bg-slate-50 hover:border-teal-300 text-slate-700"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3.5">
+                        <span
+                          className={`font-mono text-base sm:text-lg font-bold ${
+                            isActive ? "text-[#0D8B99]" : "text-slate-400"
+                          }`}
+                        >
+                          {srv.num}
+                        </span>
+
+                        <div className={`shrink-0 ${isActive ? "text-teal-600" : "text-slate-500"}`}>
+                          <IconComponent className="w-5 h-5" strokeWidth={2.2} />
+                        </div>
+
+                        <span
+                          className={`text-sm sm:text-base font-extrabold ${
+                            isActive ? "text-slate-900" : "text-slate-700"
+                          }`}
+                        >
+                          {srv.shortTitle}
+                        </span>
+                      </div>
+
+                      <div
+                        className={`transition-transform duration-200 ${
+                          isActive ? "translate-x-1 text-teal-700" : "text-slate-400 group-hover:translate-x-0.5"
+                        }`}
+                      >
+                        <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Redesigned GrydIn Guarantee Card (Clean light theme, generous padding, zero blank gap) */}
+              <div className="bg-white border border-teal-200/90 shadow-sm rounded-2xl p-5 sm:p-6 mt-1 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all hover:border-teal-400 hover:shadow-md">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 border border-teal-200/80 flex items-center justify-center shrink-0 mt-0.5">
+                    <ShieldCheck className="w-5 h-5" strokeWidth={2.2} />
+                  </div>
                   <div>
-                    {/* Top Row: Badge Pill & Decorative Vector Graphic */}
-                    <div className="flex items-start justify-between gap-4 mb-6">
-                      <span className={`text-[10px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-md ${item.badgeStyle}`}>
-                        {item.badge}
-                      </span>
-                      <div className="w-24 h-20 shrink-0 pointer-events-none transform group-hover:scale-105 transition-transform duration-300">
-                        {item.graphic}
+                    <div className="flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-teal-700 mb-0.5">
+                      <span>GRYDIN GUARANTEE</span>
+                    </div>
+                    <p className="text-sm font-extrabold text-slate-900 leading-snug">
+                      Shipped in &lt; 2 Weeks • Fixed Scope
+                    </p>
+                    <p className="text-xs text-slate-600 font-normal leading-relaxed mt-0.5">
+                      100% Client IP ownership with zero vendor lock-in.
+                    </p>
+                  </div>
+                </div>
+                <Link
+                  href="/contact"
+                  className="shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#0D8B99] hover:bg-teal-700 text-white text-xs font-bold transition-all shadow-xs"
+                >
+                  <span>Book Diagnosis</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column: Active Service Details Panel (lg:col-span-7) */}
+            <div className="lg:col-span-7">
+              {(() => {
+                const current = SERVICES_TAB_DATA[activeServiceTab] || SERVICES_TAB_DATA[0];
+                return (
+                  <div className="bg-[#EBF7F5] border border-teal-200/90 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm relative overflow-hidden flex flex-col justify-between h-full min-h-[520px]">
+                    {/* Top Row: Badge & Graphic Bubble */}
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div className="inline-flex items-center gap-2 bg-white/90 border border-teal-200/90 text-teal-800 text-xs font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-lg shadow-2xs">
+                        <Zap className="w-3.5 h-3.5 text-teal-600" />
+                        <span>{current.badge}</span>
+                      </div>
+
+                      <div className="shrink-0 pointer-events-none transform hover:scale-105 transition-transform duration-300">
+                        {current.graphic}
                       </div>
                     </div>
 
-                    {/* Title */}
-                    <h3 className={`text-xl sm:text-2xl font-bold text-slate-900 mb-2.5 leading-snug transition-colors ${item.titleHover}`}>
-                      {item.title}
-                    </h3>
+                    {/* Title & Description */}
+                    <div className="mb-6">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3">
+                        {current.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
+                        {current.description}
+                      </p>
+                    </div>
 
-                    {/* Subtitle / Description */}
-                    <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed mb-6">
-                      {item.description}
-                    </p>
+                    {/* What's Included Box */}
+                    <div className="bg-white/95 rounded-2xl p-5 sm:p-6 border border-teal-200/80 mb-6 shadow-2xs">
+                      <span className="font-extrabold text-xs uppercase tracking-wider text-teal-700 block mb-4">
+                        WHAT&apos;S INCLUDED
+                      </span>
 
-                    {/* 3 Checkmark Bullet Points */}
-                    <div className="space-y-3 mb-8">
-                      {item.bullets.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700">
-                          <CheckCircle2 className={`w-4 h-4 shrink-0 ${item.checkColor}`} strokeWidth={2.2} />
-                          <span>{bullet}</span>
-                        </div>
-                      ))}
+                      <div className="space-y-3">
+                        {current.bullets.map((bullet, bIdx) => (
+                          <div key={bIdx} className="flex items-center gap-3 text-xs sm:text-sm font-semibold text-slate-700">
+                            <CheckCircle2 className="w-4.5 h-4.5 text-teal-600 shrink-0" strokeWidth={2.2} />
+                            <span>{bullet}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Suited For Footer */}
+                    <div className="pt-2">
+                      <div className="flex items-center gap-1.5 font-extrabold text-xs uppercase tracking-wider text-teal-700 mb-1.5">
+                        <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+                        <span>SUITED FOR</span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
+                        {current.suitedFor}
+                      </p>
                     </div>
                   </div>
-
-                  {/* Bottom Link */}
-                  <div className="pt-4 border-t border-slate-200/50 mt-auto flex items-center justify-between">
-                    <Link
-                      href="/contact"
-                      className={`inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold tracking-wide transition-all group-hover:translate-x-1 ${item.linkColor}`}
-                    >
-                      Explore service
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+                );
+              })()}
+            </div>
           </div>
 
           {/* Bottom Unique Use Case Callout Banner */}
@@ -770,383 +874,147 @@ export default function ServicesPage() {
               href="/contact"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold rounded-full shadow-xs transition-all shrink-0"
             >
-              Let's talk
+              Let&apos;s talk
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── 3. Industry Solutions Matrix ── */}
-      <section className="py-24 md:py-32 bg-navy-950 border-y border-surface-line relative">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <SectionHeader
-            eyebrow="Domain Expertise"
-            title="Tailored industry solutions"
-            accent="industry solutions"
-            intro="We apply our engineering capabilities directly to industry-specific regulatory, data, and operational constraints. Here is how our solutions accelerate performance across key verticals."
-            className="mb-14 text-left"
-          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {INDUSTRY_SOLUTIONS.map((industry, index) => {
-              const IndIcon = industry.icon;
-              return (
-                <Reveal key={index} delay={index * 0.05}>
-                  <div className="surface-card rounded-2xl p-6 sm:p-7 hover:border-teal/50 transition-all flex flex-col justify-between h-full">
-                    <div>
-                      <div className="w-11 h-11 rounded-lg bg-accent-light border border-accent/25 text-accent flex items-center justify-center mb-5">
-                        <IndIcon size={22} strokeWidth={1.8} />
-                      </div>
-
-                      <h3 className="text-lg font-semibold text-white mb-1.5">
-                        {industry.title}
-                      </h3>
-                      <p className="text-xs text-slate-400 mb-5 font-normal">
-                        {industry.subtitle}
-                      </p>
-
-                      <div className="space-y-2 mb-6">
-                        {industry.useCases.map((uc, uidx) => (
-                          <div key={uidx} className="flex items-start gap-2 text-xs text-slate-300">
-                            <Check size={13} className="text-accent shrink-0 mt-0.5" />
-                            <span>{uc}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="pt-4 border-t border-surface-line mt-auto flex items-center justify-between">
-                      <span className="text-xs font-semibold text-accent">
-                        Impact: {industry.impactStat}
-                      </span>
-                      <Link
-                        href="/contact"
-                        className="text-xs font-bold text-slate-300 hover:text-white inline-flex items-center gap-1"
-                      >
-                        Inquire <ChevronRight size={13} />
-                      </Link>
-                    </div>
-                  </div>
-                </Reveal>
-              );
-            })}
-
-            {/* Custom Industry Callout Card */}
-            <Reveal delay={0.3}>
-              <div className="bg-gradient-to-br from-navy-800 to-teal/30 border border-teal/40 rounded-2xl p-7 flex flex-col justify-between text-left h-full">
-                <div>
-                  <div className="w-11 h-11 rounded-lg bg-white/10 text-white flex items-center justify-center mb-5">
-                    <Compass size={22} strokeWidth={1.8} />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">
-                    Have a specialized proprietary domain?
-                  </h3>
-                  <p className="text-base text-slate-200 leading-relaxed mb-6">
-                    Every unique business problem has an architecture to solve it. Tell us about your operational constraints, regulatory environment, and target timelines.
-                  </p>
-                </div>
-
-                <Link
-                  href="/contact"
-                  className="w-full text-center py-3 bg-white text-navy hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md"
-                >
-                  Discuss Custom Architecture
-                </Link>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
 
       {/* ── 4. The 5-Stage Engineering Lifecycle ── */}
-      <section className="py-24 md:py-32 relative bg-surface">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <SectionHeader
-            eyebrow="Execution Methodology"
-            title="Our 5-stage engineering lifecycle"
-            accent="engineering lifecycle"
-            intro="We replace endless agile meetings and speculative billing with a transparent, disciplined 5-stage deployment framework."
-            className="mb-16 text-left"
-          />
+      <section className="py-20 sm:py-28 relative bg-white border-b border-slate-200/80 overflow-hidden">
+        {/* Subtle atmospheric ambient glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[380px] bg-gradient-to-r from-blue-100/25 via-indigo-100/30 to-purple-100/25 blur-3xl rounded-full pointer-events-none" />
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
-            {ENGINEERING_LIFECYCLE.map((step, index) => (
-              <Reveal key={index} delay={index * 0.08}>
-                <div className="surface-card rounded-xl p-5 flex flex-col justify-between relative group transition-all h-full">
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-2xl font-black font-mono text-accent group-hover:text-accent-hover transition-colors">
-                        {step.step}
-                      </span>
-                      <span className="text-xs font-bold uppercase tracking-wider bg-white/5 border border-surface-line px-2 py-0.5 rounded text-slate-400">
-                        {step.timeframe}
-                      </span>
-                    </div>
-                    <h3 className="text-sm font-semibold text-white mb-1">
-                      {step.phase}
-                    </h3>
-                    <p className="text-xs font-semibold text-accent mb-3">
-                      {step.title}
-                    </p>
-                    <p className="text-sm text-ink-muted leading-relaxed mb-4">
-                      {step.description}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 border-t border-surface-line mt-auto text-xs text-slate-300">
-                    <span className="font-semibold text-slate-200 block mb-0.5">
-                      Deliverable:
-                    </span>
-                    {step.deliverable}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Enterprise Tech Stack Grid ── */}
-      <section className="py-24 bg-surface-soft border-y border-surface-line">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <SectionHeader
-            eyebrow="Technology Standards"
-            title="Modern enterprise technology stack"
-            accent="technology stack"
-            intro="We leverage production-grade, battle-tested modern frameworks that guarantee horizontal scalability, high developer velocity, and zero vendor lock-in."
-            className="mb-12"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TECH_STACK_DOMAINS.map((domain, index) => (
-              <Reveal key={index} delay={index * 0.06}>
-                <div className="surface-card rounded-xl p-6 h-full">
-                  <h3 className="text-sm font-semibold text-white tracking-wider mb-4 pb-2 border-b border-surface-line flex items-center gap-2">
-                    <Terminal size={16} className="text-teal-glow" />
-                    {domain.title}
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {domain.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="text-xs font-mono text-slate-300 bg-white/5 border border-surface-line px-2.5 py-1 rounded-md hover:border-teal/50 transition-colors"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. GrydIn vs Traditional Outsourcing Comparison ── */}
-      <section className="py-24 md:py-32 relative bg-surface">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <SectionHeader
-            eyebrow="The GrydIn Difference"
-            title="Why forward-thinking companies choose us"
-            accent="choose us"
-            intro="How our diagnosis-first, fixed-scope engineering contrasts with traditional bloated IT outsourcing and rigid off-the-shelf software."
-            className="mb-14"
-          />
-
-          <div className="overflow-x-auto glass rounded-2xl p-6">
-            <table className="w-full text-left border-collapse min-w-[640px]">
-              <thead>
-                <tr className="border-b border-surface-line text-xs font-bold uppercase tracking-wider text-slate-400">
-                  <th className="py-4 px-6">Criteria</th>
-                  <th className="py-4 px-6 text-accent bg-accent-light rounded-t-lg">
-                    GrydIn Technologies
-                  </th>
-                  <th className="py-4 px-6">Traditional IT Agencies</th>
-                  <th className="py-4 px-6">Off-the-Shelf SaaS</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/5 text-sm">
-                <tr>
-                  <td className="py-4 px-6 font-semibold text-white">
-                    First Production Deployment
-                  </td>
-                  <td className="py-4 px-6 text-accent font-bold bg-accent-light/70">
-                    &lt; 2 Weeks guaranteed
-                  </td>
-                  <td className="py-4 px-6 text-slate-400">3 – 6 Months</td>
-                  <td className="py-4 px-6 text-slate-400">Weeks of config work</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-semibold text-white">
-                    Pricing & Scope Model
-                  </td>
-                  <td className="py-4 px-6 text-accent font-bold bg-accent-light/70">
-                    Guaranteed Fixed Scope
-                  </td>
-                  <td className="py-4 px-6 text-slate-400">Billable hours & scope creep</td>
-                  <td className="py-4 px-6 text-slate-400">Per-seat recurring trap</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-semibold text-white">
-                    Codebase Ownership
-                  </td>
-                  <td className="py-4 px-6 text-accent font-bold bg-accent-light/70">
-                    100% Client IP Ownership
-                  </td>
-                  <td className="py-4 px-6 text-slate-400">Vendor dependency</td>
-                  <td className="py-4 px-6 text-slate-400">Zero IP ownership</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-semibold text-white">
-                    AI Integration Depth
-                  </td>
-                  <td className="py-4 px-6 text-accent font-bold bg-accent-light/70">
-                    Native multi-agent systems
-                  </td>
-                  <td className="py-4 px-6 text-slate-400">Surface-level wrapper APIs</td>
-                  <td className="py-4 px-6 text-slate-400">Generic chatbots</td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-6 font-semibold text-white">
-                    Post-Launch Enablement
-                  </td>
-                  <td className="py-4 px-6 text-accent font-bold bg-accent-light/70">
-                    Complete internal docs & training
-                  </td>
-                  <td className="py-4 px-6 text-slate-400">Costly maintenance lock-in</td>
-                  <td className="py-4 px-6 text-slate-400">Community support tickets</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 7. Transparent Engagement Models ── */}
-      <section className="py-24 bg-surface-soft border-y border-surface-line">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <SectionHeader
-            eyebrow="Flexible Collaboration"
-            title="Engagement models designed for certainty"
-            accent="certainty"
-            intro="We align our engagement model with your technical stage and strategic goals."
-            className="mb-14"
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Model 1: Fixed-Scope Sprint */}
-            <div className="surface-card rounded-2xl p-7 flex flex-col justify-between transition-all hover:border-teal/60">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded inline-block mb-4">
-                  High Certainty
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          {/* Header Row: Title & Subtitle on Left, Pill Badge on Right */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
+            <div className="max-w-2xl">
+              {/* Eyebrow with blue indicator bar */}
+              <div className="flex items-center gap-2.5 mb-3">
+                <span className="w-5 h-1 rounded-full bg-[#4F46E5] inline-block" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
+                  EXECUTION METHODOLOGY
                 </span>
-                <h3 className="text-2xl font-semibold text-ink mb-2">
-                  Fixed-Scope Sprint
-                </h3>
-                <p className="text-base text-slate-300 mb-6 leading-relaxed">
-                  Best for defined projects: building a new AI agent, developing a custom portal, or integrating core enterprise databases.
-                </p>
+              </div>
 
-                <div className="space-y-3 mb-8">
-                  {[
-                    "Exact deliverables agreed upon upfront",
-                    "Guaranteed first deployment in <2 weeks",
-                    "Fixed pricing with zero scope creep",
-                    "Complete source code and documentation handover",
-                  ].map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
-                      <CheckCircle2 size={15} className="text-accent shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </div>
-                  ))}
+              {/* Main Heading */}
+              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-3">
+                Our 5-Stage Engineering{" "}
+                <span className="text-[#4F46E5]">Lifecycle</span>
+              </h2>
+
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base text-slate-500 leading-relaxed font-normal max-w-xl">
+                From discovery to deployment — we turn your ideas into reliable, scalable solutions through a focused 5-stage process.
+              </p>
+            </div>
+
+            {/* Top Right Pill Badge */}
+            <div className="shrink-0 self-start lg:self-center">
+              <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-slate-200/90 shadow-xs text-xs sm:text-[13px] font-semibold text-slate-700">
+                <Zap className="w-4 h-4 text-[#4F46E5] fill-[#4F46E5]" />
+                <span>Transparent</span>
+                <span className="text-slate-300 text-xs">•</span>
+                <span>Agile</span>
+                <span className="text-slate-300 text-xs">•</span>
+                <span>Results Driven</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Connected 3D Pipeline & 5 Stage Cards */}
+          <div className="w-full overflow-x-auto pb-4 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+            <div className="min-w-[880px] lg:min-w-0">
+              {/* Full 3D Isometric Pipeline Strip */}
+              <div className="relative w-full max-w-6xl mx-auto mb-6 sm:mb-8 select-none">
+                <Image
+                  src="/images/lifecycle/lifecycle-pipeline.png"
+                  alt="Our 5-Stage Engineering Lifecycle Pipeline"
+                  width={950}
+                  height={169}
+                  className="w-full h-auto object-contain pointer-events-none"
+                  priority
+                />
+              </div>
+
+              {/* 5 Cards Row */}
+              <div className="grid grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+                {ENGINEERING_LIFECYCLE.map((stage, idx) => {
+                  const Icon = stage.icon;
+                  const { colorScheme } = stage;
+
+                  return (
+                    <Reveal key={stage.step} delay={idx * 0.08}>
+                      <div className="bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full group">
+                        <div>
+                          {/* Stage Icon */}
+                          <div
+                            className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 border ${colorScheme.iconBg} ${colorScheme.iconText} ${colorScheme.iconBorder}`}
+                          >
+                            <Icon className="w-5 h-5 stroke-[2.2]" />
+                          </div>
+
+                          {/* Stage Title */}
+                          <h3 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight mb-2">
+                            {stage.name}
+                          </h3>
+
+                          {/* Stage Description */}
+                          <p className="text-xs sm:text-[13px] text-slate-500 font-normal leading-relaxed mb-5">
+                            {stage.description}
+                          </p>
+                        </div>
+
+                        {/* Action Tag Pill Button */}
+                        <div className="mt-auto pt-1">
+                          <Link
+                            href="/contact"
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold ${colorScheme.tagBg} ${colorScheme.tagText} ${colorScheme.tagHoverBg} transition-colors`}
+                          >
+                            <span className="font-bold">&gt;</span>
+                            <span>{stage.actionTag}</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </Reveal>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Banner: Ready to Build? */}
+          <Reveal delay={0.35}>
+            <div className="mt-12 sm:mt-16 bg-[#F8FAFD] sm:bg-gradient-to-r sm:from-[#F8FAFD] sm:via-white sm:to-[#F8F9FE] border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xs hover:border-slate-300 transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-100/70 shadow-2xs">
+                  <Sparkles className="w-5 h-5 text-[#4F46E5]" />
+                </div>
+                <div>
+                  <span className="block text-[11px] font-bold uppercase tracking-widest text-[#4F46E5] mb-1">
+                    READY TO BUILD?
+                  </span>
+                  <h4 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+                    Let&apos;s turn your idea into a working product.
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                    Share your goals and we&apos;ll guide you through the next step.
+                  </p>
                 </div>
               </div>
 
               <Link
-                href="/contact"
-                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
+                href="/services#capabilities"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#0F172A] hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-lg transition-all shrink-0"
               >
-                Scope a Sprint
+                <span>Explore Our Services</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
-
-            {/* Model 2: Dedicated Engineering Pod */}
-            <div className="surface-card border-2 border-teal rounded-2xl p-7 flex flex-col justify-between relative shadow-xl shadow-teal/15">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-teal text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                Most Popular
-              </div>
-
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded inline-block mb-4">
-                  Autonomous Team
-                </span>
-                <h3 className="text-2xl font-semibold text-ink mb-2">
-                  Dedicated Pod
-                </h3>
-                <p className="text-base text-slate-300 mb-6 leading-relaxed">
-                  A high-velocity, senior engineering team tailored to accelerate your product roadmap without management friction.
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  {[
-                    "Lead Architect, Full-Stack Dev, & AI Specialist",
-                    "Full integration with your Slack/GitHub/Jira",
-                    "Bi-weekly sprint demos and prioritized backlogs",
-                    "Seamless elastic scaling based on roadmap needs",
-                  ].map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-200">
-                      <CheckCircle2 size={15} className="text-accent shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <Link
-                href="/contact"
-                className="w-full text-center py-3 bg-white hover:bg-slate-100 text-navy text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
-              >
-                Deploy an Engineering Pod
-              </Link>
-            </div>
-
-            {/* Model 3: Architecture Modernization */}
-            <div className="surface-card rounded-2xl p-7 flex flex-col justify-between transition-all hover:border-teal/60">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-accent bg-accent-light px-2.5 py-1 rounded inline-block mb-4">
-                  Enterprise Advisory
-                </span>
-                <h3 className="text-2xl font-semibold text-ink mb-2">
-                  Modernization Retainer
-                </h3>
-                <p className="text-base text-slate-300 mb-6 leading-relaxed">
-                  Continuous architecture evolution, legacy system refactoring, SLA reliability monitoring, and AI capability additions.
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  {[
-                    "Ongoing 24/7 telemetry & SLA incident support",
-                    "Quarterly architecture & security audits",
-                    "Proactive performance and cost optimization",
-                    "On-demand AI and feature enhancements",
-                  ].map((feat, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5 text-sm text-slate-300">
-                      <CheckCircle2 size={15} className="text-accent shrink-0 mt-0.5" />
-                      <span>{feat}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <Link
-                href="/contact"
-                className="w-full text-center py-3 bg-teal hover:bg-teal-dark text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-md"
-              >
-                Inquire Retainer
-              </Link>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -1174,53 +1042,223 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ── 8. Solution Scoping & Consultation CTA ── */}
-      <section className="py-24 md:py-32 relative overflow-hidden bg-surface">
-        <HeroBackdrop network={false} />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-8 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-accent-light text-accent border border-accent/30 uppercase tracking-wider mb-6">
-            <Sparkles size={14} /> Ready to eliminate friction?
+      {/* ── 8. Solution Scoping & Consultation CTA (Ready to Eliminate Friction) ── */}
+      <section className="py-20 sm:py-28 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white border-t border-slate-200/80">
+        {/* Ambient teal glow behind the diagram */}
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[650px] h-[500px] bg-gradient-to-br from-teal-100/35 via-cyan-50/25 to-transparent blur-3xl rounded-full pointer-events-none -z-0" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          {/* Main 2-Column Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mb-16 sm:mb-20">
+            {/* Left Column: Heading, Subtitle & CTAs */}
+            <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
+              {/* Eyebrow Badge */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-teal-50 text-[#0D8B99] border border-teal-200/80 mb-6 shadow-2xs self-start">
+                <Sparkles className="w-3.5 h-3.5 text-[#0D8B99]" />
+                <span>READY TO ELIMINATE FRICTION?</span>
+              </div>
+
+              {/* Main Heading */}
+              <h2 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-slate-900 tracking-tight leading-[1.14] mb-4">
+                Describe what&apos;s slowing <br />
+                your business down. <br />
+                <span className="text-[#0D8B99]">We&apos;ll map it to the right system.</span>
+              </h2>
+
+              {/* Subtitle */}
+              <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal max-w-xl mb-8">
+                Talk directly with a Lead Architect, not a sales representative. We will diagnose your workflows, assess technical feasibility, and provide a fixed-scope architecture proposal within 48 hours.
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-5 sm:gap-7">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2.5 px-7 py-4 bg-[#0D8B99] hover:bg-[#0B7884] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-lg shadow-teal-700/25 hover:shadow-xl transition-all transform hover:-translate-y-0.5 active:translate-y-0 shrink-0"
+                >
+                  <span>BOOK A FREE PROCESS DIAGNOSIS</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-1.5 text-sm font-bold text-[#0D8B99] hover:text-[#0B7884] underline-offset-4 hover:underline transition-colors shrink-0"
+                >
+                  <span>Learn about our firm</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column: Interactive System Convergence Architecture */}
+            <div className="lg:col-span-6 xl:col-span-6 relative flex items-center justify-center">
+              <div className="w-full overflow-x-auto sm:overflow-visible pb-4 sm:pb-0">
+                <div className="min-w-[520px] sm:min-w-0 flex items-center justify-between gap-1 sm:gap-2 relative">
+                  {/* Left Column: 4 Inputs Stack (People, Processes, Data, Tools) */}
+                  <div className="flex flex-col gap-3 shrink-0 z-10">
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                      <User className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                      <span className="text-xs sm:text-sm font-bold text-slate-800">People</span>
+                    </div>
+
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                      <Cog className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                      <span className="text-xs sm:text-sm font-bold text-slate-800">Processes</span>
+                    </div>
+
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                      <Database className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                      <span className="text-xs sm:text-sm font-bold text-slate-800">Data</span>
+                    </div>
+
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                      <Wrench className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                      <span className="text-xs sm:text-sm font-bold text-slate-800">Tools</span>
+                    </div>
+                  </div>
+
+                  {/* SVG Convergence Curves (4 inputs -> Center Hub) */}
+                  <svg
+                    className="w-10 sm:w-16 h-64 sm:h-72 shrink-0 pointer-events-none"
+                    viewBox="0 0 60 260"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M 0 32 C 35 32, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0 96 C 30 96, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0 164 C 30 164, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0 228 C 35 228, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+
+                  {/* Center Card: Your System with Orbit Rings */}
+                  <div className="relative flex items-center justify-center shrink-0 z-10">
+                    {/* Orbit Ring Background */}
+                    <div className="absolute -inset-7 sm:-inset-9 border border-dashed border-teal-300/60 rounded-full pointer-events-none" />
+                    <div className="absolute -inset-12 sm:-inset-16 border border-teal-200/30 rounded-full pointer-events-none" />
+
+                    <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl bg-[#E8F8F5] border-2 border-[#2DD4BF] shadow-md shadow-teal-500/10 flex flex-col items-center justify-center gap-2.5 transition-transform hover:scale-105 duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-white text-[#0D8B99] shadow-2xs flex items-center justify-center border border-teal-200/60">
+                        <Layers className="w-5 h-5 text-[#0D8B99]" strokeWidth={2.2} />
+                      </div>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight">
+                        Your System
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Output Connector Arrow (Center Hub -> 4 Outputs) */}
+                  <div className="w-7 sm:w-10 h-6 flex items-center justify-center shrink-0 relative text-[#0D8B99]">
+                    <div className="w-full h-0.5 bg-[#2DD4BF]" />
+                    <span className="absolute right-0 -mr-1 text-teal-600 font-bold text-xs">→</span>
+                  </div>
+
+                  {/* Right Column: 4 Outputs Stack with Checkmarks */}
+                  <div className="flex flex-col gap-3 shrink-0 z-10">
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                      <div className="flex items-center gap-2.5">
+                        <Zap className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                        <span className="text-xs sm:text-sm font-bold text-slate-800">Higher Efficiency</span>
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 stroke-[3]" />
+                      </div>
+                    </div>
+
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                      <div className="flex items-center gap-2.5">
+                        <Eye className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                        <span className="text-xs sm:text-sm font-bold text-slate-800">Better Visibility</span>
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 stroke-[3]" />
+                      </div>
+                    </div>
+
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                      <div className="flex items-center gap-2.5">
+                        <TrendingUp className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                        <span className="text-xs sm:text-sm font-bold text-slate-800">Scales with You</span>
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 stroke-[3]" />
+                      </div>
+                    </div>
+
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                      <div className="flex items-center gap-2.5">
+                        <Sprout className="w-4 h-4 text-[#0D8B99] shrink-0" />
+                        <span className="text-xs sm:text-sm font-bold text-slate-800">Long-Term Growth</span>
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-teal-500 text-white flex items-center justify-center shrink-0">
+                        <Check className="w-3 h-3 stroke-[3]" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight mb-6">
-            Describe what&apos;s slowing your business down. <br />
-            <span className="text-gradient">We&apos;ll map it to the right system.</span>
-          </h2>
+          {/* Bottom Strip: 3 Trust Badges */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 pt-10 sm:pt-12 border-t border-slate-200/80">
+            {/* Badge 1: NDA Protected */}
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-teal-50 text-[#0D8B99] border border-teal-200/80 flex items-center justify-center shrink-0 shadow-2xs">
+                <ShieldCheck className="w-5 h-5" strokeWidth={2.2} />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-slate-900 leading-snug">NDA Protected</h4>
+                <p className="text-xs text-slate-500 mt-0.5 font-normal leading-relaxed">
+                  Your data and ideas stay confidential.
+                </p>
+              </div>
+            </div>
 
-          <p className="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed mb-10">
-            Talk directly with a Lead Architect, not a sales representative. We will diagnose your workflows, assess technical feasibility, and provide a fixed-scope architecture proposal within 48 hours.
-          </p>
+            {/* Badge 2: Proposal in < 48 Hours */}
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-teal-50 text-[#0D8B99] border border-teal-200/80 flex items-center justify-center shrink-0 shadow-2xs">
+                <Clock className="w-5 h-5" strokeWidth={2.2} />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-slate-900 leading-snug">Proposal in &lt; 48 Hours</h4>
+                <p className="text-xs text-slate-500 mt-0.5 font-normal leading-relaxed">
+                  Get a clear plan, fast.
+                </p>
+              </div>
+            </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2.5 px-8 py-4 bg-teal hover:bg-teal-dark text-white text-sm font-bold uppercase tracking-wider rounded-md shadow-xl shadow-teal/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-            >
-              Book a free process diagnosis
-              <ArrowRight size={16} strokeWidth={2.2} />
-            </Link>
-
-            <Link
-              href="/about"
-              className="inline-flex items-center gap-2 px-6 py-4 bg-white/5 hover:bg-white/10 text-white text-sm font-bold uppercase tracking-wider border border-white/20 rounded-md transition-all hover:border-white/40"
-            >
-              Learn About Our Firm
-            </Link>
-          </div>
-
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs text-slate-400">
-            <span className="flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-teal-glow" />
-              NDA Protected
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-teal-glow" />
-              Proposal in &lt; 48 Hours
-            </span>
-            <span className="flex items-center gap-2">
-              <CheckCircle2 size={14} className="text-teal-glow" />
-              Zero Retainer Lock-In
-            </span>
+            {/* Badge 3: Zero Retainer Lock-In */}
+            <div className="flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-teal-50 text-[#0D8B99] border border-teal-200/80 flex items-center justify-center shrink-0 shadow-2xs">
+                <Lock className="w-5 h-5" strokeWidth={2.2} />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-slate-900 leading-snug">Zero Retainer Lock-In</h4>
+                <p className="text-xs text-slate-500 mt-0.5 font-normal leading-relaxed">
+                  No upfront fees. No long-term contracts.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

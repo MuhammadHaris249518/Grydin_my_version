@@ -51,15 +51,15 @@ export function HomeProblem() {
                 <div className="group h-full bg-white border border-slate-200/80 shadow-md rounded-3xl p-7 hover:shadow-xl hover:border-teal-500/50 hover:-translate-y-1 transition-all flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-6">
-                      <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-50 text-amber-600 border border-amber-200/80 font-bold">
-                        <Icon className="h-5 w-5" strokeWidth={2} />
-                      </span>
+                      <div className="flex items-center justify-center text-teal-600 font-bold">
+                        <Icon className="h-7 w-7 text-teal-600" strokeWidth={2.2} />
+                      </div>
                       <span className="font-mono text-2xl font-black text-slate-300 group-hover:text-teal-600 transition-colors">
                         {p.num}
                       </span>
                     </div>
 
-                    <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-md mb-3">
+                    <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider text-teal-800 bg-[#E5F7F4] border border-teal-200/90 px-2.5 py-1 rounded-md mb-3">
                       {p.tag}
                     </span>
 

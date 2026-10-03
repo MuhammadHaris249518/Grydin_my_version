@@ -70,20 +70,20 @@ export const CollabsMarquee = ({ background = "#04172e" }: { background?: string
       background,
       borderTop: "1px solid rgba(255,255,255,0.07)",
       borderBottom: "1px solid rgba(255,255,255,0.07)",
-      paddingTop: "clamp(2rem, 3.5vh, 2.75rem)",
-      paddingBottom: "clamp(2rem, 3.5vh, 2.75rem)",
+      paddingTop: "clamp(1rem, 2vh, 1.4rem)",
+      paddingBottom: "clamp(1rem, 2vh, 1.4rem)",
       overflow: "hidden",
     }}
   >
     <p
       style={{
         textAlign: "center",
-        fontSize: "clamp(0.65rem, 1.1vw, 0.78rem)",
+        fontSize: "clamp(0.68rem, 1.1vw, 0.78rem)",
         fontWeight: 700,
         letterSpacing: "0.26em",
         textTransform: "uppercase",
         color: "rgba(255,255,255,0.88)",
-        marginBottom: "clamp(1.25rem, 2.5vh, 1.75rem)",
+        marginBottom: "clamp(0.65rem, 1.3vh, 0.95rem)",
         padding: "0 1.5rem",
       }}
     >

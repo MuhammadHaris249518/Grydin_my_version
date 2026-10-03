@@ -1,175 +1,134 @@
 "use client";
 
-import { useState } from "react";
-import { CheckCircle2, ArrowRight, Play, Cpu, Database, Zap, RefreshCw, Terminal } from "lucide-react";
+import React, { useState } from "react";
+import Link from "next/link";
+import {
+  Zap,
+  ShieldCheck,
+  Radio,
+  ArrowRight,
+  Play,
+  ArrowUpRight,
+  type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
-import { Button } from "../ui/Button";
+import { AutonomousProductShowcase } from "@/components/video/AutonomousProductShowcase";
 
-const CHECKLIST = [
-  "Sub-second event detection triggers autonomous workflows instantly across your stack.",
-  "Deterministic guardrails validate structured payloads before executing downstream tool calls.",
-  "Live telemetry streams execution logs and status directly into your audit command center.",
-];
+interface FeaturePoint {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
 
-const ARCHITECTURE_DEMOS = [
+const LIVE_FEATURES: FeaturePoint[] = [
   {
-    id: "agents",
-    title: "Multi-Agent Triage",
-    desc: "Autonomous email parsing, document verification, and ERP record updates.",
-    steps: [
-      { label: "Trigger: Inbound Invoice PDF", time: "+12ms", status: "Verified" },
-      { label: "Agent Vision OCR Extraction", time: "+140ms", status: "Extracted" },
-      { label: "SAP / ERP Validation Check", time: "+280ms", status: "Matched" },
-      { label: "Approval & CRM Status Sync", time: "+410ms", status: "Executed" },
-    ],
+    icon: Zap,
+    title: "Sub-second event detection",
+    description: "Triggers autonomous workflows instantly across your stack.",
   },
   {
-    id: "rag",
-    title: "Document RAG Pipeline",
-    desc: "High-throughput vector search and legal clause extraction.",
-    steps: [
-      { label: "Query: Compliance SLA Clause 4.2", time: "+8ms", status: "Received" },
-      { label: "Vector Search (Qdrant Index)", time: "+45ms", status: "Top 3 Chunks" },
-      { label: "LLM Context Window Synthesis", time: "+190ms", status: "Synthesized" },
-      { label: "Audit Log & Citation Guardrail", time: "+310ms", status: "Passed" },
-    ],
+    icon: ShieldCheck,
+    title: "Deterministic guardrails",
+    description: "Validates structured payloads before executing downstream tool calls.",
   },
   {
-    id: "sync",
-    title: "Real-Time System Sync",
-    desc: "Bi-directional event streaming across legacy SQL and cloud APIs.",
-    steps: [
-      { label: "Event: Order Placed on Shopify", time: "+5ms", status: "Captured" },
-      { label: "Kafka Event Bus Dispatch", time: "+18ms", status: "Dispatched" },
-      { label: "Inventory Reservation Lock", time: "+90ms", status: "Reserved" },
-      { label: "Warehouse Dispatch Sync", time: "+160ms", status: "Completed" },
-    ],
+    icon: Radio,
+    title: "Live telemetry streams",
+    description: "Execution logs and status flow directly into your audit command center.",
   },
 ];
 
 export function HomeSeeItWork() {
-  const [activeDemo, setActiveDemo] = useState(0);
-
-  const demo = ARCHITECTURE_DEMOS[activeDemo];
+  const handleWatchLiveDemo = () => {
+    const el = document.getElementById("product-showcase-container");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   return (
-    <section className="relative bg-white py-20 md:py-28 border-b border-slate-200/80">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          {/* Left Text Column */}
+    <section
+      id="live-demo"
+      className="relative bg-white py-20 md:py-28 lg:py-32 border-b border-slate-200/80 overflow-hidden"
+    >
+      <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16">
+        <div className="grid gap-12 lg:gap-14 xl:gap-16 lg:grid-cols-12 lg:items-center">
+          {/* ── Left Column: Typography, Tightened Features & CTA Hierarchy ── */}
           <div className="lg:col-span-5">
             <Reveal>
-              <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-teal-600 mb-3">
-                <span className="w-4 h-0.5 bg-teal-600" />
-                LIVE ARCHITECTURE
+              {/* Eyebrow badge (Item 4) */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2.5 text-xs font-extrabold uppercase tracking-widest text-[#0D8B99]">
+                  <span className="w-6 h-0.5 bg-[#0D8B99] rounded-full" />
+                  LIVE ARCHITECTURE
+                </div>
+                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-teal-700 bg-teal-50 border border-teal-200/80 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                  LIVE PRODUCT DEMO <ArrowUpRight className="w-3 h-3" />
+                </span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
-                See autonomous systems in <span className="text-teal-600">live production</span>
+              {/* Main Headline (Item 6: Stronger, larger, confident) */}
+              <h2 className="text-4xl sm:text-5xl lg:text-[46px] xl:text-[52px] font-extrabold text-slate-900 tracking-tight leading-[1.08] mb-5">
+                See autonomous <br />
+                systems in <span className="text-[#0D8B99]">live <br className="hidden sm:inline" />production</span>
               </h2>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8">
+              {/* Subtitle */}
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8 max-w-lg">
                 Watch how GrydIn-engineered agents coordinate across databases, APIs, and interfaces without latency or human intervention.
               </p>
 
-              <ul className="space-y-4 mb-10">
-                {CHECKLIST.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-slate-700 font-medium">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-50 text-teal-600 border border-teal-200 mt-0.5">
-                      <CheckCircle2 className="h-4 w-4" strokeWidth={2.2} />
-                    </span>
-                    <span className="leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* 3 Tightened Feature Points: ICON + bold title + short explanation (Item 7) */}
+              <div className="space-y-4 mb-9">
+                {LIVE_FEATURES.map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={idx} className="flex items-start gap-3.5 group">
+                      <div className="w-10 h-10 rounded-full bg-teal-50/90 border border-teal-200/90 text-[#0D8B99] flex items-center justify-center shrink-0 mt-0.5 transition-colors group-hover:bg-teal-100 shadow-2xs">
+                        <Icon className="w-4.5 h-4.5 text-[#0D8B99]" />
+                      </div>
+                      <div>
+                        <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">
+                          {item.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal mt-0.5">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
 
+              {/* CTA Hierarchy (Item 8: Primary vs Secondary) */}
               <div className="flex flex-wrap items-center gap-4">
-                <Button href="/services" variant="primary" size="md" iconRight={<ArrowRight className="h-4 w-4" />}>
-                  EXPLORE ENGINEERING SPECS
-                </Button>
-                <Button href="/contact" variant="outline-dark" size="md">
-                  REQUEST LIVE DEMO
-                </Button>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3.5 bg-[#0D8B99] hover:bg-[#0b7480] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl shadow-md shadow-[#0D8B99]/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                >
+                  Explore Engineering Specs
+                  <ArrowRight className="w-4 h-4 ml-0.5" />
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={handleWatchLiveDemo}
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-bold uppercase tracking-wider border border-slate-300 rounded-xl shadow-2xs transition-all transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                >
+                  <Play className="w-3.5 h-3.5 fill-[#0D8B99] text-[#0D8B99]" />
+                  Watch Live Demo
+                </button>
               </div>
             </Reveal>
           </div>
 
-          {/* Right Live Interactive Cockpit Column (No placeholdes!) */}
-          <div className="lg:col-span-7">
+          {/* ── Right Column: Dominant Product Interface Showcase (Items 1, 2, 3, 5, 9) ── */}
+          <div
+            id="product-showcase-container"
+            className="lg:col-span-7 relative pt-4 sm:pt-6 lg:pt-0 w-full"
+          >
             <Reveal delay={0.15}>
-              <div className="bg-slate-900 rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-2xl">
-                {/* Top Control Tabs */}
-                <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                    <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                    <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                    <span className="font-mono text-xs text-slate-400 font-bold ml-2">PRODUCTION EXECUTION BUS</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 bg-slate-800 p-1 rounded-xl">
-                    {ARCHITECTURE_DEMOS.map((d, i) => (
-                      <button
-                        key={d.id}
-                        onClick={() => setActiveDemo(i)}
-                        className={`px-3 py-1.5 rounded-lg font-mono text-xs font-bold transition-all ${
-                          activeDemo === i
-                            ? "bg-teal-600 text-white shadow-xs"
-                            : "text-slate-400 hover:text-slate-200"
-                        }`}
-                      >
-                        {d.title}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Subtitle / Spec */}
-                <div className="mb-6 flex items-center justify-between">
-                  <div>
-                    <h3 className="font-mono text-base font-bold text-white flex items-center gap-2">
-                      <Zap className="w-4 h-4 text-teal-400" />
-                      {demo.title}
-                    </h3>
-                    <p className="text-xs text-slate-400 mt-1 font-mono">{demo.desc}</p>
-                  </div>
-                  <span className="font-mono text-[10px] text-emerald-400 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-md uppercase font-bold tracking-wider animate-pulse">
-                    LIVE TELEMETRY
-                  </span>
-                </div>
-
-                {/* Simulated Step Execution Stream */}
-                <div className="space-y-3 font-mono text-xs">
-                  {demo.steps.map((step, sIdx) => (
-                    <div
-                      key={sIdx}
-                      className="flex items-center justify-between p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 hover:border-teal-500/40 transition-colors"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className="w-6 h-6 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center text-[10px] font-bold">
-                          0{sIdx + 1}
-                        </span>
-                        <span className="text-slate-200 font-semibold">{step.label}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-slate-400 text-[11px]">{step.time}</span>
-                        <span className="px-2.5 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/40">
-                          {step.status}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Bottom Status Terminal Output Bar */}
-                <div className="mt-6 pt-4 border-t border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-teal-400" />
-                    <span>Audit Trail: 100% Deterministic & Immutable</span>
-                  </div>
-                  <span className="text-teal-400 font-bold">LATENCY: &lt; 500MS</span>
-                </div>
-              </div>
+              <AutonomousProductShowcase videoSrc="/videos/Video.mp4" />
             </Reveal>
           </div>
         </div>

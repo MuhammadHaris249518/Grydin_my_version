@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, AlertTriangle, FileText, Building2, ShoppingBag, HeartPulse, Zap, Truck } from "lucide-react";
 import { SOLUTIONS, type Solution } from "@/data/solutions";
@@ -23,6 +23,19 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 
 export function SolutionsClient() {
   const [activeSlug, setActiveSlug] = useState<string>(SOLUTIONS[0].slug);
+
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (SOLUTIONS.some((s) => s.slug === hash)) {
+        setActiveSlug(hash);
+      }
+    };
+    handleHash();
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
   const selected = SOLUTIONS.find((s) => s.slug === activeSlug) || SOLUTIONS[0];
   const IconComponent = ICON_MAP[selected.icon] || FileText;
 
@@ -35,7 +48,7 @@ export function SolutionsClient() {
   }));
 
   return (
-    <section className="relative bg-surface py-20 md:py-28">
+    <section id="verticals" className="relative bg-surface py-20 md:py-28">
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <SectionHeader
           eyebrow="Target Sectors"

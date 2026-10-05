@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowRight, Code2, Cloud, Sparkles, Cpu, Database, TrendingUp } from "lucide-react";
 import { buildMetadata, organizationJsonLd, websiteJsonLd, professionalServiceJsonLd } from "@/lib/seo";
 import { JsonLd } from "./globalscope/ui/JsonLd";
 import { CollabsMarquee } from "./globalscope/CollabsMarquee";
-import { HomeProblem } from "./globalscope/home/HomeProblem";
 import { HomeServices } from "./globalscope/home/HomeServices";
 import { HomeSeeItWork } from "./globalscope/home/HomeSeeItWork";
 import { HomeCases } from "./globalscope/home/HomeCases";
@@ -28,74 +28,260 @@ export const metadata: Metadata = buildMetadata({
     "GrydIn Islamabad",
   ],
 });
-
-// ── Hero Section (Retained 100% untouched) ──────────────────────────────────
+// ── Hero Section (Updated to match design reference) ─────────────────────────
 const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative w-full flex-1 flex items-center overflow-hidden bg-navy min-h-[440px]"
+      className="relative w-full flex-1 flex items-center overflow-hidden bg-[#030e1f] min-h-0"
     >
-      {/* Background Image of the Corporate Meeting Room */}
+      {/* Background Image of the Corporate Meeting Room with Holographic Grydin Globe */}
       <div
-        className="absolute inset-0 z-0 bg-cover"
+        className="absolute inset-0 z-0 bg-cover bg-no-repeat"
         style={{
-          backgroundImage: `url('/images/hero/hero-banner.jpg')`,
-          backgroundPosition: "right 30% center",
-          backgroundRepeat: "no-repeat",
+          backgroundImage: `url('/images/hero/hero-hologram.jpg')`,
+          backgroundPosition: "right 4% center",
         }}
       />
 
-      {/* Desktop horizontal smooth blend gradient: Navy #04172e on left to transparent on right */}
+      {/* Desktop horizontal smooth blend gradient: Deep Navy on left to transparent on right */}
       <div
-        className="absolute inset-0 z-10 hidden md:block"
+        className="absolute inset-0 z-10 hidden md:block pointer-events-none"
         style={{
           background:
-            "linear-gradient(90deg, #04172e 0%, #04172e 38%, rgba(4, 23, 46, 0.95) 45%, rgba(4, 23, 46, 0.7) 56%, rgba(4, 23, 46, 0.2) 70%, rgba(4, 23, 46, 0) 82%)",
+            "linear-gradient(90deg, #030e1f 0%, #030e1f 36%, rgba(3, 14, 31, 0.98) 46%, rgba(3, 14, 31, 0.75) 58%, rgba(3, 14, 31, 0.25) 75%, transparent 100%)",
         }}
       />
 
       {/* Mobile/Tablet vertical gradient for maximum text contrast */}
       <div
-        className="absolute inset-0 z-10 md:hidden"
+        className="absolute inset-0 z-10 md:hidden pointer-events-none"
         style={{
           background:
-            "linear-gradient(180deg, rgba(4, 23, 46, 0.96) 0%, rgba(4, 23, 46, 0.9) 65%, rgba(4, 23, 46, 0.75) 100%)",
+            "linear-gradient(180deg, rgba(3, 14, 31, 0.98) 0%, rgba(3, 14, 31, 0.90) 58%, rgba(3, 14, 31, 0.8) 100%)",
         }}
       />
 
+      {/* Sleek Glowing Cyber Wave & Tech Grid Pattern at bottom-left */}
+      <div className="absolute bottom-0 left-0 w-full sm:w-[580px] lg:w-[750px] h-28 sm:h-36 lg:h-44 pointer-events-none z-15 overflow-hidden">
+        <svg
+          className="w-full h-full overflow-visible"
+          viewBox="0 0 850 240"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="waveCyanGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stopColor="#00f5d4" stopOpacity="0" />
+              <stop offset="25%" stopColor="#00e5ff" stopOpacity="0.95" />
+              <stop offset="70%" stopColor="#0284c7" stopOpacity="0.85" />
+              <stop offset="100%" stopColor="#818cf8" stopOpacity="0.1" />
+            </linearGradient>
+            <linearGradient id="wavePurpleGrad" x1="0%" y1="50%" x2="100%" y2="50%">
+              <stop offset="0%" stopColor="#6366f1" stopOpacity="0" />
+              <stop offset="35%" stopColor="#818cf8" stopOpacity="0.75" />
+              <stop offset="85%" stopColor="#00c2cb" stopOpacity="0" />
+            </linearGradient>
+            <pattern id="heroDotMesh" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.1" fill="#00c2cb" fillOpacity="0.22" />
+            </pattern>
+          </defs>
+
+          {/* Dotted mesh area */}
+          <path
+            d="M 0 170 Q 220 130 450 180 T 850 160 L 850 240 L 0 240 Z"
+            fill="url(#heroDotMesh)"
+          />
+
+          {/* Purple secondary curve glow */}
+          <path
+            d="M -40 200 C 180 180 340 220 580 180 S 780 210 880 190"
+            stroke="url(#wavePurpleGrad)"
+            strokeWidth="6"
+            strokeLinecap="round"
+            filter="blur(6px)"
+          />
+
+          {/* Cyan primary curve glow */}
+          <path
+            d="M -40 160 C 160 130 300 200 520 170 S 740 180 860 160"
+            stroke="#00e5ff"
+            strokeWidth="10"
+            strokeLinecap="round"
+            opacity="0.28"
+            filter="blur(10px)"
+          />
+          <path
+            d="M -40 160 C 160 130 300 200 520 170 S 740 180 860 160"
+            stroke="url(#waveCyanGrad)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* Floating Card 1: AI AUTOMATION (Top-Left of Hologram) */}
+      <div className="hidden lg:flex absolute top-[11%] xl:top-[13%] left-[45%] xl:left-[46%] z-30 animate-float-card-a items-center gap-3 bg-[#031326]/85 hover:bg-[#031326]/95 border border-[#00c2cb]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(0,194,203,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[195px] xl:min-w-[210px] transition-all hover:scale-105 select-none">
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#00c2cb]/20 border border-[#00c2cb]/40 flex items-center justify-center text-[#00f5d4] shadow-[0_0_12px_rgba(0,245,212,0.3)]">
+          <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
+        </div>
+        <div className="flex flex-col">
+          <span className="font-mono text-[9px] xl:text-[10px] font-bold tracking-[0.14em] text-[#00c2cb] uppercase">
+            AI AUTOMATION
+          </span>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="text-xs sm:text-sm xl:text-base font-extrabold text-white">
+              +42% efficiency
+            </span>
+            <svg className="w-8 h-3.5 sm:w-9 sm:h-4" viewBox="0 0 36 16" fill="none">
+              <path
+                d="M 2 13 Q 12 12 18 7 T 34 3"
+                stroke="#10b981"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M 28 3 L 34 3 L 34 9"
+                stroke="#10b981"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Card 2: CLOUD SOLUTIONS (Below Hologram) */}
+      <div className="hidden lg:flex absolute top-[47%] xl:top-[49%] left-[50%] xl:left-[51%] z-30 animate-float-card-b items-center gap-3 bg-[#031326]/85 hover:bg-[#031326]/95 border border-[#0284c7]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(2,132,199,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[195px] xl:min-w-[210px] transition-all hover:scale-105 select-none">
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#0284c7]/20 border border-[#0284c7]/40 flex items-center justify-center text-[#38bdf8] shadow-[0_0_12px_rgba(56,189,248,0.3)]">
+          <Cloud className="w-4 h-4 sm:w-5 sm:h-5" />
+        </div>
+        <div className="flex flex-col">
+          <span className="font-mono text-[9px] xl:text-[10px] font-bold tracking-[0.14em] text-slate-300 uppercase">
+            CLOUD SOLUTIONS
+          </span>
+          <div className="flex items-center gap-2 mt-0.5">
+            <span className="text-xs sm:text-sm xl:text-base font-extrabold text-white">
+              99.9% uptime
+            </span>
+            <span className="relative flex h-2 w-2 ml-0.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Card 3: DIGITAL SOLUTIONS (Top-Right above team) */}
+      <div className="hidden lg:flex absolute top-[15%] xl:top-[17%] right-[2%] xl:right-[4%] z-30 animate-float-card-c items-center gap-3 bg-[#031326]/85 hover:bg-[#031326]/95 border border-[#818cf8]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(129,140,248,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[185px] xl:min-w-[200px] transition-all hover:scale-105 select-none">
+        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#6366f1]/20 border border-[#818cf8]/40 flex items-center justify-center text-[#a5b4fc] shadow-[0_0_12px_rgba(165,180,252,0.3)]">
+          <Database className="w-4 h-4 sm:w-5 sm:h-5" />
+        </div>
+        <div className="flex flex-col">
+          <span className="font-mono text-[9px] xl:text-[10px] font-bold tracking-[0.14em] text-slate-300 uppercase">
+            DIGITAL SOLUTIONS
+          </span>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="text-xs sm:text-sm xl:text-base font-extrabold text-white">
+              24/7 scalable
+            </span>
+            <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
+          </div>
+        </div>
+      </div>
+
       {/* Hero Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-14 md:py-16">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-3 sm:py-5 lg:py-6 my-auto">
         <div className="max-w-xl lg:max-w-2xl text-left">
-          <h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] font-black uppercase text-white tracking-tight leading-[1.12]"
-            style={{
-              fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-            }}
-          >
-            EMPOWERING YOUR <br className="hidden sm:inline" />
-            BUSINESS WITH TECH
+          {/* Eyebrow Kicker */}
+          <div className="inline-flex items-center gap-2.5 mb-2.5 sm:mb-3.5">
+            <span className="w-6 sm:w-7 h-[2px] bg-[#00c2cb] shadow-[0_0_10px_#00c2cb] inline-block rounded-full" />
+            <span className="font-mono text-[11px] sm:text-xs font-bold tracking-[0.22em] text-[#00c2cb] uppercase">
+              INNOVATION / TECHNOLOGY / GROWTH
+            </span>
+          </div>
+
+          {/* Main Title: Empowering Your Business with Tech */}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.9rem] xl:text-[3.4rem] font-bold text-white tracking-tight leading-[1.08]">
+            Empowering Your <br className="hidden sm:inline" />
+            <span className="bg-gradient-to-r from-[#00f5d4] via-[#00c2cb] to-[#38bdf8] bg-clip-text text-transparent">
+              Business
+            </span>{" "}
+            with Tech
           </h1>
 
-          <p className="mt-4 md:mt-5 text-sm sm:text-base md:text-lg text-slate-200 font-normal leading-relaxed">
-            Innovating Today for Tomorrow&apos;s Solutions. <br className="hidden sm:inline" />
-            Custom Software, Cloud, and AI.
+          {/* Subtitle */}
+          <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
+            Custom software, cloud &amp; AI solutions built <br className="hidden sm:inline" />
+            for ambitious businesses.
           </p>
 
-          <div className="mt-7 md:mt-8 flex flex-wrap items-center gap-4">
+          {/* Action Buttons: Start a Project & Explore Solutions */}
+          <div className="mt-5 sm:mt-6 flex flex-wrap items-center gap-3.5">
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-3 bg-teal hover:bg-teal-dark text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center gap-2 px-6 sm:px-7 py-2.5 sm:py-3 bg-gradient-to-r from-[#00d2df] via-[#00c2cb] to-[#0284c7] hover:from-[#00e5ff] hover:to-[#0369a1] text-white text-xs sm:text-sm font-bold rounded-full shadow-[0_0_24px_rgba(0,194,203,0.5)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
             >
-              GET STARTED
+              <span>Start a Project</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
 
             <Link
-              href="/about"
-              className="inline-flex items-center justify-center px-6 py-3 bg-transparent hover:bg-white/10 text-white text-xs sm:text-sm font-bold uppercase tracking-wider border-2 border-white rounded-md transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              href="/solutions"
+              className="inline-flex items-center justify-center px-6 sm:px-7 py-2.5 sm:py-3 bg-slate-900/50 hover:bg-white/10 text-white text-xs sm:text-sm font-semibold border border-white/20 hover:border-white/40 rounded-full transition-all transform hover:-translate-y-0.5 active:translate-y-0 backdrop-blur-md"
             >
-              LEARN MORE
+              Explore Solutions
             </Link>
+          </div>
+
+          {/* Bottom Features Row: Software • Cloud • AI */}
+          <div className="mt-5 sm:mt-7 flex items-center gap-3.5 sm:gap-5 text-xs sm:text-[13px] text-slate-300 font-medium">
+            <div className="flex items-center gap-2">
+              <Code2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00c2cb]" />
+              <span>Software</span>
+            </div>
+            <span className="text-slate-600">•</span>
+            <div className="flex items-center gap-2">
+              <Cloud className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00c2cb]" />
+              <span>Cloud</span>
+            </div>
+            <span className="text-slate-600">•</span>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00c2cb]" />
+              <span>AI</span>
+            </div>
+          </div>
+
+          {/* Mobile Metric Cards Display (Visible only on < lg screens) */}
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 lg:hidden">
+            <div className="flex items-center gap-3 bg-[#031326]/80 border border-[#00c2cb]/40 backdrop-blur-md rounded-xl p-2.5">
+              <div className="w-7 h-7 rounded-lg bg-[#00c2cb]/20 flex items-center justify-center text-[#00f5d4]">
+                <Cpu className="w-3.5 h-3.5" />
+              </div>
+              <div>
+                <p className="text-[10px] font-mono text-[#00c2cb] font-bold">AI AUTOMATION</p>
+                <p className="text-xs font-bold text-white">+42% efficiency</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-[#031326]/80 border border-[#0284c7]/40 backdrop-blur-md rounded-xl p-2.5">
+              <div className="w-7 h-7 rounded-lg bg-[#0284c7]/20 flex items-center justify-center text-[#38bdf8]">
+                <Cloud className="w-3.5 h-3.5" />
+              </div>
+              <div>
+                <p className="text-[10px] font-mono text-slate-300 font-bold">CLOUD SOLUTIONS</p>
+                <p className="text-xs font-bold text-white">99.9% uptime</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-[#031326]/80 border border-[#818cf8]/40 backdrop-blur-md rounded-xl p-2.5">
+              <div className="w-7 h-7 rounded-lg bg-[#6366f1]/20 flex items-center justify-center text-[#a5b4fc]">
+                <Database className="w-3.5 h-3.5" />
+              </div>
+              <div>
+                <p className="text-[10px] font-mono text-slate-300 font-bold">DIGITAL SOLUTIONS</p>
+                <p className="text-xs font-bold text-white">24/7 scalable</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,16 +299,13 @@ export default function Home() {
       <JsonLd data={professionalServiceJsonLd()} />
 
       <main className="w-full overflow-x-hidden bg-surface">
-        {/* 1. Hero & Brands First-Fold Landing Unit (Exactly 100% Viewport Height) */}
-        <div className="relative w-full min-h-[calc(100vh-70px)] min-h-[calc(100dvh-70px)] flex flex-col justify-between bg-[#04172e] overflow-hidden">
+        {/* 1. Hero & Brands First-Fold Landing Unit (Exactly 100% Viewport Height on first sight) */}
+        <div className="relative w-full h-[calc(100vh-66px)] sm:h-[calc(100vh-68px)] min-h-[460px] max-h-[960px] flex flex-col justify-between bg-[#030e1f] overflow-hidden">
           <HeroSection />
-          <CollabsMarquee background="#04172e" />
+          <CollabsMarquee background="#020b18" />
         </div>
 
-        {/* 2. Operational Bottlenecks (Problem) */}
-        <HomeProblem />
-
-        {/* 4. Core Capabilities (Bento Grid) */}
+        {/* 2. Core Capabilities & Solutions for Every Stage */}
         <HomeServices />
 
         {/* 5. Live Architecture Demo (Video/3D Slot) */}

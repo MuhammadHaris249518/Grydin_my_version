@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GrydInLogo } from "./GrydInLogo";
@@ -10,13 +10,12 @@ import { SearchDialog } from "./SearchDialog";
 export const NAVBAR_TOP_OFFSET = 0;
 
 const NAV_LINKS = [
-  { label: "HOME", href: "/" },
-  { label: "SERVICES", href: "/services" },
-  { label: "SOLUTIONS", href: "/solutions" },
-  { label: "PROJECTS", href: "/projects" },
-  { label: "ABOUT", href: "/about" },
-  { label: "BLOG", href: "/blog" },
-  { label: "CONTACT", href: "/contact" },
+  { label: "Home", href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "About", href: "/about" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const Navbar = () => {
@@ -24,6 +23,9 @@ export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const isHome = pathname === "/";
+  const isDarkNav = isHome;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -58,14 +60,18 @@ export const Navbar = () => {
     <>
       <header
         className={`sticky top-0 left-0 right-0 z-50 w-full transition-all duration-200 ${
-          scrolled
+          isDarkNav
+            ? scrolled
+              ? "bg-[#030e1f]/95 backdrop-blur-md border-b border-white/10 shadow-lg"
+              : "bg-[#030e1f]"
+            : scrolled
             ? "bg-white/90 backdrop-blur-md border-b border-surface-line shadow-sm"
             : "bg-white border-b border-surface-line"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 h-[70px] flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 h-[66px] sm:h-[68px] flex items-center justify-between gap-4">
           {/* Logo */}
-          <GrydInLogo variant="navbar" theme="light" />
+          <GrydInLogo variant="navbar" theme={isDarkNav ? "dark" : "light"} />
 
           {/* Desktop Navigation */}
           <nav
@@ -82,9 +88,13 @@ export const Navbar = () => {
                   key={link.label}
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`text-[12px] xl:text-[13px] font-bold uppercase tracking-wider transition-colors duration-150 relative py-1 ${
+                  className={`text-[13px] xl:text-[14px] font-semibold transition-colors duration-150 relative py-1 ${
                     isActive
-                      ? "text-accent after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-accent"
+                      ? isDarkNav
+                        ? "text-[#00c2cb] after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2.5px] after:bg-[#00c2cb] after:rounded-full"
+                        : "text-accent after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2.5px] after:bg-accent after:rounded-full"
+                      : isDarkNav
+                      ? "text-slate-200 hover:text-[#00c2cb]"
                       : "text-ink hover:text-accent"
                   }`}
                 >
@@ -100,22 +110,33 @@ export const Navbar = () => {
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="p-2 text-ink-muted hover:text-accent transition-colors rounded-full flex items-center gap-1.5 cursor-pointer"
+              className={`p-2 transition-colors rounded-full flex items-center gap-1.5 cursor-pointer ${
+                isDarkNav
+                  ? "text-slate-300 hover:text-white"
+                  : "text-ink-muted hover:text-accent"
+              }`}
               aria-label="Search site"
               title="Search (Ctrl+K)"
             >
               <Search size={18} strokeWidth={2.2} />
-              <kbd className="hidden xl:inline-block text-xs text-ink-muted bg-surface-soft border border-surface-line px-1.5 py-0.5 rounded font-mono">
+              <kbd
+                className={`hidden xl:inline-block text-xs px-1.5 py-0.5 rounded font-mono ${
+                  isDarkNav
+                    ? "text-slate-300 bg-white/5 border border-white/15"
+                    : "text-ink-muted bg-surface-soft border border-surface-line"
+                }`}
+              >
                 ⌘K
               </kbd>
             </button>
 
-            {/* Desktop "GET IN TOUCH" Button */}
+            {/* Desktop "Get In Touch" Button */}
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center justify-center bg-accent hover:bg-accent-hover text-white text-[12px] xl:text-[13px] font-bold uppercase tracking-wider px-5 py-2.5 rounded-md transition-all shadow-sm hover:shadow active:scale-[0.98]"
+              className="hidden sm:inline-flex items-center gap-1.5 bg-gradient-to-r from-[#00d2df] via-[#00c2cb] to-[#0284c7] hover:from-[#00e5ff] hover:to-[#0369a1] text-white text-[12px] xl:text-[13px] font-bold px-6 py-2.5 rounded-full transition-all shadow-[0_0_20px_rgba(0,194,203,0.4)] hover:shadow-[0_0_28px_rgba(0,194,203,0.6)] active:scale-[0.98]"
             >
-              GET IN TOUCH
+              <span>Get In Touch</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
 
             {/* Mobile Menu Button (< lg) */}

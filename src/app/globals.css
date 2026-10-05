@@ -206,6 +206,45 @@ html {
   }
 }
 
+@keyframes floatCardA {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes floatCardB {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatCardC {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.animate-float-card-a {
+  animation: floatCardA 5.5s ease-in-out infinite;
+}
+
+.animate-float-card-b {
+  animation: floatCardB 6.2s ease-in-out infinite 1.2s;
+}
+
+.animate-float-card-c {
+  animation: floatCardC 5.8s ease-in-out infinite 2.4s;
+}
+
 @layer components {
   /* Light glassmorphism — used on white/soft sections */
   .glass {

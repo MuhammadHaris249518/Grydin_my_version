@@ -27,7 +27,7 @@ export function PageHero({
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-24">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-          <div className={slot ? "lg:col-span-7 text-left" : "max-w-3xl text-left"}>
+          <div className={slot ? "lg:col-span-7 text-left" : "col-span-full max-w-3xl text-left"}>
             <Reveal>
               {breadcrumbs && breadcrumbs.length > 0 && (
                 <div className="mb-4">

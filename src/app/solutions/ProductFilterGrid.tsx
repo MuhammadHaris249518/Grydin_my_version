@@ -34,8 +34,8 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
               aria-pressed={isSelected}
               className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 isSelected
-                  ? "bg-accent text-ink border border-accent/30 shadow-glow-sm"
-                  : "surface-card text-ink-muted hover:border-white/20 hover:text-ink"
+                  ? "bg-[#0D8B99] text-white shadow-md shadow-[#0D8B99]/20 border border-[#0D8B99]"
+                  : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
             >
               {cat}
@@ -52,13 +52,13 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
 
           return (
             <Link key={prod.slug} href={`/products/${prod.slug}`} className="group block h-full">
-              <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-8 transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
+              <GlassCard className="h-full flex flex-col justify-between overflow-hidden p-8 transition-all duration-300 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg group-hover:-translate-y-0.5">
                 <div>
                   {/* 3D Product Slot */}
                   <div className="relative mb-6">
                     <ModelSlot
                       label={`product-${prod.slug}`}
-                      className="h-48 w-full border border-surface-line"
+                      className="h-48 w-full border border-slate-200"
                     />
                     <div className="absolute top-3 right-3 z-10">
                       <Badge variant={prod.status === "Live" ? "live" : prod.status === "Beta" ? "beta" : "coming-soon"}>
@@ -69,30 +69,30 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
 
                   {/* Category pill */}
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="font-mono text-xs uppercase tracking-wider text-accent">
+                    <span className="font-mono text-xs uppercase tracking-wider text-[#0D8B99] font-bold">
                       {prod.category} Architecture
                     </span>
                   </div>
 
                   {/* Name & Tagline */}
-                  <h3 className="text-2xl font-semibold text-ink tracking-tight mb-2 group-hover:text-accent transition-colors">
+                  <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight mb-2 group-hover:text-[#0D8B99] transition-colors">
                     {prod.name}
                   </h3>
-                  <p className="text-sm font-mono text-accent/90 mb-4">
+                  <p className="text-sm font-mono text-teal-700 font-semibold mb-4">
                     {prod.tagline}
                   </p>
 
-                  <p className="text-sm text-ink-muted leading-relaxed mb-6">
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
                     {prod.summary}
                   </p>
 
                   {/* 3 Key Feature Bullets */}
-                  <div className="space-y-2.5 pt-4 border-t border-surface-line mb-6">
+                  <div className="space-y-2.5 pt-4 border-t border-slate-100 mb-6">
                     {prod.features.slice(0, 3).map((feat, i) => (
-                      <div key={i} className="flex items-start gap-2.5 text-xs text-ink-muted">
-                        <Check className="w-4 h-4 text-accent shrink-0 mt-0.5" />
+                      <div key={i} className="flex items-start gap-2.5 text-xs text-slate-600">
+                        <Check className="w-4 h-4 text-[#0D8B99] shrink-0 mt-0.5" />
                         <span>
-                          <strong className="text-ink font-medium">{feat.title}: </strong>
+                          <strong className="text-slate-900 font-semibold">{feat.title}: </strong>
                           {feat.text}
                         </span>
                       </div>
@@ -100,7 +100,7 @@ export function ProductFilterGrid({ products }: ProductFilterGridProps) {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-surface-line flex items-center justify-between text-xs font-semibold text-accent">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0D8B99]">
                   <span>Explore product architecture</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>

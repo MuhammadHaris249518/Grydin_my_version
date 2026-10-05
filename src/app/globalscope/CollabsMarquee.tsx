@@ -10,15 +10,15 @@ const WHITE_EDGE_FILTER = [
 ].join(" ");
 
 const COLLAB_LOGOS = [
-  { src: "/collabs/1-kimball-law.webp", alt: "Kimball Law", height: 28 },
-  { src: "/collabs/2-gps-renting.webp", alt: "GPS Renting", height: 32 },
-  { src: "/collabs/3-solas-scotland-ai.webp", alt: "Solas Scotland AI", height: 36, whiteEdge: true },
-  { src: "/collabs/4-chaos.webp", alt: "Chaos", height: 44 },
-  { src: "/collabs/5-petcon-australia.webp", alt: "Petcon Australia", height: 40 },
-  { src: "/collabs/6-sevenleaps.webp", alt: "Sevenleaps", height: 36 },
-  { src: "/collabs/7-shape-shifters-fitness.webp", alt: "Shape Shifters Fitness", height: 36 },
-  { src: "/collabs/8-mazrex-store.webp", alt: "Mazrex Store", height: 40 },
-  { src: "/collabs/9-top-energy.webp", alt: "Top Energy", height: 36, whiteEdge: true },
+  { src: "/collabs/1-kimball-law.webp", alt: "Kimball Law", height: 22 },
+  { src: "/collabs/2-gps-renting.webp", alt: "GPS Renting", height: 24 },
+  { src: "/collabs/3-solas-scotland-ai.webp", alt: "Solas Scotland AI", height: 26, whiteEdge: true },
+  { src: "/collabs/4-chaos.webp", alt: "Chaos", height: 28 },
+  { src: "/collabs/5-petcon-australia.webp", alt: "Petcon Australia", height: 28 },
+  { src: "/collabs/6-sevenleaps.webp", alt: "Sevenleaps", height: 26 },
+  { src: "/collabs/7-shape-shifters-fitness.webp", alt: "Shape Shifters Fitness", height: 26 },
+  { src: "/collabs/8-mazrex-store.webp", alt: "Mazrex Store", height: 28 },
+  { src: "/collabs/9-top-energy.webp", alt: "Top Energy", height: 26, whiteEdge: true },
 ] as const;
 
 const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
@@ -27,9 +27,9 @@ const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
     style={{
       display: "flex",
       alignItems: "center",
-      gap: "clamp(3rem, 8vw, 6rem)",
+      gap: "clamp(2.5rem, 5vw, 4.5rem)",
       flexShrink: 0,
-      paddingRight: "clamp(3rem, 8vw, 6rem)",
+      paddingRight: "clamp(2.5rem, 5vw, 4.5rem)",
     }}
   >
     {COLLAB_LOGOS.map((logo) => (
@@ -50,7 +50,7 @@ const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
           style={{
             height: "100%",
             width: "auto",
-            maxWidth: "clamp(80px, 14vw, 180px)",
+            maxWidth: "clamp(70px, 11vw, 140px)",
             objectFit: "contain",
             opacity: 0.85,
             filter: "whiteEdge" in logo && logo.whiteEdge ? WHITE_EDGE_FILTER : "brightness(1.05)",
@@ -62,28 +62,28 @@ const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
   </div>
 );
 
-export const CollabsMarquee = ({ background = "#04172e" }: { background?: string }) => (
+export const CollabsMarquee = ({ background = "#020b18" }: { background?: string }) => (
   <section
     aria-label="Partner logos"
+    className="shrink-0 w-full select-none"
     style={{
-      width: "100%",
       background,
-      borderTop: "1px solid rgba(255,255,255,0.07)",
-      borderBottom: "1px solid rgba(255,255,255,0.07)",
-      paddingTop: "clamp(1rem, 2vh, 1.4rem)",
-      paddingBottom: "clamp(1rem, 2vh, 1.4rem)",
+      borderTop: "1px solid rgba(255,255,255,0.08)",
+      borderBottom: "1px solid rgba(255,255,255,0.08)",
+      paddingTop: "clamp(0.45rem, 0.85vh, 0.65rem)",
+      paddingBottom: "clamp(0.5rem, 0.95vh, 0.75rem)",
       overflow: "hidden",
     }}
   >
     <p
       style={{
         textAlign: "center",
-        fontSize: "clamp(0.68rem, 1.1vw, 0.78rem)",
+        fontSize: "clamp(0.62rem, 0.9vw, 0.72rem)",
         fontWeight: 700,
-        letterSpacing: "0.26em",
+        letterSpacing: "0.24em",
         textTransform: "uppercase",
-        color: "rgba(255,255,255,0.88)",
-        marginBottom: "clamp(0.65rem, 1.3vh, 0.95rem)",
+        color: "rgba(255,255,255,0.85)",
+        marginBottom: "clamp(0.35rem, 0.65vh, 0.5rem)",
         padding: "0 1.5rem",
       }}
     >

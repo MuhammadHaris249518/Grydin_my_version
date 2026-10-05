@@ -23,7 +23,7 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
   return (
     <div>
       {/* Industry Filter Chips */}
-      <div className="flex flex-wrap items-center gap-2 mb-12">
+      <div className="flex flex-wrap items-center gap-2 mb-10">
         {industries.map((ind) => {
           const isSelected = selectedIndustry === ind;
           return (
@@ -34,8 +34,8 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
               aria-pressed={isSelected}
               className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
                 isSelected
-                  ? "bg-accent text-ink border border-accent/30 shadow-glow-sm"
-                  : "surface-card text-ink-muted hover:border-white/20 hover:text-ink"
+                  ? "bg-[#0D8B99] text-white shadow-md shadow-[#0D8B99]/20 border border-[#0D8B99]"
+                  : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50"
               }`}
             >
               {ind}
@@ -46,15 +46,15 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
 
       {/* Featured Project Banner (if matches filter or All) */}
       {featuredProject && (selectedIndustry === "All" || featuredProject.industry === selectedIndustry) && (
-        <div className="mb-14">
-          <div className="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-3">
+        <div className="mb-12">
+          <div className="font-mono text-xs uppercase tracking-[0.2em] text-[#0D8B99] font-bold mb-3">
             Featured Case Study
           </div>
           <Link href={`/projects/${featuredProject.slug}`} className="group block">
-            <GlassCard className="p-8 sm:p-10 transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
+            <GlassCard className="p-8 sm:p-10 transition-[box-shadow,border-color] duration-300 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Logo / Left Panel */}
-                <div className="lg:col-span-4 bg-white/5 rounded-2xl p-8 flex flex-col items-center justify-center border border-surface-line min-h-[200px]">
+                <div className="lg:col-span-4 bg-slate-50 rounded-2xl p-8 flex flex-col items-center justify-center border border-slate-200 min-h-[200px]">
                   {featuredProject.logo ? (
                     <div className="relative w-48 h-20 flex items-center justify-center">
                       <Image
@@ -66,9 +66,9 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
                       />
                     </div>
                   ) : (
-                    <div className="text-2xl font-bold text-ink">{featuredProject.client}</div>
+                    <div className="text-2xl font-bold text-slate-900">{featuredProject.client}</div>
                   )}
-                  <span className="mt-3 font-mono text-xs uppercase tracking-wider text-ink-muted">
+                  <span className="mt-3 font-mono text-xs uppercase tracking-wider text-slate-500 font-bold">
                     {featuredProject.client}
                   </span>
                 </div>
@@ -77,17 +77,17 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
                 <div className="lg:col-span-8 flex flex-col justify-between">
                   <div>
                     <div className="flex flex-wrap items-center gap-3 mb-3">
-                      <span className="font-mono text-xs uppercase text-accent bg-accent-light px-2.5 py-0.5 rounded-md border border-accent/30">
+                      <span className="font-mono text-xs uppercase font-bold text-[#0D8B99] bg-teal-50 px-2.5 py-0.5 rounded-md border border-teal-200">
                         {featuredProject.industry}
                       </span>
-                      <span className="text-xs text-ink-muted font-mono">Delivered {featuredProject.year}</span>
+                      <span className="text-xs text-slate-500 font-mono">Delivered {featuredProject.year}</span>
                     </div>
 
-                    <h3 className="text-2xl sm:text-3xl font-semibold text-ink tracking-tight mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 group-hover:text-[#0D8B99] transition-colors">
                       {featuredProject.title}
                     </h3>
 
-                    <p className="text-base text-ink-muted leading-relaxed mb-6">
+                    <p className="text-base text-slate-600 leading-relaxed mb-6 font-normal">
                       {featuredProject.summary}
                     </p>
 
@@ -95,16 +95,16 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
                     {featuredProject.results.length > 0 && (
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
                         {featuredProject.results.map((res, i) => (
-                          <div key={i} className="rounded-xl border border-accent/30 bg-accent-light p-3.5">
-                            <div className="text-lg font-mono font-semibold text-accent">{res.metric}</div>
-                            <div className="text-xs text-ink-muted mt-0.5 line-clamp-1">{res.label}</div>
+                          <div key={i} className="rounded-xl border border-teal-200/80 bg-teal-50/70 p-3.5 shadow-2xs">
+                            <div className="text-lg font-mono font-bold text-[#0D8B99]">{res.metric}</div>
+                            <div className="text-xs text-slate-600 mt-0.5 line-clamp-1 font-medium">{res.label}</div>
                           </div>
                         ))}
                       </div>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 text-sm font-semibold text-accent">
+                  <div className="flex items-center gap-2 text-sm font-bold text-[#0D8B99]">
                     <span>View full architectural case study</span>
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                   </div>
@@ -125,32 +125,32 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
 
           return (
             <Link key={proj.slug} href={`/projects/${proj.slug}`} className="group block h-full">
-              <GlassCard className="h-full flex flex-col justify-between p-7 transition-[box-shadow,border-color] duration-300 group-hover:border-accent/30 group-hover:shadow-glow">
+              <GlassCard className="h-full flex flex-col justify-between p-7 transition-all duration-300 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg group-hover:-translate-y-0.5">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-4 border-b border-surface-line pb-4">
-                    <span className="font-mono text-xs uppercase tracking-wider text-accent font-semibold">
+                  <div className="flex items-center justify-between gap-2 mb-4 border-b border-slate-100 pb-4">
+                    <span className="font-mono text-xs uppercase tracking-wider text-[#0D8B99] font-bold">
                       {proj.client}
                     </span>
-                    <span className="text-xs text-ink-muted font-mono">
+                    <span className="text-xs text-slate-400 font-mono">
                       {proj.industry}
                     </span>
                   </div>
 
-                  <h4 className="text-xl font-semibold text-ink tracking-tight mb-2 group-hover:text-accent transition-colors">
+                  <h4 className="text-xl font-bold text-slate-900 tracking-tight mb-2 group-hover:text-[#0D8B99] transition-colors leading-snug">
                     {proj.title}
                   </h4>
 
-                  <p className="text-sm text-ink-muted leading-relaxed mb-6">
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
                     {proj.summary}
                   </p>
 
                   {/* Prominent Large Result Line */}
                   {primaryResult && (
-                    <div className="rounded-xl border border-accent/30 bg-accent-light p-4 mb-6">
-                      <div className="text-xl font-mono font-semibold text-accent">
+                    <div className="rounded-xl border border-teal-200/80 bg-teal-50/70 p-4 mb-6 shadow-2xs">
+                      <div className="text-xl font-mono font-bold text-[#0D8B99]">
                         {primaryResult.metric}
                       </div>
-                      <div className="text-xs text-ink-muted mt-1">
+                      <div className="text-xs text-slate-600 mt-1 font-medium">
                         {primaryResult.label}
                       </div>
                     </div>
@@ -159,14 +159,14 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
                   {/* Stack Tags */}
                   <div className="flex flex-wrap gap-1.5 mb-4">
                     {proj.stack.slice(0, 3).map((st) => (
-                      <span key={st} className="text-xs font-mono text-ink-muted bg-white/5 border border-surface-line px-2 py-0.5 rounded">
+                      <span key={st} className="text-[11px] font-mono text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md">
                         {st}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-surface-line flex items-center justify-between text-xs font-semibold text-accent">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#0D8B99]">
                   <span>Read case study</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </div>

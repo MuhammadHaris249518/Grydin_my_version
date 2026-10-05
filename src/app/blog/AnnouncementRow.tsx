@@ -18,14 +18,14 @@ export function AnnouncementRow({ post }: AnnouncementRowProps) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group block py-5 px-4 sm:px-6 rounded-xl hover:bg-white/5 border-b border-surface-line transition-colors"
+      className="group block py-5 px-4 sm:px-6 hover:bg-[#f0faf9]/80 border-b border-surface-line transition-colors"
     >
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 justify-between">
         {/* Left: Date Block + Title */}
         <div className="flex items-start sm:items-center gap-4 sm:gap-6 flex-1 min-w-0">
           {/* Date stamp box */}
-          <div className="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-white/5 group-hover:border-accent/30 border border-surface-line shrink-0 text-center transition-colors">
-            <span className="text-lg font-mono font-bold text-accent leading-none">
+          <div className="flex flex-col items-center justify-center w-14 h-14 rounded-xl bg-slate-50 group-hover:border-[#0d8b99]/30 border border-surface-line shrink-0 text-center transition-colors">
+            <span className="text-lg font-mono font-bold text-[#0d8b99] leading-none">
               {day}
             </span>
             <span className="text-xs font-mono uppercase tracking-wider text-ink-muted mt-0.5">

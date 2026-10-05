@@ -64,9 +64,10 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
       history.replaceState(null, "", `#${slug}`);
       window.dispatchEvent(new HashChangeEvent("hashchange"));
     }
-    const elem = document.getElementById("verticals");
+    const elem = document.getElementById("client-projects") || document.getElementById("verticals");
     if (elem) {
-      elem.scrollIntoView({ behavior: "smooth", block: "start" });
+      const top = elem.getBoundingClientRect().top + window.scrollY - 110;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 

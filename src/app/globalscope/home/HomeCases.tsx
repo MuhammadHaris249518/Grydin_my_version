@@ -137,7 +137,7 @@ export function HomeCases() {
         {/* Bottom Center Pill Button */}
         <div className="text-center pt-2">
           <Link
-            href="/projects"
+            href="/solutions#client-projects"
             className="inline-flex items-center gap-2.5 px-8 py-3 rounded-full border-2 border-[#0D8B99] text-[#0D8B99] hover:bg-[#0D8B99] hover:text-white font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-xs"
           >
             <LayoutGrid className="w-4 h-4" />

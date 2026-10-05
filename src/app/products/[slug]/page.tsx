@@ -80,7 +80,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Projects & Products", href: "/projects#our-products" },
+    { label: "Solutions", href: "/solutions#proprietary-products" },
     { label: product.name },
   ];
 
@@ -88,7 +88,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
     softwareApplicationJsonLd(product),
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
-      { name: "Products", url: "/projects#our-products" },
+      { name: "Solutions", url: "/solutions#proprietary-products" },
       { name: product.name, url: `/products/${product.slug}` },
     ]),
   ];

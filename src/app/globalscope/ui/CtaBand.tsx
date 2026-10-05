@@ -20,7 +20,7 @@ export function CtaBand({
   buttonText = "Book a free process diagnosis",
   buttonHref = "/contact",
   secondaryText = "See our work",
-  secondaryHref = "/projects",
+  secondaryHref = "/solutions#client-projects",
   className = "",
 }: CtaBandProps) {
   return (

@@ -71,7 +71,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Projects", href: "/projects" },
+    { label: "Solutions", href: "/solutions#client-projects" },
     { label: project.client },
   ];
 
@@ -79,7 +79,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     projectJsonLd(project),
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
-      { name: "Projects", url: "/projects" },
+      { name: "Solutions", url: "/solutions#client-projects" },
       { name: project.title, url: `/projects/${project.slug}` },
     ]),
   ];

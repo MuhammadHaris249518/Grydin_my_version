@@ -2,7 +2,6 @@ import {
   aboutMetadata,
   faqJsonLd,
   jsonLdScript,
-  servicesFaq,
   webPageJsonLd,
 } from "@/lib/seo";
 
@@ -16,16 +15,20 @@ const jsonLd = [
   }),
   faqJsonLd([
     {
-      question: "What is GrydIn?",
+      question: "What does GrydIn do?",
       answer:
-        "GrydIn is a software and business AI automation company based in Islamabad, Pakistan, building for businesses globally. We surface invisible manual work - gaps between tools, teams, and decisions - and eliminate it without disruption.",
+        "GrydIn builds AI agents, workflow automation, custom software, and integrations to address the gaps between tools, teams, and business decisions.",
     },
     {
-      question: "What does GrydIn believe about automation?",
+      question: "How does GrydIn approach a project?",
       answer:
-        "GrydIn believes automation should be invisible, systems should fit the process before features, humans are not the bottleneck - manual work is, and every project should be scoped tight, shipped fast, with post-launch accountability.",
+        "GrydIn starts by understanding what is slowing a business down, then shapes a solution around its process, people, tools, and constraints.",
     },
-    ...servicesFaq.slice(3, 5),
+    {
+      question: "Where is GrydIn based?",
+      answer:
+        "GrydIn is based in Islamabad, Pakistan.",
+    },
   ]),
 ];
 

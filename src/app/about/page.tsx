@@ -1,79 +1,68 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  Bot,
+  Boxes,
+  Building2,
+  Eye,
+  GitBranch,
+  Workflow,
+} from "lucide-react";
 import { PageHero } from "@/app/globalscope/ui/PageHero";
 import { Button } from "@/app/globalscope/ui/Button";
 import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
-import { ProcessTimeline, type TimelineStep } from "@/components/motion/ProcessTimeline";
-import { ModelSlot } from "@/components/3d/ModelSlot";
 import { Reveal } from "@/components/motion/Reveal";
-import { ArrowRight, Globe, CheckCircle2, Shield, Zap, Sparkles } from "lucide-react";
 
-const VALUES = [
+const CAPABILITIES = [
   {
-    num: "01",
-    title: "Surface the Invisible Work",
-    desc: "Teams spend hours moving data between systems, chasing approvals, and compiling repetitive reports. We build systems that quietly handle this in the background.",
+    icon: Bot,
+    title: "AI agents",
+    description:
+      "Purpose-built agents that can reason through defined tasks and take action across the tools your team already uses.",
   },
   {
-    num: "02",
-    title: "Zero Forced Disruption",
-    desc: "We don't force migrations onto proprietary monoliths. We integrate with your existing CRM, ERP, and databases so your operations never skip a beat.",
+    icon: Workflow,
+    title: "Workflow automation",
+    description:
+      "Connected workflows that take repetitive handoffs off your team's plate and keep information moving between systems.",
   },
   {
-    num: "03",
-    title: "Fixed Scopes & Definite Timelines",
-    desc: "No endless retainer billing or open-ended consulting hours. We audit upfront, contract exact milestones, and ship production systems in under two weeks.",
-  },
-  {
-    num: "04",
-    title: "Full Production Independence",
-    desc: "You own 100% of the code, models, schemas, and runbooks. We empower your team so you never experience vendor lock-in.",
+    icon: Boxes,
+    title: "Custom software & integrations",
+    description:
+      "Software and integrations designed around your process when off-the-shelf tools leave an important gap.",
   },
 ];
 
-const MILESTONES: TimelineStep[] = [
+const APPROACH = [
   {
-    step: "01",
-    phase: "Founded",
-    tagline: "AI-NATIVE ENGINEERING",
-    desc: "Established with a single thesis: enterprise teams don't have an execution problem; they have an operational plumbing problem.",
-    points: [
-      { title: "First 10 Deployments", desc: "Automated core client onboarding and financial triage pipelines." },
-      { title: "Deterministic Guardrails", desc: "Engineered production agent framework with strict schema validation." },
-    ],
+    number: "01",
+    title: "Understand the work",
+    description:
+      "We learn how the process works today, where information gets stuck, and what a better outcome needs to look like.",
   },
   {
-    step: "02",
-    phase: "Expansion",
-    tagline: "CROSS-BORDER REACH",
-    desc: "Scaled delivery across five international hubs while launching proprietary enterprise tooling.",
-    points: [
-      { title: "Global Footprint", desc: "Serving organizations across the US, UK, Australia, Middle East, and Pakistan." },
-      { title: "Proprietary Tooling", desc: "Incubated GridPilot and FlowMap internal event engines." },
-    ],
+    number: "02",
+    title: "Choose the right fit",
+    description:
+      "We shape the solution around your people, tools, and constraints instead of starting with a preset technology.",
   },
   {
-    step: "03",
-    phase: "Scale",
-    tagline: "AUTONOMOUS ENTERPRISE",
-    desc: "Deploying multi-model, multi-agent systems with guaranteed sub-second latencies and complete auditable observability.",
-    points: [
-      { title: "45+ Production Systems", desc: "Managing millions of event payloads across disparate architectures." },
-      { title: "Two-Week SLA", desc: "Delivering fixed-scope architectures with zero operational downtime." },
-    ],
+    number: "03",
+    title: "Build for real use",
+    description:
+      "We engineer the system to fit into day-to-day operations, with the integrations and handoffs the workflow needs.",
   },
-];
-
-const GLOBAL_REGIONS = [
-  { region: "United States", role: "Fintech, Legaltech & Property Management" },
-  { region: "United Kingdom", role: "Enterprise Knowledge & Healthcare Workflows" },
-  { region: "Australia", role: "Supply Chain & Omnichannel Inventory Flow" },
-  { region: "Middle East", role: "Energy Telemetry & Automated Field Dispatch" },
-  { region: "Pakistan", role: "Core Engineering Headquarters & Innovation Hub" },
+  {
+    number: "04",
+    title: "Keep improving",
+    description:
+      "We use what the team learns in practice to guide the next improvements to the system and process.",
+  },
 ];
 
 export default function AboutPage() {
@@ -84,49 +73,125 @@ export default function AboutPage() {
 
   return (
     <main className="min-h-screen bg-surface text-ink">
-      {/* 1. PageHero */}
       <PageHero
-        eyebrow="Our Firm & Philosophy"
-        title="Engineering certainty for modern enterprises"
-        subtitle="GrydIn is an AI-native systems engineering firm. We surface the invisible work slowing your team down, then engineer it away permanently."
+        eyebrow="About GrydIn · Grid the Unseen"
+        title="We build systems that close the gaps in your business."
+        subtitle="The work slowing a business down is often hard to see: a manual handoff, a disconnected tool, or a process no one has time to fix. GrydIn finds those gaps and builds what helps close them."
         breadcrumbs={breadcrumbs}
         actions={
-          <Button
-            href="/contact"
-            variant="primary"
-            size="md"
-            iconRight={<ArrowRight className="w-4 h-4" />}
-          >
-            Book a free process diagnosis
-          </Button>
+          <>
+            <Button
+              href="/contact"
+              variant="primary"
+              size="md"
+              iconRight={<ArrowRight className="h-4 w-4" />}
+            >
+              Talk about your workflow
+            </Button>
+            <Button href="/services" variant="outline-dark" size="md">
+              Explore what we build
+            </Button>
+          </>
+        }
+        slot={
+          <div className="relative mx-auto max-w-[440px]">
+            <div className="pointer-events-none absolute -inset-8 rounded-full bg-accent/10 blur-3xl" />
+            <GlassCard className="relative overflow-hidden border border-surface-line bg-white/80 p-6 shadow-[0_24px_70px_-36px_rgba(0,120,130,0.4)] sm:p-7">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                    The work between the work
+                  </p>
+                  <h2 className="mt-2 text-xl font-semibold tracking-tight text-ink">
+                    Make the unseen visible.
+                  </h2>
+                </div>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-accent/10 text-accent">
+                  <Eye className="h-5 w-5" />
+                </span>
+              </div>
+
+              <div className="mt-7 space-y-3">
+                {[
+                  { icon: GitBranch, label: "Tools", detail: "Disconnected systems" },
+                  { icon: Building2, label: "Teams", detail: "Manual handoffs" },
+                  { icon: Workflow, label: "Decisions", detail: "Work that gets missed" },
+                ].map(({ icon: Icon, label, detail }, index) => (
+                  <div key={label} className="flex items-center gap-3">
+                    <div className="flex min-w-0 flex-1 items-center gap-3 rounded-xl border border-surface-line bg-white/80 px-3.5 py-3">
+                      <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block text-xs font-semibold text-ink">{label}</span>
+                        <span className="block truncate text-xs text-ink-muted">{detail}</span>
+                      </span>
+                    </div>
+                    <ArrowDownRight
+                      className={`h-4 w-4 shrink-0 text-accent ${index === 2 ? "opacity-0" : ""}`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-2 flex items-center gap-3 rounded-xl border border-accent/20 bg-accent/5 p-3.5">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-accent text-white shadow-[0_8px_24px_-10px_rgba(0,145,145,0.9)]">
+                  <Bot className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-ink">A system built for your process</p>
+                  <p className="mt-0.5 text-xs text-ink-muted">AI · Automation · Software</p>
+                </div>
+                <ArrowRight className="ml-auto h-4 w-4 shrink-0 text-accent" />
+              </div>
+            </GlassCard>
+          </div>
         }
       />
 
-      {/* 2. Story & Values Section */}
-      <section className="relative bg-surface py-20 md:py-28 border-b border-surface-line">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <SectionHeader
-            eyebrow="Core Values"
-            title="The principles governing how we build"
-            accent="principles"
-            intro="We reject bloated consulting retainers. Instead, we deliver battle-tested software architectures designed around your real operational bottlenecks."
-          />
+      <section className="border-b border-surface-line bg-surface-soft py-20 md:py-28">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-10 lg:grid-cols-12 lg:items-start lg:px-16">
+          <Reveal className="lg:col-span-5">
+            <p className="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              <span className="h-px w-8 bg-accent/60" />
+              Why GrydIn
+            </p>
+            <h2 className="text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[3.25rem]">
+              The right solution starts with the{" "}
+              <span className="text-gradient">real problem.</span>
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-ink-muted sm:text-lg">
+              A business does not need technology for its own sake. It needs the right system for the work that keeps falling between tools, teams, and decisions.
+            </p>
+          </Reveal>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {VALUES.map((val, idx) => (
-              <Reveal key={val.num} delay={idx * 0.08}>
-                <GlassCard className="p-8 h-full flex flex-col justify-between">
-                  <div>
-                    <span className="font-mono text-sm font-bold text-accent">
-                      {val.num}
-                    </span>
-                    <h3 className="mt-3 text-xl font-semibold text-ink">
-                      {val.title}
-                    </h3>
-                    <p className="mt-2 text-base text-ink-muted leading-relaxed">
-                      {val.desc}
-                    </p>
-                  </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-7">
+            {[
+              {
+                title: "Start with the slowdown",
+                text: "We begin by understanding what is actually costing your team time, attention, or momentum.",
+              },
+              {
+                title: "Fit the way you work",
+                text: "The solution is shaped around your real process and existing stack, not a generic template.",
+              },
+              {
+                title: "Connect the pieces",
+                text: "We look at the full flow across people, decisions, and systems so the fix works where it matters.",
+              },
+              {
+                title: "Make it useful every day",
+                text: "We focus on practical systems your team can put to work in its normal operations.",
+              },
+            ].map((item, index) => (
+              <Reveal key={item.title} delay={index * 0.06}>
+                <GlassCard className="h-full p-6 sm:p-7">
+                  <span className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">
+                    0{index + 1}
+                  </span>
+                  <h3 className="mt-4 text-lg font-semibold text-ink">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.text}</p>
                 </GlassCard>
               </Reveal>
             ))}
@@ -134,79 +199,79 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 3. Company Milestones Timeline */}
-      <section className="relative bg-surface-soft py-20 md:py-28 border-b border-surface-line">
+      <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <SectionHeader
-            eyebrow="Journey & Evolution"
-            title="How GrydIn evolved into a global engineering firm"
-            accent="global engineering firm"
-            intro="A timeline of technological milestones, production deployments, and cross-border expansion."
-            className="mb-16"
+            eyebrow="What we build"
+            title="Technology shaped around your operation"
+            accent="your operation"
+            intro="From autonomous task handling to the software that connects your stack, we build around the problem in front of your team."
           />
 
-          <ProcessTimeline steps={MILESTONES} />
-        </div>
-      </section>
-
-      {/* 4. Global Clients & Globe Slot Block */}
-      <section className="relative bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Column: 3D Globe Slot */}
-            <div className="lg:col-span-6">
-              <Reveal>
-                <div className="surface-card aspect-square max-w-[460px] mx-auto rounded-3xl p-6 border border-surface-line relative overflow-hidden flex items-center justify-center">
-                  <ModelSlot label="globe" className="h-full w-full" />
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-surface-soft/90 to-transparent p-6 text-center">
-                    <span className="font-mono text-xs uppercase tracking-widest text-accent">
-                      Global Client Deployments
-                    </span>
-                  </div>
-                </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {CAPABILITIES.map(({ icon: Icon, title, description }, index) => (
+              <Reveal key={title} delay={index * 0.07}>
+                <GlassCard className="group h-full p-7 transition-transform duration-300 hover:-translate-y-1 sm:p-8">
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-white">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <h3 className="mt-6 text-xl font-semibold tracking-tight text-ink">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-muted">{description}</p>
+                </GlassCard>
               </Reveal>
-            </div>
-
-            {/* Right Column: Global Footprint List */}
-            <div className="lg:col-span-6">
-              <Reveal delay={0.15}>
-                <SectionHeader
-                  eyebrow="Global Footprint"
-                  title="Serving forward-thinking enterprises worldwide"
-                  accent="worldwide"
-                  intro="From Silicon Valley startups to established international operations, our architectures run globally with zero maintenance overhead."
-                />
-
-                <div className="mt-8 space-y-4">
-                  {GLOBAL_REGIONS.map((item, idx) => (
-                    <div key={idx} className="surface-card p-4 rounded-xl flex items-center justify-between gap-4">
-                      <div className="flex items-center gap-3">
-                        <Globe className="h-5 w-5 text-accent shrink-0" />
-                        <div>
-                          <p className="font-semibold text-ink text-base">{item.region}</p>
-                          <p className="text-xs text-ink-muted">{item.role}</p>
-                        </div>
-                      </div>
-                      <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-8">
-                  <Button href="/contact" variant="primary" size="lg">
-                    Book a free process diagnosis
-                  </Button>
-                </div>
-              </Reveal>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 5. CtaBand */}
+      <section className="border-y border-surface-line bg-surface-soft py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="How we work"
+            title="From understanding the work to improving the system"
+            accent="improving the system"
+            intro="A clear, collaborative path keeps the work connected to the way your business actually runs."
+            className="mb-12"
+          />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {APPROACH.map((item, index) => (
+              <Reveal key={item.number} delay={index * 0.06}>
+                <div className="relative h-full rounded-2xl border border-surface-line bg-white/75 p-6 shadow-[0_12px_40px_-32px_rgba(10,36,68,0.32)] sm:p-7">
+                  <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{item.number}</p>
+                  <h3 className="mt-4 text-lg font-semibold text-ink">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</p>
+                  {index < APPROACH.length - 1 && (
+                    <ArrowRight className="absolute -right-3 top-8 z-10 hidden h-5 w-5 rounded-full bg-surface-soft p-0.5 text-accent lg:block" />
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-12 flex flex-col gap-5 rounded-2xl border border-accent/15 bg-white/70 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div className="flex items-start gap-4">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-accent/10 text-accent">
+                <Building2 className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Based in Islamabad</p>
+                <h3 className="mt-1 text-lg font-semibold text-ink">A focused engineering team</h3>
+                <p className="mt-1 text-sm leading-relaxed text-ink-muted">GrydIn is a technology company based in Islamabad, Pakistan.</p>
+              </div>
+            </div>
+            <Button href="/contact" variant="outline-dark" size="md" iconRight={<ArrowRight className="h-4 w-4" />}>
+              Meet us in a conversation
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <CtaBand
-        title="Ready to eliminate friction in your business?"
-        subtitle="Schedule a diagnosis with a Lead Architect. Fixed-scope roadmap within 48 hours."
+        title="Let’s find the work hiding in your workflow."
+        subtitle="Tell us where work gets stuck. We’ll talk through the process and what a useful solution could look like."
+        buttonText="Start a conversation"
+        secondaryText="Explore our services"
+        secondaryHref="/services"
       />
     </main>
   );

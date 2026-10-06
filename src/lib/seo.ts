@@ -299,18 +299,18 @@ export const blogMetadata = buildMetadata({
 });
 
 export const aboutMetadata = buildMetadata({
-  documentTitle: "GrydIn - About",
-  socialTitle: "About GrydIn - AI Automation Company in Islamabad",
+  documentTitle: "About GrydIn | Grid the Unseen",
+  socialTitle: "About GrydIn - AI Agents, Automation & Software",
   description:
-    "GrydIn surfaces the invisible work slowing teams down - manual handoffs, copy-paste, and gaps between tools - then eliminates it without disruption. Learn our beliefs, origin story, and how we diagnose before we build.",
+    "Learn how GrydIn finds the invisible work slowing businesses down and builds AI agents, workflow automation, custom software, and integrations around how teams work.",
   path: "/about",
   keywords: [
     ...GLOBAL_KEYWORDS,
     "about GrydIn",
-    "AI automation company Pakistan",
-    "automation should be invisible",
-    "diagnosis before build",
-    "fixed scope fixed quote automation",
+    "AI agents Islamabad",
+    "workflow automation",
+    "custom software Islamabad",
+    "business system integration",
   ],
 });
 

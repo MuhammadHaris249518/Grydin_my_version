@@ -65,11 +65,11 @@ const OFFICE_PHOTOS = [
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-surface text-ink">
-      <section className="relative isolate flex min-h-[calc(100svh-68px)] items-center overflow-hidden border-b border-surface-line py-14 sm:py-16 lg:min-h-[calc(100svh-68px)] lg:py-16">
+      <section style={{ fontFamily: "Inter, Arial, sans-serif" }} className="relative isolate flex min-h-[calc(100svh-68px)] items-center overflow-hidden border-b border-surface-line py-14 sm:py-16 lg:min-h-[calc(100svh-68px)] lg:py-16">
         <HeroBackdrop network={false} />
         <div className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_74%_48%,rgba(34,211,238,0.14),transparent_38%)]" />
         <svg aria-hidden="true" className="pointer-events-none absolute right-0 top-0 z-[1] hidden h-full w-[68%] opacity-40 lg:block" viewBox="0 0 900 650" fill="none" preserveAspectRatio="xMidYMid slice"><g stroke="#67d9e8" strokeOpacity=".35" strokeWidth="1"><path d="m20 210 130-45 120 72 130-135 110 88 135-112 130 66"/><path d="m35 410 150-88 155 92 145-86 150 96 135-82 95 32"/><path d="m105 590 125-120 170 50 145-95 155 55 130-105 100 25"/><path d="m150 165 35 157-55 88 125 60-25 120m150-363 10 271 30 52m110-362v276l145 58m135-390 5 320 15 50"/></g><g fill="#12cde0"><circle cx="150" cy="165" r="4"/><circle cx="185" cy="322" r="5"/><circle cx="270" cy="237" r="4"/><circle cx="400" cy="102" r="5"/><circle cx="510" cy="190" r="5"/><circle cx="645" cy="78" r="5"/><circle cx="775" cy="144" r="4"/><circle cx="340" cy="414" r="5"/><circle cx="485" cy="328" r="4"/><circle cx="635" cy="424" r="5"/><circle cx="770" cy="342" r="4"/><circle cx="205" cy="470" r="4"/><circle cx="400" cy="520" r="4"/><circle cx="545" cy="425" r="5"/><circle cx="700" cy="480" r="4"/><circle cx="830" cy="375" r="5"/></g></svg>
-        <div className="relative z-10 mx-auto grid w-full max-w-[1660px] items-center gap-12 px-6 sm:px-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 lg:px-12 xl:px-14">
+        <div className="relative z-10 mx-auto grid w-full max-w-[1660px] items-center gap-12 px-6 sm:px-10 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10 lg:px-12 xl:px-14">
           <Reveal className="max-w-[790px]">
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-100 bg-white/80 px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-accent shadow-[0_4px_18px_rgba(13,139,153,0.12)]">
               <span className="h-2 w-2 rounded-full bg-sky-600 shadow-[0_0_10px_rgba(14,165,233,0.7)]" />
@@ -79,7 +79,7 @@ export default function AboutPage() {
               <span className="h-px w-9 bg-accent/70" />
               Grid the unseen
             </p>
-            <h1 className="mt-6 max-w-[790px] font-display text-[clamp(3.5rem,4vw,4.5rem)] font-bold leading-[0.99] tracking-[-0.055em] text-ink">
+            <h1 className="mt-6 max-w-[790px] font-sans text-[clamp(3.5rem,4vw,4.5rem)] font-bold leading-[0.99] tracking-[-0.055em] text-ink">
               We build systems that<br className="hidden lg:block" /> close the gaps in your<br className="hidden lg:block" /> business<span className="text-accent">.</span>
             </h1>
             <p className="mt-6 max-w-[790px] text-base leading-relaxed text-ink-muted sm:text-lg sm:leading-[1.65]">
@@ -102,18 +102,18 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal delay={0.12} className="relative mx-auto w-full max-w-[620px] lg:ml-auto">
-            <div className="pointer-events-none absolute -inset-10 rounded-[4rem] bg-cyan-300/30 blur-[70px]" />
-            <div className="pointer-events-none absolute -inset-x-2 inset-y-6 translate-x-3 rounded-[2rem] border border-cyan-300/60 bg-sky-100/55 shadow-[14px_18px_36px_rgba(3,105,161,0.16)]" />
-            <div className="pointer-events-none absolute -inset-x-2 inset-y-3 translate-x-1.5 rounded-[2rem] border border-white/80 bg-white/45" />
-            <div className="relative overflow-hidden rounded-[1.8rem] border border-cyan-200/70 bg-[radial-gradient(circle_at_78%_10%,rgba(0,213,231,0.27),transparent_29%),linear-gradient(145deg,#063353_0%,#052944_50%,#031d34_100%)] p-5 text-white shadow-[0_35px_90px_-28px_rgba(0,91,140,0.68),inset_0_1px_0_rgba(255,255,255,0.18)]  sm:rounded-[2rem] sm:p-7 lg:p-8">
-              <div className="pointer-events-none absolute -right-14 -top-20 h-64 w-64 rounded-full border border-cyan-300/20 shadow-[0_0_70px_rgba(34,211,238,0.12)]" />
-              <div className="pointer-events-none absolute -right-4 -top-10 h-44 w-44 rounded-full border border-cyan-300/20" />
+            <div className="pointer-events-none absolute -inset-8 rounded-[3rem] bg-cyan-200/15 blur-[52px]" />
+            <div className="pointer-events-none absolute -inset-y-6 -right-5 left-5 translate-x-4 rounded-[2rem] border border-cyan-300/35 bg-cyan-100/15 shadow-[8px_14px_28px_rgba(3,105,161,0.08)]" />
+            <div className="pointer-events-none absolute -inset-y-3 -right-3 left-3 translate-x-2 rounded-[2rem] border border-white/65 bg-white/25" />
+            <div className="relative overflow-hidden rounded-[1.8rem] border border-cyan-200/65 bg-[linear-gradient(145deg,#073b5d_0%,#052d4a_55%,#041f36_100%)] p-5 text-white shadow-[0_24px_56px_-34px_rgba(0,68,96,0.48),inset_0_1px_0_rgba(255,255,255,0.16)] [transform:rotate(-2deg)] sm:rounded-[2rem] sm:p-7 lg:p-8">
+              
+              
               <div className="relative flex items-center justify-between gap-4">
                 <div>
                   <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-300 sm:text-xs">The work between the work</p>
-                  <h2 className="mt-2 font-display text-xl font-bold tracking-[-0.035em] sm:text-2xl lg:text-[1.8rem]">Make the unseen visible.</h2>
+                  <h2 className="mt-2 font-sans text-xl font-bold tracking-[-0.035em] sm:text-2xl lg:text-[1.8rem]">Make the unseen visible.</h2>
                 </div>
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-cyan-300/60 bg-cyan-400/15 text-cyan-200 shadow-[0_0_28px_rgba(34,211,238,0.32)] sm:h-[68px] sm:w-[68px]">
+                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-cyan-300/50 bg-cyan-400/10 text-cyan-200 sm:h-[68px] sm:w-[68px]">
                   <Eye className="h-7 w-7 sm:h-8 sm:w-8" />
                 </span>
               </div>
@@ -123,7 +123,7 @@ export default function AboutPage() {
                   { icon: Users, label: "Teams", detail: "Manual handoffs" },
                   { icon: Workflow, label: "Decisions", detail: "Work that gets missed" },
                 ].map(({ icon: Icon, label, detail }) => (
-                  <div key={label} className="group flex items-center gap-3 rounded-2xl border border-cyan-100/20 bg-gradient-to-r from-white/[0.12] to-white/[0.06] px-3.5 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.1),0_8px_20px_rgba(0,8,25,0.16)] transition duration-300 hover:translate-x-1 hover:border-cyan-200/50 sm:gap-4 sm:px-4 sm:py-3.5">
+                  <div key={label} className="group flex items-center gap-3 rounded-[1rem] border border-cyan-100/20 bg-white/[0.07] px-3.5 py-3 transition-colors duration-200 hover:border-cyan-200/45 hover:bg-white/[0.1] sm:gap-4 sm:px-4 sm:py-3.5">
                     <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-cyan-300/35 bg-cyan-400/15 text-cyan-200 shadow-[0_0_18px_rgba(34,211,238,0.16)] sm:h-[52px] sm:w-[52px]">
                       <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </span>
@@ -135,7 +135,7 @@ export default function AboutPage() {
                   </div>
                 ))}
               </div>
-              <div className="relative mt-3 flex items-center gap-3 rounded-2xl border border-cyan-200/80 bg-gradient-to-r from-cyan-500 via-cyan-400 to-teal-400 px-3.5 py-3.5 text-white shadow-[0_0_28px_rgba(34,211,238,0.5),inset_0_1px_0_rgba(255,255,255,0.55)] sm:gap-4 sm:px-4 sm:py-4">
+              <div className="relative mt-3 flex items-center gap-3 rounded-2xl border border-cyan-200/80 bg-gradient-to-r from-cyan-500 to-teal-400 px-3.5 py-3.5 text-white shadow-[0_10px_26px_rgba(34,211,238,0.2)] sm:gap-4 sm:px-4 sm:py-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-white/50 bg-white/15 shadow-[0_0_18px_rgba(255,255,255,0.2)] sm:h-[52px] sm:w-[52px]">
                   <Bot className="h-6 w-6" />
                 </span>

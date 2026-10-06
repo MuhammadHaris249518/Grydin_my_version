@@ -33,7 +33,7 @@ export const Navbar = () => {
   }, [pathname]);
 
   useEffect(() => {
-    if (isHome) return;
+    if (!isHome) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -108,8 +108,8 @@ export const Navbar = () => {
 
           {/* Right CTA and Search */}
           <div className="flex items-center gap-3 sm:gap-4">
-            {/* Keep search available across the site, but leave it off the home hero. */}
-            {!isHome && (
+            {/* Search is shown on the home page only. */}
+            {isHome && (
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
@@ -125,13 +125,15 @@ export const Navbar = () => {
             )}
 
             {/* Desktop "Get In Touch" Button */}
-            <Link
-              href="/contact"
-              className="hidden sm:inline-flex items-center gap-1.5 bg-gradient-to-r from-[#00d2df] via-[#00c2cb] to-[#0284c7] hover:from-[#00e5ff] hover:to-[#0369a1] text-white text-[12px] xl:text-[13px] font-bold px-6 py-2.5 rounded-full transition-all shadow-[0_0_20px_rgba(0,194,203,0.4)] hover:shadow-[0_0_28px_rgba(0,194,203,0.6)] active:scale-[0.98]"
-            >
-              <span>Get In Touch</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            {isHome && (
+              <Link
+                href="/contact"
+                className="hidden sm:inline-flex items-center gap-1.5 bg-gradient-to-r from-[#00d2df] via-[#00c2cb] to-[#0284c7] hover:from-[#00e5ff] hover:to-[#0369a1] text-white text-[12px] xl:text-[13px] font-bold px-6 py-2.5 rounded-full transition-all shadow-[0_0_20px_rgba(0,194,203,0.4)] hover:shadow-[0_0_28px_rgba(0,194,203,0.6)] active:scale-[0.98]"
+              >
+                <span>Get In Touch</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            )}
 
             {/* Mobile Menu Button (< lg) */}
             <button
@@ -169,15 +171,17 @@ export const Navbar = () => {
                   );
                 })}
               </nav>
-              <div className="pt-3 border-t border-surface-line flex flex-col gap-3">
-                <Link
-                  href="/contact"
-                  onClick={() => setMenuOpen(false)}
-                  className="w-full text-center bg-accent hover:bg-accent-hover text-white py-2.5 rounded-md text-xs font-bold uppercase tracking-wider"
-                >
-                  GET IN TOUCH
-                </Link>
-              </div>
+              {isHome && (
+                <div className="pt-3 border-t border-surface-line flex flex-col gap-3">
+                  <Link
+                    href="/contact"
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full text-center bg-accent hover:bg-accent-hover text-white py-2.5 rounded-md text-xs font-bold uppercase tracking-wider"
+                  >
+                    GET IN TOUCH
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}

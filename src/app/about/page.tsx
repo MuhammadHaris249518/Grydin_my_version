@@ -10,6 +10,7 @@ import {
   GitBranch,
   Workflow,
 } from "lucide-react";
+import Image from "next/image";
 import { PageHero } from "@/app/globalscope/ui/PageHero";
 import { Button } from "@/app/globalscope/ui/Button";
 import { CtaBand } from "@/app/globalscope/ui/CtaBand";
@@ -62,6 +63,33 @@ const APPROACH = [
     title: "Keep improving",
     description:
       "We use what the team learns in practice to guide the next improvements to the system and process.",
+  },
+];
+
+const OFFICE_PHOTOS = [
+  {
+    src: "/images/about/team-at-work.png",
+    alt: "GrydIn teammates working side by side in the office",
+    title: "Working through the details",
+    detail: "Focused engineering, built around real business needs.",
+    className: "lg:col-span-7 lg:row-span-2 lg:min-h-[460px]",
+    sizes: "(min-width: 1024px) 58vw, 100vw",
+  },
+  {
+    src: "/images/about/pair-programming.png",
+    alt: "Two GrydIn teammates reviewing a project together",
+    title: "Better work, together",
+    detail: "Sharing context and solving problems as a team.",
+    className: "lg:col-span-5 lg:min-h-[222px]",
+    sizes: "(min-width: 1024px) 42vw, 100vw",
+  },
+  {
+    src: "/images/about/focused-work.png",
+    alt: "A GrydIn teammate focused on a laptop at the office",
+    title: "Attention to the craft",
+    detail: "Thoughtful execution, one problem at a time.",
+    className: "lg:col-span-5 lg:min-h-[222px]",
+    sizes: "(min-width: 1024px) 42vw, 100vw",
   },
 ];
 
@@ -218,6 +246,44 @@ export default function AboutPage() {
                   <h3 className="mt-6 text-xl font-semibold tracking-tight text-ink">{title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-ink-muted">{description}</p>
                 </GlassCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-surface-line bg-surface-soft py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+          <SectionHeader
+            eyebrow="Inside GrydIn"
+            title="The people behind the systems"
+            accent="behind the systems"
+            intro="A glimpse inside our Islamabad office—where the team works together to turn real operational problems into useful technology."
+          />
+
+          <div className="mt-12 grid gap-4 lg:grid-cols-12 lg:auto-rows-[222px]">
+            {OFFICE_PHOTOS.map((photo, index) => (
+              <Reveal
+                key={photo.src}
+                delay={index * 0.07}
+                className={photo.className}
+              >
+                <figure className="group relative h-[300px] overflow-hidden rounded-2xl border border-surface-line bg-ink shadow-[0_20px_55px_-35px_rgba(9,35,62,0.5)] sm:h-[380px] lg:h-full">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    sizes={photo.sizes}
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
+                  <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                    <p className="text-lg font-semibold tracking-tight text-white">
+                      {photo.title}
+                    </p>
+                    <p className="mt-1 text-sm text-white/75">{photo.detail}</p>
+                  </figcaption>
+                </figure>
               </Reveal>
             ))}
           </div>

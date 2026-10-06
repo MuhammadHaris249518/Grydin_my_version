@@ -88,7 +88,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="relative min-h-[calc(100vh-68px)] bg-gradient-to-b from-white via-[#f7fcfb]/50 to-white text-slate-900 overflow-hidden pt-4 sm:pt-6 md:pt-8 pb-16 sm:pb-24">
+    <main className="relative min-h-[calc(100vh-68px)] bg-gradient-to-b from-white via-[#f1fbfa]/60 to-white text-slate-900 overflow-hidden pt-3 sm:pt-4 md:pt-5 pb-12 sm:pb-16">
       {/* ── Futuristic ambient lighting in background ── */}
       <div className="pointer-events-none absolute top-0 right-0 w-[640px] h-[640px] bg-gradient-to-bl from-teal-200/25 via-cyan-100/15 to-transparent rounded-full blur-3xl -z-10" />
       <div className="pointer-events-none absolute top-[40%] left-[-100px] w-[500px] h-[500px] bg-gradient-to-tr from-cyan-200/20 via-teal-100/10 to-transparent rounded-full blur-3xl -z-10" />
@@ -103,14 +103,14 @@ export default function ContactPage() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         {/* ========================================================================= */}
         {/* UPPER SECTION: Left side Text/Info & Right side Quality Form + 3D Robot   */}
         {/* ========================================================================= */}
-        <section className="mb-20 sm:mb-24 lg:mb-28">
-          <div className="flex flex-col lg:flex-row items-start justify-between gap-8 lg:gap-8 xl:gap-12">
+        <section className="mb-8 sm:mb-10 lg:mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-7 lg:gap-8">
             {/* ── LEFT COLUMN: Heading, 3 Info Cards, Follow Us, Stats Bar ── */}
-            <div className="w-full lg:w-[440px] xl:w-[480px] shrink-0 flex flex-col justify-between pt-1">
+            <div className="w-full lg:col-span-5 flex flex-col justify-between pt-1">
               <div>
                 {/* Eyebrow badge */}
                 <div className="mb-4">
@@ -121,21 +121,20 @@ export default function ContactPage() {
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#0a233b] tracking-tight leading-[1.14] mb-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#0a233b] tracking-[-0.045em] leading-[0.98] mb-4">
                   Have a project in mind? <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00b4d8] to-[#0D8B99]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#12bfc0] to-[#008d91]">
                     Let&apos;s talk.
                   </span>
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-sm text-slate-600 leading-relaxed max-w-lg mb-7 font-normal">
-                  We&apos;re here to help. Whether you want to discuss a new project, explore our
-                  autonomous AI systems, or have technical inquiries — reach out and we&apos;ll get back to you within 24 hours.
+                <p className="text-sm sm:text-[14px] text-slate-600 leading-relaxed max-w-lg mb-5 font-normal">
+                  We&apos;re here to help. Whether you want to discuss a new project, explore our solutions, or have technical inquiries — reach out and we&apos;ll get back to you within 24 hours.
                 </p>
 
                 {/* 3 Quick Contact Info Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
                   {/* EMAIL */}
                   <div className="bg-white rounded-2xl border border-slate-200/90 shadow-[0_4px_16px_rgba(13,139,153,0.04)] p-3.5 sm:p-4 hover:border-teal-300 hover:shadow-md transition-all group">
                     <div className="w-8 h-8 rounded-lg bg-[#EAF8F6] text-[#0D8B99] flex items-center justify-center mb-2 border border-teal-100/80 group-hover:scale-105 transition-transform">
@@ -194,7 +193,7 @@ export default function ContactPage() {
                 </div>
 
                 {/* Follow Us Row */}
-                <div className="flex items-center gap-3 mb-6">
+                <div className="hidden">
                   <span className="text-xs font-bold text-slate-800">Follow Us</span>
                   <div className="flex items-center gap-2">
                     <a
@@ -238,10 +237,10 @@ export default function ContactPage() {
               </div>
 
               {/* Dark Stats Banner at bottom - sleek rounded pill */}
-              <div className="relative rounded-2xl sm:rounded-full bg-gradient-to-r from-[#031525] via-[#051f33] to-[#041a2c] border border-teal-500/25 px-4 sm:px-5 py-3 sm:py-3.5 shadow-xl shadow-teal-950/15 overflow-hidden">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+              <div className="relative rounded-2xl bg-gradient-to-r from-[#031b2a] via-[#052c3a] to-[#031b2a] border border-teal-500/25 px-4 py-3 shadow-xl shadow-teal-950/15 overflow-hidden">
+                <div className="flex items-center justify-between gap-3">
                   {/* Left: 3D Holographic Cube + Tagline */}
-                  <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+                  <div className="flex items-center gap-2.5 min-w-0">
                     <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0">
                       <div className="absolute inset-0 bg-[#00C2CB]/25 rounded-full blur-sm" />
                       <Image
@@ -257,35 +256,27 @@ export default function ContactPage() {
                         Trusted by startups &amp; businesses
                       </p>
                       <p className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
-                        From idea to deployment, we build solutions that scale.
+                        From early-stage ideas to scalable products, we&apos;ve helped teams worldwide build.
                       </p>
                     </div>
                   </div>
 
                   {/* Right: Metrics */}
-                  <div className="flex items-center gap-3 sm:gap-4 shrink-0 sm:pl-2">
+                  <div className="flex items-center gap-3 sm:gap-4 shrink-0 border-l border-white/20 pl-3">
                     <div className="text-center">
                       <p className="font-extrabold text-white text-xs sm:text-sm leading-none">
                         10+
                       </p>
                       <p className="text-[8px] sm:text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">
-                        Delivered
+                        Projects
                       </p>
                     </div>
                     <div className="text-center">
                       <p className="font-extrabold text-white text-xs sm:text-sm leading-none">
-                        5+
+                        8+
                       </p>
                       <p className="text-[8px] sm:text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">
-                        Clients
-                      </p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-extrabold text-[#00C2CB] text-xs sm:text-sm leading-none">
-                        99%
-                      </p>
-                      <p className="text-[8px] sm:text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">
-                        Satisfaction
+                        Happy Clients
                       </p>
                     </div>
                   </div>
@@ -294,8 +285,8 @@ export default function ContactPage() {
             </div>
 
             {/* ── RIGHT COLUMN: High-Quality Vector Form + Integrated 3D Robot Stage ── */}
-            <div className="w-full lg:flex-1 relative">
-              <div className="relative z-10 w-full bg-white rounded-3xl sm:rounded-[32px] border border-slate-200/90 shadow-[0_20px_60px_-15px_rgba(13,139,153,0.08)] p-6 sm:p-7 md:p-8 xl:p-9 transition-all hover:shadow-[0_24px_70px_-15px_rgba(13,139,153,0.12)]">
+            <div className="w-full lg:col-span-7 relative">
+              <div className="relative z-10 w-full bg-white/80 backdrop-blur-xl rounded-3xl sm:rounded-[28px] border border-[#b8e3e9] shadow-[0_20px_60px_-15px_rgba(13,139,153,0.14)] p-5 sm:p-6 md:p-7 transition-all hover:shadow-[0_24px_70px_-15px_rgba(13,139,153,0.18)]">
                 {/* Form or success state */}
                 {submitted ? (
                   <div className="rounded-2xl border border-teal-200 bg-teal-50/70 p-8 sm:p-12 text-center shadow-xs">
@@ -318,7 +309,7 @@ export default function ContactPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-7 xl:gap-8 items-center">
+                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 xl:gap-3 items-center">
                     {/* Left side inside card: Clean, Razor-Sharp Vector Form Fields */}
                     <div className="xl:col-span-7">
                       {/* Eyebrow badge */}
@@ -334,7 +325,7 @@ export default function ContactPage() {
                         Tell us about your project
                       </h2>
                       <p className="text-xs sm:text-[13px] text-slate-500 mt-1 mb-5 leading-relaxed font-normal">
-                        Share your requirements, timeline or any questions. We&apos;ll get back to you with the right solution.
+                        Share your requirements, timeline or any questions. We&apos;ll get back to you within 24 hours.
                       </p>
 
                       {errorMessage && (
@@ -346,7 +337,7 @@ export default function ContactPage() {
 
                       <form onSubmit={handleSubmit} className="space-y-3.5">
                         {/* Full Name & Email Address */}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div>
                             <label className="block text-[11px] sm:text-xs font-semibold text-slate-700 mb-1">
                               Full Name <span className="text-[#0D8B99]">*</span>
@@ -428,14 +419,14 @@ export default function ContactPage() {
                             <textarea
                               required
                               rows={3}
-                              maxLength={500}
+                              maxLength={1000}
                               value={formData.message}
                               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                               placeholder="Tell us about your project, goals, and any specific requirements..."
                               className="w-full bg-[#F8FBFB] hover:bg-white focus:bg-white border border-slate-200/90 rounded-xl p-3.5 pb-6 text-xs sm:text-[13px] text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0D8B99]/20 focus:border-[#0D8B99] transition-all leading-relaxed resize-none shadow-xs"
                             />
                             <span className="absolute right-3 bottom-2 font-mono text-[10px] text-slate-400 select-none">
-                              {formData.message.length}/500
+                              {formData.message.length}/1000
                             </span>
                           </div>
                         </div>
@@ -479,9 +470,9 @@ export default function ContactPage() {
         {/* ========================================================================= */}
         {/* LOWER SECTION: Address & Map (Matching user reference layout exactly)     */}
         {/* ========================================================================= */}
-        <section className="relative z-10 mx-auto max-w-[800px]">
+        <section className="relative z-10 mx-auto max-w-[1360px]">
           {/* Section Heading Badge & Title */}
-          <div className="text-center mb-8 sm:mb-10">
+          <div className="text-left mb-3 sm:mb-4 max-w-[560px]">
             <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF8F6] border border-[#BCE8E3] text-[#0D8B99] font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase mb-2.5 shadow-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               PHYSICAL HEADQUARTERS &amp; CAMPUS
@@ -489,15 +480,19 @@ export default function ContactPage() {
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0a233b] tracking-tight">
               Our Base of Operations
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-1 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-500 max-w-md mt-1 leading-relaxed">
               Visit our engineering campus in Islamabad or reach out directly for synchronous briefings.
             </p>
           </div>
 
-          {/* Stacked Cards matching reference image */}
-          <div className="space-y-6 sm:space-y-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] items-center gap-5 lg:gap-6">
             <HeadquartersCard />
             <CampusMapCard />
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-x-7 gap-y-2 text-[10px] font-medium text-slate-600 sm:text-[11px]">
+            <span className="inline-flex items-center gap-2"><span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#e0f8f6] text-teal-700"><MessageSquare className="h-4 w-4" /></span>Reliable Communication</span>
+            <span className="inline-flex items-center gap-2"><span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#e0f8f6] text-teal-700"><ShieldCheck className="h-4 w-4" /></span>Professional Support</span>
+            <span className="inline-flex items-center gap-2"><span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#e0f8f6] text-teal-700"><CheckCircle2 className="h-4 w-4" /></span>On-Time Delivery</span>
           </div>
         </section>
       </div>

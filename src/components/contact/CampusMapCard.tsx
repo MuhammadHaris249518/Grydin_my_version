@@ -11,15 +11,15 @@ export function CampusMapCard() {
   return (
     <div className="w-full">
       {/* ── Main Map Card Container ── */}
-      <div className="relative w-full bg-white rounded-3xl sm:rounded-[32px] border border-slate-200/90 shadow-[0_16px_50px_rgba(13,139,153,0.06)] p-5 sm:p-7 md:p-8 transition-all hover:shadow-[0_20px_60px_rgba(13,139,153,0.09)] hover:border-teal-300/80">
+      <div className="relative w-full bg-white rounded-2xl border border-[#d3e9f2] shadow-[0_12px_36px_rgba(13,139,153,0.08)] p-2 transition-all hover:shadow-[0_20px_50px_rgba(13,139,153,0.12)] hover:border-teal-300/80">
         {/* Header Bar */}
-        <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5">
+        <div className="absolute left-5 top-5 z-10 flex items-center justify-between gap-4 rounded-lg border border-white/80 bg-white/90 px-3 py-2 shadow-sm backdrop-blur">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#EAF8F6] border border-[#BCE8E3]/80 flex items-center justify-center text-[#0D8B99]">
               <Map className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0D8B99]" />
             </div>
-            <h3 className="font-extrabold text-[#0a233b] text-xs sm:text-sm tracking-wider uppercase font-mono">
-              ISLAMABAD CAMPUS MAP
+            <h3 className="font-bold text-[#0a233b] text-[10px] sm:text-xs tracking-tight">
+              The Box Software Technology Park
             </h3>
           </div>
 
@@ -27,7 +27,7 @@ export function CampusMapCard() {
             href={SITE.office.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-bold text-slate-700 hover:text-[#0D8B99] transition-colors group"
+            className="hidden"
           >
             <span>View full map</span>
             <ArrowRight className="w-3.5 h-3.5 text-[#0D8B99] transition-transform group-hover:translate-x-1" />
@@ -35,10 +35,10 @@ export function CampusMapCard() {
         </div>
 
         {/* Map Display Container */}
-        <div className="relative w-full rounded-2xl sm:rounded-[24px] overflow-hidden border border-slate-200/90 bg-[#F4F9F9] shadow-inner min-h-[220px] sm:min-h-[280px] md:min-h-[320px]">
+        <div className="relative w-full rounded-xl overflow-hidden border border-slate-200/90 bg-[#F4F9F9] shadow-inner min-h-[220px] sm:min-h-[280px]">
           {showLiveMap ? (
             /* Live Interactive Google Map Embed */
-            <div className="relative w-full h-[280px] sm:h-[340px] md:h-[380px]">
+            <div className="relative w-full h-[220px] sm:h-[280px]">
               <iframe
                 title="GrydIn Islamabad Campus Live Map"
                 src={SITE.office.mapsEmbedSrc}
@@ -62,7 +62,7 @@ export function CampusMapCard() {
             </div>
           ) : (
             /* Stylized Map Preview Graphic matching reference mockup exactly */
-            <div className="relative w-full h-[220px] sm:h-[280px] md:h-[320px]">
+            <div className="relative w-full h-[220px] sm:h-[280px]">
               <Image
                 src="/images/contact/islamabad-campus-map.png"
                 alt="Islamabad Campus Map - The Box Software Technology Park"
@@ -106,7 +106,7 @@ export function CampusMapCard() {
         <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-teal-300 to-teal-400" />
         <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
         <span className="text-[11px] sm:text-xs text-slate-500 font-medium tracking-wide">
-          <strong className="text-slate-700 font-bold">GrydIn</strong> • Engineering for what&apos;s next
+          Ideas <span className="px-3 text-teal-500">→</span> Strategy <span className="px-3 text-teal-500">→</span> Product
         </span>
       </div>
     </div>

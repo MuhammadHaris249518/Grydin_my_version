@@ -4,6 +4,7 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useSpring, useMotionValue, useTransform } from "framer-motion";
 import { MessageSquare, Mail, Sparkles, ArrowRight } from "lucide-react";
+import { SITE } from "@/app/globalscope/site-config";
 
 export function ContactRobotAssistant() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,7 +53,7 @@ export function ContactRobotAssistant() {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[360px] sm:h-[420px] xl:h-full min-h-[380px] xl:min-h-[520px] flex items-center justify-center select-none overflow-hidden rounded-2xl xl:rounded-3xl bg-gradient-to-b from-[#f4fcfc]/70 via-[#eaf7f7]/40 to-white/90 border border-teal-100/60 p-4"
+      className="relative w-full h-[360px] sm:h-[420px] xl:h-[470px] min-h-[360px] flex items-center justify-center select-none overflow-hidden rounded-2xl xl:rounded-3xl bg-gradient-to-br from-[#e8f9f8] via-[#f7fcfc] to-[#c9f4f1] border border-teal-100/60 p-4"
       style={{ perspective: 1200 }}
     >
       {/* ── Cyber Atmospheric Light Bloom & Orbital Rings ── */}
@@ -199,27 +200,20 @@ export function ContactRobotAssistant() {
           }}
           className="absolute right-[2%] sm:right-[4%] bottom-[14%] sm:bottom-[16%] z-20 max-w-[170px]"
         >
-          <div className="bg-gradient-to-br from-white/95 via-[#f0faf9]/90 to-[#e2f5f4]/85 backdrop-blur-lg border border-teal-200/80 shadow-xl shadow-teal-900/10 rounded-2xl p-3 sm:p-3.5 transition-transform hover:scale-105 duration-200">
+          <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer" className="block bg-[#032b38]/95 backdrop-blur-lg border border-teal-300/80 shadow-xl shadow-teal-900/25 rounded-2xl p-3 sm:p-3.5 text-white transition-transform hover:scale-105 duration-200">
             <div className="flex items-center gap-2 mb-1.5">
-              {/* GrydIn Logo SVG mark */}
-              <div className="w-4 h-4 text-[#0D8B99] shrink-0">
-                <svg viewBox="0 0 132.5 145" fill="currentColor" className="w-full h-full">
-                  <path d="M66.354,25.354l26.286,26.286c0.197,0.197,0.518,0.19,0.706-0.015l11.757-12.784c0.176-0.191,0.172-0.486-0.009-0.672 L68.144,0.148C68.052,0.053,67.925,0,67.793,0h-2.848c-0.13,0-0.255,0.052-0.347,0.144L0.143,64.857 C0.051,64.949,0,65.073,0,65.202v13.456c0,0.128,0.05,0.251,0.14,0.343l64.716,65.853c0.092,0.094,0.218,0.146,0.349,0.146h2.897 c0.133,0,0.26-0.054,0.352-0.15l33.409-34.708c0.088-0.091,0.137-0.213,0.137-0.34l-0.023-20.266 c-0.001-1.224-1.461-1.857-2.356-1.023l-31.48,29.355c-0.091,0.084-0.21,0.131-0.334,0.131h-2.601c-0.132,0-0.258-0.053-0.35-0.147 l-42.717-43.71C22.05,74.051,22,73.928,22,73.801v-2.604c0-0.126,0.049-0.247,0.136-0.338l43.519-45.497 C65.844,25.163,66.16,25.16,66.354,25.354z" />
-                  <path d="M66.5,63.5v20h43v17.775c0,1.146,1.407,1.695,2.183,0.852l20.407-22.181c0.264-0.287,0.41-0.662,0.41-1.052V63.95 c0-0.249-0.202-0.45-0.45-0.45H66.5z" />
-                </svg>
+              <div className="w-7 h-7 rounded-full bg-[#00c985] flex items-center justify-center text-white shrink-0">
+                <MessageSquare className="w-4 h-4" />
               </div>
-              <span className="text-[10px] font-mono font-bold tracking-wider text-teal-800 uppercase">
-                GrydIn
-              </span>
+              <div>
+                <span className="block text-xs font-bold text-teal-200">Chat on WhatsApp</span>
+                <span className="block text-[9px] text-slate-300">Quick questions? We&apos;re here.</span>
+              </div>
             </div>
-            <p className="text-[11px] sm:text-xs font-bold text-slate-800 leading-snug">
-              Let&apos;s create something amazing
-            </p>
-            <div className="flex items-center gap-1 text-[10px] text-[#0D8B99] font-semibold mt-1.5">
-              <span>Connect</span>
-              <ArrowRight className="w-3 h-3" />
+            <div className="flex items-center justify-center gap-1 rounded-full bg-[#00bd83] py-1.5 text-[10px] font-bold text-white">
+              <span>Chat Now</span><ArrowRight className="w-3 h-3" />
             </div>
-          </div>
+          </a>
         </motion.div>
 
         {/* ── Cyber Platform Pedestal at base ── */}

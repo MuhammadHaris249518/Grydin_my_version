@@ -33,6 +33,8 @@ export const Navbar = () => {
   }, [pathname]);
 
   useEffect(() => {
+    if (isHome) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
@@ -41,7 +43,7 @@ export const Navbar = () => {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -106,29 +108,21 @@ export const Navbar = () => {
 
           {/* Right CTA and Search */}
           <div className="flex items-center gap-3 sm:gap-4">
-            {/* Search Button */}
-            <button
-              type="button"
-              onClick={() => setSearchOpen(true)}
-              className={`p-2 transition-colors rounded-full flex items-center gap-1.5 cursor-pointer ${
-                isDarkNav
-                  ? "text-slate-300 hover:text-white"
-                  : "text-ink-muted hover:text-accent"
-              }`}
-              aria-label="Search site"
-              title="Search (Ctrl+K)"
-            >
-              <Search size={18} strokeWidth={2.2} />
-              <kbd
-                className={`hidden xl:inline-block text-xs px-1.5 py-0.5 rounded font-mono ${
-                  isDarkNav
-                    ? "text-slate-300 bg-white/5 border border-white/15"
-                    : "text-ink-muted bg-surface-soft border border-surface-line"
-                }`}
+            {/* Keep search available across the site, but leave it off the home hero. */}
+            {!isHome && (
+              <button
+                type="button"
+                onClick={() => setSearchOpen(true)}
+                className="p-2 transition-colors rounded-full flex items-center gap-1.5 cursor-pointer text-ink-muted hover:text-accent"
+                aria-label="Search site"
+                title="Search (Ctrl+K)"
               >
-                ⌘K
-              </kbd>
-            </button>
+                <Search size={18} strokeWidth={2.2} />
+                <kbd className="hidden xl:inline-block text-xs px-1.5 py-0.5 rounded font-mono text-ink-muted bg-surface-soft border border-surface-line">
+                  ⌘K
+                </kbd>
+              </button>
+            )}
 
             {/* Desktop "Get In Touch" Button */}
             <Link

@@ -208,41 +208,120 @@ html {
 
 @keyframes floatCardA {
   0%, 100% {
-    transform: translateY(0px);
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(-0.35deg);
   }
-  50% {
-    transform: translateY(-8px);
+  34% {
+    transform: perspective(1100px) translate3d(-4px, -8px, 12px) rotateX(2deg) rotateY(-3deg) rotateZ(-0.8deg);
+  }
+  68% {
+    transform: perspective(1100px) translate3d(3px, -13px, 6px) rotateX(-1.4deg) rotateY(2deg) rotateZ(0.35deg);
   }
 }
 
 @keyframes floatCardB {
   0%, 100% {
-    transform: translateY(0px);
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(0.35deg);
   }
-  50% {
-    transform: translateY(-10px);
+  35% {
+    transform: perspective(1100px) translate3d(4px, -10px, 14px) rotateX(-2deg) rotateY(3deg) rotateZ(0.9deg);
+  }
+  72% {
+    transform: perspective(1100px) translate3d(-3px, -15px, 7px) rotateX(1.3deg) rotateY(-2deg) rotateZ(-0.3deg);
   }
 }
 
 @keyframes floatCardC {
   0%, 100% {
-    transform: translateY(0px);
+    transform: perspective(1100px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) rotateZ(-0.25deg);
   }
-  50% {
-    transform: translateY(-7px);
+  32% {
+    transform: perspective(1100px) translate3d(-3px, -7px, 10px) rotateX(1.7deg) rotateY(-2.4deg) rotateZ(-0.7deg);
+  }
+  70% {
+    transform: perspective(1100px) translate3d(4px, -12px, 5px) rotateX(-1.2deg) rotateY(2.2deg) rotateZ(0.3deg);
   }
 }
 
 .animate-float-card-a {
-  animation: floatCardA 5.5s ease-in-out infinite;
+  animation: floatCardA 8.4s ease-in-out infinite;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  will-change: transform;
 }
 
 .animate-float-card-b {
-  animation: floatCardB 6.2s ease-in-out infinite 1.2s;
+  animation: floatCardB 9.2s ease-in-out infinite 1.4s;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  will-change: transform;
 }
 
 .animate-float-card-c {
-  animation: floatCardC 5.8s ease-in-out infinite 2.4s;
+  animation: floatCardC 8.8s ease-in-out infinite 2.8s;
+  transform-style: preserve-3d;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.home-hero-caret {
+  display: inline-block;
+  width: 0.075em;
+  height: 0.82em;
+  margin-left: 0.09em;
+  vertical-align: -0.02em;
+  border-radius: 999px;
+  background: #00e5d4;
+  box-shadow: 0 0 12px rgba(0, 229, 212, 0.65);
+  animation: blink 0.9s steps(2, end) infinite;
+}
+
+.home-hero-orbit-logo {
+  position: absolute;
+  left: 63.5%;
+  top: 29%;
+  z-index: 20;
+  width: clamp(4.25rem, 6vw, 6.5rem);
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.home-hero-orbit-logo::before {
+  position: absolute;
+  inset: 15%;
+  content: "";
+  border: 1px solid rgba(125, 240, 255, 0.46);
+  border-right-color: rgba(0, 229, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 0 16px rgba(0, 194, 203, 0.34), inset 0 0 14px rgba(56, 189, 248, 0.18);
+  transform: rotateX(58deg) rotateZ(-24deg);
+}
+
+.home-hero-orbit-halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(19, 120, 210, 0.78) 0 20%, rgba(28, 128, 224, 0.43) 42%, rgba(18, 103, 194, 0.08) 72%, transparent 78%);
+  filter: blur(5px);
+}
+
+.home-hero-orbit-glyph {
+  position: relative;
+  z-index: 1;
+  width: 43%;
+  height: 48%;
+  overflow: visible;
+  fill: #b8ffff;
+  filter: drop-shadow(0 0 5px rgba(0, 245, 255, 0.95)) drop-shadow(0 0 14px rgba(0, 194, 203, 0.9));
+  transform-origin: center;
+  animation: homeHeroMarkSpin 22s linear infinite;
+}
+
+@keyframes homeHeroMarkSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @layer components {

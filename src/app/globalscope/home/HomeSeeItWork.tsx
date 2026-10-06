@@ -59,7 +59,7 @@ export function HomeSeeItWork() {
       id="live-demo"
       className="relative bg-white py-20 md:py-28 lg:py-32 border-b border-slate-200/80 overflow-hidden"
     >
-      <div className="relative mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16">
+      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
         <div className="grid gap-12 lg:gap-14 xl:gap-16 lg:grid-cols-12 lg:items-center">
           {/* ── Left Column: Typography, Tightened Features & CTA Hierarchy ── */}
           <div className="lg:col-span-5">

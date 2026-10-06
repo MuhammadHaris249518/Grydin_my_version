@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Search, ArrowRight } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GrydInLogo } from "./GrydInLogo";
-import { SearchDialog } from "./SearchDialog";
 
 export const NAVBAR_TOP_OFFSET = 0;
 
@@ -21,7 +20,6 @@ const NAV_LINKS = [
 export const Navbar = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const isHome = pathname === "/";
@@ -29,21 +27,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     setMenuOpen(false);
-    setSearchOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    if (!isHome) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setSearchOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isHome]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -106,24 +90,8 @@ export const Navbar = () => {
             })}
           </nav>
 
-          {/* Right CTA and Search */}
+          {/* Right CTA */}
           <div className="flex items-center gap-3 sm:gap-4">
-            {/* Search is shown on the home page only. */}
-            {isHome && (
-              <button
-                type="button"
-                onClick={() => setSearchOpen(true)}
-                className="p-2 transition-colors rounded-full flex items-center gap-1.5 cursor-pointer text-ink-muted hover:text-accent"
-                aria-label="Search site"
-                title="Search (Ctrl+K)"
-              >
-                <Search size={18} strokeWidth={2.2} />
-                <kbd className="hidden xl:inline-block text-xs px-1.5 py-0.5 rounded font-mono text-ink-muted bg-surface-soft border border-surface-line">
-                  ⌘K
-                </kbd>
-              </button>
-            )}
-
             {/* Desktop "Get In Touch" Button */}
             {isHome && (
               <Link
@@ -187,7 +155,6 @@ export const Navbar = () => {
         )}
       </header>
 
-      <SearchDialog isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 };

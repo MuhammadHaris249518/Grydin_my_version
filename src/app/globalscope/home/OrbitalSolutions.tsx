@@ -259,7 +259,7 @@ export function OrbitalSolutions() {
       {/* ── 3D Orbital Arena (Expanded Horizontal Spacing) ── */}
       <div
         ref={containerRef}
-        className="relative w-full max-w-[1520px] mx-auto h-[550px] sm:h-[610px] lg:h-[650px] flex items-center justify-center overflow-visible"
+        className="relative w-full max-w-7xl mx-auto h-[550px] sm:h-[610px] lg:h-[650px] flex items-center justify-center overflow-visible"
         style={{ perspective: "1200px" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

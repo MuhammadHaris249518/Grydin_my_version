@@ -17,6 +17,9 @@ import {
   CheckCircle2,
   MessageSquare,
   AlertCircle,
+  Cpu,
+  Headphones,
+  Timer,
 } from "lucide-react";
 import { ContactRobotAssistant } from "@/components/contact/ContactRobotAssistant";
 import { HeadquartersCard } from "@/components/contact/HeadquartersCard";
@@ -103,12 +106,12 @@ export default function ContactPage() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-16">
         {/* ========================================================================= */}
-        {/* UPPER SECTION: Left side Text/Info & Right side Quality Form + 3D Robot   */}
+        {/* HERO: Keep the introduction and contact details clear, with the assistant alongside. */}
         {/* ========================================================================= */}
         <section className="mb-8 sm:mb-10 lg:mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-7 lg:gap-8">
+          <div className="grid grid-cols-1 items-start gap-7 lg:grid-cols-12 lg:gap-8">
             {/* ── LEFT COLUMN: Heading, 3 Info Cards, Follow Us, Stats Bar ── */}
             <div className="w-full lg:col-span-5 flex flex-col justify-between pt-1">
               <div>
@@ -121,10 +124,11 @@ export default function ContactPage() {
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#0a233b] tracking-[-0.045em] leading-[0.98] mb-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold text-[#0a233b] tracking-[-0.045em] leading-[0.98] mb-6">
                   Have a project in mind? <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#12bfc0] to-[#008d91]">
+                  <span className="relative inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#12bfc0] to-[#008d91]">
                     Let&apos;s talk.
+                    <span aria-hidden="true" className="absolute -bottom-2 left-[17%] h-[4px] w-[45%] rounded-[100%] bg-gradient-to-r from-[#00c9c4] via-[#27ded0] to-transparent [transform:rotate(-2deg)]" />
                   </span>
                 </h1>
 
@@ -284,9 +288,30 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* ── RIGHT COLUMN: High-Quality Vector Form + Integrated 3D Robot Stage ── */}
-            <div className="w-full lg:col-span-7 relative">
-              <div className="relative z-10 w-full bg-white/80 backdrop-blur-xl rounded-3xl sm:rounded-[28px] border border-[#b8e3e9] shadow-[0_20px_60px_-15px_rgba(13,139,153,0.14)] p-5 sm:p-6 md:p-7 transition-all hover:shadow-[0_24px_70px_-15px_rgba(13,139,153,0.18)]">
+            {/* Keep the existing assistant in the first view, beside the contact information. */}
+            <div className="w-full lg:col-span-7 lg:col-start-6 lg:row-start-1">
+              <ContactRobotAssistant />
+              <div className="mt-5 grid grid-cols-3 divide-x divide-teal-100/90">
+                {[
+                  { icon: Cpu, title: "Modern Tech Stack", detail: "Scalable & future-ready" },
+                  { icon: Headphones, title: "Dedicated Support", detail: "We're with you throughout" },
+                  { icon: Timer, title: "On-Time Delivery", detail: "Your goals, our priority" },
+                ].map(({ icon: Icon, title, detail }) => (
+                  <div key={title} className="flex min-w-0 items-center gap-2.5 px-3 first:pl-1 last:pr-0 sm:gap-3 sm:px-5">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#def8f5] text-[#0d9a9d]">
+                      <Icon className="h-4 w-4" strokeWidth={2.2} />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-[10px] font-bold leading-snug text-slate-800 sm:text-xs">{title}</span>
+                      <span className="mt-0.5 block text-[9px] leading-snug text-slate-500 sm:text-[10px]">{detail}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* The complete form sits below the intro, inside the contact hero. */}
+            <div className="relative z-10 w-full rounded-3xl border border-[#b8e3e9] bg-white/85 p-5 shadow-[0_20px_60px_-15px_rgba(13,139,153,0.12)] backdrop-blur-xl transition-shadow hover:shadow-[0_24px_70px_-15px_rgba(13,139,153,0.16)] sm:rounded-[28px] sm:p-6 md:p-8 lg:col-span-12 lg:row-start-2">
                 {/* Form or success state */}
                 {submitted ? (
                   <div className="rounded-2xl border border-teal-200 bg-teal-50/70 p-8 sm:p-12 text-center shadow-xs">
@@ -309,9 +334,9 @@ export default function ContactPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 xl:gap-3 items-center">
-                    {/* Left side inside card: Clean, Razor-Sharp Vector Form Fields */}
-                    <div className="xl:col-span-7">
+                  <div className="grid grid-cols-1 items-start gap-8 xl:grid-cols-12 xl:gap-10">
+                    {/* Form fields */}
+                    <div className="xl:col-span-8">
                       {/* Eyebrow badge */}
                       <div className="flex items-center gap-2 mb-2.5">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF8F6] border border-[#BCE8E3] text-[#0D8B99] font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase">
@@ -456,13 +481,30 @@ export default function ContactPage() {
                       </form>
                     </div>
 
-                    {/* Right side inside card: Interactive 3D Robot Assistant with Real Movement */}
-                    <div className="xl:col-span-5 w-full flex items-center justify-center">
-                      <ContactRobotAssistant />
-                    </div>
+                    {/* Helpful prompt balances the wide form and helps visitors know what to share. */}
+                    <aside className="relative overflow-hidden rounded-2xl border border-teal-100 bg-gradient-to-br from-[#effcfb] via-white to-[#e5f7f8] p-6 xl:col-span-4 xl:mt-12">
+                      <div className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-cyan-200/35 blur-2xl" />
+                      <div className="relative">
+                        <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl border border-teal-100 bg-white text-[#0D8B99] shadow-sm">
+                          <MessageSquare className="h-5 w-5" />
+                        </span>
+                        <h3 className="text-lg font-bold tracking-tight text-[#0a233b]">A helpful place to start</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                          Tell us what you&apos;re trying to improve, what gets in the way today, and when you hope to get started. We&apos;ll help shape the next step.
+                        </p>
+                        <div className="mt-6 space-y-3 border-t border-teal-100 pt-5 text-sm text-slate-700">
+                          <p className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-[#0D8B99]" />The process or workflow involved</p>
+                          <p className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-[#0D8B99]" />Your goals and rough timeline</p>
+                          <p className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-[#0D8B99]" />Tools or systems you already use</p>
+                        </div>
+                        <div className="mt-6 flex items-center gap-3 rounded-xl bg-white/80 p-3.5 ring-1 ring-teal-100/80">
+                          <ShieldCheck className="h-5 w-5 shrink-0 text-emerald-600" />
+                          <p className="text-xs leading-relaxed text-slate-600">Your information stays private. Expect a reply within 24 hours.</p>
+                        </div>
+                      </div>
+                    </aside>
                   </div>
                 )}
-              </div>
             </div>
           </div>
         </section>
@@ -470,7 +512,7 @@ export default function ContactPage() {
         {/* ========================================================================= */}
         {/* LOWER SECTION: Address & Map (Matching user reference layout exactly)     */}
         {/* ========================================================================= */}
-        <section className="relative z-10 mx-auto max-w-[1360px]">
+        <section className="relative z-10 mx-auto w-full max-w-[1280px]">
           {/* Section Heading Badge & Title */}
           <div className="text-left mb-3 sm:mb-4 max-w-[560px]">
             <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF8F6] border border-[#BCE8E3] text-[#0D8B99] font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase mb-2.5 shadow-xs">

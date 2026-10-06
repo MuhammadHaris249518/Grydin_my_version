@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Code2, Cloud, Sparkles, Cpu, Database, TrendingUp } from "lucide-react";
+import { ArrowRight, Code2, Cloud, Sparkles, Cpu, Database } from "lucide-react";
 import { buildMetadata, organizationJsonLd, websiteJsonLd, professionalServiceJsonLd } from "@/lib/seo";
 import { JsonLd } from "./globalscope/ui/JsonLd";
 import { CollabsMarquee } from "./globalscope/CollabsMarquee";
@@ -12,6 +12,7 @@ import { HomeNewsroom } from "./globalscope/home/HomeNewsroom";
 import { HomeFaq } from "./globalscope/home/HomeFaq";
 import { CtaBand } from "./globalscope/ui/CtaBand";
 import { getAllPosts } from "@/lib/blog";
+import { HomeHeroTitle } from "./globalscope/home/HomeHeroTitle";
 
 export const metadata: Metadata = buildMetadata({
   documentTitle: "GrydIn | Autonomous AI Agents, Workflow Automation & Custom Software",
@@ -61,6 +62,15 @@ const HeroSection = () => {
             "linear-gradient(180deg, rgba(3, 14, 31, 0.98) 0%, rgba(3, 14, 31, 0.90) 58%, rgba(3, 14, 31, 0.8) 100%)",
         }}
       />
+
+      {/* Rotating G mark stays centered on the holographic globe. */}
+      <div aria-hidden="true" className="home-hero-orbit-logo hidden md:flex">
+        <span className="home-hero-orbit-halo" />
+        <svg viewBox="0 0 132.5 145" className="home-hero-orbit-glyph">
+          <path d="M66.354,25.354l26.286,26.286c0.197,0.197,0.518,0.19,0.706-.015l11.757-12.784c0.176-.191.172-.486-.009-.672L68.144.148C68.052.053,67.925,0,67.793,0h-2.848c-.13,0-.255.052-.347.144L.143,64.857C.051,64.949,0,65.073,0,65.202v13.456c0,.128.05.251.14.343l64.716,65.853c.092.094.218.146.349.146h2.897c.133,0,.26-.054.352-.15l33.409-34.708c.088-.091.137-.213.137-.34l-.023-20.266c-.001-1.224-1.461-1.857-2.356-1.023l-31.48,29.355c-.091.084-.21.131-.334.131h-2.601c-.132,0-.258-.053-.35-.147l-42.717-43.71C22.05,74.051,22,73.928,22,73.801v-2.604c0-.126.049-.247.136-.338l43.519-45.497c.189-.199.505-.202.699-.008z" />
+          <path d="M66.5,63.5v20h43v17.775c0,1.146,1.407,1.695,2.183.852l20.407-22.181c.264-.287.41-.662.41-1.052V63.95c0-.249-.202-.45-.45-.45H66.5z" />
+        </svg>
+      </div>
 
       {/* Sleek Glowing Cyber Wave & Tech Grid Pattern at bottom-left */}
       <div className="absolute bottom-0 left-0 w-full sm:w-[580px] lg:w-[750px] h-28 sm:h-36 lg:h-44 pointer-events-none z-15 overflow-hidden">
@@ -120,73 +130,53 @@ const HeroSection = () => {
         </svg>
       </div>
 
-      {/* Floating Card 1: AI AUTOMATION (Top-Left of Hologram) */}
-      <div className="hidden lg:flex absolute top-[11%] xl:top-[13%] left-[45%] xl:left-[46%] z-30 animate-float-card-a items-center gap-3 bg-[#031326]/85 hover:bg-[#031326]/95 border border-[#00c2cb]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(0,194,203,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[195px] xl:min-w-[210px] transition-all hover:scale-105 select-none">
+      {/* Floating Card 1: AI Engineering */}
+      <div className="hidden lg:flex absolute top-[11%] xl:top-[13%] left-[45%] xl:left-[46%] z-30 animate-float-card-a items-center gap-3 bg-[#031326]/95 hover:bg-[#031326] border border-[#00c2cb]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(0,194,203,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[195px] xl:min-w-[210px] transition-all hover:shadow-[0_0_36px_rgba(0,194,203,0.38)] select-none">
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#00c2cb]/20 border border-[#00c2cb]/40 flex items-center justify-center text-[#00f5d4] shadow-[0_0_12px_rgba(0,245,212,0.3)]">
           <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
         <div className="flex flex-col">
           <span className="font-mono text-[9px] xl:text-[10px] font-bold tracking-[0.14em] text-[#00c2cb] uppercase">
-            AI AUTOMATION
+            AI ENGINEERING
           </span>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className="text-xs sm:text-sm xl:text-base font-extrabold text-white">
-              +42% efficiency
+              Agents &amp; copilots
             </span>
-            <svg className="w-8 h-3.5 sm:w-9 sm:h-4" viewBox="0 0 36 16" fill="none">
-              <path
-                d="M 2 13 Q 12 12 18 7 T 34 3"
-                stroke="#10b981"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <path
-                d="M 28 3 L 34 3 L 34 9"
-                stroke="#10b981"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
           </div>
         </div>
       </div>
 
-      {/* Floating Card 2: CLOUD SOLUTIONS (Below Hologram) */}
-      <div className="hidden lg:flex absolute top-[47%] xl:top-[49%] left-[50%] xl:left-[51%] z-30 animate-float-card-b items-center gap-3 bg-[#031326]/85 hover:bg-[#031326]/95 border border-[#0284c7]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(2,132,199,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[195px] xl:min-w-[210px] transition-all hover:scale-105 select-none">
+      {/* Floating Card 2: Cloud Platform */}
+      <div className="hidden lg:flex absolute top-[47%] xl:top-[49%] left-[50%] xl:left-[51%] z-30 animate-float-card-b items-center gap-3 bg-[#031326]/95 hover:bg-[#031326] border border-[#0284c7]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(2,132,199,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[195px] xl:min-w-[210px] transition-all hover:shadow-[0_0_36px_rgba(2,132,199,0.38)] select-none">
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#0284c7]/20 border border-[#0284c7]/40 flex items-center justify-center text-[#38bdf8] shadow-[0_0_12px_rgba(56,189,248,0.3)]">
           <Cloud className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
         <div className="flex flex-col">
           <span className="font-mono text-[9px] xl:text-[10px] font-bold tracking-[0.14em] text-slate-300 uppercase">
-            CLOUD SOLUTIONS
+            CLOUD PLATFORM
           </span>
           <div className="flex items-center gap-2 mt-0.5">
             <span className="text-xs sm:text-sm xl:text-base font-extrabold text-white">
-              99.9% uptime
-            </span>
-            <span className="relative flex h-2 w-2 ml-0.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              Secure cloud infrastructure
             </span>
           </div>
         </div>
       </div>
 
-      {/* Floating Card 3: DIGITAL SOLUTIONS (Top-Right above team) */}
-      <div className="hidden lg:flex absolute top-[15%] xl:top-[17%] right-[2%] xl:right-[4%] z-30 animate-float-card-c items-center gap-3 bg-[#031326]/85 hover:bg-[#031326]/95 border border-[#818cf8]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(129,140,248,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[185px] xl:min-w-[200px] transition-all hover:scale-105 select-none">
+      {/* Floating Card 3: Product Engineering */}
+      <div className="hidden lg:flex absolute top-[15%] xl:top-[17%] right-[2%] xl:right-[4%] z-30 animate-float-card-c items-center gap-3 bg-[#031326]/95 hover:bg-[#031326] border border-[#818cf8]/50 backdrop-blur-xl shadow-[0_0_24px_rgba(129,140,248,0.3)] rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-4 sm:py-3 min-w-[185px] xl:min-w-[200px] transition-all hover:shadow-[0_0_36px_rgba(129,140,248,0.38)] select-none">
         <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-[#6366f1]/20 border border-[#818cf8]/40 flex items-center justify-center text-[#a5b4fc] shadow-[0_0_12px_rgba(165,180,252,0.3)]">
           <Database className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
         <div className="flex flex-col">
           <span className="font-mono text-[9px] xl:text-[10px] font-bold tracking-[0.14em] text-slate-300 uppercase">
-            DIGITAL SOLUTIONS
+            PRODUCT ENGINEERING
           </span>
           <div className="flex items-center gap-1.5 mt-0.5">
             <span className="text-xs sm:text-sm xl:text-base font-extrabold text-white">
-              24/7 scalable
+              Full-stack products
             </span>
-            <TrendingUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />
           </div>
         </div>
       </div>
@@ -202,14 +192,7 @@ const HeroSection = () => {
             </span>
           </div>
 
-          {/* Main Title: Empowering Your Business with Tech */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[2.9rem] xl:text-[3.4rem] font-bold text-white tracking-tight leading-[1.08]">
-            Empowering Your <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-[#00f5d4] via-[#00c2cb] to-[#38bdf8] bg-clip-text text-transparent">
-              Business
-            </span>{" "}
-            with Tech
-          </h1>
+          <HomeHeroTitle />
 
           {/* Subtitle */}
           <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base text-slate-300 font-normal leading-relaxed max-w-xl">
@@ -255,31 +238,31 @@ const HeroSection = () => {
 
           {/* Mobile Metric Cards Display (Visible only on < lg screens) */}
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 lg:hidden">
-            <div className="flex items-center gap-3 bg-[#031326]/80 border border-[#00c2cb]/40 backdrop-blur-md rounded-xl p-2.5">
+            <div className="flex items-center gap-3 bg-[#031326]/95 border border-[#00c2cb]/40 backdrop-blur-md rounded-xl p-2.5">
               <div className="w-7 h-7 rounded-lg bg-[#00c2cb]/20 flex items-center justify-center text-[#00f5d4]">
                 <Cpu className="w-3.5 h-3.5" />
               </div>
               <div>
-                <p className="text-[10px] font-mono text-[#00c2cb] font-bold">AI AUTOMATION</p>
-                <p className="text-xs font-bold text-white">+42% efficiency</p>
+                <p className="text-[10px] font-mono text-[#00c2cb] font-bold">AI ENGINEERING</p>
+                <p className="text-xs font-bold text-white">Agents &amp; copilots</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-[#031326]/80 border border-[#0284c7]/40 backdrop-blur-md rounded-xl p-2.5">
+            <div className="flex items-center gap-3 bg-[#031326]/95 border border-[#0284c7]/40 backdrop-blur-md rounded-xl p-2.5">
               <div className="w-7 h-7 rounded-lg bg-[#0284c7]/20 flex items-center justify-center text-[#38bdf8]">
                 <Cloud className="w-3.5 h-3.5" />
               </div>
               <div>
-                <p className="text-[10px] font-mono text-slate-300 font-bold">CLOUD SOLUTIONS</p>
-                <p className="text-xs font-bold text-white">99.9% uptime</p>
+                <p className="text-[10px] font-mono text-slate-300 font-bold">CLOUD PLATFORM</p>
+                <p className="text-xs font-bold text-white">Secure cloud infrastructure</p>
               </div>
             </div>
-            <div className="flex items-center gap-3 bg-[#031326]/80 border border-[#818cf8]/40 backdrop-blur-md rounded-xl p-2.5">
+            <div className="flex items-center gap-3 bg-[#031326]/95 border border-[#818cf8]/40 backdrop-blur-md rounded-xl p-2.5">
               <div className="w-7 h-7 rounded-lg bg-[#6366f1]/20 flex items-center justify-center text-[#a5b4fc]">
                 <Database className="w-3.5 h-3.5" />
               </div>
               <div>
-                <p className="text-[10px] font-mono text-slate-300 font-bold">DIGITAL SOLUTIONS</p>
-                <p className="text-xs font-bold text-white">24/7 scalable</p>
+                <p className="text-[10px] font-mono text-slate-300 font-bold">PRODUCT ENGINEERING</p>
+                <p className="text-xs font-bold text-white">Full-stack products</p>
               </div>
             </div>
           </div>

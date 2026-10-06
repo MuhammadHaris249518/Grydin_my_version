@@ -11,6 +11,7 @@ export interface PageHeroProps {
   actions?: ReactNode;
   image?: string;
   slot?: ReactNode;
+  showSlotOnMobile?: boolean;
 }
 
 export function PageHero({
@@ -20,6 +21,7 @@ export function PageHero({
   breadcrumbs,
   actions,
   slot,
+  showSlotOnMobile = false,
 }: PageHeroProps) {
   return (
     <section className="relative w-full overflow-hidden min-h-[320px] md:min-h-[380px] flex items-center border-b border-surface-line">
@@ -59,7 +61,13 @@ export function PageHero({
           </div>
 
           {slot && (
-            <div className="hidden lg:block lg:col-span-5">
+            <div
+              className={
+                showSlotOnMobile
+                  ? "lg:col-span-5"
+                  : "hidden lg:block lg:col-span-5"
+              }
+            >
               <Reveal delay={0.15}>
                 {slot}
               </Reveal>

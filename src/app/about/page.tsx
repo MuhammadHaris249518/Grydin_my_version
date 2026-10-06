@@ -1,7 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  Bot,
+  Building2,
+  Eye,
+  GitBranch,
+  Workflow,
+} from "lucide-react";
 import { PageHero } from "@/app/globalscope/ui/PageHero";
 import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -66,6 +74,76 @@ export default function AboutPage() {
         title="We build systems that close the gaps in your business."
         subtitle="Work often gets lost between tools, teams, and decisions. We find those gaps and build technology around how your team actually works."
         breadcrumbs={breadcrumbs}
+        showSlotOnMobile
+        slot={
+          <div className="relative mx-auto w-full max-w-[540px]">
+            <div className="pointer-events-none absolute -inset-6 rounded-[2rem] bg-accent/20 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[radial-gradient(circle_at_85%_5%,rgba(0,207,194,0.24),transparent_32%),linear-gradient(145deg,#071829,#0b293e_58%,#063a45)] p-5 text-white shadow-[0_28px_80px_-32px_rgba(0,91,105,0.7)] sm:p-7">
+              <div className="pointer-events-none absolute -right-16 -top-20 h-52 w-52 rounded-full border border-teal-glow/20" />
+              <div className="pointer-events-none absolute -right-8 -top-12 h-36 w-36 rounded-full border border-teal-glow/15" />
+
+              <div className="relative flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-teal-glow">
+                    The work between the work
+                  </p>
+                  <h2 className="mt-2 text-xl font-semibold tracking-tight sm:text-2xl">
+                    Make the unseen visible.
+                  </h2>
+                </div>
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-teal-glow/20 bg-teal-glow/10 text-teal-glow">
+                  <Eye className="h-5 w-5" />
+                </span>
+              </div>
+
+              <div className="relative mt-6 space-y-2.5">
+                {[
+                  { icon: GitBranch, label: "Tools", detail: "Disconnected systems" },
+                  { icon: Building2, label: "Teams", detail: "Manual handoffs" },
+                  { icon: Workflow, label: "Decisions", detail: "Work that gets missed" },
+                ].map(({ icon: Icon, label, detail }, index) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.045] px-3.5 py-3 transition-colors hover:border-teal-glow/25 hover:bg-white/[0.07] sm:px-4"
+                  >
+                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-teal-glow/10 text-teal-glow">
+                      <Icon className="h-[18px] w-[18px]" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold">{label}</span>
+                      <span className="mt-0.5 block truncate text-xs text-white/65 sm:text-sm">
+                        {detail}
+                      </span>
+                    </span>
+                    <ArrowDownRight
+                      className={
+                        index === 2
+                          ? "h-4 w-4 shrink-0 text-teal-glow opacity-0"
+                          : "h-4 w-4 shrink-0 text-teal-glow"
+                      }
+                      aria-hidden="true"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="relative mt-3 flex items-center gap-3 rounded-xl border border-teal-glow/30 bg-accent px-3.5 py-3.5 shadow-[0_14px_36px_-18px_rgba(0,205,190,0.9)] sm:px-4">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white/15 text-white">
+                  <Bot className="h-[18px] w-[18px]" />
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="block text-sm font-semibold">
+                    A system built for your process
+                  </span>
+                  <span className="mt-0.5 block text-xs text-white/80">
+                    AI · Automation · Software
+                  </span>
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+        }
       />
 
       <section className="border-b border-surface-line bg-surface-soft py-16 md:py-20">

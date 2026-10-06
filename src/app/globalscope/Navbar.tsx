@@ -61,7 +61,7 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden lg:flex items-center gap-5 xl:gap-7"
+            className="hidden lg:flex flex-1 items-center justify-center gap-8 xl:gap-12 2xl:gap-14"
             aria-label="Main navigation"
           >
             {NAV_LINKS.map((link) => {

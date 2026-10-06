@@ -67,8 +67,8 @@ export const CollabsMarquee = ({ background = "#020b18" }: { background?: string
     aria-label="Partner logos"
     className="shrink-0 w-full select-none"
     style={{
-      background,
-      borderTop: "1px solid rgba(255,255,255,0.08)",
+      background: `linear-gradient(180deg, #030e1f 0%, ${background} 100%)`,
+      borderTop: "1px solid rgba(0,194,203,0.3)",
       borderBottom: "1px solid rgba(255,255,255,0.08)",
       paddingTop: "clamp(0.45rem, 0.85vh, 0.65rem)",
       paddingBottom: "clamp(0.5rem, 0.95vh, 0.75rem)",

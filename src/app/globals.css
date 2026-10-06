@@ -275,55 +275,6 @@ html {
   animation: blink 0.9s steps(2, end) infinite;
 }
 
-.home-hero-orbit-logo {
-  position: absolute;
-  left: 63.5%;
-  top: 29%;
-  z-index: 20;
-  width: clamp(4.25rem, 6vw, 6.5rem);
-  aspect-ratio: 1;
-  align-items: center;
-  justify-content: center;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.home-hero-orbit-logo::before {
-  position: absolute;
-  inset: 15%;
-  content: "";
-  border: 1px solid rgba(125, 240, 255, 0.46);
-  border-right-color: rgba(0, 229, 255, 0.9);
-  border-radius: 50%;
-  box-shadow: 0 0 16px rgba(0, 194, 203, 0.34), inset 0 0 14px rgba(56, 189, 248, 0.18);
-  transform: rotateX(58deg) rotateZ(-24deg);
-}
-
-.home-hero-orbit-halo {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(19, 120, 210, 0.78) 0 20%, rgba(28, 128, 224, 0.43) 42%, rgba(18, 103, 194, 0.08) 72%, transparent 78%);
-  filter: blur(5px);
-}
-
-.home-hero-orbit-glyph {
-  position: relative;
-  z-index: 1;
-  width: 43%;
-  height: 48%;
-  overflow: visible;
-  fill: #b8ffff;
-  filter: drop-shadow(0 0 5px rgba(0, 245, 255, 0.95)) drop-shadow(0 0 14px rgba(0, 194, 203, 0.9));
-  transform-origin: center;
-  animation: homeHeroMarkSpin 22s linear infinite;
-}
-
-@keyframes homeHeroMarkSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
 @layer components {
   /* Light glassmorphism — used on white/soft sections */
   .glass {

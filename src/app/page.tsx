@@ -63,15 +63,6 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Rotating G mark stays centered on the holographic globe. */}
-      <div aria-hidden="true" className="home-hero-orbit-logo hidden md:flex">
-        <span className="home-hero-orbit-halo" />
-        <svg viewBox="0 0 132.5 145" className="home-hero-orbit-glyph">
-          <path d="M66.354,25.354l26.286,26.286c0.197,0.197,0.518,0.19,0.706-.015l11.757-12.784c0.176-.191.172-.486-.009-.672L68.144.148C68.052.053,67.925,0,67.793,0h-2.848c-.13,0-.255.052-.347.144L.143,64.857C.051,64.949,0,65.073,0,65.202v13.456c0,.128.05.251.14.343l64.716,65.853c.092.094.218.146.349.146h2.897c.133,0,.26-.054.352-.15l33.409-34.708c.088-.091.137-.213.137-.34l-.023-20.266c-.001-1.224-1.461-1.857-2.356-1.023l-31.48,29.355c-.091.084-.21.131-.334.131h-2.601c-.132,0-.258-.053-.35-.147l-42.717-43.71C22.05,74.051,22,73.928,22,73.801v-2.604c0-.126.049-.247.136-.338l43.519-45.497c.189-.199.505-.202.699-.008z" />
-          <path d="M66.5,63.5v20h43v17.775c0,1.146,1.407,1.695,2.183.852l20.407-22.181c.264-.287.41-.662.41-1.052V63.95c0-.249-.202-.45-.45-.45H66.5z" />
-        </svg>
-      </div>
-
       {/* Sleek Glowing Cyber Wave & Tech Grid Pattern at bottom-left */}
       <div className="absolute bottom-0 left-0 w-full sm:w-[580px] lg:w-[750px] h-28 sm:h-36 lg:h-44 pointer-events-none z-15 overflow-hidden">
         <svg
@@ -283,7 +274,7 @@ export default function Home() {
 
       <main className="w-full overflow-x-hidden bg-surface">
         {/* 1. Hero & Brands First-Fold Landing Unit (Exactly 100% Viewport Height on first sight) */}
-        <div className="relative w-full h-[calc(100vh-66px)] sm:h-[calc(100vh-68px)] min-h-[460px] max-h-[960px] flex flex-col justify-between bg-[#030e1f] overflow-hidden">
+        <div className="relative w-full h-[calc(100vh-66px)] sm:h-[calc(100vh-68px)] min-h-[460px] grid grid-rows-[minmax(0,1fr)_auto] bg-[#030e1f] overflow-hidden">
           <HeroSection />
           <CollabsMarquee background="#020b18" />
         </div>

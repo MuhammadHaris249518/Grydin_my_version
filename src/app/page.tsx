@@ -34,7 +34,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="relative w-full flex-1 flex items-center overflow-hidden bg-[#030e1f] min-h-0"
+      className="relative w-full min-h-[calc(100vh-66px)] sm:min-h-[calc(100vh-68px)] flex items-center overflow-hidden bg-[#030e1f]"
     >
       {/* Background Image of the Corporate Meeting Room with Holographic Grydin Globe */}
       <div
@@ -182,7 +182,7 @@ const HeroSection = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-3 sm:py-5 lg:py-6 my-auto">
+      <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-12 lg:py-16 my-auto">
         <div className="max-w-xl lg:max-w-2xl text-left">
           {/* Eyebrow Kicker */}
           <div className="inline-flex items-center gap-2.5 mb-2.5 sm:mb-3.5">
@@ -282,11 +282,11 @@ export default function Home() {
       <JsonLd data={professionalServiceJsonLd()} />
 
       <main className="w-full overflow-x-hidden bg-surface">
-        {/* 1. Hero & Brands First-Fold Landing Unit (Exactly 100% Viewport Height on first sight) */}
-        <div className="relative w-full h-[calc(100vh-66px)] sm:h-[calc(100vh-68px)] min-h-[460px] max-h-[960px] flex flex-col justify-between bg-[#030e1f] overflow-hidden">
-          <HeroSection />
-          <CollabsMarquee background="#020b18" />
-        </div>
+        {/* 1. Hero Section - Full Viewport View */}
+        <HeroSection />
+
+        {/* 2. Client & Partner Brands Marquee - Revealed upon scrolling down */}
+        <CollabsMarquee background="#020b18" />
 
         {/* 2. Core Capabilities & Solutions for Every Stage */}
         <HomeServices />

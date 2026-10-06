@@ -10,15 +10,15 @@ const WHITE_EDGE_FILTER = [
 ].join(" ");
 
 const COLLAB_LOGOS = [
-  { src: "/collabs/1-kimball-law.webp", alt: "Kimball Law", height: 22 },
-  { src: "/collabs/2-gps-renting.webp", alt: "GPS Renting", height: 24 },
-  { src: "/collabs/3-solas-scotland-ai.webp", alt: "Solas Scotland AI", height: 26, whiteEdge: true },
-  { src: "/collabs/4-chaos.webp", alt: "Chaos", height: 28 },
-  { src: "/collabs/5-petcon-australia.webp", alt: "Petcon Australia", height: 28 },
-  { src: "/collabs/6-sevenleaps.webp", alt: "Sevenleaps", height: 26 },
-  { src: "/collabs/7-shape-shifters-fitness.webp", alt: "Shape Shifters Fitness", height: 26 },
-  { src: "/collabs/8-mazrex-store.webp", alt: "Mazrex Store", height: 28 },
-  { src: "/collabs/9-top-energy.webp", alt: "Top Energy", height: 26, whiteEdge: true },
+  { src: "/collabs/1-kimball-law.webp", alt: "Kimball Law", height: 32 },
+  { src: "/collabs/2-gps-renting.webp", alt: "GPS Renting", height: 34 },
+  { src: "/collabs/3-solas-scotland-ai.webp", alt: "Solas Scotland AI", height: 36, whiteEdge: true },
+  { src: "/collabs/4-chaos.webp", alt: "Chaos", height: 40 },
+  { src: "/collabs/5-petcon-australia.webp", alt: "Petcon Australia", height: 40 },
+  { src: "/collabs/6-sevenleaps.webp", alt: "Sevenleaps", height: 36 },
+  { src: "/collabs/7-shape-shifters-fitness.webp", alt: "Shape Shifters Fitness", height: 36 },
+  { src: "/collabs/8-mazrex-store.webp", alt: "Mazrex Store", height: 40 },
+  { src: "/collabs/9-top-energy.webp", alt: "Top Energy", height: 36, whiteEdge: true },
 ] as const;
 
 const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
@@ -27,9 +27,9 @@ const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
     style={{
       display: "flex",
       alignItems: "center",
-      gap: "clamp(2.5rem, 5vw, 4.5rem)",
+      gap: "clamp(3rem, 5.5vw, 5rem)",
       flexShrink: 0,
-      paddingRight: "clamp(2.5rem, 5vw, 4.5rem)",
+      paddingRight: "clamp(3rem, 5.5vw, 5rem)",
     }}
   >
     {COLLAB_LOGOS.map((logo) => (
@@ -50,9 +50,9 @@ const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (
           style={{
             height: "100%",
             width: "auto",
-            maxWidth: "clamp(70px, 11vw, 140px)",
+            maxWidth: "clamp(85px, 13vw, 160px)",
             objectFit: "contain",
-            opacity: 0.85,
+            opacity: 0.88,
             filter: "whiteEdge" in logo && logo.whiteEdge ? WHITE_EDGE_FILTER : "brightness(1.05)",
             userSelect: "none",
           }}
@@ -70,20 +70,20 @@ export const CollabsMarquee = ({ background = "#020b18" }: { background?: string
       background,
       borderTop: "1px solid rgba(255,255,255,0.08)",
       borderBottom: "1px solid rgba(255,255,255,0.08)",
-      paddingTop: "clamp(0.45rem, 0.85vh, 0.65rem)",
-      paddingBottom: "clamp(0.5rem, 0.95vh, 0.75rem)",
+      paddingTop: "clamp(1.2rem, 2.2vh, 1.7rem)",
+      paddingBottom: "clamp(1.3rem, 2.4vh, 1.85rem)",
       overflow: "hidden",
     }}
   >
     <p
       style={{
         textAlign: "center",
-        fontSize: "clamp(0.62rem, 0.9vw, 0.72rem)",
+        fontSize: "clamp(0.7rem, 0.95vw, 0.82rem)",
         fontWeight: 700,
         letterSpacing: "0.24em",
         textTransform: "uppercase",
-        color: "rgba(255,255,255,0.85)",
-        marginBottom: "clamp(0.35rem, 0.65vh, 0.5rem)",
+        color: "rgba(255,255,255,0.88)",
+        marginBottom: "clamp(0.8rem, 1.5vh, 1.1rem)",
         padding: "0 1.5rem",
       }}
     >
@@ -96,9 +96,9 @@ export const CollabsMarquee = ({ background = "#020b18" }: { background?: string
         width: "100%",
         overflow: "hidden",
         WebkitMaskImage:
-          "linear-gradient(to right, transparent 0%, black 44%, black 56%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
         maskImage:
-          "linear-gradient(to right, transparent 0%, black 44%, black 56%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
       }}
     >
       <div

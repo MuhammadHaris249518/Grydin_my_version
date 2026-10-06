@@ -11,31 +11,10 @@ import {
   Zap,
 } from "lucide-react";
 import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
-import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import { Reveal } from "@/components/motion/Reveal";
-
-const PRINCIPLES = [
-  {
-    number: "01",
-    title: "Start with the real problem",
-    description:
-      "We learn where work gets stuck before deciding which technology belongs in the solution.",
-  },
-  {
-    number: "02",
-    title: "Fit how your team works",
-    description:
-      "Each system is shaped around your process and tools, instead of asking your team to fit a template.",
-  },
-  {
-    number: "03",
-    title: "Connect the whole workflow",
-    description:
-      "We look across tools, teams, and decisions so the answer addresses the gaps between them.",
-  },
-];
+import { OurStorySection } from "@/components/about/OurStorySection";
 
 const OFFICE_PHOTOS = [
   {
@@ -151,43 +130,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-surface-line bg-surface-soft py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-            <Reveal className="lg:col-span-5">
-              <p className="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                <span className="h-px w-8 bg-accent/60" />
-                Our story
-              </p>
-              <h2 className="text-3xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[3rem]">
-                The work no one sees can hold a business back.
-              </h2>
-            </Reveal>
-            <Reveal className="space-y-5 lg:col-span-7" delay={0.08}>
-              <p className="text-base leading-relaxed text-ink-muted sm:text-lg">
-                GrydIn grew from a simple observation: businesses lose momentum in the gaps between tools, teams, and decisions. Repeated handoffs and small manual tasks are easy to overlook, but they add friction to the work people are trying to do.
-              </p>
-              <p className="text-base leading-relaxed text-ink-muted sm:text-lg">
-                We start by understanding what is actually slowing a team down. Then we build the specific system that can help: an AI agent, a workflow automation, a custom integration, or software designed around the way that business works.
-              </p>
-              <p className="border-l-2 border-accent pl-4 text-sm font-medium leading-relaxed text-ink">
-                No templates or off-the-shelf fixes. Start with the problem, then build what fits.
-              </p>
-            </Reveal>
-          </div>
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {PRINCIPLES.map((item, index) => (
-              <Reveal key={item.number} delay={index * 0.06}>
-                <GlassCard className="h-full p-6 sm:p-7">
-                  <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">{item.number}</p>
-                  <h3 className="mt-4 text-lg font-semibold text-ink">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">{item.description}</p>
-                </GlassCard>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <OurStorySection />
+
       <section className="bg-surface py-16 md:py-20">
         <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">

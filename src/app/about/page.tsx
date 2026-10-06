@@ -102,9 +102,10 @@ export default function AboutPage() {
 
           <Reveal delay={0.12} className="relative mx-auto w-full max-w-[460px] xl:max-w-[520px] 2xl:ml-16 2xl:max-w-[560px]">
             <div className="pointer-events-none absolute -inset-8 rounded-[3rem] bg-cyan-200/15 blur-[52px]" />
-            <div className="pointer-events-none absolute -inset-y-6 -right-5 left-5 translate-x-4 rounded-[2rem] border border-cyan-300/35 bg-cyan-100/15 shadow-[8px_14px_28px_rgba(3,105,161,0.08)]" />
-            <div className="pointer-events-none absolute -inset-y-3 -right-3 left-3 translate-x-2 rounded-[2rem] border border-white/65 bg-white/25" />
-            <div className="relative overflow-hidden rounded-[1.8rem] border border-cyan-200/65 bg-[linear-gradient(145deg,#073b5d_0%,#052d4a_55%,#041f36_100%)] p-5 text-white shadow-[0_24px_56px_-34px_rgba(0,68,96,0.48),inset_0_1px_0_rgba(255,255,255,0.16)] [transform:rotate(-4deg)] sm:rounded-[2rem] sm:p-7 lg:p-8 2xl:pt-12 2xl:pb-8">
+            <div className="pointer-events-none absolute -inset-y-5 -right-7 left-7 translate-x-5 rounded-[2rem] border border-cyan-300/45 bg-[linear-gradient(145deg,rgba(224,251,255,0.34),rgba(59,190,220,0.12))] shadow-[12px_20px_32px_rgba(3,105,161,0.12)]" />
+            <div className="pointer-events-none absolute -inset-y-2 -right-3 left-3 translate-x-2 rounded-[2rem] border border-white/75 bg-[linear-gradient(145deg,rgba(255,255,255,0.55),rgba(207,244,250,0.2))] shadow-[8px_12px_22px_rgba(3,105,161,0.08)]" />
+            <div className="relative overflow-hidden rounded-[1.8rem] border border-cyan-200/65 bg-[linear-gradient(145deg,#073b5d_0%,#052d4a_55%,#041f36_100%)] p-5 text-white shadow-[0_30px_64px_-30px_rgba(0,68,96,0.55),inset_0_1px_0_rgba(255,255,255,0.2)] [transform:rotate(-3.5deg)] sm:rounded-[2rem] sm:p-7 lg:p-8 2xl:pt-12 2xl:pb-8">
+              <div className="pointer-events-none absolute -right-10 -top-12 h-52 w-52 rounded-full bg-cyan-400/10 blur-2xl" />
               
               
               <div className="relative flex items-center justify-between gap-4">
@@ -112,7 +113,8 @@ export default function AboutPage() {
                   <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-300 sm:text-xs">The work between the work</p>
                   <h2 className="mt-2 font-display text-xl font-bold tracking-[-0.035em] sm:text-2xl lg:text-[1.8rem]">Make the unseen visible.</h2>
                 </div>
-                <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-cyan-300/50 bg-cyan-400/10 text-cyan-200 sm:h-[68px] sm:w-[68px]">
+                <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-cyan-300/65 bg-cyan-400/15 text-cyan-100 shadow-[0_0_26px_rgba(34,211,238,0.22),inset_0_1px_0_rgba(255,255,255,0.22)] sm:h-[68px] sm:w-[68px]">
+                  <span className="pointer-events-none absolute -inset-3 rounded-[1.35rem] border border-cyan-300/20" />
                   <Eye className="h-7 w-7 sm:h-8 sm:w-8" />
                 </span>
               </div>

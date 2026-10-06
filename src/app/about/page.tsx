@@ -79,7 +79,7 @@ export default function AboutPage() {
               Grid the unseen
             </p>
             <h1 className="mt-6 max-w-[790px] font-display text-[clamp(3.5rem,4vw,4.5rem)] font-extrabold leading-[0.99] tracking-[-0.045em] text-ink">
-              We build systems that<br className="hidden lg:block" /> close the gaps in your<br className="hidden lg:block" /> business<span className="text-accent">.</span>
+              We build systems that<br className="hidden 2xl:block" /> close the gaps in your<br className="hidden 2xl:block" /> business<span className="text-accent">.</span>
             </h1>
             <p className="mt-6 max-w-[790px] text-base leading-relaxed text-ink-muted sm:text-lg sm:leading-[1.65]">
               Work often gets lost between tools, teams, and decisions. We find those gaps and build technology around how your team actually works.
@@ -100,7 +100,7 @@ export default function AboutPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.12} className="relative mx-auto w-full max-w-[620px] lg:ml-0 xl:translate-x-10">
+          <Reveal delay={0.12} className="relative mx-auto w-full max-w-[460px] xl:max-w-[520px] 2xl:ml-0 2xl:max-w-[620px] 2xl:translate-x-12">
             <div className="pointer-events-none absolute -inset-8 rounded-[3rem] bg-cyan-200/15 blur-[52px]" />
             <div className="pointer-events-none absolute -inset-y-6 -right-5 left-5 translate-x-4 rounded-[2rem] border border-cyan-300/35 bg-cyan-100/15 shadow-[8px_14px_28px_rgba(3,105,161,0.08)]" />
             <div className="pointer-events-none absolute -inset-y-3 -right-3 left-3 translate-x-2 rounded-[2rem] border border-white/65 bg-white/25" />

@@ -80,7 +80,7 @@ export function HomeServices() {
       </div>
 
       {/* ── PART 2: Transformed Solutions for Every Stage 3D Orbital Carousel (Expanded width for comfortable spacing) ── */}
-      <div className="relative w-full max-w-[1520px] mx-auto px-4 sm:px-6 mb-12">
+      <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-12">
         <OrbitalSolutions />
       </div>
 

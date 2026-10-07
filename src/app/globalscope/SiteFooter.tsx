@@ -26,15 +26,15 @@ export const SiteFooter = () => {
       </div>
 
       {/* Main 4-Column Footer */}
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+      <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-16 py-10 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Column 1: Brand Info (4 cols) */}
           <div className="lg:col-span-4">
             <GrydInLogo variant="footer" theme="dark" />
-            <p className="mt-4 text-sm leading-relaxed text-white/60 max-w-sm">
+            <p className="mt-3 sm:mt-4 text-sm leading-relaxed text-white/60 max-w-sm">
               {SITE.tagline}. High-reliability custom software, autonomous AI agents, and workflow automations shipped in under two weeks.
             </p>
-            <div className="mt-6 flex items-center gap-3">
+            <div className="mt-4 sm:mt-6 flex items-center gap-3">
               <a
                 href={SITE.linkedin}
                 target="_blank"
@@ -59,7 +59,7 @@ export const SiteFooter = () => {
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-teal-glow mb-5">
               Services
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="grid grid-cols-2 gap-x-3 gap-y-2 sm:flex sm:flex-col sm:gap-3">
               {SERVICE_LINKS.map((link) => (
                 <Link
                   key={link.label}
@@ -77,7 +77,7 @@ export const SiteFooter = () => {
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-teal-glow mb-5">
               Newsroom
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="grid grid-cols-2 gap-x-3 gap-y-2 sm:flex sm:flex-col sm:gap-3">
               {BLOG_LINKS.map((link) => (
                 <Link
                   key={link.label}
@@ -95,7 +95,7 @@ export const SiteFooter = () => {
             <p className="font-mono text-xs uppercase tracking-[0.18em] text-teal-glow mb-5">
               Navigation
             </p>
-            <nav className="flex flex-col gap-3">
+            <nav className="grid grid-cols-2 gap-x-3 gap-y-2 sm:flex sm:flex-col sm:gap-3">
               {SITEMAP_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -110,7 +110,7 @@ export const SiteFooter = () => {
         </div>
 
         {/* Copyright Row */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
+        <div className="mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
           <div>
             © {new Date().getFullYear()} {SITE.legalName}. All rights reserved.
           </div>

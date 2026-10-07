@@ -24,26 +24,26 @@ export function CtaBand({
   className = "",
 }: CtaBandProps) {
   return (
-    <section className={`relative overflow-hidden bg-ink py-24 md:py-32 text-white border-t border-white/10 ${className}`}>
+    <section className={`relative overflow-hidden border-t border-white/10 bg-ink py-12 text-white sm:py-24 md:py-32 ${className}`}>
       <HeroBackdrop network={false} dark={true} />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6 sm:px-10 text-center">
+      <div className="relative z-10 mx-auto max-w-5xl px-5 sm:px-10 text-center">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.22em] text-teal-glow mb-4">
             Next Steps
           </p>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-white tracking-tight leading-tight">
+          <h2 className="text-[clamp(1.65rem,7vw,2.1rem)] font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
             {title}
           </h2>
 
           {subtitle && (
-            <p className="mt-5 text-base sm:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto mt-4 max-w-2xl text-[13px] leading-relaxed text-white/70 sm:mt-5 sm:text-lg">
               {subtitle}
             </p>
           )}
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-7 flex flex-col items-stretch justify-center gap-2.5 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
             <Button
               href={buttonHref}
               variant="primary"

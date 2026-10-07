@@ -123,7 +123,7 @@ export function AutonomousProductShowcase({
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="relative w-full select-none group/showcase">
+    <div className="group/showcase relative w-full min-w-0 select-none">
       {/* ── Soft Ambient Teal Glow Behind Monitor Frame ── */}
       <div className="absolute -inset-6 sm:-inset-8 lg:-inset-12 bg-gradient-to-tr from-teal-500/20 via-cyan-500/10 to-transparent rounded-[3rem] blur-3xl -z-10 pointer-events-none" />
       <div className="absolute -inset-1 rounded-[2.5rem] bg-gradient-to-b from-teal-500/15 via-transparent to-slate-900/10 blur-xs -z-10 pointer-events-none" />
@@ -131,7 +131,7 @@ export function AutonomousProductShowcase({
       {/* ── Outer Monitor Bezel Frame (Hardware Console Window) ── */}
       <div
         ref={containerRef}
-        className="relative rounded-2xl sm:rounded-[2.2rem] bg-[#0c1322] border border-slate-800/90 shadow-[0_30px_70px_-15px_rgba(2,6,23,0.55),0_0_40px_-15px_rgba(13,139,153,0.25)] overflow-hidden flex flex-col text-slate-100"
+        className="relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-slate-800/90 bg-[#0c1322] text-slate-100 shadow-[0_30px_70px_-15px_rgba(2,6,23,0.55),0_0_40px_-15px_rgba(13,139,153,0.25)] sm:rounded-[2.2rem]"
       >
         {/* ── Sleek Console Window Header Bar ── */}
         <div className="flex items-center justify-between px-4 sm:px-5 py-2.5 bg-[#090f1d] border-b border-slate-800/80">
@@ -154,7 +154,7 @@ export function AutonomousProductShowcase({
         </div>
 
         {/* ── Screen Main Viewport Area ── */}
-        <div className="relative aspect-[16/10.5] min-h-[360px] sm:min-h-[420px] md:min-h-[460px] w-full bg-[#0c1322] overflow-hidden flex items-center justify-center">
+        <div className="relative aspect-video min-h-[220px] w-full min-w-0 overflow-hidden bg-[#0c1322] sm:aspect-[16/10.5] sm:min-h-[360px] md:min-h-[460px]">
           {/* Active Playing Video Layer */}
           <video
             ref={videoRef}
@@ -183,12 +183,12 @@ export function AutonomousProductShowcase({
 
           {/* ── Orchestration Console UI (Displayed when video loading or as fallback) ── */}
           <div
-            className={`w-full h-full flex flex-row overflow-hidden transition-opacity duration-300 ${
+            className={`flex h-full w-full min-w-0 flex-row overflow-hidden transition-opacity duration-300 ${
               hasLoaded || isPlaying ? "opacity-0 pointer-events-none" : "opacity-100 z-0"
             }`}
           >
             {/* Left Sidebar (Dark Navy #0c1322) */}
-            <div className="w-28 sm:w-36 md:w-44 bg-[#0a101d] border-r border-slate-800/80 p-2.5 sm:p-3.5 flex flex-col justify-between shrink-0">
+            <div className="hidden w-28 shrink-0 flex-col justify-between border-r border-slate-800/80 bg-[#0a101d] p-2.5 sm:flex sm:w-36 sm:p-3.5 md:w-44">
               <div>
                 {/* GrydIn Logo */}
                 <div className="flex items-center gap-1.5 sm:gap-2 mb-4 sm:mb-6 px-1">
@@ -233,7 +233,7 @@ export function AutonomousProductShowcase({
             </div>
 
             {/* Main Console Canvas (Clean White/Slate Surface #f8fafc) */}
-            <div className="flex-1 bg-[#f8fafc] text-slate-900 p-3 sm:p-4 md:p-5 flex flex-col justify-between overflow-hidden">
+            <div className="flex min-w-0 flex-1 flex-col justify-between overflow-hidden bg-[#f8fafc] p-2.5 text-slate-900 sm:p-4 md:p-5">
               {/* Header Row */}
               <div className="flex items-center justify-between pb-2 border-b border-slate-200/70">
                 <div>
@@ -259,7 +259,7 @@ export function AutonomousProductShowcase({
               </div>
 
               {/* 4 Stat Cards Row */}
-              <div className="grid grid-cols-4 gap-2 sm:gap-3 my-2.5 sm:my-3">
+              <div className="my-2 grid grid-cols-2 gap-1.5 sm:my-3 sm:grid-cols-4 sm:gap-3">
                 <div className="bg-white rounded-lg sm:rounded-xl p-2 sm:p-2.5 border border-slate-200/80 shadow-xs flex items-center gap-2">
                   <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                     <User className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -304,14 +304,14 @@ export function AutonomousProductShowcase({
               </div>
 
               {/* Lower Section: Recent Activity (Left) + Live Logs (Right) */}
-              <div className="grid grid-cols-12 gap-2.5 sm:gap-3 flex-1 overflow-hidden">
+              <div className="grid min-w-0 flex-1 grid-cols-1 gap-2.5 overflow-hidden sm:grid-cols-12 sm:gap-3">
                 {/* Recent Activity */}
-                <div className="col-span-7 flex flex-col justify-between">
+                <div className="flex min-w-0 flex-col justify-between sm:col-span-7">
                   <span className="font-bold text-[10px] sm:text-xs text-slate-800 mb-1 block">
                     Recent Activity
                   </span>
                   <div className="space-y-1.5 text-[9px] sm:text-[10px]">
-                    <div className="bg-white rounded-lg p-1.5 sm:p-2 border border-slate-200/70 flex items-center justify-between shadow-2xs">
+                    <div className="flex min-w-0 items-center justify-between rounded-lg border border-slate-200/70 bg-white p-1.5 shadow-2xs sm:p-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
                           <Zap className="w-2.5 h-2.5" />
@@ -326,7 +326,7 @@ export function AutonomousProductShowcase({
                       </span>
                     </div>
 
-                    <div className="bg-white rounded-lg p-1.5 sm:p-2 border border-slate-200/70 flex items-center justify-between shadow-2xs">
+                    <div className="flex min-w-0 items-center justify-between rounded-lg border border-slate-200/70 bg-white p-1.5 shadow-2xs sm:p-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="w-4 h-4 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
                           <Database className="w-2.5 h-2.5" />
@@ -341,7 +341,7 @@ export function AutonomousProductShowcase({
                       </span>
                     </div>
 
-                    <div className="bg-white rounded-lg p-1.5 sm:p-2 border border-slate-200/70 flex items-center justify-between shadow-2xs">
+                    <div className="flex min-w-0 items-center justify-between rounded-lg border border-slate-200/70 bg-white p-1.5 shadow-2xs sm:p-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="w-4 h-4 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center shrink-0">
                           <CheckCircle2 className="w-2.5 h-2.5" />
@@ -356,7 +356,7 @@ export function AutonomousProductShowcase({
                       </span>
                     </div>
 
-                    <div className="bg-white rounded-lg p-1.5 sm:p-2 border border-slate-200/70 flex items-center justify-between shadow-2xs">
+                    <div className="flex min-w-0 items-center justify-between rounded-lg border border-slate-200/70 bg-white p-1.5 shadow-2xs sm:p-2">
                       <div className="flex items-center gap-2 min-w-0">
                         <span className="w-4 h-4 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center shrink-0">
                           <RefreshCw className="w-2.5 h-2.5" />
@@ -374,7 +374,7 @@ export function AutonomousProductShowcase({
                 </div>
 
                 {/* Right: Live Logs Box */}
-                <div className="col-span-5 flex flex-col justify-between">
+                <div className="hidden min-w-0 flex-col justify-between sm:col-span-5 sm:flex">
                   <span className="font-bold text-[10px] sm:text-xs text-slate-800 mb-1 block">
                     Live Logs
                   </span>
@@ -454,9 +454,9 @@ export function AutonomousProductShowcase({
       </div>
 
       {/* ── Bottom Section Caption & Tags (Outside the Bezel - Matching Mockup) ── */}
-      <div className="mt-4 sm:mt-5 flex flex-col sm:flex-row items-center justify-between gap-3 px-1 text-xs">
+      <div className="mt-3 flex min-w-0 flex-col items-stretch justify-between gap-3 px-1 text-xs sm:mt-5 sm:flex-row sm:items-center">
         {/* Left: ● LIVE EXECUTION | Agents coordinating tools in real time */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex min-w-0 flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:justify-start">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-500" />
@@ -465,13 +465,13 @@ export function AutonomousProductShowcase({
             LIVE EXECUTION
           </span>
           <span className="text-slate-300 hidden sm:inline">|</span>
-          <span className="text-slate-600 font-medium text-[11px] sm:text-xs">
+          <span className="text-center text-[11px] font-medium text-slate-600 sm:text-left sm:text-xs">
             Agents coordinating tools in real time
           </span>
         </div>
 
         {/* Right: Three Pills [ Real execution ] [ Live logs ] [ No narration ] */}
-        <div className="flex items-center gap-2">
+        <div className="flex min-w-0 flex-wrap items-center justify-center gap-2 sm:justify-end">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-teal-50/90 text-teal-800 border border-teal-200/90 shadow-2xs hover:bg-teal-100/80 transition-colors">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-600" />
             Real execution

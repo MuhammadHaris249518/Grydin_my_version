@@ -45,15 +45,15 @@ export default function SolutionsHubPage() {
       {/* 3. Client Case Studies & Production Deployments Section */}
       <section
         id="client-projects"
-        className="relative bg-slate-50/60 py-20 md:py-28 border-b border-slate-200/80"
+        className="relative bg-slate-50/60 py-14 sm:py-20 md:py-28 border-b border-slate-200/80"
       >
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Client Case Studies"
             title="Recent production deployments"
             accent="production deployments"
             intro="Fixed-scope systems, autonomous agents, and workflow automations deployed for real teams worldwide."
-            className="mb-12"
+            className="mb-8 sm:mb-12"
           />
           <ProjectFilterGrid
             projects={PROJECTS}
@@ -65,15 +65,15 @@ export default function SolutionsHubPage() {
       {/* 4. Proprietary Products & In-House Tooling Section */}
       <section
         id="proprietary-products"
-        className="relative bg-white py-20 md:py-28"
+        className="relative bg-white py-14 sm:py-20 md:py-28"
       >
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
           <SectionHeader
             eyebrow="Proprietary Tools & Engines"
             title="Software incubated at GrydIn"
             accent="incubated at GrydIn"
             intro="Enterprise tooling and autonomous workflow engines built in-house to solve recurring operational bottlenecks."
-            className="mb-12"
+            className="mb-8 sm:mb-12"
           />
           <ProductFilterGrid
             products={PRODUCTS}

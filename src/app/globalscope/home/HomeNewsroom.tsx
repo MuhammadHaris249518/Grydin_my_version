@@ -69,7 +69,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
   ];
 
   return (
-    <section id="newsroom" className="relative w-full bg-[#EDF8F7] py-16 md:py-24 border-b border-teal-100/70 overflow-hidden">
+    <section id="newsroom" className="relative w-full overflow-hidden border-b border-teal-100/70 bg-[#EDF8F7] py-12 sm:py-16 md:py-24">
       {/* Top Left Background Accent Grid Dots */}
       <div className="absolute top-6 left-6 opacity-20 pointer-events-none hidden sm:block">
         <div className="grid grid-cols-4 gap-2">
@@ -79,19 +79,19 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
         </div>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
         {/* Header Block with Top-Right Handwritten Annotation */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+        <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 md:flex-row md:items-end md:gap-6">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
               <span className="text-teal-500">──→</span>
               LATEST INSIGHTS
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-slate-900 tracking-tight leading-tight mb-3">
+            <h2 className="mb-2 text-[clamp(1.65rem,7vw,2rem)] font-extrabold leading-tight tracking-tight text-slate-900 sm:mb-3 sm:text-4xl lg:text-[2.75rem]">
               Engineering perspectives &{" "}
               <span className="text-teal-600">company updates</span>
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed font-normal">
+            <p className="max-w-3xl text-[13px] font-normal leading-relaxed text-slate-600 sm:text-base">
               Thoughts, tutorials, and updates from our team on AI, cloud, and modern engineering — straight from the trenches.
             </p>
           </div>
@@ -107,7 +107,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
         </div>
 
         {/* Filter Tabs Bar */}
-        <div className="flex flex-wrap items-center gap-2 mb-8 border-b border-teal-200/60 pb-6">
+        <div className="-mx-5 mb-6 flex snap-x snap-mandatory items-center gap-2 overflow-x-auto border-b border-teal-200/60 px-5 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mb-8 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-6">
           {CATEGORIES.map((cat) => {
             const Icon = cat.icon;
             const isActive = activeCategory === cat.id;
@@ -115,7 +115,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold tracking-tight transition-all duration-200 ${
+                className={`inline-flex shrink-0 items-center gap-2 rounded-full px-3.5 py-2 text-xs font-semibold tracking-tight transition-all duration-200 sm:px-4 ${
                   isActive
                     ? "bg-[#0D8B99] text-white shadow-sm"
                     : "bg-white/80 text-slate-700 hover:bg-white border border-slate-200/80 hover:border-teal-300"
@@ -129,14 +129,14 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
         </div>
 
         {/* Main Grid Section */}
-        <div className="grid gap-6 lg:grid-cols-12 mb-10">
+        <div className="mb-8 grid min-w-0 gap-4 sm:gap-6 lg:mb-10 lg:grid-cols-12">
           {/* Left Big Featured Card (7 cols) */}
-          <Reveal className="lg:col-span-7">
+          <Reveal className="min-w-0 lg:col-span-7">
             <div className="group block h-full">
-              <div className="flex h-full flex-col justify-between rounded-3xl p-6 sm:p-8 bg-[#E3F5F2] border border-teal-200/90 shadow-sm hover:shadow-md transition-all">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              <div className="flex h-full flex-col justify-between rounded-3xl border border-teal-200/90 bg-[#E3F5F2] p-4 shadow-sm transition-all hover:shadow-md sm:p-8">
+                <div className="grid min-w-0 grid-cols-1 items-center gap-4 sm:gap-6 md:grid-cols-12">
                   {/* Left Text Info (7 cols) */}
-                  <div className="md:col-span-7 flex flex-col justify-between h-full">
+                  <div className="flex h-full min-w-0 flex-col justify-between md:col-span-7">
                     <div>
                       <div className="flex items-center gap-3 flex-wrap mb-4">
                         <span className="rounded-md bg-[#0D8B99] text-white px-3 py-1 font-bold text-xs">
@@ -173,7 +173,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
                   </div>
 
                   {/* Right Image Graphic (5 cols) */}
-                  <div className="md:col-span-5 relative h-52 md:h-64 rounded-2xl overflow-hidden shadow-inner border border-teal-200/60">
+                  <div className="relative h-44 overflow-hidden rounded-2xl border border-teal-200/60 shadow-inner sm:h-52 md:col-span-5 md:h-64">
                     <Image
                       src={featuredPost.image}
                       alt={featuredPost.title}
@@ -187,12 +187,12 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
           </Reveal>
 
           {/* Right Column: 2 Stacked Compact Post Cards (5 cols) */}
-          <div className="flex flex-col gap-6 lg:col-span-5">
+          <div className="-mx-5 flex min-w-0 snap-x snap-mandatory flex-row gap-3 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:gap-4 sm:px-0 lg:col-span-5 lg:flex-col lg:overflow-visible lg:pb-0">
             {sidePosts.map((post, idx) => (
-              <Reveal key={post.title} delay={0.1 * (idx + 1)}>
+              <Reveal key={post.title} delay={0.1 * (idx + 1)} className="w-[84%] max-w-[360px] shrink-0 snap-start sm:w-[70%] lg:w-auto lg:max-w-none lg:shrink">
                 <div className="group block h-full">
-                  <div className="flex flex-col sm:flex-row h-full justify-between rounded-2xl p-5 bg-white border border-slate-200/90 shadow-sm hover:shadow-md transition-all gap-4">
-                    <div className="flex-1 flex flex-col justify-between">
+                  <div className="flex h-full flex-col justify-between gap-3 rounded-2xl border border-slate-200/90 bg-white p-4 shadow-sm transition-all hover:shadow-md sm:gap-4 sm:p-5 lg:flex-row">
+                    <div className="flex min-w-0 flex-1 flex-col justify-between">
                       <div>
                         <div className="flex items-center gap-2.5 flex-wrap mb-2">
                           <span className="rounded-md bg-sky-100 text-sky-800 border border-sky-200 px-2.5 py-0.5 font-bold text-[11px]">
@@ -227,7 +227,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
                     </div>
 
                     {/* Compact Right Image Thumbnail */}
-                    <div className="relative w-full sm:w-36 h-28 rounded-xl overflow-hidden shrink-0 border border-slate-200/70 shadow-xs">
+                    <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-xl border border-slate-200/70 shadow-xs sm:h-28 sm:w-36">
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -243,16 +243,16 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
         </div>
 
         {/* Bottom Footer Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-4 border-t border-teal-200/60">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 mr-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 pt-4 border-t border-teal-200/60">
+          <div className="flex w-full min-w-0 items-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:w-auto sm:flex-wrap sm:overflow-visible sm:pb-0">
+            <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-slate-500 mr-1 sm:mr-2">
               EXPLORE TOPICS ──
             </span>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`rounded-full px-3.5 py-1 text-xs font-semibold transition-colors ${
+                className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                   activeCategory === cat.id
                     ? "bg-[#0D8B99] text-white"
                     : "bg-white border border-slate-200 text-slate-600 hover:text-teal-700 hover:border-teal-300"

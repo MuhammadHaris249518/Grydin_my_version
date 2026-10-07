@@ -14,7 +14,6 @@ import {
   CheckCircle2,
   ArrowRight,
   Sparkles,
-  ArrowDown,
   Cpu,
   Workflow,
   Bot,
@@ -587,9 +586,9 @@ export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-surface text-ink selection:bg-accent selection:text-white">
       {/* ── 1. Hero Section with 3D RobotStage ── */}
-      <section className="relative overflow-hidden bg-slate-50/70 border-b border-slate-200/80 pb-20 pt-12 md:pb-24 md:pt-16">
+      <section className="relative overflow-hidden border-b border-slate-200/80 bg-slate-50/70 pb-14 pt-10 sm:pb-20 sm:pt-12 md:pb-24 md:pt-16">
         <HeroBackdrop network={false} />
-        <div className="relative z-10 mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
           <div className="mx-auto max-w-4xl text-center">
             {/* Eyebrow Badge */}
             <div className="flex justify-center mb-6">
@@ -600,7 +599,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Main Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-6">
+            <h1 className="mb-4 text-[clamp(1.8rem,8vw,2.4rem)] font-extrabold leading-[1.12] tracking-tight text-slate-900 sm:mb-6 sm:text-5xl lg:text-6xl">
               Engineering next-gen <br />
               <span className="text-teal-600">
                 AI & enterprise software
@@ -609,15 +608,15 @@ export default function ServicesPage() {
             </h1>
 
             {/* Subtitle Description */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-2xl mx-auto mb-8">
+            <p className="mx-auto mb-6 max-w-2xl text-[14px] font-normal leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
               We build autonomous AI systems, custom software and cloud platforms that automate complex business operations — helping you scale faster, work smarter and stay ahead.
             </p>
 
             {/* Hero CTAs */}
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md shadow-teal-600/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2 rounded-lg bg-teal-600 px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-md shadow-teal-600/20 transition-all hover:-translate-y-0.5 hover:bg-teal-700 hover:shadow-lg active:translate-y-0 sm:gap-2.5 sm:px-6 sm:py-3.5 sm:text-sm"
               >
                 BOOK A FREE PROCESS DIAGNOSIS
                 <ArrowRight size={16} strokeWidth={2.2} />
@@ -625,7 +624,7 @@ export default function ServicesPage() {
 
               <a
                 href="#capabilities"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-bold uppercase tracking-wider border border-slate-300 rounded-lg shadow-xs transition-all hover:border-slate-400"
+                className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-800 shadow-xs transition-all hover:border-slate-400 hover:bg-slate-50 sm:gap-2.5 sm:px-6 sm:py-3.5 sm:text-sm"
               >
                 EXPLORE CAPABILITIES
                 <ArrowRight size={16} strokeWidth={2} />
@@ -638,8 +637,8 @@ export default function ServicesPage() {
           </div>
 
           {/* Connected Feature Cards (4-Grid Bottom Section) */}
-          <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-10 border-t border-slate-200/80">
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+          <div className="mt-10 grid grid-cols-2 gap-2.5 border-t border-slate-200/80 pt-6 sm:mt-16 sm:grid-cols-2 sm:gap-6 sm:pt-10 md:grid-cols-4">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
               <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
                 <Clock className="w-5 h-5" strokeWidth={2} />
               </div>
@@ -654,7 +653,7 @@ export default function ServicesPage() {
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
               <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
                 <ShieldCheck className="w-5 h-5" strokeWidth={2} />
               </div>
@@ -669,7 +668,7 @@ export default function ServicesPage() {
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
               <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
                 <Box className="w-5 h-5" strokeWidth={2} />
               </div>
@@ -684,7 +683,7 @@ export default function ServicesPage() {
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
               <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
                 <Target className="w-5 h-5" strokeWidth={2} />
               </div>
@@ -703,15 +702,15 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 2. Core Capabilities / Services Explorer ── */}
-      <section id="capabilities" className="py-16 sm:py-24 relative bg-slate-50/50 border-b border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <section id="capabilities" className="relative border-b border-slate-200/80 bg-slate-50/50 py-14 sm:py-24">
+        <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-12">
           {/* Section Header */}
-          <div className="max-w-3xl mb-12">
+          <div className="mb-8 max-w-3xl sm:mb-12">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
               <span className="text-teal-500 font-bold">──</span>
               WHAT WE BUILD
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+            <h2 className="mb-3 text-[clamp(1.65rem,7vw,2rem)] font-extrabold leading-tight tracking-tight text-slate-900 sm:mb-4 sm:text-4xl lg:text-5xl">
               Our <span className="text-teal-600">Services</span>
             </h2>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
@@ -720,7 +719,7 @@ export default function ServicesPage() {
           </div>
 
           {/* 2-Column Split Interactive Component */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-12">
             {/* Left Column: 6 Vertical Tabs + Redesigned GrydIn Guarantee Card (lg:col-span-5) */}
             <div className="lg:col-span-5 flex flex-col gap-3.5">
               <div className="flex flex-col gap-3">
@@ -805,7 +804,7 @@ export default function ServicesPage() {
               {(() => {
                 const current = SERVICES_TAB_DATA[activeServiceTab] || SERVICES_TAB_DATA[0];
                 return (
-                  <div className="bg-[#EBF7F5] border border-teal-200/90 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-sm relative overflow-hidden flex flex-col justify-between h-full min-h-[520px]">
+                  <div className="relative flex h-full min-h-[360px] flex-col justify-between overflow-hidden rounded-3xl border border-teal-200/90 bg-[#EBF7F5] p-4 shadow-sm sm:min-h-[520px] sm:p-8 lg:p-10">
                     {/* Top Row: Badge & Graphic Bubble */}
                     <div className="flex items-start justify-between gap-4 mb-4">
                       <div className="inline-flex items-center gap-2 bg-white/90 border border-teal-200/90 text-teal-800 text-xs font-extrabold uppercase tracking-wider px-3.5 py-1.5 rounded-lg shadow-2xs">
@@ -829,7 +828,7 @@ export default function ServicesPage() {
                     </div>
 
                     {/* What's Included Box */}
-                    <div className="bg-white/95 rounded-2xl p-5 sm:p-6 border border-teal-200/80 mb-6 shadow-2xs">
+                    <div className="mb-5 rounded-2xl border border-teal-200/80 bg-white/95 p-4 shadow-2xs sm:mb-6 sm:p-6">
                       <span className="font-extrabold text-xs uppercase tracking-wider text-teal-700 block mb-4">
                         WHAT&apos;S INCLUDED
                       </span>
@@ -885,13 +884,13 @@ export default function ServicesPage() {
 
 
       {/* ── 4. The 5-Stage Engineering Lifecycle ── */}
-      <section className="py-20 sm:py-28 relative bg-white border-b border-slate-200/80 overflow-hidden">
+      <section className="py-14 sm:py-28 relative bg-white border-b border-slate-200/80 overflow-hidden">
         {/* Subtle atmospheric ambient glow */}
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[380px] bg-gradient-to-r from-blue-100/25 via-indigo-100/30 to-purple-100/25 blur-3xl rounded-full pointer-events-none" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           {/* Header Row: Title & Subtitle on Left, Pill Badge on Right */}
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-16">
             <div className="max-w-2xl">
               {/* Eyebrow with blue indicator bar */}
               <div className="flex items-center gap-2.5 mb-3">
@@ -902,7 +901,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Main Heading */}
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-3">
+              <h2 className="text-[1.7rem] leading-tight sm:text-4xl lg:text-[44px] font-extrabold text-slate-900 tracking-tight sm:leading-[1.12] mb-3">
                 Our 5-Stage Engineering{" "}
                 <span className="text-[#4F46E5]">Lifecycle</span>
               </h2>
@@ -915,7 +914,7 @@ export default function ServicesPage() {
 
             {/* Top Right Pill Badge */}
             <div className="shrink-0 self-start lg:self-center">
-              <div className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-slate-200/90 shadow-xs text-xs sm:text-[13px] font-semibold text-slate-700">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 sm:gap-2.5 sm:px-5 sm:py-2.5 rounded-full bg-white border border-slate-200/90 shadow-xs text-[11px] sm:text-[13px] font-semibold text-slate-700">
                 <Zap className="w-4 h-4 text-[#4F46E5] fill-[#4F46E5]" />
                 <span>Transparent</span>
                 <span className="text-slate-300 text-xs">•</span>
@@ -927,9 +926,10 @@ export default function ServicesPage() {
           </div>
 
           {/* Connected 3D Pipeline & 5 Stage Cards */}
-          <div className="w-full pt-1">
+          <div className="w-full overflow-x-auto pb-3 pt-1 -mx-5 px-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:overflow-visible sm:px-0 sm:pb-4">
+            <div className="min-w-0 sm:min-w-[880px] lg:min-w-0">
               {/* Full 3D Isometric Pipeline Strip */}
-              <div className="relative mx-auto mb-6 hidden w-full max-w-6xl select-none sm:mb-8 sm:block">
+              <div className="relative hidden w-full max-w-6xl mx-auto mb-6 sm:mb-8 select-none sm:block">
                 <Image
                   src="/images/lifecycle/lifecycle-pipeline.png"
                   alt="Our 5-Stage Engineering Lifecycle Pipeline"
@@ -941,14 +941,14 @@ export default function ServicesPage() {
               </div>
 
               {/* 5 Cards Row */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 lg:gap-5">
+              <div className="flex snap-x snap-mandatory gap-3 sm:grid sm:grid-cols-5 sm:gap-4 lg:gap-5">
                 {ENGINEERING_LIFECYCLE.map((stage, idx) => {
                   const Icon = stage.icon;
                   const { colorScheme } = stage;
 
                   return (
-                    <Reveal key={stage.step} delay={idx * 0.08}>
-                      <div className="bg-white border border-slate-200/80 rounded-2xl p-5 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full group">
+                    <Reveal key={stage.step} delay={idx * 0.08} className="w-[82%] max-w-[310px] shrink-0 snap-start sm:w-auto sm:max-w-none sm:shrink">
+                      <div className="bg-white border border-slate-200/80 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between h-full group">
                         <div>
                           {/* Stage Icon */}
                           <div
@@ -983,6 +983,7 @@ export default function ServicesPage() {
                   );
                 })}
               </div>
+            </div>
           </div>
 
           {/* Bottom Banner: Ready to Build? */}
@@ -1042,13 +1043,13 @@ export default function ServicesPage() {
       </section>
 
       {/* ── 8. Solution Scoping & Consultation CTA (Ready to Eliminate Friction) ── */}
-      <section className="py-20 sm:py-28 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white border-t border-slate-200/80">
+      <section className="py-14 sm:py-28 relative overflow-hidden bg-gradient-to-b from-white via-slate-50/40 to-white border-t border-slate-200/80">
         {/* Ambient teal glow behind the diagram */}
         <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[650px] h-[500px] bg-gradient-to-br from-teal-100/35 via-cyan-50/25 to-transparent blur-3xl rounded-full pointer-events-none -z-0" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           {/* Main 2-Column Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mb-16 sm:mb-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-8 items-center mb-10 sm:mb-20">
             {/* Left Column: Heading, Subtitle & CTAs */}
             <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
               {/* Eyebrow Badge */}
@@ -1091,37 +1092,66 @@ export default function ServicesPage() {
 
             {/* Right Column: Interactive System Convergence Architecture */}
             <div className="lg:col-span-6 xl:col-span-6 relative flex items-center justify-center">
-              <div className="grid w-full grid-cols-1 gap-4">
+              <div className="w-full overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:overflow-visible sm:pb-0">
+                <div className="min-w-[520px] sm:min-w-0 flex items-center justify-between gap-1 sm:gap-2 relative">
                   {/* Left Column: 4 Inputs Stack (People, Processes, Data, Tools) */}
-                  <div>
-                    <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">Inputs</p>
-                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                  <div className="flex flex-col gap-3 shrink-0 z-10">
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <User className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">People</span>
                     </div>
 
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <Cog className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">Processes</span>
                     </div>
 
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <Database className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">Data</span>
                     </div>
 
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <Wrench className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">Tools</span>
                     </div>
-                    </div>
                   </div>
 
-                  <ArrowDown className="mx-auto h-4 w-4 text-[#0D8B99]" aria-hidden="true" />
+                  {/* SVG Convergence Curves (4 inputs -> Center Hub) */}
+                  <svg
+                    className="w-10 sm:w-16 h-64 sm:h-72 shrink-0 pointer-events-none"
+                    viewBox="0 0 60 260"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M 0 32 C 35 32, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0 96 C 30 96, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0 164 C 30 164, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M 0 228 C 35 228, 35 130, 60 130"
+                      stroke="#2DD4BF"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                    />
+                  </svg>
 
                   {/* Center Card: Your System with Orbit Rings */}
-                  <div className="relative flex items-center justify-center py-2">
+                  <div className="relative flex items-center justify-center shrink-0 z-10">
                     {/* Orbit Ring Background */}
                     <div className="absolute -inset-7 sm:-inset-9 border border-dashed border-teal-300/60 rounded-full pointer-events-none" />
                     <div className="absolute -inset-12 sm:-inset-16 border border-teal-200/30 rounded-full pointer-events-none" />
@@ -1136,13 +1166,15 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  <ArrowDown className="mx-auto h-4 w-4 text-[#0D8B99]" aria-hidden="true" />
+                  {/* Output Connector Arrow (Center Hub -> 4 Outputs) */}
+                  <div className="w-7 sm:w-10 h-6 flex items-center justify-center shrink-0 relative text-[#0D8B99]">
+                    <div className="w-full h-0.5 bg-[#2DD4BF]" />
+                    <span className="absolute right-0 -mr-1 text-teal-600 font-bold text-xs">→</span>
+                  </div>
 
                   {/* Right Column: 4 Outputs Stack with Checkmarks */}
-                  <div>
-                    <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">Outcomes</p>
-                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3">
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                  <div className="flex flex-col gap-3 shrink-0 z-10">
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <Zap className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Higher Efficiency</span>
@@ -1152,7 +1184,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <Eye className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Better Visibility</span>
@@ -1162,7 +1194,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <TrendingUp className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Scales with You</span>
@@ -1172,7 +1204,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <Sprout className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Long-Term Growth</span>
@@ -1182,7 +1214,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
                   </div>
-                  </div>
+                </div>
               </div>
             </div>
           </div>

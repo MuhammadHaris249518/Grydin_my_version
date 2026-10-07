@@ -60,18 +60,18 @@ export function BlogHero({ activeTopic, onSelectTopic }: BlogHeroProps) {
             </div>
 
             {/* 2. Main Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-ink tracking-tight leading-[1.12] mb-6">
+            <h1 className="mb-4 text-[clamp(1.8rem,8vw,2.4rem)] font-bold leading-[1.12] tracking-tight text-ink sm:mb-6 sm:text-5xl lg:text-[3.5rem]">
               Perspectives on{" "}
               <span className="text-[#0d8b99] block mt-1">Systems &amp; Engineering</span>
             </h1>
 
             {/* 3. Subtitle */}
-            <p className="text-base sm:text-lg text-ink-muted leading-relaxed max-w-xl mb-8">
+            <p className="mb-6 max-w-xl text-[14px] leading-relaxed text-ink-muted sm:mb-8 sm:text-lg">
               Thoughts, lessons and practical insights on AI agents, workflow automation, and modern systems architecture from Grydin.
             </p>
 
             {/* 4. Topic Quick Links / Filters */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-1 border-t border-slate-100 sm:border-0 sm:pt-0">
+            <div className="-mx-5 flex snap-x snap-mandatory items-center gap-2 overflow-x-auto border-t border-slate-100 px-5 pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:gap-6 sm:overflow-visible sm:border-0 sm:px-0 sm:pt-0">
               {HERO_TOPICS.map((topic) => {
                 const Icon = topic.icon;
                 const isActive = activeTopic === topic.id;
@@ -79,7 +79,7 @@ export function BlogHero({ activeTopic, onSelectTopic }: BlogHeroProps) {
                   <button
                     key={topic.id}
                     onClick={() => onSelectTopic?.(isActive ? null : topic.id)}
-                    className={`inline-flex items-center gap-2 text-xs sm:text-sm font-semibold transition-all group py-1.5 px-2 -ml-2 rounded-lg ${
+                    className={`inline-flex shrink-0 items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-semibold transition-all group sm:text-sm ${
                       isActive
                         ? "text-[#0d8b99] bg-[#e6f7f5] px-3"
                         : "text-ink/80 hover:text-[#0d8b99] hover:bg-slate-50"

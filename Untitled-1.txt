@@ -1,0 +1,110 @@
+# 
+
+[Grydin](http://localhost:3000/)
+[HOME](http://localhost:3000/)
+[SERVICES](http://localhost:3000/services)
+[PROJECTS](http://localhost:3000/services)
+[ABOUT](http://localhost:3000/about)
+[BLOG](http://localhost:3000/#services)
+[CONTACT](http://localhost:3000/contact)
+[GET IN TOUCH](http://localhost:3000/contact)
+
+# EMPOWERING YOURBUSINESS WITH TECH
+Innovating Today for Tomorrow's Solutions.Custom Software, Cloud, and AI.
+[GET STARTED](http://localhost:3000/contact)
+[LEARN MORE](http://localhost:3000/about)
+Powering growth for global innovators
+Built for
+
+## Six ways we grid the unseen.
+
+### AI Agents
+Workflows that run themselves.
+Intelligent agents that plan, decide, and execute across your tools – autonomously.
+
+#### Autonomous Execution
+Handles multi-step tasks and makes decisions in real time.
+
+#### Seamless Integration
+Connects with your apps, APIs and data – effortlessly.
+
+#### Reliable & Transparent
+Built-in monitoring, logs and smart fallbacks.
+AI Agents
+Built on
+
+## Three steps to the unseen.
+
+### Diagnose
+UNDERSTAND BEFORE BUILDING.
+We map your workflow end to end – every gap, bottleneck, and hidden process costing you time. Nothing gets built until we know what's broken.
+
+#### Process Discovery
+We uncover how work really flows across your team.
+
+#### Gap & Bottleneck Analysis
+We find what's slowing you down — and why.
+
+#### Data & System Audit
+We audit systems, data, and integrations in depth.
+
+### Design
+ARCHITECT WITH INTENT.
+We scope only what moves the needle. No bloat, no unnecessary complexity. You see the exact plan before anything is built.
+
+#### Solution Architecture
+Scalable architecture tailored to your goals.
+
+#### Workflow Blueprint
+Every step, condition, and integration mapped.
+
+#### Integrations & Reliability
+Tools unified in one secure, observable ecosystem.
+
+### Deploy
+AUTOMATE. INTEGRATE. DELIVER.
+We ship fast, integrate quietly, and hand off docs your team can actually use. The system runs quietly – you notice it in the results.
+
+#### Seamless Deployment
+Automated delivery with zero disruption or downtime.
+
+#### Deep Integrations
+Your daily tools connected — all working together.
+
+#### Full Documentation
+Clear guides so your team stays independent.
+Proven
+
+## Numbers behind the noise.
+Outcomes we can point to, drawn from recent case studies.
+Faster Dispatch Turnaround
+
+#### Meridian Freight Co.
+Deployed an AI agent to triage incoming freight requests and auto-assign drivers, cutting manual dispatch review to minutes.
+Drop in Manual Reconciliation Hours
+
+#### Ledgerly Financial
+Automated cross-ledger transaction matching, removing the weekly reconciliation backlog their finance team used to run by hand.
+Increase in Booking Completion
+
+#### Aurelia Stays
+Connected their booking engine, PMS, and channel manager into one system, replacing manual re-entry across three platforms with a single source of truth.
+Your move
+
+## See a gap worth closing?
+Describe what's slowing your business down. No pitch, no sales deck – just an honest, scoped response within one business day.
+[Start the diagnosis](http://localhost:3000/contact)
+[Grydin](http://localhost:3000/)
+We bridge the gaps in your business.
+Services
+[AI Agents](http://localhost:3000/services)
+[Workflow Automation](http://localhost:3000/services)
+[AI Integration](http://localhost:3000/services)
+[Custom Software](http://localhost:3000/services)
+[System Integration](http://localhost:3000/services)
+[Full-Stack Development](http://localhost:3000/services)
+Sitemap
+[Home](http://localhost:3000/)
+[Services](http://localhost:3000/services)
+[About](http://localhost:3000/about)
+[Contact](http://localhost:3000/contact)

@@ -32,14 +32,6 @@ interface IndustryItem {
   slug?: string;
 }
 
-const TRUSTED_INDUSTRIES: IndustryItem[] = [
-  { name: "Manufacturing", icon: Factory },
-  { name: "Healthcare", icon: HeartPulse },
-  { name: "Logistics", icon: Truck },
-  { name: "Retail", icon: ShoppingBag },
-  { name: "Finance", icon: TrendingUp },
-];
-
 const INDUSTRIES_WE_SERVE: IndustryItem[] = [
   { name: "Manufacturing", icon: Factory, slug: "manufacturing" },
   { name: "Healthcare", icon: HeartPulse, slug: "healthcare-wellness" },
@@ -72,13 +64,13 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white pt-10 pb-16 sm:pb-20 border-b border-slate-200/80">
+    <section className="relative overflow-hidden border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50/50 to-white pb-8 pt-6 sm:pb-10 sm:pt-8">
       {/* Background Ambient Network & Light Glow */}
       <div className="absolute top-1/4 right-1/4 -translate-y-1/2 w-[700px] h-[550px] bg-gradient-to-br from-teal-100/40 via-cyan-50/30 to-transparent blur-3xl rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14">
         {/* Breadcrumb Navigation */}
-        <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500 mb-6">
+        <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-xs font-semibold text-slate-500 sm:mb-5">
           <Link href="/" className="hover:text-teal-700 transition-colors">
             Home
           </Link>
@@ -87,32 +79,31 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
           <span className="w-6 h-px bg-slate-300 ml-1 inline-block" />
         </nav>
 
-        {/* 2-Column Split: Left Copy & Value Props | Right Architecture Diagram */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 items-center gap-7 lg:grid-cols-12 lg:gap-8">
           {/* Left Column (Content) */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
+          <div className="flex flex-col justify-center lg:col-span-5">
             {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-[#0D8B99] mb-4">
+            <div className="mb-4 inline-flex w-fit items-center gap-2.5 rounded-full border border-teal-100 bg-teal-50/80 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0D8B99] sm:text-[11px]">
               <span>INDUSTRY SOLUTIONS</span>
-              <span className="w-6 h-0.5 bg-[#0D8B99] rounded-full" />
+              <span className="h-0.5 w-5 rounded-full bg-[#0D8B99]" />
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-5">
+            <h1 className="mb-4 text-4xl font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-5xl lg:text-[54px]">
               Solutions engineered <br className="hidden sm:inline" />
-              for your industry
+              <span className="text-[#0D8B99]">for your industry</span>
             </h1>
 
             {/* Subtitle Description */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal max-w-xl mb-8">
+            <p className="mb-6 max-w-lg text-sm font-normal leading-relaxed text-slate-600 sm:mb-7 sm:text-base">
               Domain-specific automation, AI agents, and custom software designed to eliminate operational bottlenecks and improve how your business works.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 sm:gap-6 mb-10">
+            <div className="mb-2 flex flex-col items-stretch gap-3 min-[420px]:flex-row min-[420px]:items-center sm:gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#0D8B99] hover:bg-[#0B7884] text-white text-sm font-bold rounded-xl shadow-md shadow-teal-700/20 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-[#0D8B99] px-5 py-3 text-xs font-bold text-white shadow-md shadow-teal-700/20 transition-all hover:-translate-y-0.5 hover:bg-[#0B7884] hover:shadow-lg active:translate-y-0 sm:px-6 sm:py-3.5 sm:text-sm"
               >
                 <span>Book a Free Process Diagnosis</span>
                 <ArrowRight className="w-4 h-4" />
@@ -121,70 +112,16 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
               <button
                 type="button"
                 onClick={() => handleScrollToVerticals()}
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#0D8B99] hover:text-[#0B7884] transition-colors group cursor-pointer"
+                className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-5 text-xs font-bold text-[#0D8B99] transition-colors hover:border-teal-500 hover:bg-teal-50/60 hover:text-[#0B7884] sm:text-sm"
               >
                 <span>Explore our solutions</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
-            </div>
-
-            {/* 3 Pillar Feature Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-6 border-t border-slate-200/80 mb-10">
-              {/* Feature 1: AI Agents */}
-              <div className="flex flex-col">
-                <div className="w-10 h-10 rounded-full bg-teal-50 text-[#0D8B99] border border-teal-200/80 flex items-center justify-center mb-3 shadow-2xs">
-                  <Brain className="w-5 h-5" strokeWidth={2.2} />
-                </div>
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">AI Agents</h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                  Intelligent agents that handle real work.
-                </p>
-              </div>
-
-              {/* Feature 2: Process Automation */}
-              <div className="flex flex-col">
-                <div className="w-10 h-10 rounded-full bg-teal-50 text-[#0D8B99] border border-teal-200/80 flex items-center justify-center mb-3 shadow-2xs">
-                  <Cpu className="w-5 h-5" strokeWidth={2.2} />
-                </div>
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">Process Automation</h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                  Remove manual work and save time.
-                </p>
-              </div>
-
-              {/* Feature 3: Custom Software */}
-              <div className="flex flex-col">
-                <div className="w-10 h-10 rounded-full bg-teal-50 text-[#0D8B99] border border-teal-200/80 flex items-center justify-center mb-3 shadow-2xs">
-                  <Code2 className="w-5 h-5" strokeWidth={2.2} />
-                </div>
-                <h3 className="text-sm font-extrabold text-slate-900 mb-1">Custom Software</h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                  Scalable solutions built for your needs.
-                </p>
-              </div>
-            </div>
-
-            {/* Trusted By Strip */}
-            <div>
-              <span className="block text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-3">
-                TRUSTED BY FORWARD-THINKING BUSINESSES
-              </span>
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs font-semibold text-slate-600">
-                {TRUSTED_INDUSTRIES.map((ind) => {
-                  const Icon = ind.icon;
-                  return (
-                    <span key={ind.name} className="flex items-center gap-1.5 hover:text-slate-900 transition-colors">
-                      <Icon className="w-4 h-4 text-slate-400" />
-                      <span>{ind.name}</span>
-                    </span>
-                  );
-                })}
-              </div>
             </div>
           </div>
 
           {/* Right Column: Architectural AI Flowchart Diagram */}
-          <div className="lg:col-span-6 xl:col-span-6 relative flex items-center justify-center py-4">
+          <div className="relative flex items-center justify-center py-2 lg:col-span-7 lg:py-0">
             {/* SVG Background Network Mesh */}
             <svg
               className="absolute inset-0 w-full h-full pointer-events-none -z-0 opacity-40"
@@ -229,9 +166,9 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
               </div>
 
               {/* ── 2. Middle Row: Left Satellite (Your Data) + Center (AI Agent) + Right Satellite (Checklist) ── */}
-              <div className="w-full flex items-center justify-between gap-2 sm:gap-3 z-10">
+              <div className="z-10 grid w-full grid-cols-2 items-center gap-2 xl:flex xl:justify-between xl:gap-3">
                 {/* Left Satellite Card: Your Data / Systems / Team */}
-                <div className="w-28 sm:w-36 bg-white/95 border border-slate-200/80 rounded-2xl p-3 sm:p-3.5 shadow-sm space-y-2 text-[11px] font-semibold text-slate-700 shrink-0">
+                <div className="w-28 shrink-0 space-y-2 rounded-2xl border border-slate-200/80 bg-white/95 p-3 text-[11px] font-semibold text-slate-700 shadow-sm sm:w-36 sm:p-3.5">
                   <div className="flex items-center gap-2">
                     <Database className="w-4 h-4 text-[#0D8B99] shrink-0" />
                     <span className="truncate">Your Data</span>
@@ -247,12 +184,12 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
                 </div>
 
                 {/* Curved Connector Dots (Left to Center) */}
-                <div className="hidden sm:flex items-center -mx-1 text-teal-400 font-mono text-xs select-none">
+                <div className="-mx-1 hidden items-center font-mono text-xs text-teal-400 select-none xl:flex">
                   <span className="tracking-tighter animate-pulse">··→</span>
                 </div>
 
                 {/* Central Hero AI Agent Card */}
-                <div className="flex-1 bg-gradient-to-br from-[#06383E] via-[#0D8B99] to-[#04262A] text-white rounded-2xl p-4 sm:p-5 shadow-lg shadow-teal-900/20 border border-teal-300/40 relative overflow-hidden group">
+                <div className="relative col-span-2 min-w-0 overflow-hidden rounded-2xl border border-teal-300/40 bg-gradient-to-br from-[#06383E] via-[#0D8B99] to-[#04262A] p-4 text-white shadow-lg shadow-teal-900/20 group sm:p-5 xl:flex-1">
                   {/* Subtle inner radial glow */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-teal-400/20 rounded-full blur-2xl pointer-events-none" />
 
@@ -276,7 +213,7 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
                 </div>
 
                 {/* Right Satellite Card: Context Checklist */}
-                <div className="w-32 sm:w-40 bg-white/95 border border-slate-200/80 rounded-2xl p-3 sm:p-3.5 shadow-sm space-y-1.5 text-[11px] font-semibold text-slate-700 shrink-0">
+                <div className="w-32 shrink-0 space-y-1.5 rounded-2xl border border-slate-200/80 bg-white/95 p-3 text-[11px] font-semibold text-slate-700 shadow-sm sm:w-40 sm:p-3.5">
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 shrink-0" />
                     <span className="truncate">Understand context</span>
@@ -365,28 +302,51 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
           </div>
         </div>
 
-        {/* ── 3. Bottom Strip: INDUSTRIES WE SERVE ── */}
-        <div className="mt-14 sm:mt-18 pt-10 border-t border-slate-200/80">
-          <div className="flex items-center justify-center gap-2.5 text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-6 text-center">
-            <span>INDUSTRIES WE SERVE</span>
-            <span className="w-8 h-0.5 bg-slate-300 rounded-full" />
+        <div className="mt-5 grid grid-cols-1 gap-6 border-t border-slate-200/80 pt-5 sm:mt-7 sm:pt-6 md:grid-cols-12 md:gap-8">
+          <div className="grid grid-cols-3 gap-3 sm:gap-5 md:col-span-7">
+            <div className="min-w-0">
+              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl border border-teal-100 bg-teal-50 text-[#0D8B99] sm:mb-2.5 sm:h-10 sm:w-10">
+                <Brain className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2.2} />
+              </div>
+              <h3 className="text-xs font-extrabold text-slate-900 sm:text-sm">AI Agents</h3>
+              <p className="mt-1 text-[10px] leading-relaxed text-slate-500 sm:text-xs">Intelligent agents that handle real work.</p>
+            </div>
+            <div className="min-w-0">
+              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl border border-teal-100 bg-teal-50 text-[#0D8B99] sm:mb-2.5 sm:h-10 sm:w-10">
+                <Cpu className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2.2} />
+              </div>
+              <h3 className="text-xs font-extrabold text-slate-900 sm:text-sm">Process Automation</h3>
+              <p className="mt-1 text-[10px] leading-relaxed text-slate-500 sm:text-xs">Remove manual work and save time.</p>
+            </div>
+            <div className="min-w-0">
+              <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl border border-teal-100 bg-teal-50 text-[#0D8B99] sm:mb-2.5 sm:h-10 sm:w-10">
+                <Code2 className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2.2} />
+              </div>
+              <h3 className="text-xs font-extrabold text-slate-900 sm:text-sm">Custom Software</h3>
+              <p className="mt-1 text-[10px] leading-relaxed text-slate-500 sm:text-xs">Scalable solutions built for your needs.</p>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5">
-            {INDUSTRIES_WE_SERVE.map((industry) => {
-              const Icon = industry.icon;
-              return (
-                <button
-                  key={industry.name}
-                  type="button"
-                  onClick={() => handleScrollToVerticals(industry.slug)}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-teal-50/70 border border-slate-200/90 hover:border-teal-300 text-xs font-semibold text-slate-700 hover:text-teal-800 shadow-2xs transition-all duration-200 cursor-pointer"
-                >
-                  <Icon className="w-3.5 h-3.5 text-slate-400 group-hover:text-teal-600" />
-                  <span>{industry.name}</span>
-                </button>
-              );
-            })}
+          <div className="border-t border-slate-200/80 pt-4 md:col-span-5 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+            <span className="mb-3 block text-[9px] font-bold uppercase tracking-[0.15em] text-slate-400 sm:text-[10px]">
+              TRUSTED BY FORWARD-THINKING BUSINESSES
+            </span>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2.5">
+              {INDUSTRIES_WE_SERVE.map((industry) => {
+                const Icon = industry.icon;
+                return (
+                  <button
+                    key={industry.name}
+                    type="button"
+                    onClick={() => handleScrollToVerticals(industry.slug)}
+                    className="inline-flex min-h-9 items-center gap-1.5 text-[10px] font-semibold text-slate-600 transition-colors hover:text-[#0D8B99] sm:text-[11px]"
+                  >
+                    <Icon className="h-3.5 w-3.5 shrink-0 text-slate-400" />
+                    <span>{industry.name}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

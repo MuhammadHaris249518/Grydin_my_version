@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   ArrowRight,
   Sparkles,
+  ArrowDown,
   Cpu,
   Workflow,
   Bot,
@@ -926,10 +927,9 @@ export default function ServicesPage() {
           </div>
 
           {/* Connected 3D Pipeline & 5 Stage Cards */}
-          <div className="w-full overflow-x-auto pb-4 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0">
-            <div className="min-w-[880px] lg:min-w-0">
+          <div className="w-full pt-1">
               {/* Full 3D Isometric Pipeline Strip */}
-              <div className="relative w-full max-w-6xl mx-auto mb-6 sm:mb-8 select-none">
+              <div className="relative mx-auto mb-6 hidden w-full max-w-6xl select-none sm:mb-8 sm:block">
                 <Image
                   src="/images/lifecycle/lifecycle-pipeline.png"
                   alt="Our 5-Stage Engineering Lifecycle Pipeline"
@@ -941,7 +941,7 @@ export default function ServicesPage() {
               </div>
 
               {/* 5 Cards Row */}
-              <div className="grid grid-cols-5 gap-3.5 sm:gap-4 lg:gap-5">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 lg:gap-5">
                 {ENGINEERING_LIFECYCLE.map((stage, idx) => {
                   const Icon = stage.icon;
                   const { colorScheme } = stage;
@@ -983,7 +983,6 @@ export default function ServicesPage() {
                   );
                 })}
               </div>
-            </div>
           </div>
 
           {/* Bottom Banner: Ready to Build? */}
@@ -1092,66 +1091,37 @@ export default function ServicesPage() {
 
             {/* Right Column: Interactive System Convergence Architecture */}
             <div className="lg:col-span-6 xl:col-span-6 relative flex items-center justify-center">
-              <div className="w-full overflow-x-auto sm:overflow-visible pb-4 sm:pb-0">
-                <div className="min-w-[520px] sm:min-w-0 flex items-center justify-between gap-1 sm:gap-2 relative">
+              <div className="grid w-full grid-cols-1 gap-4">
                   {/* Left Column: 4 Inputs Stack (People, Processes, Data, Tools) */}
-                  <div className="flex flex-col gap-3 shrink-0 z-10">
-                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                  <div>
+                    <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">Inputs</p>
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <User className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">People</span>
                     </div>
 
-                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <Cog className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">Processes</span>
                     </div>
 
-                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <Database className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">Data</span>
                     </div>
 
-                    <div className="w-36 sm:w-40 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center gap-3 transition-transform hover:-translate-y-0.5">
                       <Wrench className="w-4 h-4 text-[#0D8B99] shrink-0" />
                       <span className="text-xs sm:text-sm font-bold text-slate-800">Tools</span>
                     </div>
+                    </div>
                   </div>
 
-                  {/* SVG Convergence Curves (4 inputs -> Center Hub) */}
-                  <svg
-                    className="w-10 sm:w-16 h-64 sm:h-72 shrink-0 pointer-events-none"
-                    viewBox="0 0 60 260"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M 0 32 C 35 32, 35 130, 60 130"
-                      stroke="#2DD4BF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M 0 96 C 30 96, 35 130, 60 130"
-                      stroke="#2DD4BF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M 0 164 C 30 164, 35 130, 60 130"
-                      stroke="#2DD4BF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                    <path
-                      d="M 0 228 C 35 228, 35 130, 60 130"
-                      stroke="#2DD4BF"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
+                  <ArrowDown className="mx-auto h-4 w-4 text-[#0D8B99]" aria-hidden="true" />
 
                   {/* Center Card: Your System with Orbit Rings */}
-                  <div className="relative flex items-center justify-center shrink-0 z-10">
+                  <div className="relative flex items-center justify-center py-2">
                     {/* Orbit Ring Background */}
                     <div className="absolute -inset-7 sm:-inset-9 border border-dashed border-teal-300/60 rounded-full pointer-events-none" />
                     <div className="absolute -inset-12 sm:-inset-16 border border-teal-200/30 rounded-full pointer-events-none" />
@@ -1166,15 +1136,13 @@ export default function ServicesPage() {
                     </div>
                   </div>
 
-                  {/* Output Connector Arrow (Center Hub -> 4 Outputs) */}
-                  <div className="w-7 sm:w-10 h-6 flex items-center justify-center shrink-0 relative text-[#0D8B99]">
-                    <div className="w-full h-0.5 bg-[#2DD4BF]" />
-                    <span className="absolute right-0 -mr-1 text-teal-600 font-bold text-xs">→</span>
-                  </div>
+                  <ArrowDown className="mx-auto h-4 w-4 text-[#0D8B99]" aria-hidden="true" />
 
                   {/* Right Column: 4 Outputs Stack with Checkmarks */}
-                  <div className="flex flex-col gap-3 shrink-0 z-10">
-                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                  <div>
+                    <p className="mb-2 text-center text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">Outcomes</p>
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <Zap className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Higher Efficiency</span>
@@ -1184,7 +1152,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <Eye className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Better Visibility</span>
@@ -1194,7 +1162,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <TrendingUp className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Scales with You</span>
@@ -1204,7 +1172,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
 
-                    <div className="w-48 sm:w-56 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
+                    <div className="w-full min-w-0 bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-3.5 flex items-center justify-between gap-3 transition-transform hover:-translate-y-0.5">
                       <div className="flex items-center gap-2.5">
                         <Sprout className="w-4 h-4 text-[#0D8B99] shrink-0" />
                         <span className="text-xs sm:text-sm font-bold text-slate-800">Long-Term Growth</span>
@@ -1214,7 +1182,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
                   </div>
-                </div>
+                  </div>
               </div>
             </div>
           </div>

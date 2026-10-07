@@ -38,7 +38,7 @@ export default function BlogHubPage() {
 
       {/* 2. Official Announcements / Releases */}
       {announcementPosts.length > 0 && (
-        <section className="bg-surface-soft py-16 md:py-20 border-t border-surface-line">
+        <section className="bg-surface-soft py-12 sm:py-16 md:py-20 border-t border-surface-line">
           <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
             <div className="flex items-center justify-between mb-8 pb-3 border-b border-surface-line">
               <div>

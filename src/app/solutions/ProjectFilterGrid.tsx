@@ -23,7 +23,7 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
   return (
     <div>
       {/* Industry Filter Chips */}
-      <div className="flex flex-wrap items-center gap-2 mb-10">
+      <div className="-mx-5 mb-6 flex snap-x snap-mandatory items-center gap-2 overflow-x-auto px-5 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mb-10 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
         {industries.map((ind) => {
           const isSelected = selectedIndustry === ind;
           return (
@@ -32,7 +32,7 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
               type="button"
               onClick={() => setSelectedIndustry(ind)}
               aria-pressed={isSelected}
-              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all cursor-pointer ${
+              className={`shrink-0 rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide transition-all cursor-pointer sm:px-4 ${
                 isSelected
                   ? "bg-[#0D8B99] text-white shadow-md shadow-[#0D8B99]/20 border border-[#0D8B99]"
                   : "bg-white border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50"
@@ -51,10 +51,10 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
             Featured Case Study
           </div>
           <Link href={`/projects/${featuredProject.slug}`} className="group block">
-            <GlassCard className="p-8 sm:p-10 transition-[box-shadow,border-color] duration-300 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg">
+            <GlassCard className="p-4 transition-[box-shadow,border-color] duration-300 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg sm:p-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Logo / Left Panel */}
-                <div className="lg:col-span-4 bg-slate-50 rounded-2xl p-8 flex flex-col items-center justify-center border border-slate-200 min-h-[200px]">
+                <div className="flex min-h-[132px] flex-col items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 p-5 lg:col-span-4 sm:min-h-[200px] sm:p-8">
                   {featuredProject.logo ? (
                     <div className="relative w-48 h-20 flex items-center justify-center">
                       <Image
@@ -116,7 +116,7 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
       )}
 
       {/* Main Grid of Project Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:gap-4 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-3">
         {projects.map((proj) => {
           const matches = selectedIndustry === "All" || proj.industry === selectedIndustry;
           if (!matches) return null;
@@ -124,8 +124,8 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
           const primaryResult = proj.results[0];
 
           return (
-            <Link key={proj.slug} href={`/projects/${proj.slug}`} className="group block h-full">
-              <GlassCard className="h-full flex flex-col justify-between p-7 transition-all duration-300 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg group-hover:-translate-y-0.5">
+            <Link key={proj.slug} href={`/projects/${proj.slug}`} className="group block h-full w-[86%] max-w-[360px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink">
+              <GlassCard className="flex h-full flex-col justify-between p-4 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:border-[#0D8B99]/40 group-hover:shadow-lg sm:p-7">
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-4 border-b border-slate-100 pb-4">
                     <span className="font-mono text-xs uppercase tracking-wider text-[#0D8B99] font-bold">
@@ -136,17 +136,17 @@ export function ProjectFilterGrid({ projects, featuredProject }: ProjectFilterGr
                     </span>
                   </div>
 
-                  <h4 className="text-xl font-bold text-slate-900 tracking-tight mb-2 group-hover:text-[#0D8B99] transition-colors leading-snug">
+                  <h4 className="mb-2 text-lg font-bold leading-snug tracking-tight text-slate-900 transition-colors group-hover:text-[#0D8B99] sm:text-xl">
                     {proj.title}
                   </h4>
 
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6 font-normal">
+                  <p className="mb-4 text-[13px] font-normal leading-relaxed text-slate-600 sm:mb-6 sm:text-sm">
                     {proj.summary}
                   </p>
 
                   {/* Prominent Large Result Line */}
                   {primaryResult && (
-                    <div className="rounded-xl border border-teal-200/80 bg-teal-50/70 p-4 mb-6 shadow-2xs">
+                    <div className="mb-4 rounded-xl border border-teal-200/80 bg-teal-50/70 p-3 shadow-2xs sm:mb-6 sm:p-4">
                       <div className="text-xl font-mono font-bold text-[#0D8B99]">
                         {primaryResult.metric}
                       </div>

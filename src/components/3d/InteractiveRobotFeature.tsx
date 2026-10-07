@@ -9,6 +9,7 @@ export function InteractiveRobotFeature() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [desktopMotion, setDesktopMotion] = useState(false);
 
   // Mouse tracking physics with spring dampening
   const mouseX = useMotionValue(0);
@@ -34,6 +35,11 @@ export function InteractiveRobotFeature() {
 
   // Scroll into view detection
   useEffect(() => {
+    const media = window.matchMedia("(min-width: 768px)");
+    const updateMotion = () => setDesktopMotion(media.matches);
+    updateMotion();
+    media.addEventListener("change", updateMotion);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -47,7 +53,10 @@ export function InteractiveRobotFeature() {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      media.removeEventListener("change", updateMotion);
+      observer.disconnect();
+    };
   }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -68,51 +77,51 @@ export function InteractiveRobotFeature() {
   return (
     <div
       ref={containerRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      className="relative w-full h-[400px] sm:h-[460px] lg:h-[480px] flex items-center justify-center select-none"
+      onMouseMove={desktopMotion ? handleMouseMove : undefined}
+      onMouseEnter={desktopMotion ? () => setIsHovered(true) : undefined}
+      onMouseLeave={desktopMotion ? handleMouseLeave : undefined}
+      className="relative flex h-[285px] w-full select-none items-center justify-center sm:h-[460px] lg:h-[480px]"
       style={{ perspective: 1200 }}
     >
       {/* ── Background Atmospheric Light Rings ── */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
         {/* Soft radial teal bloom */}
-        <div className="w-[380px] h-[380px] sm:w-[440px] sm:h-[440px] bg-gradient-to-tr from-teal-400/20 via-cyan-300/25 to-transparent rounded-full blur-3xl" />
+        <div className="h-[260px] w-[260px] rounded-full bg-gradient-to-tr from-teal-400/20 via-cyan-300/25 to-transparent blur-3xl sm:h-[440px] sm:w-[440px]" />
 
         {/* Orbit Ring 1: Outer dashed cyan circle */}
         <motion.div
-          animate={{ rotate: 360 }}
+          animate={desktopMotion ? { rotate: 360 } : undefined}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[360px] h-[360px] sm:w-[420px] sm:h-[420px] rounded-full border border-teal-300/40 border-dashed"
+          className="absolute h-[240px] w-[240px] rounded-full border border-teal-300/40 border-dashed sm:h-[420px] sm:w-[420px]"
         />
 
         {/* Orbit Ring 2: Subtle secondary ring */}
         <motion.div
-          animate={{ rotate: -360 }}
+          animate={desktopMotion ? { rotate: -360 } : undefined}
           transition={{ duration: 70, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[440px] h-[220px] rounded-full border border-teal-200/30 -rotate-12"
+          className="absolute h-[130px] w-[280px] -rotate-12 rounded-full border border-teal-200/30 sm:h-[220px] sm:w-[440px]"
         />
       </div>
 
       {/* ── 3D Robot Figure with Entrance & Breathing Floating Physics ── */}
       <motion.div
         style={{
-          rotateX,
-          rotateY,
+          rotateX: desktopMotion ? rotateX : 0,
+          rotateY: desktopMotion ? rotateY : 0,
           transformStyle: "preserve-3d",
         }}
         initial={{ opacity: 0, y: 50, scale: 0.9 }}
         animate={
-          isInView
+          isInView && desktopMotion
             ? {
                 opacity: 1,
                 y: [0, -10, 0],
                 scale: 1,
               }
-            : {}
+            : isInView ? { opacity: 1, y: 0, scale: 1 } : {}
         }
         transition={
-          isInView
+          isInView && desktopMotion
             ? {
                 opacity: { duration: 0.8, ease: "easeOut" },
                 scale: { duration: 0.8, ease: "easeOut" },
@@ -125,25 +134,25 @@ export function InteractiveRobotFeature() {
               }
             : {}
         }
-        className="relative w-full max-w-[440px] h-full flex items-center justify-center cursor-grab active:cursor-grabbing"
+        className="relative flex h-full w-full max-w-[300px] items-center justify-center sm:max-w-[440px] sm:cursor-grab sm:active:cursor-grabbing"
       >
         {/* Main 3D Robot Render Asset */}
-        <div className="relative w-[340px] sm:w-[410px] h-[320px] sm:h-[390px] drop-shadow-[0_20px_35px_rgba(13,139,153,0.18)]">
+        <div className="relative h-[230px] w-[245px] drop-shadow-[0_14px_25px_rgba(13,139,153,0.16)] sm:h-[390px] sm:w-[410px] sm:drop-shadow-[0_20px_35px_rgba(13,139,153,0.18)]">
           <Image
             src="/images/robot/robot-3d-character.png"
             alt="GrydIn 3D AI Assistant Robot"
             fill
-            sizes="(max-width: 640px) 340px, 410px"
+            sizes="(max-width: 640px) 245px, 410px"
             className="object-contain pointer-events-none select-none"
             priority
           />
 
           {/* Interactive Holographic Light Scan over the Tablet */}
           <motion.div
-            animate={{
+            animate={desktopMotion ? {
               x: ["-100%", "200%"],
               opacity: [0, 0.7, 0],
-            }}
+            } : undefined}
             transition={{
               duration: 3,
               repeat: Infinity,
@@ -155,10 +164,10 @@ export function InteractiveRobotFeature() {
 
           {/* Extra Cyan Glow on Robot Visor Eyes on Hover / Entrance */}
           <motion.div
-            animate={{
+            animate={desktopMotion ? {
               opacity: isHovered ? [0.4, 0.85, 0.4] : [0.2, 0.5, 0.2],
               scale: isHovered ? [1, 1.08, 1] : 1,
-            }}
+            } : undefined}
             transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
             className="absolute top-[22%] left-[36%] w-[28%] h-[12%] bg-cyan-400/25 blur-lg rounded-full pointer-events-none"
           />
@@ -166,11 +175,11 @@ export function InteractiveRobotFeature() {
 
         {/* ── Layered 3D Floating Glass Badge 1: Code brackets </> (Left) ── */}
         <motion.div
-          style={{ x: badge1X, y: badge1Y }}
-          animate={{
+          style={{ x: desktopMotion ? badge1X : 0, y: desktopMotion ? badge1Y : 0 }}
+          animate={desktopMotion ? {
             y: [0, -8, 0],
             rotate: [-2, 2, -2],
-          }}
+          } : undefined}
           transition={{
             duration: 3.8,
             repeat: Infinity,
@@ -178,18 +187,18 @@ export function InteractiveRobotFeature() {
           }}
           className="absolute left-[2%] sm:left-[6%] top-[24%] z-20"
         >
-          <div className="bg-white/90 backdrop-blur-md border border-teal-200/90 shadow-lg shadow-teal-500/10 rounded-2xl p-3 sm:p-3.5 flex items-center justify-center text-[#0D8B99] transition-transform hover:scale-110 duration-200">
-            <Code2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#0D8B99] stroke-[2.5]" />
+          <div className="bg-white/90 backdrop-blur-md border border-teal-200/90 shadow-lg shadow-teal-500/10 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 flex items-center justify-center text-[#0D8B99] transition-transform hover:scale-110 duration-200">
+            <Code2 className="w-4 h-4 sm:w-6 sm:h-6 text-[#0D8B99] stroke-[2.5]" />
           </div>
         </motion.div>
 
         {/* ── Layered 3D Floating Glass Badge 2: Cloud (Top Right) ── */}
         <motion.div
-          style={{ x: badge2X, y: badge2Y }}
-          animate={{
+          style={{ x: desktopMotion ? badge2X : 0, y: desktopMotion ? badge2Y : 0 }}
+          animate={desktopMotion ? {
             y: [0, 9, 0],
             rotate: [1, -2, 1],
-          }}
+          } : undefined}
           transition={{
             duration: 4.4,
             repeat: Infinity,
@@ -198,18 +207,18 @@ export function InteractiveRobotFeature() {
           }}
           className="absolute right-[4%] sm:right-[10%] top-[14%] z-20"
         >
-          <div className="bg-white/90 backdrop-blur-md border border-teal-200/90 shadow-lg shadow-teal-500/10 rounded-2xl p-3 sm:p-3.5 flex items-center justify-center text-[#0D8B99] transition-transform hover:scale-110 duration-200">
-            <Cloud className="w-5 h-5 sm:w-6 sm:h-6 text-[#0D8B99] stroke-[2.2]" />
+          <div className="bg-white/90 backdrop-blur-md border border-teal-200/90 shadow-lg shadow-teal-500/10 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 flex items-center justify-center text-[#0D8B99] transition-transform hover:scale-110 duration-200">
+            <Cloud className="w-4 h-4 sm:w-6 sm:h-6 text-[#0D8B99] stroke-[2.2]" />
           </div>
         </motion.div>
 
         {/* ── Layered 3D Floating Glass Badge 3: Analytics (Far Right) ── */}
         <motion.div
-          style={{ x: badge3X, y: badge3Y }}
-          animate={{
+          style={{ x: desktopMotion ? badge3X : 0, y: desktopMotion ? badge3Y : 0 }}
+          animate={desktopMotion ? {
             y: [0, -7, 0],
             rotate: [-1, 2, -1],
-          }}
+          } : undefined}
           transition={{
             duration: 4,
             repeat: Infinity,
@@ -218,8 +227,8 @@ export function InteractiveRobotFeature() {
           }}
           className="absolute right-[0%] sm:right-[4%] top-[48%] z-20"
         >
-          <div className="bg-white/90 backdrop-blur-md border border-teal-200/90 shadow-lg shadow-teal-500/10 rounded-2xl p-3 sm:p-3.5 flex items-center justify-center text-[#0D8B99] transition-transform hover:scale-110 duration-200">
-            <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-[#0D8B99] stroke-[2.2]" />
+          <div className="bg-white/90 backdrop-blur-md border border-teal-200/90 shadow-lg shadow-teal-500/10 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 flex items-center justify-center text-[#0D8B99] transition-transform hover:scale-110 duration-200">
+            <BarChart3 className="w-4 h-4 sm:w-6 sm:h-6 text-[#0D8B99] stroke-[2.2]" />
           </div>
         </motion.div>
 
@@ -230,7 +239,7 @@ export function InteractiveRobotFeature() {
           transition={{ delay: 1.2, duration: 0.6 }}
           className="absolute right-[8%] bottom-[8%] z-20 bg-white/95 backdrop-blur-md border border-teal-200/90 shadow-md rounded-full px-3 py-1 flex items-center gap-2"
         >
-          <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-teal-500 md:animate-pulse" />
           <span className="text-[11px] font-bold text-slate-800 tracking-tight flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-[#0D8B99]" />
             Autonomous AI

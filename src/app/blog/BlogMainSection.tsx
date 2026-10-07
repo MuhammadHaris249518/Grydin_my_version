@@ -145,7 +145,7 @@ export function BlogMainSection({
 
   return (
     <section className="bg-white py-12 md:py-16">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <div className="mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
@@ -191,9 +191,11 @@ export function BlogMainSection({
           {/* Main Articles Grid */}
           <div className="lg:col-span-8">
             {displayedPosts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0">
                 {displayedPosts.map((post) => (
-                  <PostCard key={post.slug} post={post} />
+                  <div key={post.slug} className="w-[84%] max-w-[360px] shrink-0 snap-start sm:w-auto sm:max-w-none sm:shrink">
+                    <PostCard post={post} />
+                  </div>
                 ))}
               </div>
             ) : (

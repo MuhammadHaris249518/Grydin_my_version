@@ -14,11 +14,11 @@ import { OrbitalSolutions } from "./OrbitalSolutions";
 
 export function HomeServices() {
   return (
-    <section id="services" className="relative overflow-hidden bg-slate-50/60 py-20 md:py-28 border-y border-slate-200/80">
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+    <section id="services" className="relative overflow-hidden border-y border-slate-200/80 bg-slate-50/60 py-14 sm:py-20 md:py-28">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
         {/* ── PART 1: Top Feature Hero Area with Interactive 3D Robot ── */}
-        <div className="bg-white rounded-3xl lg:rounded-[2.5rem] p-6 sm:p-10 lg:p-12 border border-slate-200/90 shadow-xl shadow-slate-200/50 mb-16 relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="relative mb-10 overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-4 shadow-xl shadow-slate-200/50 sm:mb-16 sm:rounded-3xl sm:p-10 lg:rounded-[2.5rem] lg:p-12">
+          <div className="grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12">
             {/* Left Column */}
             <div className="lg:col-span-6 z-10">
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-teal-50 text-teal-700 border border-teal-200/80 tracking-wider uppercase mb-5">
@@ -26,19 +26,19 @@ export function HomeServices() {
                 AI &amp; SOFTWARE ENGINEERING
               </span>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-[44px] xl:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.12] mb-4">
+              <h2 className="mb-3 text-[clamp(1.65rem,7vw,2.15rem)] font-extrabold leading-[1.12] tracking-tight text-slate-900 sm:mb-4 sm:text-4xl lg:text-[44px] xl:text-5xl">
                 Six ways we <span className="text-[#0D8B99]">eliminate</span> <br className="hidden sm:inline" />
                 operational friction
               </h2>
 
-              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal mb-8 max-w-xl">
+              <p className="mb-5 max-w-xl text-[13px] font-normal leading-relaxed text-slate-600 sm:mb-8 sm:text-lg">
                 We build intelligent, high-reliability systems tailored to your specific bottlenecks, with no black-boxes, false promises.
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 mb-8">
+              <div className="mb-5 flex flex-wrap items-center gap-2.5 sm:mb-8 sm:gap-4">
                 <Link
                   href="/services"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#0D8B99] hover:bg-[#0b7480] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-full shadow-md shadow-[#0D8B99]/20 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#0D8B99] px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-md shadow-[#0D8B99]/20 transition-all hover:-translate-y-0.5 hover:bg-[#0b7480] active:translate-y-0 sm:gap-2.5 sm:px-7 sm:py-3.5 sm:text-sm"
                 >
                   Explore Our Services
                   <ArrowRight className="w-4 h-4" />
@@ -46,14 +46,14 @@ export function HomeServices() {
 
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white hover:bg-slate-50 text-slate-800 text-xs sm:text-sm font-bold uppercase tracking-wider border border-slate-300 rounded-full shadow-2xs transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                  className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-5 py-2.5 text-[11px] font-bold uppercase tracking-wider text-slate-800 shadow-2xs transition-all hover:-translate-y-0.5 hover:bg-slate-50 active:translate-y-0 sm:gap-2.5 sm:px-7 sm:py-3.5 sm:text-sm"
                 >
                   Talk to Our Team
                 </Link>
               </div>
 
               {/* 3 Feature Pills */}
-              <div className="flex flex-wrap items-center gap-4 sm:gap-6 pt-6 border-t border-slate-200 text-xs sm:text-sm font-semibold text-slate-700">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-slate-200 pt-4 text-[11px] font-semibold text-slate-700 sm:gap-6 sm:pt-6 sm:text-sm">
                 <span className="flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#0D8B99]" />
                   Custom AI Solutions
@@ -80,13 +80,13 @@ export function HomeServices() {
       </div>
 
       {/* ── PART 2: Transformed Solutions for Every Stage 3D Orbital Carousel (Expanded width for comfortable spacing) ── */}
-      <div className="relative w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-12">
+      <div className="relative w-full max-w-[1520px] mx-auto px-4 sm:px-6 mb-12">
         <OrbitalSolutions />
       </div>
 
       {/* ── PART 3: Bottom Callout Banner ── */}
-      <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="bg-gradient-to-r from-teal-50/90 via-emerald-50/60 to-teal-50/90 border border-teal-200/80 rounded-3xl p-8 sm:p-10 shadow-xs flex flex-col lg:flex-row items-center justify-between gap-8">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
+        <div className="flex flex-col items-center justify-between gap-5 rounded-2xl border border-teal-200/80 bg-gradient-to-r from-teal-50/90 via-emerald-50/60 to-teal-50/90 p-5 shadow-xs sm:gap-8 sm:rounded-3xl sm:p-10 lg:flex-row">
           <div className="max-w-xl">
             <span className="inline-block text-[10px] font-extrabold uppercase tracking-wider text-teal-800 bg-teal-100/90 border border-teal-200 px-3 py-1 rounded-full mb-3">
               LET'S BUILD TOGETHER
@@ -115,8 +115,8 @@ export function HomeServices() {
           </div>
 
           {/* Right Side Checklist + Isometric Graphic */}
-          <div className="flex flex-col sm:flex-row items-center gap-8 border-t lg:border-t-0 lg:border-l border-teal-200/80 pt-6 lg:pt-0 lg:pl-8">
-            <div className="space-y-3 font-semibold text-xs sm:text-sm text-slate-700">
+          <div className="flex w-full flex-col items-start gap-5 border-t border-teal-200/80 pt-5 sm:w-auto sm:flex-row sm:items-center sm:gap-8 sm:pt-6 lg:border-l lg:border-t-0 lg:pt-0 lg:pl-8">
+            <div className="grid w-full grid-cols-2 gap-x-3 gap-y-3 font-semibold text-xs text-slate-700 sm:w-auto sm:grid-cols-1 sm:gap-y-3 sm:text-sm">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 className="w-4.5 h-4.5 text-teal-600 shrink-0" strokeWidth={2.2} />
                 <span>Clear communication</span>
@@ -136,7 +136,7 @@ export function HomeServices() {
             </div>
 
             {/* Isometric Graphic */}
-            <div className="w-24 h-24 shrink-0 text-teal-600 pointer-events-none">
+            <div className="hidden h-24 w-24 shrink-0 text-teal-600 pointer-events-none sm:block">
               <svg viewBox="0 0 100 100" fill="none" className="w-full h-full">
                 <path d="M50 15 L85 35 L50 55 L15 35 Z" fill="#2DD4BF" fillOpacity="0.4" stroke="#0D8B99" strokeWidth="2" />
                 <path d="M15 35 L50 55 L50 85 L15 65 Z" fill="#0D8B99" fillOpacity="0.6" stroke="#0D8B99" strokeWidth="2" />

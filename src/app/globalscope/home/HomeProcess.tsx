@@ -68,24 +68,24 @@ const PROCESS_STEPS: TimelineStep[] = [
 
 export function HomeProcess() {
   return (
-    <section id="process" className="relative bg-slate-50/70 py-20 md:py-28 border-b border-slate-200/80">
-      <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-        <div className="max-w-3xl mb-12">
+    <section id="process" className="relative bg-slate-50/70 py-14 sm:py-20 md:py-28 border-b border-slate-200/80">
+      <div className="mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
+        <div className="max-w-3xl mb-8 sm:mb-12">
           <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-teal-600 mb-3">
             <span className="w-4 h-0.5 bg-teal-600" />
             METHODOLOGY
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          <h2 className="text-[clamp(1.65rem,7vw,2rem)] sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-3 sm:mb-4">
             How we ship in <span className="text-teal-600">under two weeks</span>
           </h2>
           <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
             A battle-tested framework engineered to deliver production-grade software and automations without endless scoping meetings or bloated budgets.
           </p>
         </div>
-        <div className="relative mt-12">
+        <div className="relative mt-8 sm:mt-12">
           <ProcessTimeline steps={PROCESS_STEPS} />
         </div>
-        <div className="mt-14 text-center">
+        <div className="mt-10 sm:mt-14 text-center">
           <Button href="/contact" variant="primary" size="lg">
             BOOK A FREE PROCESS DIAGNOSIS
           </Button>

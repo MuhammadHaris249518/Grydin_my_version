@@ -1,13 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Map, ArrowRight, ExternalLink, X, MapPin } from "lucide-react";
+import { ExternalLink, Map, MapPin } from "lucide-react";
 import { SITE } from "@/app/globalscope/site-config";
 
 export function CampusMapCard() {
-  const [showLiveMap, setShowLiveMap] = useState(false);
-
   return (
     <div className="w-full">
       {/* ── Main Map Card Container ── */}
@@ -23,81 +19,32 @@ export function CampusMapCard() {
             </h3>
           </div>
 
-          <a
-            href={SITE.office.mapsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden"
-          >
-            <span>View full map</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#0D8B99] transition-transform group-hover:translate-x-1" />
-          </a>
         </div>
 
         {/* Map Display Container */}
         <div className="relative w-full rounded-xl overflow-hidden border border-slate-200/90 bg-[#F4F9F9] shadow-inner min-h-[220px] sm:min-h-[280px]">
-          {showLiveMap ? (
-            /* Live Interactive Google Map Embed */
-            <div className="relative w-full h-[220px] sm:h-[280px]">
-              <iframe
-                title="GrydIn Islamabad Campus Live Map"
-                src={SITE.office.mapsEmbedSrc}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen={false}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="w-full h-full"
-              />
-              {/* Close Button to return to stylized view */}
-              <button
-                type="button"
-                onClick={() => setShowLiveMap(false)}
-                className="absolute top-3 right-3 bg-white/95 backdrop-blur-md text-slate-700 hover:text-slate-900 border border-slate-200 px-3 py-1.5 rounded-full text-xs font-bold shadow-md flex items-center gap-1.5 cursor-pointer hover:bg-slate-50 transition-all z-20"
-              >
-                <X className="w-3.5 h-3.5 text-slate-500" />
-                <span>Close Interactive</span>
-              </button>
-            </div>
-          ) : (
-            /* Stylized Map Preview Graphic matching reference mockup exactly */
-            <div className="relative w-full h-[220px] sm:h-[280px]">
-              <Image
-                src="/images/contact/islamabad-campus-map.png"
-                alt="Islamabad Campus Map - The Box Software Technology Park"
-                fill
-                sizes="(max-width: 768px) 100vw, 760px"
-                className="object-cover object-center"
-                priority
-              />
-
-              {/* Interactive Overlay Button matching reference screenshot */}
-              <div className="absolute inset-0 flex items-end justify-center pb-5 sm:pb-7 pointer-events-none">
-                <button
-                  type="button"
-                  onClick={() => setShowLiveMap(true)}
-                  className="pointer-events-auto inline-flex items-center gap-2.5 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-[#009ca6] via-[#0D8B99] to-[#00b4d8] hover:from-[#008992] hover:to-[#009fb8] text-white font-bold text-xs sm:text-[13px] tracking-wider uppercase shadow-lg shadow-teal-900/25 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer group"
-                >
-                  <Map className="w-4 h-4 text-white/90" />
-                  <span>SHOW INTERACTIVE MAP</span>
-                  <ArrowRight className="w-4 h-4 text-white/90 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
-
-              {/* Direct Directions quick-link badge on bottom-left */}
-              <a
-                href={SITE.office.directionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm border border-slate-200/90 rounded-full px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-[#0D8B99] shadow-xs flex items-center gap-1.5 transition-colors cursor-pointer"
-              >
-                <MapPin className="w-3 h-3 text-[#0D8B99]" />
-                <span>Directions</span>
-                <ExternalLink className="w-2.5 h-2.5 text-slate-400" />
-              </a>
-            </div>
-          )}
+          <div className="relative w-full h-[220px] sm:h-[280px]">
+            <iframe
+              title="GrydIn Islamabad Campus Map"
+              src={SITE.office.mapsEmbedSrc}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full"
+            />
+            <a
+              href={SITE.office.directionsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm border border-slate-200/90 rounded-full px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-[#0D8B99] shadow-xs flex items-center gap-1.5 transition-colors"
+            >
+              <MapPin className="w-3 h-3 text-[#0D8B99]" />
+              <span>Directions</span>
+              <ExternalLink className="w-2.5 h-2.5 text-slate-400" />
+            </a>
+          </div>
         </div>
       </div>
 

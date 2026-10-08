@@ -103,7 +103,7 @@ export default function ContactPage() {
         </svg>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
         {/* ========================================================================= */}
         {/* HERO SECTION: Contact introduction and quick contact information   */}
         {/* ========================================================================= */}
@@ -473,7 +473,7 @@ export default function ContactPage() {
         {/* ========================================================================= */}
         {/* LOWER SECTION: Address & Map (Matching user reference layout exactly)     */}
         {/* ========================================================================= */}
-        <section className="relative z-10 mx-auto max-w-[1360px]">
+        <section className="relative z-10 mx-auto w-full">
           {/* Section Heading Badge & Title */}
           <div className="text-left mb-3 sm:mb-4 max-w-[560px]">
             <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAF8F6] border border-[#BCE8E3] text-[#0D8B99] font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase mb-2.5 shadow-xs">

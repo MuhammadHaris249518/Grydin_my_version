@@ -100,7 +100,7 @@ export const FooterTape = () => {
           }}
         >
           <img
-            src="/brand/GrydIn.png"
+            src="/assets/brand/GrydIn.png"
             alt="GrydIn"
             width={12}
             height={12}

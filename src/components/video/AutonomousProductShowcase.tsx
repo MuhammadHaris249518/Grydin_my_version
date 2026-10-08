@@ -30,7 +30,7 @@ interface AutonomousProductShowcaseProps {
 }
 
 export function AutonomousProductShowcase({
-  videoSrc = "/videos/Video.mp4",
+  videoSrc = "/assets/videos/Video.mp4",
   isPlaying: controlledIsPlaying,
   setIsPlaying: controlledSetIsPlaying,
 }: AutonomousProductShowcaseProps) {

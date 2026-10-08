@@ -48,28 +48,28 @@ const PRINCIPLES = [
 
 const OFFICE_PHOTOS = [
   {
-    src: "/images/about/team-at-work.png",
+    src: "/assets/images/about/team-at-work.png",
     alt: "GrydIn teammates working side by side in the Islamabad office",
     title: "Working through the details",
     className: "sm:col-span-2 lg:col-span-1 lg:row-span-1",
     sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
   {
-    src: "/images/about/pair-programming.png",
+    src: "/assets/images/about/pair-programming.png",
     alt: "Two GrydIn teammates reviewing a project together",
     title: "Solving problems together",
     className: "lg:col-span-1",
     sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
   {
-    src: "/images/about/focused-work.png",
+    src: "/assets/images/about/focused-work.png",
     alt: "A GrydIn teammate focused on a laptop at the office",
     title: "Focused on the work",
     className: "lg:col-span-1",
     sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
   {
-    src: "/images/about/team-collaboration.png",
+    src: "/assets/images/about/team-collaboration.png",
     alt: "GrydIn teammates collaborating at laptops in the Islamabad office",
     title: "Building together",
     className: "lg:col-span-1",

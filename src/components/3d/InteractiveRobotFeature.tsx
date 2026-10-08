@@ -139,7 +139,7 @@ export function InteractiveRobotFeature() {
         {/* Main 3D Robot Render Asset */}
         <div className="relative h-[230px] w-[245px] drop-shadow-[0_14px_25px_rgba(13,139,153,0.16)] sm:h-[390px] sm:w-[410px] sm:drop-shadow-[0_20px_35px_rgba(13,139,153,0.18)]">
           <Image
-            src="/images/robot/robot-3d-character.png"
+            src="/assets/images/robot/robot-3d-character.png"
             alt="GrydIn 3D AI Assistant Robot"
             fill
             sizes="(max-width: 640px) 245px, 410px"

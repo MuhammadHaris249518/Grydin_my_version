@@ -16,17 +16,17 @@ function organizationPostalAddress() {
 }
 
 const OG_IMAGE = {
-  url: "/brand/og-image.png",
+  url: "/assets/brand/og-image.png",
   width: 1200,
   height: 630,
   alt: "GrydIn - AI automation and custom software company",
 };
 
 /** Browser tab favicon only — transparent black mark (Logo - black.png). */
-export const SITE_FAVICON = "/brand/logo-black.png";
+export const SITE_FAVICON = "/assets/brand/logo-black.png";
 
 /** Google Search result site icon only — white square (logo-white-bg.png). */
-export const GOOGLE_SITE_ICON = "/brand/logo-white-bg.png";
+export const GOOGLE_SITE_ICON = "/assets/brand/logo-white-bg.png";
 
 export const SERVICE_SEO = [
   {
@@ -378,7 +378,7 @@ export function organizationJsonLd() {
       width: 512,
       height: 512,
     },
-    image: `${SITE_URL}/brand/og-image.png`,
+    image: `${SITE_URL}/assets/brand/og-image.png`,
     description:
       "Software and AI automation company. GrydIn eliminates invisible manual work with AI agents, workflow automation, AI integration, custom software, system integration, and full-stack development.",
     email: SITE.email,
@@ -415,7 +415,7 @@ export function professionalServiceJsonLd() {
     "@id": `${SITE_URL}/#professional-service`,
     name: SITE.name,
     url: SITE_URL,
-    image: `${SITE_URL}/brand/og-image.png`,
+    image: `${SITE_URL}/assets/brand/og-image.png`,
     description: homeMetadata.description,
     priceRange: "$$",
     areaServed: "Worldwide",
@@ -615,7 +615,7 @@ export function blogPostingJsonLd(post: {
     ? post.cover.startsWith("http")
       ? post.cover
       : `${SITE_URL}${post.cover}`
-    : `${SITE_URL}/brand/og-image.png`;
+    : `${SITE_URL}/assets/brand/og-image.png`;
 
   return {
     "@context": "https://schema.org",

@@ -42,7 +42,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
     description:
       "We're excited to announce the expansion of our AI automation practice, helping businesses build intelligent systems, streamline operations, and unlock new possibilities with generative AI.",
     slug: posts[0]?.slug || "grydin-expands-ai-automation-practice",
-    image: "/images/blog/ai-automation-practice.jpg",
+    image: "/assets/images/blog/ai-automation-practice.jpg",
   };
 
   const sidePosts = [
@@ -54,7 +54,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
       description:
         "GridPilot announces the private beta of GridPilot, an enterprise console for observing and governing autonomous AI agent workflows.",
       slug: posts[1]?.slug || "introducing-gridpilot-beta",
-      image: "/images/blog/gridpilot-beta.jpg",
+      image: "/assets/images/blog/gridpilot-beta.jpg",
     },
     {
       title: "Why Businesses Have a Visibility Problem, Not an Execution Problem",
@@ -64,7 +64,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
       description:
         "Most operational leaders aren't caused by slow workers. They stem from invisible handoffs, missing alerts, and fragmented SaaS tools.",
       slug: posts[2]?.slug || "visibility-problem-not-execution",
-      image: "/images/blog/visibility-problem.jpg",
+      image: "/assets/images/blog/visibility-problem.jpg",
     },
   ];
 

@@ -931,7 +931,7 @@ export default function ServicesPage() {
               {/* Full 3D Isometric Pipeline Strip */}
               <div className="relative hidden w-full max-w-6xl mx-auto mb-6 sm:mb-8 select-none sm:block">
                 <Image
-                  src="/images/lifecycle/lifecycle-pipeline.png"
+                  src="/assets/images/lifecycle/lifecycle-pipeline.png"
                   alt="Our 5-Stage Engineering Lifecycle Pipeline"
                   width={950}
                   height={169}

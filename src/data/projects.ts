@@ -2,7 +2,7 @@
  * PROJECTS DATA SOURCE
  * 
  * NOTE TO OWNER:
- * The initial 9 entries below are seeded from client collaboration logos in `public/collabs/`.
+ * The initial 9 entries below are seeded from client collaboration logos in `public/assets/collabs/`.
  * Because exact production deliverables and quantitative metrics are private client data,
  * plausible generic copy has been aligned with GrydIn's 6 core services and every entry
  * is marked `verified: false` with qualitative metrics until real case study figures are provided.
@@ -27,7 +27,7 @@ export interface Project {
   results: ProjectResult[]; // 2-4
   services: string[]; // slugs from SERVICE_SEO in lib/seo.ts
   stack: string[];
-  logo?: string; // e.g. "/collabs/1-kimball-law.webp"
+  logo?: string; // e.g. "/assets/collabs/1-kimball-law.webp"
   featured?: boolean;
   verified: boolean; // false = placeholder copy, owner must confirm
   liveUrl?: string;
@@ -50,7 +50,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["ai-agents", "workflow-automation", "system-integration"],
     stack: ["TypeScript", "n8n", "OpenAI API", "PostgreSQL", "Tailwind CSS"],
-    logo: "/collabs/1-kimball-law.webp",
+    logo: "/assets/collabs/1-kimball-law.webp",
     featured: true,
     verified: false, // TODO(owner): verify
   },
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["workflow-automation", "system-integration", "custom-software"],
     stack: ["Node.js", "Make.com", "REST APIs", "React", "Cloudflare Workers"],
-    logo: "/collabs/2-gps-renting.webp",
+    logo: "/assets/collabs/2-gps-renting.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["ai-agents", "ai-integration", "full-stack-development"],
     stack: ["Python", "FastAPI", "Next.js", "Pinecone", "LangChain"],
-    logo: "/collabs/3-solas-scotland-ai.webp",
+    logo: "/assets/collabs/3-solas-scotland-ai.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -108,7 +108,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["custom-software", "system-integration"],
     stack: ["Go", "AWS Lambda", "S3", "Docker", "FFmpeg"],
-    logo: "/collabs/4-chaos.webp",
+    logo: "/assets/collabs/4-chaos.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["system-integration", "workflow-automation"],
     stack: ["TypeScript", "Shopify API", "Webhooks", "PostgreSQL", "Node.js"],
-    logo: "/collabs/5-petcon-australia.webp",
+    logo: "/assets/collabs/5-petcon-australia.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -146,7 +146,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["custom-software", "full-stack-development"],
     stack: ["React", "Next.js", "Node.js", "Prisma", "Tailwind CSS"],
-    logo: "/collabs/6-sevenleaps.webp",
+    logo: "/assets/collabs/6-sevenleaps.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["full-stack-development", "workflow-automation"],
     stack: ["React", "Stripe API", "Twilio", "Supabase", "Tailwind CSS"],
-    logo: "/collabs/7-shape-shifters-fitness.webp",
+    logo: "/assets/collabs/7-shape-shifters-fitness.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -184,7 +184,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["workflow-automation", "system-integration", "ai-integration"],
     stack: ["n8n", "Shopify GraphQL", "Shipping APIs", "Redis", "TypeScript"],
-    logo: "/collabs/8-mazrex-store.webp",
+    logo: "/assets/collabs/8-mazrex-store.webp",
     verified: false, // TODO(owner): verify
   },
   {
@@ -203,7 +203,7 @@ export const PROJECTS: Project[] = [
     ],
     services: ["custom-software", "system-integration"],
     stack: ["Python", "MQTT", "TimescaleDB", "Next.js", "Docker"],
-    logo: "/collabs/9-top-energy.webp",
+    logo: "/assets/collabs/9-top-energy.webp",
     verified: false, // TODO(owner): verify
   },
 ];

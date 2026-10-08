@@ -10,15 +10,15 @@ const WHITE_EDGE_FILTER = [
 ].join(" ");
 
 const COLLAB_LOGOS = [
-  { src: "/collabs/1-kimball-law.webp", alt: "Kimball Law", height: 32 },
-  { src: "/collabs/2-gps-renting.webp", alt: "GPS Renting", height: 34 },
-  { src: "/collabs/3-solas-scotland-ai.webp", alt: "Solas Scotland AI", height: 36, whiteEdge: true },
-  { src: "/collabs/4-chaos.webp", alt: "Chaos", height: 40 },
-  { src: "/collabs/5-petcon-australia.webp", alt: "Petcon Australia", height: 40 },
-  { src: "/collabs/6-sevenleaps.webp", alt: "Sevenleaps", height: 36 },
-  { src: "/collabs/7-shape-shifters-fitness.webp", alt: "Shape Shifters Fitness", height: 36 },
-  { src: "/collabs/8-mazrex-store.webp", alt: "Mazrex Store", height: 40 },
-  { src: "/collabs/9-top-energy.webp", alt: "Top Energy", height: 36, whiteEdge: true },
+  { src: "/assets/collabs/1-kimball-law.webp", alt: "Kimball Law", height: 32 },
+  { src: "/assets/collabs/2-gps-renting.webp", alt: "GPS Renting", height: 34 },
+  { src: "/assets/collabs/3-solas-scotland-ai.webp", alt: "Solas Scotland AI", height: 36, whiteEdge: true },
+  { src: "/assets/collabs/4-chaos.webp", alt: "Chaos", height: 40 },
+  { src: "/assets/collabs/5-petcon-australia.webp", alt: "Petcon Australia", height: 40 },
+  { src: "/assets/collabs/6-sevenleaps.webp", alt: "Sevenleaps", height: 36 },
+  { src: "/assets/collabs/7-shape-shifters-fitness.webp", alt: "Shape Shifters Fitness", height: 36 },
+  { src: "/assets/collabs/8-mazrex-store.webp", alt: "Mazrex Store", height: 40 },
+  { src: "/assets/collabs/9-top-energy.webp", alt: "Top Energy", height: 36, whiteEdge: true },
 ] as const;
 
 const LogoRow = ({ ariaHidden = false }: { ariaHidden?: boolean }) => (

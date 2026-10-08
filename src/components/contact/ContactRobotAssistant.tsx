@@ -112,7 +112,7 @@ export function ContactRobotAssistant() {
         {/* Main 3D Robot Render Asset (Crisp, High-Resolution Studio Render) */}
         <div className="relative w-[280px] sm:w-[320px] h-[260px] sm:h-[310px] drop-shadow-[0_20px_40px_rgba(13,139,153,0.22)]">
           <Image
-            src="/images/robot/robot-3d-character.png"
+            src="/assets/images/robot/robot-3d-character.png"
             alt="GrydIn 3D AI Assistant Robot"
             fill
             sizes="(max-width: 640px) 280px, 320px"

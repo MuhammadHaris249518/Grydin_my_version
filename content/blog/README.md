@@ -25,7 +25,7 @@ All articles in this directory are MDX files rendered at build time via `next-md
    ```
 3. Optional fields:
    - `updated`: ISO date (`YYYY-MM-DD`) when an article is revised.
-   - `cover`: Path to an image in `public/images/blog/` (recommend 1200×630). If omitted, an algorithmic `<CoverArt />` cover is generated automatically.
+   - `cover`: Path to an image in `public/assets/images/blog/` (recommend 1200×630). If omitted, an algorithmic `<CoverArt />` cover is generated automatically.
    - `source`: For news items (e.g. "GrydIn Research").
    - `externalUrl`: For news items linking out to press publications.
    - `canonical`: Cross-posting canonical URL.

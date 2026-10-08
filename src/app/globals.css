@@ -348,6 +348,14 @@ html {
   to { transform: translateX(-50%); }
 }
 
+@media (max-width: 639px) {
+  .solutions-flowchart {
+    transform: scale(0.92);
+    transform-origin: top center;
+    margin-bottom: -3rem;
+  }
+}
+
 @layer components {
   /* Light glassmorphism — used on white/soft sections */
   .glass {

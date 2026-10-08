@@ -60,6 +60,13 @@ const OFFICE_PHOTOS = [
     className: "lg:col-span-1",
     sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
+  {
+    src: "/images/about/team-collaboration.png",
+    alt: "GrydIn teammates collaborating at laptops in the Islamabad office",
+    title: "Building together",
+    className: "lg:col-span-1",
+    sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
+  },
 ];
 
 export default function AboutPage() {

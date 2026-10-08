@@ -43,22 +43,22 @@ const OFFICE_PHOTOS = [
     src: "/images/about/team-at-work.png",
     alt: "GrydIn teammates working side by side in the Islamabad office",
     title: "Working through the details",
-    className: "sm:col-span-2 lg:col-span-7 lg:row-span-2",
-    sizes: "(min-width: 1024px) 58vw, 100vw",
+    className: "sm:col-span-2 lg:col-span-1 lg:row-span-1",
+    sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
   {
     src: "/images/about/pair-programming.png",
     alt: "Two GrydIn teammates reviewing a project together",
     title: "Solving problems together",
-    className: "lg:col-span-5",
-    sizes: "(min-width: 1024px) 42vw, 100vw",
+    className: "lg:col-span-1",
+    sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
   {
     src: "/images/about/focused-work.png",
     alt: "A GrydIn teammate focused on a laptop at the office",
     title: "Focused on the work",
-    className: "lg:col-span-5",
-    sizes: "(min-width: 1024px) 42vw, 100vw",
+    className: "lg:col-span-1",
+    sizes: "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 86vw",
   },
 ];
 
@@ -218,7 +218,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-9 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-12 lg:auto-rows-[210px]">
+          <div className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-9 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:auto-rows-[280px]">
             {OFFICE_PHOTOS.map((photo, index) => (
               <Reveal
                 key={photo.src}

@@ -348,6 +348,25 @@ html {
   to { transform: translateX(-50%); }
 }
 
+.robot-service-carousel-track {
+  animation: robotServiceMarquee 48s linear infinite;
+  will-change: transform;
+}
+
+.robot-service-carousel-track[data-paused="true"] {
+  animation-play-state: paused;
+}
+
+.robot-service-carousel:hover .robot-service-carousel-track,
+.robot-service-carousel:focus-within .robot-service-carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes robotServiceMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @media (max-width: 639px) {
   .solutions-flowchart {
     transform: scale(0.92);
@@ -429,6 +448,21 @@ html {
   }
 
   .about-team-marquee-track {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .robot-service-carousel {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .robot-service-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .robot-service-carousel-track {
     animation: none !important;
     transform: none !important;
     will-change: auto;

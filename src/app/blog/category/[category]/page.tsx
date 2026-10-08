@@ -1,7 +1,6 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import {
   getPostsByCategory,
@@ -15,6 +14,7 @@ import { PageHero } from "@/app/globalscope/ui/PageHero";
 import { CtaBand } from "@/app/globalscope/ui/CtaBand";
 import { JsonLd } from "@/app/globalscope/ui/JsonLd";
 import { CategoryBar } from "../../CategoryBar";
+import { AnnouncementHeroArtwork } from "../../AnnouncementHeroArtwork";
 import { PostCard } from "../../PostCard";
 import { AnnouncementRow } from "../../AnnouncementRow";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -105,39 +105,14 @@ export default async function CategoryPage({ params }: PageProps) {
     <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
-      {/* PageHero with 3D Robot illustration */}
+      {/* Show the robot artwork only on the Announcements archive. */}
       <PageHero
         eyebrow="Category Archive"
         title={name}
         subtitle={description}
         breadcrumbs={breadcrumbs}
-        showSlotOnMobile
-        slot={
-          <div className="relative w-full max-w-[440px] sm:max-w-[480px] lg:max-w-[520px] mx-auto lg:mr-0 flex justify-center lg:justify-end">
-            <div className="relative w-full">
-              {/* Soft ambient halo glow */}
-              <div
-                className="absolute inset-0 rounded-full blur-3xl opacity-70 pointer-events-none transform scale-90"
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(13, 139, 153, 0.16) 0%, rgba(45, 212, 191, 0.08) 45%, transparent 70%)",
-                }}
-              />
-
-              {/* 3D Robot Workspace Illustration */}
-              <div className="relative z-10 transition-transform duration-500 hover:scale-[1.02]">
-                <Image
-                  src="/assets/images/blog/category-robot.png"
-                  alt={`GrydIn ${name} Robot Workspace`}
-                  width={587}
-                  height={385}
-                  priority
-                  className="w-full h-auto object-contain drop-shadow-sm select-none mix-blend-multiply"
-                />
-              </div>
-            </div>
-          </div>
-        }
+        slot={cat === "announcements" ? <AnnouncementHeroArtwork /> : undefined}
+        showSlotOnMobile={cat === "announcements"}
       />
 
       {/* Sticky Category Bar */}

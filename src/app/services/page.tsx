@@ -722,7 +722,7 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-12">
             {/* Left Column: 6 Vertical Tabs + Redesigned GrydIn Guarantee Card (lg:col-span-5) */}
             <div className="lg:col-span-5 flex flex-col gap-3.5">
-              <div className="flex flex-col gap-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:flex lg:flex-col lg:gap-3">
                 {SERVICES_TAB_DATA.map((srv, idx) => {
                   const IconComponent = srv.icon;
                   const isActive = activeServiceTab === idx;
@@ -731,15 +731,15 @@ export default function ServicesPage() {
                     <button
                       key={srv.num}
                       onClick={() => setActiveServiceTab(idx)}
-                      className={`w-full group text-left px-5 py-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-4 ${
+                      className={`min-h-[68px] w-full group text-left px-3 py-3 sm:px-4 lg:px-5 lg:py-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-2 sm:gap-4 ${
                         isActive
                           ? "bg-[#E5F7F4] border-2 border-[#2DD4BF] shadow-sm text-slate-900"
                           : "bg-white/90 border-slate-200/90 hover:bg-slate-50 hover:border-teal-300 text-slate-700"
                       }`}
                     >
-                      <div className="flex items-center gap-3.5">
+                      <div className="flex min-w-0 items-center gap-2 sm:gap-3.5">
                         <span
-                          className={`font-mono text-base sm:text-lg font-bold ${
+                          className={`font-mono text-sm sm:text-lg font-bold ${
                             isActive ? "text-[#0D8B99]" : "text-slate-400"
                           }`}
                         >
@@ -747,11 +747,11 @@ export default function ServicesPage() {
                         </span>
 
                         <div className={`shrink-0 ${isActive ? "text-teal-600" : "text-slate-500"}`}>
-                          <IconComponent className="w-5 h-5" strokeWidth={2.2} />
+                          <IconComponent className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" strokeWidth={2.2} />
                         </div>
 
                         <span
-                          className={`text-sm sm:text-base font-extrabold ${
+                          className={`min-w-0 text-xs leading-tight sm:text-sm lg:text-base font-extrabold ${
                             isActive ? "text-slate-900" : "text-slate-700"
                           }`}
                         >

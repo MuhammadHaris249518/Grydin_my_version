@@ -637,63 +637,63 @@ export default function ServicesPage() {
           </div>
 
           {/* Connected Feature Cards (4-Grid Bottom Section) */}
-          <div className="mt-10 grid grid-cols-2 gap-2.5 border-t border-slate-200/80 pt-6 sm:mt-16 sm:grid-cols-2 sm:gap-6 sm:pt-10 md:grid-cols-4">
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
-              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
-                <Clock className="w-5 h-5" strokeWidth={2} />
+          <div className="mt-8 grid grid-cols-2 gap-2 border-t border-slate-200/80 pt-5 sm:mt-16 sm:grid-cols-2 sm:gap-6 sm:pt-10 md:grid-cols-4">
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-xl p-3 sm:rounded-2xl sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-100 bg-teal-50 text-teal-600 sm:mb-4 sm:h-10 sm:w-10">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2} />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
+              <div className="mb-1 text-lg font-extrabold text-slate-900 sm:text-3xl">
                 2 Weeks
               </div>
-              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+              <div className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-wider text-teal-600 sm:text-[11px]">
                 RAPID DEPLOYMENT
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="text-[11px] font-normal leading-relaxed text-slate-600 sm:text-xs">
                 Get your solution up and running in just 2 weeks.
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
-              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
-                <ShieldCheck className="w-5 h-5" strokeWidth={2} />
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-xl p-3 sm:rounded-2xl sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-100 bg-teal-50 text-teal-600 sm:mb-4 sm:h-10 sm:w-10">
+                <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2} />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
+              <div className="mb-1 text-lg font-extrabold text-slate-900 sm:text-3xl">
                 Audit-Ready
               </div>
-              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+              <div className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-wider text-teal-600 sm:text-[11px]">
                 RELIABILITY & SECURITY
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="text-[11px] font-normal leading-relaxed text-slate-600 sm:text-xs">
                 Meet industry standards with built-in compliance.
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
-              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
-                <Box className="w-5 h-5" strokeWidth={2} />
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-xl p-3 sm:rounded-2xl sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-100 bg-teal-50 text-teal-600 sm:mb-4 sm:h-10 sm:w-10">
+                <Box className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2} />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
+              <div className="mb-1 text-lg font-extrabold text-slate-900 sm:text-3xl">
                 Turnkey
               </div>
-              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+              <div className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-wider text-teal-600 sm:text-[11px]">
                 CUSTOM INTEGRATION
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="text-[11px] font-normal leading-relaxed text-slate-600 sm:text-xs">
                 End-to-end solutions, from design to deployment.
               </p>
             </div>
 
-            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
-              <div className="w-10 h-10 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center mb-4 border border-teal-100">
-                <Target className="w-5 h-5" strokeWidth={2} />
+            <div className="bg-white border border-slate-200/80 shadow-md shadow-slate-200/40 rounded-xl p-3 sm:rounded-2xl sm:p-6 hover:shadow-xl hover:border-teal-500/40 transition-all duration-300">
+              <div className="mb-3 flex h-8 w-8 items-center justify-center rounded-full border border-teal-100 bg-teal-50 text-teal-600 sm:mb-4 sm:h-10 sm:w-10">
+                <Target className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2} />
               </div>
-              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
+              <div className="mb-1 text-lg font-extrabold text-slate-900 sm:text-3xl">
                 Fixed Scope
               </div>
-              <div className="text-[11px] font-bold uppercase tracking-wider text-teal-600 mb-1">
+              <div className="mb-1 text-[9px] font-bold uppercase leading-tight tracking-wider text-teal-600 sm:text-[11px]">
                 TRANSPARENT PRICING
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed font-normal">
+              <p className="text-[11px] font-normal leading-relaxed text-slate-600 sm:text-xs">
                 No hidden costs. Clear timelines. Complete peace of mind.
               </p>
             </div>

@@ -50,16 +50,16 @@ export const SERVICES_LIST: ServiceCard[] = [
   {
     id: "workflow",
     icon: GitBranch,
-    iconBg: "bg-blue-50 text-blue-600 border border-blue-200/80",
-    iconColor: "text-blue-600",
+    iconBg: "bg-teal-50 text-teal-600 border border-teal-200/80",
+    iconColor: "text-teal-600",
     badge: "INTEGRATIONS",
-    badgeBg: "bg-blue-50/90 text-blue-700 border-blue-200/90",
-    depthColor: "#2563EB",
+    badgeBg: "bg-teal-50/90 text-teal-700 border-teal-200/90",
+    depthColor: "#0D8B99",
     title: "Workflow Automation & Pipelines",
     description:
       "Streamline your business processes with automated workflows, integrations and reliable pipelines.",
     href: "/services#system-integration",
-    cornerGradient: "from-blue-100/70 to-indigo-50/20",
+    cornerGradient: "from-teal-100/70 to-cyan-50/20",
   },
   {
     id: "ai-rag",
@@ -78,16 +78,16 @@ export const SERVICES_LIST: ServiceCard[] = [
   {
     id: "system-integration",
     icon: BarChart3,
-    iconBg: "bg-blue-50 text-blue-600 border border-blue-200/80",
-    iconColor: "text-blue-600",
+    iconBg: "bg-teal-50 text-teal-600 border border-teal-200/80",
+    iconColor: "text-teal-600",
     badge: "SYSTEMS",
-    badgeBg: "bg-blue-50/90 text-blue-700 border-blue-200/90",
-    depthColor: "#1D4ED8",
+    badgeBg: "bg-teal-50/90 text-teal-700 border-teal-200/90",
+    depthColor: "#0D8B99",
     title: "System Integration & Middleware",
     description:
       "Unify your tools, data and services with secure, high-performance integrations.",
     href: "/services#system-integration",
-    cornerGradient: "from-cyan-100/70 to-blue-50/20",
+    cornerGradient: "from-teal-100/70 to-cyan-50/20",
   },
   {
     id: "fullstack",

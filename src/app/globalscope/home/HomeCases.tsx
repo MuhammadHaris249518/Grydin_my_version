@@ -46,13 +46,13 @@ export function HomeCases() {
         </div>
 
         {/* 3 Case Study Cards Grid */}
-        <div className="-mx-5 mb-8 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-10 sm:px-10 md:mx-0 md:mb-12 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
+        <div className="-mx-5 mb-8 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:-mx-10 sm:px-10 md:mx-0 md:mb-12 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
           {cases.map((c, i) => {
             const IconComp = CARD_ICONS[i % CARD_ICONS.length];
             const primaryResult = c.results && c.results.length > 0 ? c.results[0] : null;
 
             return (
-              <Reveal key={c.slug} delay={i * 0.1} className="h-full w-[86%] max-w-[360px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink">
+              <Reveal key={c.slug} delay={i * 0.1} viewportMargin="-24px" className="h-full w-[76vw] max-w-[340px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink">
                 <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-slate-200/90 bg-white p-5 shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/50 hover:shadow-xl sm:p-7">
 
                   {/* Top-Right Mint Diagonal Graphic Badge */}

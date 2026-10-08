@@ -6,6 +6,8 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  Pause,
+  Play,
   Code2,
   GitBranch,
   Bot,
@@ -116,13 +118,14 @@ export const SERVICES_LIST: ServiceCard[] = [
   },
 ];
 
-function MobileServiceCard({ service }: { service: ServiceCard }) {
+function MobileServiceCard({ service, duplicate = false }: { service: ServiceCard; duplicate?: boolean }) {
   const Icon = service.icon;
 
   return (
     <Link
       href={service.href}
-      className="flex h-[238px] w-[82vw] max-w-[300px] shrink-0 snap-start flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+      tabIndex={duplicate ? -1 : undefined}
+      className="flex h-[238px] w-[82vw] max-w-[300px] shrink-0 flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
     >
       <div className="mb-4 flex items-center gap-3">
         <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${service.iconBg}`}>
@@ -146,6 +149,7 @@ function MobileServiceCard({ service }: { service: ServiceCard }) {
 }
 
 export function OrbitalSolutions() {
+  const [mobileCarouselPaused, setMobileCarouselPaused] = useState(false);
   const [angle, setAngle] = useState(0);
   const [targetAngle, setTargetAngle] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -286,15 +290,39 @@ export function OrbitalSolutions() {
       </div>
 
       <div className="md:hidden">
+        <div className="mb-3 flex items-center justify-between px-5">
+          <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-teal-700">Explore our services</span>
+          <button
+            type="button"
+            onClick={() => setMobileCarouselPaused((paused) => !paused)}
+            aria-label={mobileCarouselPaused ? "Resume services carousel" : "Pause services carousel"}
+            aria-pressed={mobileCarouselPaused}
+            className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-teal-200 bg-white px-3 text-[10px] font-semibold text-teal-800 shadow-sm transition-colors hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+          >
+            {mobileCarouselPaused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
+            {mobileCarouselPaused ? "Play" : "Pause"}
+          </button>
+        </div>
         <div
           role="region"
           aria-label="Our services"
           aria-roledescription="carousel"
-          className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          tabIndex={0}
+          className="home-services-carousel overflow-hidden"
         >
-          {SERVICES_LIST.map((service) => (
-            <MobileServiceCard key={service.id} service={service} />
-          ))}
+          <div className="home-services-carousel-track flex w-max" data-paused={mobileCarouselPaused}>
+            {[false, true].map((duplicate) => (
+              <div
+                key={duplicate ? "duplicate" : "original"}
+                className="flex shrink-0 gap-3 px-5 pb-5"
+                aria-hidden={duplicate || undefined}
+              >
+                {SERVICES_LIST.map((service) => (
+                  <MobileServiceCard key={service.id} service={service} duplicate={duplicate} />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

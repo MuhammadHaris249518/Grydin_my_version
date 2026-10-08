@@ -367,6 +367,22 @@ html {
   to { transform: translateX(-50%); }
 }
 
+.home-services-carousel-track {
+  animation: homeServicesMarquee 42s linear infinite;
+  will-change: transform;
+}
+
+.home-services-carousel-track[data-paused="true"],
+.home-services-carousel:hover .home-services-carousel-track,
+.home-services-carousel:focus-within .home-services-carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes homeServicesMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @media (max-width: 639px) {
   .solutions-flowchart {
     transform: scale(0.92);
@@ -463,6 +479,21 @@ html {
   }
 
   .robot-service-carousel-track {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .home-services-carousel {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .home-services-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .home-services-carousel-track {
     animation: none !important;
     transform: none !important;
     will-change: auto;

@@ -13,6 +13,7 @@ import { CategoryBar } from "../CategoryBar";
 import { PostCard } from "../PostCard";
 import { AnnouncementRow } from "../AnnouncementRow";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { AnnouncementHeroArtwork } from "../AnnouncementHeroArtwork";
 import {
   buildMetadata,
   collectionPageJsonLd,
@@ -64,6 +65,8 @@ export default function AllArticlesPage() {
         title="All Articles"
         subtitle="Explore every engineering insight, company update, and announcement from Grydin."
         breadcrumbs={breadcrumbs}
+        slot={<AnnouncementHeroArtwork />}
+        showSlotOnMobile
         compact
       />
       <CategoryBar />

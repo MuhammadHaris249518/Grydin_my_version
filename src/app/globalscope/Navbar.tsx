@@ -21,6 +21,7 @@ export const Navbar = () => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
 
   const isHome = pathname === "/";
   const isDarkNav = isHome;
@@ -30,10 +31,24 @@ export const Navbar = () => {
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    let previousScrollY = window.scrollY;
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 8);
+
+      if (!menuOpen) {
+        const movingDown = currentScrollY > previousScrollY;
+        setNavHidden(movingDown && currentScrollY > 120);
+      } else {
+        setNavHidden(false);
+      }
+
+      previousScrollY = currentScrollY;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [menuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -45,7 +60,9 @@ export const Navbar = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 ${
+          navHidden && !menuOpen ? "-translate-y-full pointer-events-none" : "translate-y-0"
+        } ${
           isDarkNav
             ? scrolled
               ? "bg-[#030e1f]/95 backdrop-blur-md border-b border-white/10 shadow-lg"
@@ -155,7 +172,6 @@ export const Navbar = () => {
         )}
       </header>
       <div aria-hidden="true" className="h-[66px] sm:h-[68px]" />
-
     </>
   );
 };

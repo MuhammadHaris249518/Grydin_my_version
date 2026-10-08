@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Pause, Play } from "lucide-react";
 import { HERO_SERVICES, CARD_W, CARD_H, type HeroService } from "@/data/hero-services";
 import { cn } from "@/lib/cn";
 import { useCanRender3D, useVisible } from "./hooks";
@@ -100,6 +100,64 @@ function StageCard({
   );
 }
 
+function MobileServiceCard({
+  s,
+  index,
+  duplicate = false,
+  onSelect,
+}: {
+  s: HeroService;
+  index: number;
+  duplicate?: boolean;
+  onSelect?: (id: string) => void;
+}) {
+  const Icon = s.icon;
+  const content = (
+    <>
+      <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-teal-100 bg-gradient-to-br from-white to-teal-50 text-teal-700 shadow-sm transition-all duration-300 group-hover:-rotate-3 group-hover:border-teal-200 group-hover:bg-teal-50">
+        <Icon className="h-5 w-5" strokeWidth={2} />
+      </span>
+      <span className="min-w-0 flex-1 pt-0.5">
+        <span className="mb-1.5 block font-mono text-[9px] font-bold uppercase tracking-[0.18em] text-teal-700">
+          Capability {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="block text-sm font-bold leading-snug text-slate-900 transition-colors group-hover:text-teal-800">
+          {s.title}
+        </span>
+        <span className="mt-1 block text-xs leading-relaxed text-slate-600">
+          {s.blurb}
+        </span>
+      </span>
+      <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-teal-600/70 transition-transform duration-300 group-hover:translate-x-1" />
+    </>
+  );
+  const className = "group relative flex min-h-[138px] w-[84vw] max-w-[360px] shrink-0 items-start gap-3.5 overflow-hidden rounded-2xl border border-slate-200/80 bg-white/95 p-4 text-left shadow-[0_12px_32px_-24px_rgba(15,23,42,0.32)] transition-all duration-300 hover:border-teal-200 hover:shadow-[0_18px_36px_-22px_rgba(13,139,153,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500";
+
+  return (
+    <div className="relative shrink-0" aria-hidden={duplicate || undefined}>
+      <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-teal-300/80 to-transparent" aria-hidden="true" />
+      {onSelect ? (
+        <button
+          type="button"
+          onClick={() => onSelect(s.id)}
+          className={className}
+          tabIndex={duplicate ? -1 : undefined}
+        >
+          {content}
+        </button>
+      ) : (
+        <Link
+          href={`/services#${s.id}`}
+          className={className}
+          tabIndex={duplicate ? -1 : undefined}
+        >
+          {content}
+        </Link>
+      )}
+    </div>
+  );
+}
+
 export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
   const stageRef = useRef<HTMLDivElement>(null);
   const lookRef = useRef<Look>({ x: 0, y: 0 });
@@ -109,6 +167,7 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
   const cycle = useRef(0);
   const [focusId, setFocusId] = useState<string | null>(null);
   const [autoId, setAutoId] = useState<string | null>(null);
+  const [mobileCarouselPaused, setMobileCarouselPaused] = useState(false);
   const can3D = useCanRender3D();
   const { ref: visRef, visible } = useVisible<HTMLDivElement>("0px");
   const activeId = focusId ?? autoId;
@@ -174,7 +233,61 @@ export function RobotStage({ services = HERO_SERVICES, onSelect }: Props) {
         /* Below 1024px or with reduced motion: static robot + normal card grid */
         <div className="mx-auto max-w-5xl">
           <RobotFallback className="max-w-[240px]" />
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-7 sm:hidden">
+            <div className="mb-3 flex items-center justify-between px-1">
+              <div className="flex items-center gap-2">
+                <span className="h-1 w-5 rounded-full bg-teal-400" />
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-teal-700">
+                  Our capabilities
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setMobileCarouselPaused((paused) => !paused)}
+                aria-label={mobileCarouselPaused ? "Resume capability carousel" : "Pause capability carousel"}
+                aria-pressed={mobileCarouselPaused}
+                className="inline-flex min-h-8 items-center gap-1.5 rounded-full border border-teal-200 bg-white px-3 text-[10px] font-semibold text-teal-800 shadow-sm transition-colors hover:border-teal-300 hover:bg-teal-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+              >
+                {mobileCarouselPaused ? <Play className="h-3 w-3" /> : <Pause className="h-3 w-3" />}
+                {mobileCarouselPaused ? "Play" : "Pause"}
+              </button>
+            </div>
+            <div
+              className="robot-service-carousel overflow-hidden"
+              role="region"
+              aria-roledescription="carousel"
+              aria-label="GrydIn capabilities"
+              tabIndex={0}
+            >
+              <div
+                className="robot-service-carousel-track flex w-max"
+                data-paused={mobileCarouselPaused}
+              >
+                {[false, true].map((duplicate) => (
+                  <div
+                    key={duplicate ? "duplicate" : "original"}
+                    className="robot-service-carousel-group flex shrink-0 gap-3 pr-3"
+                    aria-hidden={duplicate || undefined}
+                  >
+                    {services.map((s, index) => (
+                      <MobileServiceCard
+                        key={s.id}
+                        s={s}
+                        index={index}
+                        duplicate={duplicate}
+                        onSelect={onSelect}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="mt-2.5 px-1 text-[10px] font-medium text-slate-500">
+              Six ways we help your business move forward
+            </p>
+          </div>
+
+          <div className="mt-8 hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => {
               const Icon = s.icon;
               const content = (

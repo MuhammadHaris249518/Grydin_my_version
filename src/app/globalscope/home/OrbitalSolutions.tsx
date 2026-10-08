@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   ChevronLeft,
@@ -388,9 +389,13 @@ export function OrbitalSolutions() {
             <div className="w-24 h-24 rounded-full border border-teal-300/40 animate-pulse flex items-center justify-center bg-teal-50/30 backdrop-blur-xs">
               <div className="w-16 h-16 rounded-full border border-teal-200/80 flex items-center justify-center bg-white shadow-[0_0_24px_rgba(45,212,191,0.35)]">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#E6F7F5] via-white to-[#CBF3ED] flex items-center justify-center text-[#0D8B99] shadow-inner">
-                  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-[#0D8B99] drop-shadow-xs">
-                    <path d="M12 2L14.2 9.8L22 12L14.2 14.2L12 22L9.8 14.2L2 12L9.8 9.8L12 2Z" />
-                  </svg>
+                  <Image
+                    src="/assets/brand/logo-black.png"
+                    alt="GrydIn"
+                    width={44}
+                    height={44}
+                    className="h-7 w-7 object-contain"
+                  />
                 </div>
               </div>
             </div>

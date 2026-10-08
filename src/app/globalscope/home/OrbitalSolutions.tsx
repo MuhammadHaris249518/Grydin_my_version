@@ -116,6 +116,35 @@ export const SERVICES_LIST: ServiceCard[] = [
   },
 ];
 
+function MobileServiceCard({ service }: { service: ServiceCard }) {
+  const Icon = service.icon;
+
+  return (
+    <Link
+      href={service.href}
+      className="flex h-[238px] w-[82vw] max-w-[300px] shrink-0 snap-start flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+    >
+      <div className="mb-4 flex items-center gap-3">
+        <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${service.iconBg}`}>
+          <Icon className="h-5 w-5" aria-hidden="true" />
+        </span>
+        <span className={`rounded-full border px-3 py-1 text-[9px] font-bold uppercase tracking-wide ${service.badgeBg}`}>
+          {service.badge}
+        </span>
+      </div>
+      <h3 className="text-[17px] font-bold leading-snug tracking-tight text-slate-900">
+        {service.title}
+      </h3>
+      <p className="mt-2 line-clamp-3 text-[13px] leading-relaxed text-slate-600">
+        {service.description}
+      </p>
+      <span className="mt-auto inline-flex items-center gap-1.5 border-t border-slate-100 pt-3 text-xs font-bold text-teal-700">
+        Learn more <ArrowRight className="h-3.5 w-3.5" />
+      </span>
+    </Link>
+  );
+}
+
 export function OrbitalSolutions() {
   const [angle, setAngle] = useState(0);
   const [targetAngle, setTargetAngle] = useState(0);
@@ -256,10 +285,23 @@ export function OrbitalSolutions() {
         </p>
       </div>
 
+      <div className="md:hidden">
+        <div
+          role="region"
+          aria-label="Our services"
+          aria-roledescription="carousel"
+          className="flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {SERVICES_LIST.map((service) => (
+            <MobileServiceCard key={service.id} service={service} />
+          ))}
+        </div>
+      </div>
+
       {/* ── 3D Orbital Arena (Expanded Horizontal Spacing) ── */}
       <div
         ref={containerRef}
-        className="relative w-full max-w-7xl mx-auto h-[550px] sm:h-[610px] lg:h-[650px] flex items-center justify-center overflow-visible"
+        className="relative hidden w-full max-w-7xl mx-auto h-[550px] sm:h-[610px] lg:h-[650px] items-center justify-center overflow-visible md:flex"
         style={{ perspective: "1200px" }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -431,7 +473,7 @@ export function OrbitalSolutions() {
       </div>
 
       {/* ── Bottom Carousel Controls: Prev (<), Indicator Dots, Next (>) ── */}
-      <div className="flex items-center justify-center gap-4 mt-6 sm:mt-8 relative z-30">
+      <div className="hidden items-center justify-center gap-4 mt-6 sm:mt-8 relative z-30 md:flex">
         {/* Left Arrow Button */}
         <button
           type="button"

@@ -33,7 +33,7 @@ export function HomeCases() {
         {/* Header Block (Clean header without side logos) */}
         <div className="mb-8 max-w-3xl sm:mb-12">
           <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
-            <span className="text-teal-500">──→</span>
+            <span aria-hidden="true" className="inline-block h-px w-8 bg-teal-500" />
             CASE STUDIES
           </div>
           <h2 className="mb-3 text-[clamp(1.65rem,7vw,2rem)] font-extrabold leading-tight tracking-tight text-slate-900 sm:mb-4 sm:text-4xl lg:text-[2.75rem]">

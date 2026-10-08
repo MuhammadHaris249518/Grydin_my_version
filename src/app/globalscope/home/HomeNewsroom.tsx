@@ -84,7 +84,7 @@ export function HomeNewsroom({ posts = [] }: HomeNewsroomProps) {
         <div className="mb-6 flex flex-col justify-between gap-4 sm:mb-8 md:flex-row md:items-end md:gap-6">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
-              <span className="text-teal-500">──→</span>
+              <span aria-hidden="true" className="inline-block h-px w-8 bg-teal-500" />
               LATEST INSIGHTS
             </div>
             <h2 className="mb-2 text-[clamp(1.65rem,7vw,2rem)] font-extrabold leading-tight tracking-tight text-slate-900 sm:mb-3 sm:text-4xl lg:text-[2.75rem]">

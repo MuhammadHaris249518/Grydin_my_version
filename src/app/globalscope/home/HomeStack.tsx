@@ -218,21 +218,9 @@ export function HomeStack() {
       <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16 text-center mb-10 sm:mb-14">
         {/* Eyebrow Header matching exact visual mock with directional arrows */}
         <div className="inline-flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-widest text-teal-700 mb-3">
-          <div className="flex items-center text-teal-500 font-mono text-sm" aria-hidden="true">
-            <span className="w-px h-3.5 bg-teal-500 inline-block mr-0.5" />
-            <span className="w-6 sm:w-8 h-px bg-teal-500 inline-block" />
-            <svg className="w-2.5 h-2.5 -ml-1 text-teal-500" viewBox="0 0 8 8" fill="currentColor">
-              <path d="M0 0 L8 4 L0 8 Z" />
-            </svg>
-          </div>
+          <div aria-hidden="true" className="h-px w-8 bg-teal-500" />
           <span className="font-bold text-teal-700 tracking-wider">OUR TECHNOLOGY STACK</span>
-          <div className="flex items-center text-teal-500 font-mono text-sm" aria-hidden="true">
-            <svg className="w-2.5 h-2.5 -mr-1 text-teal-500 rotate-180" viewBox="0 0 8 8" fill="currentColor">
-              <path d="M0 0 L8 4 L0 8 Z" />
-            </svg>
-            <span className="w-6 sm:w-8 h-px bg-teal-500 inline-block" />
-            <span className="w-px h-3.5 bg-teal-500 inline-block ml-0.5" />
-          </div>
+          <div aria-hidden="true" className="h-px w-8 bg-teal-500" />
         </div>
 
         {/* Section Title */}

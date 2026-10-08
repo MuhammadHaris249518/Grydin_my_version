@@ -722,7 +722,7 @@ export default function ServicesPage() {
           <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 lg:grid-cols-12">
             {/* Left Column: 6 Vertical Tabs + Redesigned GrydIn Guarantee Card (lg:col-span-5) */}
             <div className="lg:col-span-5 flex flex-col gap-3.5">
-              <div className="flex flex-col gap-3">
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 lg:flex lg:flex-col lg:gap-3">
                 {SERVICES_TAB_DATA.map((srv, idx) => {
                   const IconComponent = srv.icon;
                   const isActive = activeServiceTab === idx;
@@ -731,15 +731,15 @@ export default function ServicesPage() {
                     <button
                       key={srv.num}
                       onClick={() => setActiveServiceTab(idx)}
-                      className={`w-full group text-left px-5 py-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-4 ${
+                      className={`min-h-[68px] w-full group text-left px-3 py-3 sm:px-4 lg:px-5 lg:py-3.5 rounded-2xl border transition-all duration-300 flex items-center justify-between gap-2 sm:gap-4 ${
                         isActive
                           ? "bg-[#E5F7F4] border-2 border-[#2DD4BF] shadow-sm text-slate-900"
                           : "bg-white/90 border-slate-200/90 hover:bg-slate-50 hover:border-teal-300 text-slate-700"
                       }`}
                     >
-                      <div className="flex items-center gap-3.5">
+                      <div className="flex min-w-0 items-center gap-2 sm:gap-3.5">
                         <span
-                          className={`font-mono text-base sm:text-lg font-bold ${
+                          className={`font-mono text-sm sm:text-lg font-bold ${
                             isActive ? "text-[#0D8B99]" : "text-slate-400"
                           }`}
                         >
@@ -747,11 +747,11 @@ export default function ServicesPage() {
                         </span>
 
                         <div className={`shrink-0 ${isActive ? "text-teal-600" : "text-slate-500"}`}>
-                          <IconComponent className="w-5 h-5" strokeWidth={2.2} />
+                          <IconComponent className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" strokeWidth={2.2} />
                         </div>
 
                         <span
-                          className={`text-sm sm:text-base font-extrabold ${
+                          className={`min-w-0 text-xs leading-tight sm:text-sm lg:text-base font-extrabold ${
                             isActive ? "text-slate-900" : "text-slate-700"
                           }`}
                         >
@@ -986,35 +986,6 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* Bottom Banner: Ready to Build? */}
-          <Reveal delay={0.35}>
-            <div className="mt-12 sm:mt-16 bg-teal-50/40 sm:bg-gradient-to-r sm:from-teal-50/60 sm:via-white sm:to-cyan-50/50 border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xs hover:border-teal-200 transition-colors">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-100 shadow-2xs">
-                  <Sparkles className="w-5 h-5 text-teal-600" />
-                </div>
-                <div>
-                  <span className="block text-[11px] font-bold uppercase tracking-widest text-teal-700 mb-1">
-                    READY TO BUILD?
-                  </span>
-                  <h4 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
-                    Let&apos;s turn your idea into a working product.
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                    Share your goals and we&apos;ll guide you through the next step.
-                  </p>
-                </div>
-              </div>
-
-              <Link
-                href="/services#capabilities"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#0F172A] hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-lg transition-all shrink-0"
-              >
-                <span>Explore Our Services</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Reveal>
         </div>
       </section>
 

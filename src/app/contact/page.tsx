@@ -105,12 +105,12 @@ export default function ContactPage() {
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
         {/* ========================================================================= */}
-        {/* UPPER SECTION: Left side Text/Info & Right side Quality Form + 3D Robot   */}
+        {/* HERO SECTION: Contact introduction and quick contact information   */}
         {/* ========================================================================= */}
         <section className="mb-8 sm:mb-10 lg:mb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-start gap-7 lg:gap-8">
+          <div className="grid grid-cols-1 items-start gap-7 lg:gap-8">
             {/* ── LEFT COLUMN: Heading, 3 Info Cards, Follow Us, Stats Bar ── */}
-            <div className="w-full lg:col-span-5 flex flex-col justify-between pt-1">
+            <div className="w-full flex flex-col justify-between pt-1">
               <div>
                 {/* Eyebrow badge */}
                 <div className="mb-4">
@@ -284,8 +284,28 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* ── RIGHT COLUMN: High-Quality Vector Form + Integrated 3D Robot Stage ── */}
-            <div className="w-full lg:col-span-7 relative">
+
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* CONTACT FORM SECTION: Dedicated space for the form and chat assistant       */}
+        {/* ========================================================================= */}
+        <section className="mb-12 sm:mb-16 lg:mb-20 rounded-[28px] border border-teal-100/80 bg-white/55 p-4 shadow-[0_18px_60px_-32px_rgba(13,139,153,0.28)] backdrop-blur-sm sm:p-6 lg:p-8">
+          <div className="mx-auto mb-6 max-w-6xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#BCE8E3] bg-[#EAF8F6] px-3.5 py-1.5 font-mono text-[10px] font-bold uppercase tracking-wider text-[#0D8B99] sm:text-[11px]">
+              <MessageSquare className="h-3.5 w-3.5" />
+              SEND US A MESSAGE
+            </span>
+            <h2 className="mt-3 text-2xl font-extrabold tracking-tight text-[#0a233b] sm:text-3xl">
+              Tell us about your project
+            </h2>
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
+              Share your requirements, timeline or any questions. We&apos;ll get back to you within 24 hours.
+            </p>
+          </div>
+            {/* ── FORM AND CHAT: Message form with WhatsApp assistant ── */}
+            <div className="w-full relative mx-auto max-w-6xl">
               <div className="relative z-10 w-full bg-white/80 backdrop-blur-xl rounded-3xl sm:rounded-[28px] border border-[#b8e3e9] shadow-[0_20px_60px_-15px_rgba(13,139,153,0.14)] p-5 sm:p-6 md:p-7 transition-all hover:shadow-[0_24px_70px_-15px_rgba(13,139,153,0.18)]">
                 {/* Form or success state */}
                 {submitted ? (
@@ -312,22 +332,6 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 xl:gap-3 items-center">
                     {/* Left side inside card: Clean, Razor-Sharp Vector Form Fields */}
                     <div className="xl:col-span-7">
-                      {/* Eyebrow badge */}
-                      <div className="flex items-center gap-2 mb-2.5">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF8F6] border border-[#BCE8E3] text-[#0D8B99] font-mono text-[10px] sm:text-[11px] font-bold tracking-wider uppercase">
-                          <MessageSquare className="w-3 h-3 text-[#0D8B99]" />
-                          SEND US A MESSAGE
-                        </span>
-                      </div>
-
-                      {/* Form Title & Subtitle */}
-                      <h2 className="text-2xl sm:text-[26px] font-bold text-slate-900 tracking-tight leading-snug">
-                        Tell us about your project
-                      </h2>
-                      <p className="text-xs sm:text-[13px] text-slate-500 mt-1 mb-5 leading-relaxed font-normal">
-                        Share your requirements, timeline or any questions. We&apos;ll get back to you within 24 hours.
-                      </p>
-
                       {errorMessage && (
                         <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                           <AlertCircle className="w-4 h-4 shrink-0" />
@@ -464,7 +468,6 @@ export default function ContactPage() {
                 )}
               </div>
             </div>
-          </div>
         </section>
 
         {/* ========================================================================= */}

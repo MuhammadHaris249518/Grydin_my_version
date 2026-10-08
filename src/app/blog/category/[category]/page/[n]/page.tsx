@@ -110,14 +110,14 @@ export default async function PaginatedCategoryPage({ params }: PageProps) {
     <div className="min-h-screen bg-surface text-ink">
       <JsonLd data={jsonLdData} />
 
-      {/* Show the robot artwork only on the Announcements archive. */}
+      {/* Keep the newsroom archive hero consistent across categories. */}
       <PageHero
         eyebrow="Category Archive"
         title={`${name} (Page ${pageNum})`}
         subtitle={`Viewing page ${pageNum} of ${name.toLowerCase()} publications.`}
         breadcrumbs={breadcrumbs}
-        slot={cat === "announcements" ? <AnnouncementHeroArtwork /> : undefined}
-        showSlotOnMobile={cat === "announcements"}
+        slot={<AnnouncementHeroArtwork />}
+        showSlotOnMobile
       />
 
       {/* Sticky Category Bar */}

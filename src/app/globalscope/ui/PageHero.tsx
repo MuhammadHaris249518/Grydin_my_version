@@ -12,6 +12,7 @@ export interface PageHeroProps {
   image?: string;
   slot?: ReactNode;
   showSlotOnMobile?: boolean;
+  compact?: boolean;
 }
 
 export function PageHero({
@@ -22,13 +23,14 @@ export function PageHero({
   actions,
   slot,
   showSlotOnMobile = false,
+  compact = false,
 }: PageHeroProps) {
   return (
-    <section className="relative w-full overflow-hidden min-h-[320px] md:min-h-[380px] flex items-center border-b border-surface-line">
+    <section className={`relative w-full overflow-hidden ${compact ? "min-h-[260px] md:min-h-[300px]" : "min-h-[320px] md:min-h-[380px]"} flex items-center border-b border-surface-line`}>
       <HeroBackdrop network={true} dark={false} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16 md:py-24">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
+      <div className={`relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 ${compact ? "py-10 md:py-12" : "py-16 md:py-24"}`}>
+        <div className={`grid ${compact ? "gap-6" : "gap-10"} lg:grid-cols-12 lg:items-center`}>
           <div className={slot ? "lg:col-span-7 text-left" : "col-span-full max-w-3xl text-left"}>
             <Reveal>
               {breadcrumbs && breadcrumbs.length > 0 && (

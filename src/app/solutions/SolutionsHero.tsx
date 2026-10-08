@@ -206,7 +206,7 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
             </svg>
 
             {/* Diagram Flow Container */}
-            <div className="relative w-full max-w-[560px] mx-auto flex flex-col items-center">
+            <div className="solutions-flowchart relative w-full max-w-[560px] mx-auto flex flex-col items-center">
               {/* ── 1. Top Card: Business Input ── */}
               <div className="w-full max-w-[280px] bg-white border border-slate-200/90 shadow-sm rounded-2xl p-3 sm:p-4 flex items-center gap-3.5 z-10 transition-transform hover:-translate-y-0.5">
                 <div className="w-10 h-10 rounded-xl bg-teal-50 text-[#0D8B99] border border-teal-100 flex items-center justify-center shrink-0">
@@ -266,12 +266,12 @@ export function SolutionsHero({ onSelectIndustry }: SolutionsHeroProps) {
                   </div>
 
                   {/* Analyze -> Decide -> Act Pipeline */}
-                  <div className="flex items-center justify-between text-[11px] sm:text-xs font-semibold text-teal-100/90 bg-black/20 rounded-xl px-2.5 py-1.5 border border-white/10">
-                    <span>Analyze</span>
-                    <span className="text-teal-300">→</span>
-                    <span>Decide</span>
-                    <span className="text-teal-300">→</span>
-                    <span>Act</span>
+                  <div className="grid min-w-0 grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-1 rounded-xl border border-white/10 bg-black/20 px-2 py-1.5 text-[10px] font-semibold text-teal-100/90 sm:text-xs">
+                    <span className="text-center">Analyze</span>
+                    <span className="text-center text-teal-300">→</span>
+                    <span className="text-center">Decide</span>
+                    <span className="text-center text-teal-300">→</span>
+                    <span className="text-center">Act</span>
                   </div>
                 </div>
 

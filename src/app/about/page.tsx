@@ -10,6 +10,8 @@ import {
   Workflow,
   Zap,
   ChartNoAxesColumnIncreasing,
+  Target,
+  Sparkles,
 } from "lucide-react";
 import { HeroBackdrop } from "@/components/ui/HeroBackdrop";
 import { CtaBand } from "@/app/globalscope/ui/CtaBand";
@@ -20,18 +22,24 @@ import { Reveal } from "@/components/motion/Reveal";
 const PRINCIPLES = [
   {
     number: "01",
+    label: "Diagnose",
+    icon: Target,
     title: "Start with the real problem",
     description:
       "We learn where work gets stuck before deciding which technology belongs in the solution.",
   },
   {
     number: "02",
+    label: "Design around you",
+    icon: Users,
     title: "Fit how your team works",
     description:
       "Each system is shaped around your process and tools, instead of asking your team to fit a template.",
   },
   {
     number: "03",
+    label: "Connect the gaps",
+    icon: Workflow,
     title: "Connect the whole workflow",
     description:
       "We look across tools, teams, and decisions so the answer addresses the gaps between them.",
@@ -167,46 +175,100 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="border-b border-surface-line bg-surface-soft py-12 sm:py-16 md:py-20">
-        <div className="mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
-          <div className="grid gap-7 sm:gap-10 lg:grid-cols-12 lg:gap-16">
+      <section className="relative isolate overflow-hidden border-b border-surface-line bg-gradient-to-br from-[#eaf8f6] via-[#f8fbfd] to-white py-14 sm:py-20 md:py-24">
+        <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+          <div className="absolute -left-32 top-8 h-80 w-80 rounded-full bg-teal-200/25 blur-3xl" />
+          <div className="absolute -right-24 top-1/4 h-96 w-96 rounded-full bg-cyan-100/45 blur-3xl" />
+          <div className="absolute inset-0 opacity-[0.16] [background-image:radial-gradient(#0d8b99_0.7px,transparent_0.7px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_72%)]" />
+        </div>
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-teal-400/70 to-transparent" aria-hidden="true" />
+
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
+          <div className="grid items-center gap-7 sm:gap-10 lg:grid-cols-12 lg:gap-14">
             <Reveal className="lg:col-span-5">
-              <p className="mb-5 flex items-center gap-3 font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                <span className="h-px w-8 bg-accent/60" />
+              <p className="mb-5 inline-flex items-center gap-3 rounded-full border border-teal-200/80 bg-white/75 px-3.5 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-accent shadow-sm backdrop-blur">
+                <span className="h-2 w-2 rounded-full bg-teal-500 shadow-[0_0_0_4px_rgba(13,139,153,0.12)]" />
                 Our story
               </p>
-              <h2 className="text-2xl font-semibold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-[3rem]">
-                The work no one sees can hold a business back.
+              <h2 className="max-w-xl text-[2rem] font-extrabold leading-[1.06] tracking-tight text-ink sm:text-4xl lg:text-[3.25rem]">
+                The work no one sees <span className="text-gradient">can hold a business back.</span>
               </h2>
+              <p className="mt-5 max-w-md text-sm leading-relaxed text-ink-muted sm:text-base">
+                We find the friction between people, tools, and decisions, then build the system that helps work move forward.
+              </p>
+              <div className="mt-6 inline-flex items-center gap-2.5 text-xs font-semibold text-teal-800">
+                <span className="grid h-7 w-7 place-items-center rounded-lg border border-teal-200 bg-white/80 text-accent shadow-sm">
+                  <Sparkles className="h-3.5 w-3.5" />
+                </span>
+                Less friction. Better systems.
+              </div>
             </Reveal>
 
-            <Reveal className="space-y-5 lg:col-span-7" delay={0.08}>
-              <p className="text-base leading-relaxed text-ink-muted sm:text-lg">
-                GrydIn grew from a simple observation: businesses lose momentum in the gaps between tools, teams, and decisions. Repeated handoffs and small manual tasks are easy to overlook, but they add friction to the work people are trying to do.
-              </p>
-              <p className="text-base leading-relaxed text-ink-muted sm:text-lg">
-                We start by understanding what is actually slowing a team down. Then we build the specific system that can help: an AI agent, a workflow automation, a custom integration, or software designed around the way that business works.
-              </p>
-              <p className="border-l-2 border-accent pl-4 text-sm font-medium leading-relaxed text-ink">
-                No templates or off-the-shelf fixes. Start with the problem, then build what fits.
-              </p>
+            <Reveal className="lg:col-span-7" delay={0.08}>
+              <div className="relative overflow-hidden rounded-3xl border border-white/90 bg-white/80 p-5 shadow-[0_24px_70px_-42px_rgba(13,139,153,0.34)] backdrop-blur-md sm:p-8">
+                <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-teal-100/60 blur-3xl" aria-hidden="true" />
+                <div className="relative">
+                  <div className="mb-5 flex items-center gap-3">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl border border-teal-200 bg-gradient-to-br from-white to-teal-50 text-accent shadow-sm">
+                      <Workflow className="h-5 w-5" />
+                    </span>
+                    <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-accent sm:text-[11px]">
+                      The idea that started GrydIn
+                    </span>
+                  </div>
+                  <div className="space-y-4 border-l-2 border-teal-200 pl-4 sm:pl-5">
+                    <p className="text-sm leading-relaxed text-ink-muted sm:text-base">
+                      GrydIn grew from a simple observation: businesses lose momentum in the gaps between tools, teams, and decisions. Repeated handoffs and small manual tasks are easy to overlook, but they add friction to the work people are trying to do.
+                    </p>
+                    <p className="text-sm leading-relaxed text-ink-muted sm:text-base">
+                      We start by understanding what is actually slowing a team down. Then we build the specific system that can help: an AI agent, a workflow automation, a custom integration, or software designed around the way that business works.
+                    </p>
+                  </div>
+                  <div className="mt-5 flex items-start gap-3 rounded-2xl border border-teal-100 bg-gradient-to-r from-teal-50/90 to-cyan-50/60 p-3.5 sm:items-center sm:p-4">
+                    <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white text-accent shadow-sm sm:mt-0">
+                      <Target className="h-4 w-4" />
+                    </span>
+                    <p className="text-xs font-semibold leading-relaxed text-teal-950 sm:text-sm">
+                      No templates or off-the-shelf fixes. Start with the problem, then build what fits.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </Reveal>
           </div>
 
-          <div className="-mx-5 mt-7 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-12 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:px-0 md:pb-0">
-            {PRINCIPLES.map((item, index) => (
-              <Reveal key={item.number} delay={index * 0.06} className="w-[84%] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink">
-                <GlassCard className="h-full p-4 sm:p-7">
-                  <p className="font-mono text-xs font-semibold tracking-[0.18em] text-accent">
-                    {item.number}
-                  </p>
-                  <h3 className="mt-4 text-lg font-semibold text-ink">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                    {item.description}
-                  </p>
-                </GlassCard>
-              </Reveal>
-            ))}
+          <div className="relative mt-8 sm:mt-12">
+            <div className="pointer-events-none absolute left-[12%] right-[12%] top-8 hidden h-px bg-gradient-to-r from-transparent via-teal-300/70 to-transparent md:block" aria-hidden="true" />
+            <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
+              {PRINCIPLES.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <Reveal key={item.number} delay={index * 0.06} className="w-[84%] max-w-[350px] shrink-0 snap-start md:w-auto md:max-w-none md:shrink">
+                    <GlassCard className="group relative h-full overflow-hidden rounded-3xl border border-teal-100/90 bg-white/90 p-5 shadow-[0_14px_38px_-24px_rgba(13,139,153,0.28)] transition-all duration-300 hover:-translate-y-1 hover:border-teal-300 hover:shadow-[0_22px_44px_-24px_rgba(13,139,153,0.34)] sm:p-7">
+                      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-teal-300 via-cyan-400 to-teal-500" aria-hidden="true" />
+                      <div className="pointer-events-none absolute -right-8 -top-10 h-28 w-28 rounded-full bg-teal-100/70 blur-2xl transition-colors group-hover:bg-cyan-100" aria-hidden="true" />
+                      <div className="relative">
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="inline-flex items-center rounded-lg border border-teal-200 bg-teal-50 px-2.5 py-1 font-mono text-xs font-bold tracking-[0.14em] text-accent">
+                            {item.number}
+                          </span>
+                          <span className="grid h-12 w-12 place-items-center rounded-2xl border border-teal-100 bg-gradient-to-br from-white to-teal-50 text-accent shadow-[0_8px_20px_-12px_rgba(13,139,153,0.55)] transition-transform duration-300 group-hover:-rotate-3 group-hover:scale-105">
+                            <Icon className="h-5 w-5" strokeWidth={2.1} />
+                          </span>
+                        </div>
+                        <p className="mt-5 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-teal-700">
+                          {item.label}
+                        </p>
+                        <h3 className="mt-2 text-lg font-bold tracking-tight text-ink sm:text-xl">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-ink-muted">
+                          {item.description}
+                        </p>
+                      </div>
+                    </GlassCard>
+                  </Reveal>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

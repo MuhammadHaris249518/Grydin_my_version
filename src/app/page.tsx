@@ -40,7 +40,7 @@ const HeroSection = () => {
       <div
         className="absolute inset-0 z-0 bg-cover bg-no-repeat"
         style={{
-          backgroundImage: `url('/images/hero/hero-hologram.jpg')`,
+          backgroundImage: `url('/assets/images/hero/hero-hologram.jpg')`,
           backgroundPosition: "right 4% center",
         }}
       />

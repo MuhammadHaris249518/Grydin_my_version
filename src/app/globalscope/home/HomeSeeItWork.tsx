@@ -137,7 +137,7 @@ export function HomeSeeItWork() {
           >
             <Reveal delay={0.15}>
               <AutonomousProductShowcase
-                videoSrc="/videos/Video.mp4"
+                videoSrc="/assets/videos/Video.mp4"
                 isPlaying={isPlaying}
                 setIsPlaying={setIsPlaying}
               />

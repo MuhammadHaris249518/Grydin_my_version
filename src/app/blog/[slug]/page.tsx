@@ -61,7 +61,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const url = `${SITE_URL}/blog/${post.slug}`;
   const canonicalUrl = post.canonical || url;
-  const ogImageUrl = post.cover || "/brand/og-image.png";
+  const ogImageUrl = post.cover || "/assets/brand/og-image.png";
 
   return {
     title: { absolute: `${post.title} | GrydIn` },

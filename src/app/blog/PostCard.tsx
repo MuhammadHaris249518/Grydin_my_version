@@ -30,22 +30,22 @@ export function getPostCoverImage(post: BlogPost): string {
   const title = post.title.toLowerCase();
   
   if (slug.includes("ai-agents") || title.includes("ai agent")) {
-    return "/images/blog/card-ai-agents.jpg";
+    return "/assets/images/blog/card-ai-agents.jpg";
   }
   if (slug.includes("visibility-problem") || title.includes("visibility") || title.includes("architecture")) {
-    return "/images/blog/card-system-architecture.jpg";
+    return "/assets/images/blog/card-system-architecture.jpg";
   }
   if (slug.includes("automation") || slug.includes("workflow")) {
-    return "/images/blog/ai-automation-practice.jpg";
+    return "/assets/images/blog/ai-automation-practice.jpg";
   }
   if (slug.includes("gridpilot") || slug.includes("tools") || slug.includes("developer")) {
-    return "/images/blog/gridpilot-beta.jpg";
+    return "/assets/images/blog/gridpilot-beta.jpg";
   }
   if (slug.includes("fixed-scope") || slug.includes("delivery")) {
-    return "/images/blog/visibility-problem.jpg";
+    return "/assets/images/blog/visibility-problem.jpg";
   }
   
-  return "/images/blog/card-ai-agents.jpg";
+  return "/assets/images/blog/card-ai-agents.jpg";
 }
 
 export function getPostCategoryBadge(post: BlogPost): string {

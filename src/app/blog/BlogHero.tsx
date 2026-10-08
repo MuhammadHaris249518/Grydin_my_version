@@ -104,7 +104,7 @@ export function BlogHero({ activeTopic, onSelectTopic }: BlogHeroProps) {
               {/* Main 3D Robot Image */}
               <div className="relative z-10 transition-transform duration-500 hover:scale-[1.02]">
                 <Image
-                  src="/images/blog/blog-hero-robot.png"
+                  src="/assets/images/blog/blog-hero-robot.png"
                   alt="GrydIn AI Robot Workspace"
                   width={520}
                   height={380}

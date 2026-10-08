@@ -409,7 +409,7 @@ html {
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 20px 50px -24px rgba(0, 0, 0, 0.6);
   }
   .bg-circuit {
-    background-image: url("/images/patterns/circuit.svg");
+    background-image: url("/assets/images/patterns/circuit.svg");
     background-size: 360px 360px;
   }
   .text-gradient {

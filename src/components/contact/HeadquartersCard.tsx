@@ -7,7 +7,7 @@ export function HeadquartersCard() {
     <article className="grid h-full grid-cols-1 sm:grid-cols-[minmax(150px,0.72fr)_1.28fr] gap-4 rounded-2xl border border-[#d3e9f2] bg-white/90 p-3 shadow-[0_8px_28px_rgba(13,139,153,0.07)]">
       <div className="relative min-h-[180px] overflow-hidden rounded-xl border border-slate-100 bg-gradient-to-br from-[#e5f6fa] via-white to-[#c7f2ed] sm:min-h-[210px]">
         <Image
-          src="/images/contact/headquarters-building-3d.png"
+          src="/assets/images/contact/headquarters-building-3d.png"
           alt="The Box Software Technology Park campus"
           fill
           sizes="(max-width: 640px) 100vw, 220px"

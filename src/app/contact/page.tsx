@@ -244,7 +244,7 @@ export default function ContactPage() {
                     <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0">
                       <div className="absolute inset-0 bg-[#00C2CB]/25 rounded-full blur-sm" />
                       <Image
-                        src="/images/contact/stats-cube-3d.png"
+                        src="/assets/images/contact/stats-cube-3d.png"
                         alt="GrydIn 3D Cube"
                         fill
                         sizes="36px"

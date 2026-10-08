@@ -10,7 +10,7 @@ export const AUTHORS: Record<string, Author> = {
   "grydin-team": {
     name: "GrydIn Team",
     role: "Engineering & Strategy",
-    avatar: "/brand/logo-white-bg.png",
+    avatar: "/assets/brand/logo-white-bg.png",
     linkedin: "https://www.linkedin.com/company/grydin",
     bio: "Engineers and automation strategists designing fixed-scope, reliable software systems at GrydIn.",
   },

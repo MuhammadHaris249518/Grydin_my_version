@@ -333,6 +333,21 @@ html {
   to { transform: rotate(360deg); }
 }
 
+.about-team-marquee-track {
+  animation: aboutTeamMarquee 42s linear infinite;
+  will-change: transform;
+}
+
+.about-team-marquee:hover .about-team-marquee-track,
+.about-team-marquee:focus-within .about-team-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes aboutTeamMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
 @layer components {
   /* Light glassmorphism — used on white/soft sections */
   .glass {
@@ -394,5 +409,20 @@ html {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .about-team-marquee {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .about-team-marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .about-team-marquee-track {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
   }
 }

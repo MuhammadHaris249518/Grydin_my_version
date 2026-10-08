@@ -218,30 +218,43 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="-mx-5 mt-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:mt-9 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3 lg:auto-rows-[280px]">
-            {OFFICE_PHOTOS.map((photo, index) => (
-              <Reveal
-                key={photo.src}
-                delay={index * 0.07}
-                className={`w-[86%] max-w-[360px] shrink-0 snap-start sm:w-auto sm:max-w-none sm:shrink ${photo.className}`}
-              >
-                <figure className="group relative h-[235px] overflow-hidden rounded-2xl border border-surface-line bg-ink shadow-[0_20px_55px_-35px_rgba(9,35,62,0.5)] sm:h-[340px] lg:h-full">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    sizes={photo.sizes}
-                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/5 to-transparent" />
-                  <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                    <p className="text-lg font-semibold tracking-tight text-white">
-                      {photo.title}
-                    </p>
-                  </figcaption>
-                </figure>
-              </Reveal>
-            ))}
+          <div
+            className="about-team-marquee mt-5 overflow-hidden py-3 sm:mt-9"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Photos of the GrydIn team at work"
+            tabIndex={0}
+          >
+            <div className="about-team-marquee-track flex w-max">
+              {[false, true].map((isDuplicate) => (
+                <div
+                  key={isDuplicate ? "duplicate" : "original"}
+                  className="about-team-marquee-group flex shrink-0 gap-3 pr-3 sm:gap-4 sm:pr-4"
+                  aria-hidden={isDuplicate || undefined}
+                >
+                  {OFFICE_PHOTOS.map((photo) => (
+                    <figure
+                      key={photo.src}
+                      className="group relative h-[235px] w-[82vw] max-w-[420px] shrink-0 overflow-hidden rounded-2xl border border-surface-line bg-ink shadow-[0_20px_55px_-35px_rgba(9,35,62,0.5)] sm:h-[300px] sm:w-[42vw] sm:max-w-[460px] lg:h-[280px] lg:w-[31vw] lg:max-w-[400px]"
+                    >
+                      <Image
+                        src={photo.src}
+                        alt={isDuplicate ? "" : photo.alt}
+                        fill
+                        sizes={photo.sizes}
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/5 to-transparent" />
+                      <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                        <p className="text-lg font-semibold tracking-tight text-white">
+                          {photo.title}
+                        </p>
+                      </figcaption>
+                    </figure>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

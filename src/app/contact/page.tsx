@@ -108,9 +108,9 @@ export default function ContactPage() {
         {/* HERO SECTION: Contact introduction and quick contact information   */}
         {/* ========================================================================= */}
         <section className="mb-8 sm:mb-10 lg:mb-8">
-          <div className="grid grid-cols-1 items-start gap-7 lg:gap-8">
-            {/* ── LEFT COLUMN: Heading, 3 Info Cards, Follow Us, Stats Bar ── */}
-            <div className="w-full flex flex-col justify-between pt-1">
+          <div className="grid grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:gap-10">
+            {/* ── LEFT COLUMN: Contact introduction and quick contact details ── */}
+            <div className="w-full pt-1">
               <div>
                 {/* Eyebrow badge */}
                 <div className="mb-4">
@@ -236,55 +236,47 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Dark Stats Banner at bottom - sleek rounded pill */}
-              <div className="relative rounded-2xl bg-gradient-to-r from-[#031b2a] via-[#052c3a] to-[#031b2a] border border-teal-500/25 px-4 py-3 shadow-xl shadow-teal-950/15 overflow-hidden">
-                <div className="flex items-center justify-between gap-3">
-                  {/* Left: 3D Holographic Cube + Tagline */}
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0">
-                      <div className="absolute inset-0 bg-[#00C2CB]/25 rounded-full blur-sm" />
-                      <Image
-                        src="/assets/images/contact/stats-cube-3d.png"
-                        alt="GrydIn 3D Cube"
-                        fill
-                        sizes="36px"
-                        className="object-contain relative z-10"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-bold text-white text-[11px] sm:text-xs leading-tight">
-                        Trusted by startups &amp; businesses
-                      </p>
-                      <p className="text-[9px] sm:text-[10px] text-slate-400 leading-tight mt-0.5">
-                        From early-stage ideas to scalable products, we&apos;ve helped teams worldwide build.
-                      </p>
-                    </div>
-                  </div>
+            </div>
+            {/* The robot and WhatsApp visual sits beside the hero copy on desktop. */}
+            <div className="w-full max-w-[560px] justify-self-center lg:max-w-none">
+              <ContactRobotAssistant />
+            </div>
+          </div>
 
-                  {/* Right: Metrics */}
-                  <div className="flex items-center gap-3 sm:gap-4 shrink-0 border-l border-white/20 pl-3">
-                    <div className="text-center">
-                      <p className="font-extrabold text-white text-xs sm:text-sm leading-none">
-                        10+
-                      </p>
-                      <p className="text-[8px] sm:text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">
-                        Projects
-                      </p>
-                    </div>
-                    <div className="text-center">
-                      <p className="font-extrabold text-white text-xs sm:text-sm leading-none">
-                        8+
-                      </p>
-                      <p className="text-[8px] sm:text-[9px] text-slate-400 uppercase tracking-wider mt-0.5">
-                        Happy Clients
-                      </p>
-                    </div>
-                  </div>
+          {/* Dark stats banner spanning the hero beneath its two columns. */}
+          <div className="relative mt-5 overflow-hidden rounded-2xl border border-teal-500/25 bg-gradient-to-r from-[#031b2a] via-[#052c3a] to-[#031b2a] px-4 py-3 shadow-xl shadow-teal-950/15">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-2.5">
+                <div className="relative h-8 w-8 shrink-0 sm:h-9 sm:w-9">
+                  <div className="absolute inset-0 rounded-full bg-[#00C2CB]/25 blur-sm" />
+                  <Image
+                    src="/assets/images/contact/stats-cube-3d.png"
+                    alt="GrydIn 3D Cube"
+                    fill
+                    sizes="36px"
+                    className="relative z-10 object-contain"
+                  />
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold leading-tight text-white sm:text-xs">
+                    Trusted by startups &amp; businesses
+                  </p>
+                  <p className="mt-0.5 text-[9px] leading-tight text-slate-400 sm:text-[10px]">
+                    From early-stage ideas to scalable products, we&apos;ve helped teams worldwide build.
+                  </p>
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-3 border-l border-white/20 pl-3 sm:gap-4">
+                <div className="text-center">
+                  <p className="text-xs font-extrabold leading-none text-white sm:text-sm">10+</p>
+                  <p className="mt-0.5 text-[8px] uppercase tracking-wider text-slate-400 sm:text-[9px]">Projects</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-xs font-extrabold leading-none text-white sm:text-sm">8+</p>
+                  <p className="mt-0.5 text-[8px] uppercase tracking-wider text-slate-400 sm:text-[9px]">Happy Clients</p>
                 </div>
               </div>
             </div>
-
-
           </div>
         </section>
 
@@ -329,9 +321,9 @@ export default function ContactPage() {
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 xl:grid-cols-12 gap-4 xl:gap-3 items-center">
+                  <div className="grid grid-cols-1">
                     {/* Left side inside card: Clean, Razor-Sharp Vector Form Fields */}
-                    <div className="xl:col-span-7">
+                    <div className="w-full">
                       {errorMessage && (
                         <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                           <AlertCircle className="w-4 h-4 shrink-0" />
@@ -460,10 +452,6 @@ export default function ContactPage() {
                       </form>
                     </div>
 
-                    {/* Right side inside card: Interactive 3D Robot Assistant with Real Movement */}
-                    <div className="xl:col-span-5 w-full flex items-center justify-center">
-                      <ContactRobotAssistant />
-                    </div>
                   </div>
                 )}
               </div>

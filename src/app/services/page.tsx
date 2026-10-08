@@ -454,8 +454,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Companies needing instant, reliable answers from internal technical documentation, contracts, and knowledge bases.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#C084FC]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#7E22CE] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Cpu className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -479,8 +479,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Businesses that have outgrown rigid off-the-shelf software and require custom portals or enterprise web platforms.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#818CF8]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#4338CA] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Layers className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -504,8 +504,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Enterprises managing fragmented tools and databases that require unified, real-time data sync without data loss.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#FBBF24]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#D97706] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Plug className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -529,8 +529,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Founders and enterprise tech leaders looking for a senior full-stack pod to ship production-ready features rapidly.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#34D399]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#059669] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Code2 className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>

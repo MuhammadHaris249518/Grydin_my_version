@@ -390,7 +390,7 @@ export function OrbitalSolutions() {
               <div className="w-16 h-16 rounded-full border border-teal-200/80 flex items-center justify-center bg-white shadow-[0_0_24px_rgba(45,212,191,0.35)]">
                 <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-[#E6F7F5] via-white to-[#CBF3ED] flex items-center justify-center text-[#0D8B99] shadow-inner">
                   <Image
-                    src="/brand/logo-black.png"
+                    src="/assets/brand/logo-black.png"
                     alt="GrydIn"
                     width={44}
                     height={44}

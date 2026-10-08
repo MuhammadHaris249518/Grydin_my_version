@@ -8,11 +8,13 @@ export function Reveal({
   delay = 0,
   y = 24,
   className,
+  viewportMargin = "-80px",
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
+  viewportMargin?: string;
 }) {
   const reduce = useReducedMotion();
   return (
@@ -20,7 +22,7 @@ export function Reveal({
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: viewportMargin }}
       transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}

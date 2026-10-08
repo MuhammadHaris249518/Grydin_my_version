@@ -301,12 +301,12 @@ const ENGINEERING_LIFECYCLE: LifecycleStage[] = [
     actionTag: "Discovery & Analysis",
     icon: Search,
     colorScheme: {
-      iconBg: "bg-sky-50",
-      iconText: "text-sky-600",
-      iconBorder: "border-sky-100",
-      tagBg: "bg-[#EAF5FE]",
-      tagText: "text-[#0284C7]",
-      tagHoverBg: "hover:bg-[#D9EDFE]",
+      iconBg: "bg-teal-50",
+      iconText: "text-teal-600",
+      iconBorder: "border-teal-100",
+      tagBg: "bg-teal-50",
+      tagText: "text-teal-700",
+      tagHoverBg: "hover:bg-teal-100",
     },
   },
   {
@@ -316,12 +316,12 @@ const ENGINEERING_LIFECYCLE: LifecycleStage[] = [
     actionTag: "System Design",
     icon: Layers,
     colorScheme: {
-      iconBg: "bg-purple-50",
-      iconText: "text-purple-600",
-      iconBorder: "border-purple-100",
-      tagBg: "bg-[#F4EFFE]",
-      tagText: "text-[#8B5CF6]",
-      tagHoverBg: "hover:bg-[#EADBFE]",
+      iconBg: "bg-teal-50",
+      iconText: "text-teal-600",
+      iconBorder: "border-teal-100",
+      tagBg: "bg-teal-50",
+      tagText: "text-teal-700",
+      tagHoverBg: "hover:bg-teal-100",
     },
   },
   {
@@ -331,12 +331,12 @@ const ENGINEERING_LIFECYCLE: LifecycleStage[] = [
     actionTag: "Development",
     icon: Code2,
     colorScheme: {
-      iconBg: "bg-emerald-50",
-      iconText: "text-emerald-600",
-      iconBorder: "border-emerald-100",
-      tagBg: "bg-[#E8FAF4]",
-      tagText: "text-[#0D9488]",
-      tagHoverBg: "hover:bg-[#D1F5E9]",
+      iconBg: "bg-teal-50",
+      iconText: "text-teal-600",
+      iconBorder: "border-teal-100",
+      tagBg: "bg-teal-50",
+      tagText: "text-teal-700",
+      tagHoverBg: "hover:bg-teal-100",
     },
   },
   {
@@ -346,12 +346,12 @@ const ENGINEERING_LIFECYCLE: LifecycleStage[] = [
     actionTag: "QA & Optimization",
     icon: ShieldCheck,
     colorScheme: {
-      iconBg: "bg-amber-50",
-      iconText: "text-amber-600",
-      iconBorder: "border-amber-100",
-      tagBg: "bg-[#FEF7EC]",
-      tagText: "text-[#D97706]",
-      tagHoverBg: "hover:bg-[#FEEBC8]",
+      iconBg: "bg-teal-50",
+      iconText: "text-teal-600",
+      iconBorder: "border-teal-100",
+      tagBg: "bg-teal-50",
+      tagText: "text-teal-700",
+      tagHoverBg: "hover:bg-teal-100",
     },
   },
   {
@@ -361,12 +361,12 @@ const ENGINEERING_LIFECYCLE: LifecycleStage[] = [
     actionTag: "Live & Support",
     icon: Cloud,
     colorScheme: {
-      iconBg: "bg-indigo-50",
-      iconText: "text-indigo-600",
-      iconBorder: "border-indigo-100",
-      tagBg: "bg-[#EEF2FF]",
-      tagText: "text-[#4F46E5]",
-      tagHoverBg: "hover:bg-[#E0E7FF]",
+      iconBg: "bg-teal-50",
+      iconText: "text-teal-600",
+      iconBorder: "border-teal-100",
+      tagBg: "bg-teal-50",
+      tagText: "text-teal-700",
+      tagHoverBg: "hover:bg-teal-100",
     },
   },
 ];
@@ -429,8 +429,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Organizations spending hundreds of operational hours manually transferring data across disconnected tools.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#38BDF8]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#0284C7] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Workflow className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -454,8 +454,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Companies needing instant, reliable answers from internal technical documentation, contracts, and knowledge bases.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#C084FC]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#7E22CE] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Cpu className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -479,8 +479,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Businesses that have outgrown rigid off-the-shelf software and require custom portals or enterprise web platforms.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#818CF8]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#4338CA] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Layers className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -504,8 +504,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Enterprises managing fragmented tools and databases that require unified, real-time data sync without data loss.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#FBBF24]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#D97706] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Plug className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -529,8 +529,8 @@ const SERVICES_TAB_DATA: ServiceTabData[] = [
       "Founders and enterprise tech leaders looking for a senior full-stack pod to ship production-ready features rapidly.",
     graphic: (
       <div className="relative w-20 h-16 sm:w-24 sm:h-20 flex items-center justify-center">
-        <div className="absolute inset-0 bg-[#34D399]/20 rounded-full blur-xl" />
-        <div className="relative w-14 h-14 rounded-2xl bg-[#059669] flex items-center justify-center text-white shadow-md">
+        <div className="absolute inset-0 bg-teal-400/20 rounded-full blur-xl" />
+        <div className="relative w-14 h-14 rounded-2xl bg-teal-600 flex items-center justify-center text-white shadow-md">
           <Code2 className="w-7 h-7 text-white" strokeWidth={2} />
         </div>
       </div>
@@ -886,7 +886,7 @@ export default function ServicesPage() {
       {/* ── 4. The 5-Stage Engineering Lifecycle ── */}
       <section className="py-14 sm:py-28 relative bg-white border-b border-slate-200/80 overflow-hidden">
         {/* Subtle atmospheric ambient glow */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[380px] bg-gradient-to-r from-blue-100/25 via-indigo-100/30 to-purple-100/25 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[380px] bg-gradient-to-r from-teal-100/20 via-cyan-100/30 to-teal-100/20 blur-3xl rounded-full pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
           {/* Header Row: Title & Subtitle on Left, Pill Badge on Right */}
@@ -894,7 +894,7 @@ export default function ServicesPage() {
             <div className="max-w-2xl">
               {/* Eyebrow with blue indicator bar */}
               <div className="flex items-center gap-2.5 mb-3">
-                <span className="w-5 h-1 rounded-full bg-[#4F46E5] inline-block" />
+                <span className="w-5 h-1 rounded-full bg-teal-500 inline-block" />
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
                   EXECUTION METHODOLOGY
                 </span>
@@ -903,7 +903,7 @@ export default function ServicesPage() {
               {/* Main Heading */}
               <h2 className="text-[1.7rem] leading-tight sm:text-4xl lg:text-[44px] font-extrabold text-slate-900 tracking-tight sm:leading-[1.12] mb-3">
                 Our 5-Stage Engineering{" "}
-                <span className="text-[#4F46E5]">Lifecycle</span>
+                <span className="text-teal-600">Lifecycle</span>
               </h2>
 
               {/* Subtitle */}
@@ -915,7 +915,7 @@ export default function ServicesPage() {
             {/* Top Right Pill Badge */}
             <div className="shrink-0 self-start lg:self-center">
               <div className="inline-flex items-center gap-2 px-3.5 py-2 sm:gap-2.5 sm:px-5 sm:py-2.5 rounded-full bg-white border border-slate-200/90 shadow-xs text-[11px] sm:text-[13px] font-semibold text-slate-700">
-                <Zap className="w-4 h-4 text-[#4F46E5] fill-[#4F46E5]" />
+                <Zap className="w-4 h-4 text-teal-600 fill-teal-600" />
                 <span>Transparent</span>
                 <span className="text-slate-300 text-xs">•</span>
                 <span>Agile</span>
@@ -988,13 +988,13 @@ export default function ServicesPage() {
 
           {/* Bottom Banner: Ready to Build? */}
           <Reveal delay={0.35}>
-            <div className="mt-12 sm:mt-16 bg-[#F8FAFD] sm:bg-gradient-to-r sm:from-[#F8FAFD] sm:via-white sm:to-[#F8F9FE] border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xs hover:border-slate-300 transition-colors">
+            <div className="mt-12 sm:mt-16 bg-teal-50/40 sm:bg-gradient-to-r sm:from-teal-50/60 sm:via-white sm:to-cyan-50/50 border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xs hover:border-teal-200 transition-colors">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-100/70 shadow-2xs">
-                  <Sparkles className="w-5 h-5 text-[#4F46E5]" />
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-100 shadow-2xs">
+                  <Sparkles className="w-5 h-5 text-teal-600" />
                 </div>
                 <div>
-                  <span className="block text-[11px] font-bold uppercase tracking-widest text-[#4F46E5] mb-1">
+                  <span className="block text-[11px] font-bold uppercase tracking-widest text-teal-700 mb-1">
                     READY TO BUILD?
                   </span>
                   <h4 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
@@ -1092,7 +1092,8 @@ export default function ServicesPage() {
 
             {/* Right Column: Interactive System Convergence Architecture */}
             <div className="lg:col-span-6 xl:col-span-6 relative flex items-center justify-center">
-              <div className="w-full overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:overflow-visible sm:pb-0">
+              <div className="flex w-full justify-center overflow-hidden pb-3 sm:overflow-visible sm:pb-0">
+                <div className="mx-auto h-[156px] w-[520px] origin-top scale-[0.54] min-[360px]:scale-[0.6] min-[390px]:h-[170px] min-[390px]:scale-[0.65] min-[430px]:h-[188px] min-[430px]:scale-[0.72] sm:h-auto sm:w-full sm:scale-100">
                 <div className="min-w-[520px] sm:min-w-0 flex items-center justify-between gap-1 sm:gap-2 relative">
                   {/* Left Column: 4 Inputs Stack (People, Processes, Data, Tools) */}
                   <div className="flex flex-col gap-3 shrink-0 z-10">
@@ -1214,6 +1215,7 @@ export default function ServicesPage() {
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>

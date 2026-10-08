@@ -45,7 +45,7 @@ export const Navbar = () => {
   return (
     <>
       <header
-        className={`sticky top-0 left-0 right-0 z-50 w-full transition-all duration-200 ${
+        className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-200 ${
           isDarkNav
             ? scrolled
               ? "bg-[#030e1f]/95 backdrop-blur-md border-b border-white/10 shadow-lg"
@@ -154,6 +154,7 @@ export const Navbar = () => {
           </div>
         )}
       </header>
+      <div aria-hidden="true" className="h-[66px] sm:h-[68px]" />
 
     </>
   );

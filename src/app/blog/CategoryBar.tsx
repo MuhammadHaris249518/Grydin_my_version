@@ -9,7 +9,7 @@ export function CategoryBar() {
   const pathname = usePathname();
 
   const links = [
-    { label: "All", href: "/blog" },
+    { label: "All", href: "/blog/all" },
     { label: "Insights", href: "/blog/category/blog" },
     { label: "News", href: "/blog/category/news" },
     { label: "Announcements", href: "/blog/category/announcements" },
@@ -21,8 +21,8 @@ export function CategoryBar() {
         <div className="flex items-center gap-2">
           {links.map((link) => {
             const isActive =
-              link.href === "/blog"
-                ? pathname === "/blog" || pathname.startsWith("/blog/page/")
+              link.label === "All"
+                ? pathname === "/blog/all" || pathname.startsWith("/blog/page/")
                 : pathname.startsWith(link.href);
 
             return (

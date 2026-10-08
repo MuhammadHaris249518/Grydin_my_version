@@ -64,7 +64,7 @@ export default async function PaginatedBlogPage({ params }: PageProps) {
 
   const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "Newsroom", href: "/blog" },
+    { label: "Newsroom", href: "/blog/all" },
     { label: `Page ${pageNum}` },
   ];
 
@@ -81,7 +81,7 @@ export default async function PaginatedBlogPage({ params }: PageProps) {
     }),
     breadcrumbJsonLd([
       { name: "Home", url: "/" },
-      { name: "Newsroom", url: "/blog" },
+      { name: "Newsroom", url: "/blog/all" },
       { name: `Page ${pageNum}`, url: `/blog/page/${pageNum}` },
     ]),
   ];
@@ -134,7 +134,7 @@ export default async function PaginatedBlogPage({ params }: PageProps) {
             <div>
               {pagination.hasPrevPage && (
                 <Link
-                  href={pageNum === 2 ? "/blog" : `/blog/page/${pageNum - 1}`}
+                  href={pageNum === 2 ? "/blog/all" : `/blog/page/${pageNum - 1}`}
                   className="surface-card px-4 py-2 rounded-xl text-xs font-mono text-accent hover:text-ink transition-colors flex items-center gap-1.5"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />

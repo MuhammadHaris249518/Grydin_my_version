@@ -50,7 +50,6 @@ export function BlogMainSection({
 }: BlogMainSectionProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const [showAll, setShowAll] = useState(false);
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
@@ -107,8 +106,8 @@ export function BlogMainSection({
     return result;
   }, [posts, activeCategory, activeTag, selectedTopic]);
 
-  // Featured view shows 4 items by default (matching the 2x2 grid in the mockup), or all when toggled
-  const displayedPosts = showAll || effectiveFilter ? filteredPosts : filteredPosts.slice(0, 4);
+  // Keep the landing page focused on featured stories; the archive route shows every post.
+  const displayedPosts = effectiveFilter ? filteredPosts : filteredPosts.slice(0, 4);
 
   const handleCategoryClick = (categoryId: string) => {
     if (activeCategory === categoryId) {
@@ -134,7 +133,6 @@ export function BlogMainSection({
     setActiveCategory(null);
     setActiveTag(null);
     onSelectTopic?.(null);
-    setShowAll(false);
   };
 
   const handleSubscribe = (e: React.FormEvent) => {
@@ -171,19 +169,23 @@ export function BlogMainSection({
             </h2>
           </div>
 
-          <button
-            onClick={() => {
-              if (effectiveFilter) {
-                handleClearFilters();
-              } else {
-                setShowAll(!showAll);
-              }
-            }}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0d8b99] hover:text-[#0b7884] transition-colors group self-start sm:self-auto"
-          >
-            <span>{showAll || effectiveFilter ? "Show Featured (4)" : "View All Articles"}</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
+          {effectiveFilter ? (
+            <button
+              onClick={handleClearFilters}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0d8b99] hover:text-[#0b7884] transition-colors group self-start sm:self-auto"
+            >
+              <span>Clear filter</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </button>
+          ) : (
+            <Link
+              href="/blog/all"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0d8b99] hover:text-[#0b7884] transition-colors group self-start sm:self-auto"
+            >
+              <span>View All Articles</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          )}
         </div>
 
         {/* 2-Column Grid Layout: Main Articles (Left 8 cols) + Sidebar (Right 4 cols) */}

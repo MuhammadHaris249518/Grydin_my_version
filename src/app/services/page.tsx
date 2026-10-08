@@ -986,35 +986,6 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* Bottom Banner: Ready to Build? */}
-          <Reveal delay={0.35}>
-            <div className="mt-12 sm:mt-16 bg-teal-50/40 sm:bg-gradient-to-r sm:from-teal-50/60 sm:via-white sm:to-cyan-50/50 border border-slate-200/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-xs hover:border-teal-200 transition-colors">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0 border border-teal-100 shadow-2xs">
-                  <Sparkles className="w-5 h-5 text-teal-600" />
-                </div>
-                <div>
-                  <span className="block text-[11px] font-bold uppercase tracking-widest text-teal-700 mb-1">
-                    READY TO BUILD?
-                  </span>
-                  <h4 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
-                    Let&apos;s turn your idea into a working product.
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-                    Share your goals and we&apos;ll guide you through the next step.
-                  </p>
-                </div>
-              </div>
-
-              <Link
-                href="/services#capabilities"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#0F172A] hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold rounded-full shadow-md hover:shadow-lg transition-all shrink-0"
-              >
-                <span>Explore Our Services</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Reveal>
         </div>
       </section>
 
